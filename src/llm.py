@@ -1,0 +1,369 @@
+"""The only place that knows which LLM vendor is in use.
+
+Four providers, same interface, chosen by ``LLM_PROVIDER`` in .env:
+
+``ollama``     local, free, offline, no key. Slower and weaker at following the citation
+               format, so the citation-verification gate in generator.py earns its keep.
+``openai``     hosted, costs per call, needs a key. Good at obeying "cite every sentence".
+``anthropic``  hosted, costs per call, needs a key. Strongest at the supersession rule —
+               noticing that an endorsement overrides a base clause and saying so.
+``gemini``     hosted, costs per call, needs a key. Generous free tier, so it is the
+               cheapest way to see real generated answers.
+
+Retrieval quality is unaffected by this choice — only the wording of the final answer is.
+That is worth understanding: if the app returns a wrong figure, changing provider will not
+fix it, because the error happened before generation.
+
+The key is read from the environment only. It is never logged, never written to disk by
+this app, and never sent anywhere except the vendor's own endpoint.
+"""
+
+from __future__ import annotations
+
+import os
+import time
+from dataclasses import dataclass
+
+import requests
+
+from .config import (
+    ANTHROPIC_MAX_TOKENS,
+    ANTHROPIC_MODEL,
+    GEMINI_BASE_URL,
+    GEMINI_MODEL,
+    GEMINI_TIMEOUT,
+    LLM_PROVIDER,
+    OLLAMA_MODEL,
+    OLLAMA_TIMEOUT,
+    OLLAMA_URL,
+    OPENAI_BASE_URL,
+    OPENAI_MODEL,
+    OPENAI_TIMEOUT,
+)
+
+
+@dataclass
+class ProviderStatus:
+    ready: bool
+    detail: str
+
+
+class LLMError(RuntimeError):
+    pass
+
+
+# ------------------------------------------------------------------------------- ollama
+
+
+def ollama_status(url: str = OLLAMA_URL) -> ProviderStatus:
+    try:
+        response = requests.get(f"{url}/api/tags", timeout=3)
+        response.raise_for_status()
+    except requests.exceptions.ConnectionError:
+        return ProviderStatus(False, f"Ollama is not running on {url}")
+    except Exception as exc:
+        return ProviderStatus(False, f"Ollama check failed: {exc}")
+
+    models = [m.get("name", "") for m in response.json().get("models", []) if m.get("name")]
+    if not models:
+        return ProviderStatus(False, "Ollama is running but no models are pulled.")
+    return ProviderStatus(True, ", ".join(models))
+
+
+def ollama_has_model(model: str, url: str = OLLAMA_URL) -> bool:
+    status = ollama_status(url)
+    if not status.ready:
+        return False
+    installed = [m.strip() for m in status.detail.split(",")]
+    base = model.split(":")[0]
+    return any(m == model or m.split(":")[0] == base for m in installed)
+
+
+def ollama_chat(system: str, user: str, model: str = OLLAMA_MODEL, url: str = OLLAMA_URL) -> str:
+    payload = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": system},
+            {"role": "user", "content": user},
+        ],
+        "stream": False,
+        "options": {"temperature": 0.0, "num_ctx": 8192, "top_p": 0.9},
+    }
+    response = requests.post(f"{url}/api/chat", json=payload, timeout=OLLAMA_TIMEOUT)
+    response.raise_for_status()
+    return response.json()["message"]["content"].strip()
+
+
+# ------------------------------------------------------------------------------- openai
+
+
+def openai_key() -> str | None:
+    key = os.environ.get("OPENAI_API_KEY", "").strip()
+    return key or None
+
+
+def openai_status(model: str = OPENAI_MODEL) -> ProviderStatus:
+    if not openai_key():
+        return ProviderStatus(
+            False,
+            "OPENAI_API_KEY is not set. Put it in .env (see .env.example) — the app reads "
+            "it from the environment and never stores it.",
+        )
+    return ProviderStatus(True, f"OpenAI key detected · model {model}")
+
+
+def openai_chat(system: str, user: str, model: str = OPENAI_MODEL) -> str:
+    key = openai_key()
+    if not key:
+        raise LLMError("OPENAI_API_KEY is not set.")
+
+    response = requests.post(
+        f"{OPENAI_BASE_URL}/chat/completions",
+        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+        json={
+            "model": model,
+            "messages": [
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+            "temperature": 0.0,
+        },
+        timeout=OPENAI_TIMEOUT,
+    )
+    if response.status_code == 401:
+        raise LLMError("OpenAI rejected the key (401). Check OPENAI_API_KEY.")
+    if response.status_code == 429:
+        raise LLMError("OpenAI rate limit or quota exceeded (429).")
+    response.raise_for_status()
+    return response.json()["choices"][0]["message"]["content"].strip()
+
+
+# ------------------------------------------------------------------------------ claude
+
+
+def anthropic_key() -> str | None:
+    key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
+    return key or None
+
+
+def anthropic_status(model: str = ANTHROPIC_MODEL) -> ProviderStatus:
+    try:
+        import anthropic  # noqa: F401
+    except ModuleNotFoundError:
+        return ProviderStatus(
+            False, "The `anthropic` package is not installed. pip install anthropic"
+        )
+    if not anthropic_key():
+        return ProviderStatus(
+            False,
+            "ANTHROPIC_API_KEY is not set. Put it in .env (see .env.example) — the app "
+            "reads it from the environment and never stores it.",
+        )
+    return ProviderStatus(True, f"Anthropic key detected · model {model}")
+
+
+def anthropic_chat(system: str, user: str, model: str = ANTHROPIC_MODEL) -> str:
+    """Claude via the official SDK.
+
+    Three things differ from the Ollama and OpenAI paths, and getting them wrong is a
+    hard 400 rather than a silent degradation:
+
+    1. **No `temperature`.** The parameter was removed on Claude Opus 5 — sending it at
+       all is rejected. Determinism is steered by the prompt instead, which is why the
+       system prompt is emphatic about quoting figures verbatim.
+    2. **The system prompt is a top-level `system=` argument**, not a message with
+       `role="system"` as in the OpenAI-shaped APIs.
+    3. **`max_tokens` bounds thinking *and* the answer together**, and thinking is on by
+       default, so a value sized only for the answer truncates mid-sentence.
+    """
+    import anthropic
+
+    if not anthropic_key():
+        raise LLMError("ANTHROPIC_API_KEY is not set.")
+
+    client = anthropic.Anthropic()
+    try:
+        response = client.messages.create(
+            model=model,
+            max_tokens=ANTHROPIC_MAX_TOKENS,
+            system=system,
+            messages=[{"role": "user", "content": user}],
+        )
+    except anthropic.AuthenticationError as exc:
+        raise LLMError(f"Anthropic rejected the key: {exc}") from exc
+    except anthropic.RateLimitError as exc:
+        raise LLMError(f"Anthropic rate limit exceeded: {exc}") from exc
+
+    # A safety classifier can decline the request. That returns HTTP 200 with an empty or
+    # partial `content`, so reading content[0] unconditionally would crash here.
+    if response.stop_reason == "refusal":
+        raise LLMError(
+            "Claude declined to answer this request (stop_reason=refusal)."
+        )
+
+    parts = [block.text for block in response.content if block.type == "text"]
+    return "\n".join(parts).strip()
+
+
+# ------------------------------------------------------------------------------ gemini
+
+
+def gemini_key() -> str | None:
+    key = os.environ.get("GEMINI_API_KEY", "").strip()
+    return key or None
+
+
+def gemini_status(model: str = GEMINI_MODEL) -> ProviderStatus:
+    if not gemini_key():
+        return ProviderStatus(
+            False,
+            "GEMINI_API_KEY is not set. Put it in .env (see .env.example) — the app reads "
+            "it from the environment and never stores it.",
+        )
+    return ProviderStatus(True, f"Gemini key detected · model {model}")
+
+
+def _gemini_retry_delay(response, default: float = 20.0) -> float:
+    """Honour the API's own RetryInfo if it sends one, else back off a fixed amount."""
+    try:
+        for detail in response.json().get("error", {}).get("details", []):
+            delay = detail.get("retryDelay")
+            if isinstance(delay, str) and delay.endswith("s"):
+                return min(60.0, max(1.0, float(delay[:-1])))
+    except (ValueError, TypeError, AttributeError):
+        pass
+    return default
+
+
+def gemini_chat(system: str, user: str, model: str = GEMINI_MODEL, attempt: int = 0) -> str:
+    """Gemini via the REST API.
+
+    Shape differs from the OpenAI-style APIs in three ways worth noting:
+    the system prompt is its own ``system_instruction`` object rather than a message with
+    ``role="system"``; user turns wrap text in a ``parts`` list; and sampling settings live
+    under ``generationConfig`` instead of at the top level.
+
+    The key goes in a header, not the query string — a key in a URL ends up in server
+    logs, proxy logs, and browser history.
+    """
+    key = gemini_key()
+    if not key:
+        raise LLMError("GEMINI_API_KEY is not set.")
+
+    response = requests.post(
+        f"{GEMINI_BASE_URL}/models/{model}:generateContent",
+        headers={"x-goog-api-key": key, "Content-Type": "application/json"},
+        json={
+            "system_instruction": {"parts": [{"text": system}]},
+            "contents": [{"role": "user", "parts": [{"text": user}]}],
+            "generationConfig": {"temperature": 0.0},
+        },
+        timeout=GEMINI_TIMEOUT,
+    )
+    if response.status_code in (400, 403):
+        raise LLMError(
+            f"Gemini rejected the request ({response.status_code}). Check GEMINI_API_KEY "
+            f"and that your key has access to '{model}'. Body: {response.text[:200]}"
+        )
+    if response.status_code == 404:
+        # A 404 here usually does NOT mean the model is absent — Google gates older
+        # versions to existing users, so the model appears in ListModels and still 404s
+        # for a newer key. The API's own message says which; surface it verbatim.
+        detail = response.json().get("error", {}).get("message", response.text[:200])
+        raise LLMError(
+            f"Gemini refused model '{model}': {detail}\n"
+            "Set GEMINI_MODEL in .env to a model your key can use "
+            "(`gemini-flash-latest` is the safe choice)."
+        )
+    if response.status_code == 429:
+        # Two separate free-tier quotas: requests-per-minute and TOKENS-per-minute. A RAG
+        # prompt carries five passages, so it trips the token quota long before the request
+        # quota — a one-word probe can succeed while real questions 429. Both reset on a
+        # rolling minute, so one backoff usually clears it.
+        retry_after = _gemini_retry_delay(response)
+        if attempt == 0:
+            time.sleep(retry_after)
+            return gemini_chat(system, user, model, attempt=1)
+        raise LLMError(
+            "Gemini quota exceeded (429) twice. This is usually the free tier's "
+            "tokens-per-minute limit rather than requests-per-minute, because each question "
+            "sends five passages. Wait a minute, lower top-k to send fewer passages, or set "
+            "GEMINI_MODEL to a lite variant with a larger allowance."
+        )
+    response.raise_for_status()
+
+    payload = response.json()
+
+    # A safety filter can block the prompt outright — no candidates come back at all.
+    blocked = payload.get("promptFeedback", {}).get("blockReason")
+    if blocked:
+        raise LLMError(f"Gemini blocked the prompt (reason: {blocked}).")
+
+    candidates = payload.get("candidates") or []
+    if not candidates:
+        raise LLMError("Gemini returned no candidates.")
+
+    finish = candidates[0].get("finishReason")
+    if finish in {"SAFETY", "RECITATION", "BLOCKLIST", "PROHIBITED_CONTENT"}:
+        raise LLMError(f"Gemini stopped early (finishReason: {finish}).")
+
+    parts = candidates[0].get("content", {}).get("parts", [])
+    text = "\n".join(p["text"] for p in parts if "text" in p).strip()
+    if not text:
+        raise LLMError(f"Gemini returned an empty answer (finishReason: {finish}).")
+    return text
+
+
+# ------------------------------------------------------------------------------ dispatch
+
+PROVIDERS = ("ollama", "openai", "anthropic", "gemini")
+
+
+def provider_name() -> str:
+    return os.environ.get("LLM_PROVIDER", LLM_PROVIDER).strip().lower()
+
+
+def status(provider: str | None = None) -> ProviderStatus:
+    name = provider or provider_name()
+    if name == "openai":
+        return openai_status()
+    if name == "anthropic":
+        return anthropic_status()
+    if name == "gemini":
+        return gemini_status()
+    return ollama_status()
+
+
+def is_ready(provider: str | None = None) -> bool:
+    name = provider or provider_name()
+    if name == "openai":
+        return openai_status().ready
+    if name == "anthropic":
+        return anthropic_status().ready
+    if name == "gemini":
+        return gemini_status().ready
+    return ollama_has_model(OLLAMA_MODEL)
+
+
+def default_model(provider: str | None = None) -> str:
+    name = provider or provider_name()
+    return {
+        "openai": OPENAI_MODEL,
+        "anthropic": ANTHROPIC_MODEL,
+        "gemini": GEMINI_MODEL,
+    }.get(name, OLLAMA_MODEL)
+
+
+def chat(system: str, user: str, provider: str | None = None, model: str | None = None) -> str:
+    name = provider or provider_name()
+    if name == "openai":
+        return openai_chat(system, user, model or OPENAI_MODEL)
+    if name == "anthropic":
+        return anthropic_chat(system, user, model or ANTHROPIC_MODEL)
+    if name == "gemini":
+        return gemini_chat(system, user, model or GEMINI_MODEL)
+    if name == "ollama":
+        return ollama_chat(system, user, model or OLLAMA_MODEL)
+    raise LLMError(
+        f"Unknown LLM_PROVIDER '{name}'. Use one of: {', '.join(PROVIDERS)}."
+    )

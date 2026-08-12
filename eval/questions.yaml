@@ -1,0 +1,151 @@
+# Gold question set for the insurance placeholder corpus.
+#
+# Three kinds, because they measure different failures:
+#
+#   answerable   — the fact sits in exactly one place. Tests plain retrieval.
+#   superseded   — an endorsement overrides the base wording. The system must surface the
+#                  CURRENT figure and outrank the stale one. This is the hard case, and the
+#                  one a keyword search gets confidently wrong.
+#   unanswerable — the fact is absent. The system must abstain. `near_miss: true` marks the
+#                  cruel variety: topically adjacent, so the cosine gate lets it through and
+#                  only the cross-encoder catches it.
+#
+# `expect_text` values must appear VERBATIM in the correct chunk — the harness does a
+# substring match, so keep them short and exact.
+
+- id: ncb-three-years
+  question: What No Claim Bonus applies after three consecutive claim-free years?
+  kind: answerable
+  expect_doc: PW-MOTOR-001
+  expect_text: ["35%"]
+
+- id: file-retention
+  question: How long does the insurer keep claim files after settlement?
+  kind: answerable
+  expect_doc: PW-CLAIMS-003
+  expect_text: ["eight years"]
+
+- id: grace-period
+  question: If I miss the premium due date, how long do I have to pay?
+  kind: answerable
+  expect_doc: PW-DEFS-004
+  expect_text: ["30 days"]
+
+- id: portability-window
+  question: How far before renewal must I apply to move to another insurer?
+  kind: answerable
+  expect_doc: PW-DEFS-004
+  expect_text: ["45 days"]
+
+- id: tyre-limit
+  question: If my tyres are damaged in an accident, how much is payable?
+  kind: answerable
+  expect_doc: PW-MOTOR-001
+  expect_text: ["50% of the cost of replacement"]
+
+- id: day-care-opd
+  question: Is treatment in an out-patient department covered as a day care procedure?
+  kind: answerable
+  expect_doc: PW-HEALTH-002
+  expect_text: ["out-patient department is not a day care procedure"]
+
+- id: ombudsman-ceiling
+  question: What is the maximum claim value the Insurance Ombudsman can consider?
+  kind: answerable
+  expect_doc: PW-CLAIMS-003
+  expect_text: ["50,00,000"]
+
+- id: deductible-above-1500cc
+  question: What is the compulsory deductible for a car above 1500cc?
+  kind: superseded
+  current_doc: END-2026-01
+  current_text: ["3,000"]
+  stale_doc: PW-MOTOR-001
+  stale_text: ["2,000"]
+
+- id: ped-waiting-period
+  question: What is the waiting period for pre-existing diseases?
+  kind: superseded
+  current_doc: END-2026-02
+  current_text: ["24 months"]
+  stale_doc: PW-HEALTH-002
+  stale_text: ["36 months"]
+
+- id: health-reimbursement-window
+  question: How many days do I have to submit documents for a health reimbursement claim?
+  kind: superseded
+  current_doc: END-2026-02
+  current_text: ["30 days from discharge"]
+  stale_doc: PW-HEALTH-002
+  stale_text: ["15 days of\ndischarge", "15 days"]
+
+- id: ctl-threshold
+  question: At what percentage of IDV is a vehicle treated as a constructive total loss?
+  kind: superseded
+  current_doc: END-2026-01
+  current_text: ["70%"]
+  stale_doc: PW-MOTOR-001
+  stale_text: ["75%"]
+
+- id: claim-decision-clock
+  question: How long does the insurer have to decide a claim after the last document arrives?
+  kind: superseded
+  current_doc: END-2026-03
+  current_text: ["15 days"]
+  stale_doc: PW-CLAIMS-003
+  stale_text: ["30 days"]
+
+- id: proportionate-deduction
+  question: Does proportionate deduction still apply if I take a room above my eligible rent?
+  kind: superseded
+  current_doc: END-2026-02
+  current_text: ["abolished"]
+  stale_doc: PW-HEALTH-002
+  stale_text: ["same proportion"]
+
+- id: motor-intimation-window
+  question: How soon must I report an own damage loss to the insurer?
+  kind: superseded
+  current_doc: END-2026-01
+  current_text: ["72 hours"]
+  stale_doc: PW-MOTOR-001
+  stale_text: ["48 hours"]
+
+- id: senior-copay
+  question: At what age does the mandatory co-payment start and how much is it?
+  kind: superseded
+  current_doc: END-2026-02
+  current_text: ["66 years", "10%"]
+  stale_doc: PW-HEALTH-002
+  stale_text: ["61 years", "20%"]
+
+- id: cyber-cover
+  question: What is the cyber liability cover limit under this policy?
+  kind: unanswerable
+
+- id: drone-damage
+  question: Does the policy cover accidental damage to a drone?
+  kind: unanswerable
+
+- id: premium-quote
+  question: What is the annual premium for a 2019 Honda City in Chennai?
+  kind: unanswerable
+
+- id: nominee-change
+  question: How do I change the nominee recorded on my policy?
+  kind: unanswerable
+
+- id: dental-waiting-period
+  question: What is the waiting period before dental treatment becomes payable?
+  kind: unanswerable
+  near_miss: true
+
+- id: ncb-after-two-claims
+  question: What No Claim Bonus applies to a rental car hired abroad?
+  kind: unanswerable
+  near_miss: true
+
+- id: ambulance-charges
+  question: How much is payable for road ambulance charges?
+  kind: unanswerable
+  near_miss: true

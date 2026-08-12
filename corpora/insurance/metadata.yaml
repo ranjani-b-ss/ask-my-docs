@@ -1,0 +1,17 @@
+# Metadata overrides, keyed by filename. Values here win over anything the loader can
+# infer from the file itself. PDFs and scraped HTML usually carry no usable metadata, so
+# this is where they get the fields the pipeline needs.
+#
+# WHEN YOU ADD THE ASSIGNED PDF: add an entry for it here. `document_id` and `title` drive
+# the citation shown to the user; `effective_date` drives recency filtering and lets the
+# model resolve a conflict between a base wording and an endorsement.
+
+04-definitions.pdf:
+  document_id: PW-DEFS-004
+  title: Standard Definitions and Interpretation
+  doc_type: policy_wording
+  version: "1.8"
+  effective_date: 2025-04-01
+  line_of_business: all
+  owner: Underwriting
+  source_url: https://docs.meridianassurance.example/policy/definitions

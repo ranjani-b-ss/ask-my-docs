@@ -1,0 +1,11 @@
+# Local-only RAG stack: no API key, no cloud calls at query time.
+chromadb>=0.5.23,<1.2      # vector store (HNSW index, persists to disk)
+fastembed>=0.5.0           # ONNX embeddings + reranker, ~200MB, no torch
+streamlit>=1.41            # UI
+pypdf>=5.1                 # PDF text extraction
+beautifulsoup4>=4.12       # HTML/web page extraction
+reportlab>=4.2             # generates the sample PDF in the corpus
+pyyaml>=6.0                # eval question set + front-matter parsing
+requests>=2.32             # talks to the local Ollama HTTP API
+anthropic>=0.40        # only needed for LLM_PROVIDER=anthropic
+python-dotenv>=1.0     # loads .env so keys never live in the code
