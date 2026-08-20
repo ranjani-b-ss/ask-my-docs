@@ -103,11 +103,9 @@ CANDIDATE_K = 20   # chunks pulled from the vector store before reranking
 MIN_COSINE = 0.64
 MIN_RERANK_SCORE = 0.10
 
-# These two are only the FALLBACK. Thresholds are a measured property of a corpus, not
-# universal constants — a cross-encoder scores clean Markdown far higher than the same
-# content pulled out of a real PDF. Each corpus therefore calibrates its own values at
-# ingest time (src/calibration.py) and stores them on the collection; these apply only to a
-# corpus that has not been calibrated. Nothing here is document-specific.
+# Re-measure these with eval/calibrate.py if you swap in a corpus that behaves differently:
+# a cross-encoder scores clean Markdown far higher than the same content pulled out of a
+# real PDF, so a corpus of scanned documents may need a lower rerank floor.
 
 
 # Cross-encoder scores within this band count as a tie, and the later effective_date wins.

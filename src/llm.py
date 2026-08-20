@@ -275,6 +275,18 @@ def gemini_chat(system: str, user: str, model: str = GEMINI_MODEL, attempt: int 
             "Set GEMINI_MODEL in .env to a model your key can use "
             "(`gemini-flash-latest` is the safe choice)."
         )
+    if response.status_code in (500, 502, 503, 504):
+        # Transient server-side failure. Worth one retry: otherwise a two-second blip
+        # silently degrades a whole eval run to retrieval-only mode, and every unanswerable
+        # question gets labelled as a different outcome than it really was.
+        if attempt == 0:
+            time.sleep(5)
+            return gemini_chat(system, user, model, attempt=1)
+        raise LLMError(
+            f"Gemini returned {response.status_code} (server-side, transient) twice. "
+            "Not a problem with your key or quota — try again shortly."
+        )
+
     if response.status_code == 429:
         # Two separate free-tier quotas: requests-per-minute and TOKENS-per-minute. A RAG
         # prompt carries five passages, so it trips the token quota long before the request

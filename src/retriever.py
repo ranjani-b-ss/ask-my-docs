@@ -22,7 +22,7 @@ from .config import (
     DEFAULT_CHUNKING,
 )
 from .embedder import get_embedder, get_reranker
-from . import store
+from . import keyword, store
 
 
 @dataclass
@@ -31,6 +31,8 @@ class Hit:
     meta: dict
     cosine: float
     rerank_score: float | None = None
+    bm25: float | None = None      # keyword score, None when hybrid is off
+    rrf: float | None = None       # fused rank score
 
     @property
     def score(self) -> float:
@@ -71,6 +73,28 @@ def build_where(doc_type: str | None = None, effective_on_or_after: str | None =
     return clauses[0] if len(clauses) == 1 else {"$and": clauses}
 
 
+RRF_K = 60   # standard damping constant; large enough that rank 1 vs 2 is not a landslide
+
+
+def reciprocal_rank_fusion(*ranked_lists: list[str], k: int = RRF_K) -> dict[str, float]:
+    """Fuse several ranked ID lists into one score per ID.
+
+    Each list contributes ``1 / (k + rank)``. The appeal is that it needs no score
+    normalisation: cosine similarity (0-1) and BM25 (unbounded) are not comparable as
+    numbers, but their *ranks* always are. That is why RRF is the default fusion for hybrid
+    search rather than a weighted score sum, which would need per-corpus tuning of the
+    weights — exactly the corpus-specific fitting we want to avoid.
+
+    An item ranked highly by both retrievers beats one ranked highly by only one, which is
+    the whole point: agreement between two different notions of relevance is evidence.
+    """
+    fused: dict[str, float] = {}
+    for ranked in ranked_lists:
+        for rank, item_id in enumerate(ranked, start=1):
+            fused[item_id] = fused.get(item_id, 0.0) + 1.0 / (k + rank)
+    return fused
+
+
 def retrieve(
     question: str,
     cfg: ChunkConfig = DEFAULT_CHUNKING,
@@ -82,6 +106,7 @@ def retrieve(
     min_rerank_score: float | None = None,
     corpus_id: str = DEFAULT_CORPUS,
     prefer_recent: bool = True,
+    use_hybrid: bool = True,
 ) -> Retrieval:
     # None means "use the defaults from config"; an explicit number always wins, so the UI
     # sliders and eval/calibrate.py can override per call.
@@ -100,6 +125,36 @@ def retrieve(
 
     hits = [Hit(text=r["text"], meta=r["meta"], cosine=r["cosine"]) for r in raw]
     best_cosine = max(h.cosine for h in hits)
+    fused_in = 0
+
+    if use_hybrid and where is None:
+        # Keyword search over the same collection, fused by rank. Skipped when a metadata
+        # filter is active: BM25 here scans the whole collection, so fusing its results
+        # would smuggle back chunks the filter deliberately excluded.
+        bm25, docs, metas = keyword.get_index(collection)
+        kw = bm25.top_n(question, candidate_k)
+        if kw:
+            by_text = {h.text: h for h in hits}
+            for idx, score in kw:
+                text = docs[idx]
+                if text in by_text:
+                    by_text[text].bm25 = round(score, 4)
+                else:
+                    # Found by keywords but missed by the vector search entirely — this is
+                    # the class of result hybrid exists to recover.
+                    extra = Hit(text=text, meta=metas[idx], cosine=0.0)
+                    extra.bm25 = round(score, 4)
+                    hits.append(extra)
+                    by_text[text] = extra
+                    fused_in += 1
+
+            dense_order = [r["text"] for r in raw]
+            kw_order = [docs[i] for i, _ in kw]
+            fused = reciprocal_rank_fusion(dense_order, kw_order)
+            for h in hits:
+                h.rrf = round(fused.get(h.text, 0.0), 6)
+            hits.sort(key=lambda h: h.rrf or 0.0, reverse=True)
+            hits = hits[:candidate_k]
 
     if use_reranker:
         scores = get_reranker().score(question, [h.text for h in hits])
@@ -134,6 +189,9 @@ def retrieve(
         "best_cosine": best_cosine,
         "best_rerank": best.rerank_score,
         "reranked": use_reranker,
+        "hybrid": use_hybrid and where is None,
+        "keyword_only_candidates": fused_in,
+        "best_bm25": max((h.bm25 or 0.0 for h in hits), default=0.0),
         "collection": store.collection_name(cfg, corpus_id),
     }
 

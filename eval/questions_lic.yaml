@@ -1,0 +1,89 @@
+# Gold questions for the LIC New Jeevan Shanti policy document (corpus: uploaded).
+#
+# Used by eval/calibrate.py to measure the score distributions on THIS document, and by
+# eval/run_eval.py to score retrieval. The unanswerable set was verified by grepping the
+# extracted text — e.g. "grace period" appears 0 times, because this is a Single Premium
+# plan with no recurring premiums, so no grace period exists.
+
+# ── answerable ────────────────────────────────────────────────────────────────────────
+- id: free-look-period
+  question: What is the free look period for this policy?
+  kind: answerable
+  expect_text: ["15 days"]
+
+- id: policy-loan-when
+  question: Can I take a loan against this policy and when?
+  kind: answerable
+  expect_text: ["three months"]
+
+- id: surrender-when
+  question: When can the policy be surrendered?
+  kind: answerable
+  expect_text: ["any time"]
+
+- id: death-during-deferment
+  question: What happens if the annuitant dies during the deferment period?
+  kind: answerable
+  expect_text: ["105%"]
+
+- id: minor-definition
+  question: Who counts as a minor under this policy?
+  kind: answerable
+  expect_text: ["18 years"]
+
+- id: annuity-definition
+  question: What does annuity mean in this policy?
+  kind: answerable
+  expect_text: ["specified"]
+
+- id: assignment-allowed
+  question: Can this policy be assigned or transferred to someone else?
+  kind: answerable
+  expect_text: ["assign"]
+
+- id: nomination
+  question: How does nomination work under this policy?
+  kind: answerable
+  expect_text: ["nominat"]
+
+- id: annuity-modes
+  question: What modes of annuity payment are available?
+  kind: answerable
+  expect_text: ["monthly"]
+
+- id: suicide-clause
+  question: Is death by suicide covered under this policy?
+  kind: answerable
+  expect_text: ["suicide"]
+
+# ── unanswerable — verified absent from this document ─────────────────────────────────
+- id: grace-period
+  question: What is the grace period for payment of premium?
+  kind: unanswerable
+  near_miss: true   # a Single Premium plan has no recurring premium, so none exists
+
+- id: motor-deductible
+  question: What is the compulsory deductible for a car above 1500cc?
+  kind: unanswerable
+
+- id: cyber-cover
+  question: What is the cyber liability cover limit?
+  kind: unanswerable
+
+- id: maternity-benefit
+  question: What maternity expenses are covered?
+  kind: unanswerable
+
+- id: ncb-scale
+  question: What No Claim Bonus applies after three claim-free years?
+  kind: unanswerable
+
+- id: hospital-room-rent
+  question: What is the daily room rent limit for hospitalisation?
+  kind: unanswerable
+  near_miss: true
+
+- id: waiting-period-ped
+  question: What is the waiting period for pre-existing diseases?
+  kind: unanswerable
+  near_miss: true
