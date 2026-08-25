@@ -440,4 +440,14 @@ python eval/read_trace.py --seed 20260826 --n 20             # the reading pass
 python eval/replay_trace.py --seed 20260826 --n 20           # the replay
 ```
 
-**Prediction commit:** `PREDICTION_COMMIT_HASH`
+**Prediction commit:** `b0f7c375ecf1254272719facf17d705154410d17` (short `b0f7c37`), branch
+`week-5-error-analysis`, committed 26 August 2026 — *before* any fix. Verify with:
+
+```bash
+git show b0f7c37:notes.md | sed -n '/## 5. The prediction/,/^---$/p'
+```
+
+That commit contains the prediction and the taxonomy and no change to the answer prompt, which
+is still `claims-v1` / `43275b979e43` there. The prompt revision the prediction is about
+(`claims-v2`) belongs to next week and must land in a later commit, or the prediction was not
+made in advance.
