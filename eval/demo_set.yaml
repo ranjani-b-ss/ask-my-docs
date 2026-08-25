@@ -1,0 +1,24 @@
+# The curated demo set — the questions this app gets shown with.
+#
+# These are the ones that went into the walkthrough, the README, and every screen-share:
+# they land cleanly, they show off supersession and abstention, and they are the reason
+# anyone believes the app works.
+#
+# They are traced with surface: demo so the seeded random sample can EXCLUDE them. That
+# exclusion is the point. Sampling these would produce a frequency table describing the
+# demo, not the product — and the bonus challenge in the brief is precisely to measure the
+# gap between the two.
+
+set: demo
+
+questions:
+  - {corpus: insurance, q: "What is the compulsory deductible for a car above 1500cc?"}
+  - {corpus: insurance, q: "What is the waiting period for pre-existing diseases?"}
+  - {corpus: insurance, q: "What is the co-payment for insured persons above 60 years?"}
+  - {corpus: insurance, q: "How many days do I have to intimate a motor claim?"}
+  - {corpus: insurance, q: "What is the depreciation rate for plastic parts?"}
+  - {corpus: insurance, q: "Is the grievance officer required to respond within a fixed time?"}
+  - {corpus: insurance, q: "Which document supersedes the base health wording?"}
+  - {corpus: insurance, q: "Does the policy cover flood damage to the engine?"}
+  - {corpus: insurance, q: "What is the room rent limit?"}
+  - {corpus: insurance, q: "What is the premium for this policy?"}

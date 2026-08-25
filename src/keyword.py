@@ -91,21 +91,25 @@ class BM25:
 
 # One index per collection, built on first use. Chunk text never changes for a given
 # collection (ingest creates a fresh one), so the cache cannot go stale.
-_cache: dict[str, tuple[BM25, list[str], list[dict]]] = {}
+_cache: dict[str, tuple[BM25, list[str], list[dict], list[str]]] = {}
 
 
-def get_index(collection) -> tuple[BM25, list[str], list[dict]]:
+def get_index(collection) -> tuple[BM25, list[str], list[dict], list[str]]:
     """Build (or fetch) the BM25 index for a Chroma collection.
 
     Reads the chunk text straight out of Chroma rather than persisting a second copy — one
     source of truth, and nothing to invalidate when a corpus is re-ingested.
+
+    Returns the chunk ids alongside the text so a keyword-only hit can be written to a
+    trace with its id, same as a dense hit.
     """
     name = collection.name
     if name not in _cache:
         got = collection.get(include=["documents", "metadatas"])
         docs = got["documents"] or []
         metas = got["metadatas"] or []
-        _cache[name] = (BM25(docs), docs, metas)
+        ids = got["ids"] or []
+        _cache[name] = (BM25(docs), docs, metas, ids)
     return _cache[name]
 
 

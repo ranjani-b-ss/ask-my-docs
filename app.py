@@ -259,6 +259,7 @@ def main() -> None:
                 min_rerank_score=opts["min_rerank"],
                 provider=opts["provider"],
                 force_extractive=opts["force_extractive"],
+                surface="web",
             )
         render_answer(result)
 

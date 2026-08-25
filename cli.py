@@ -56,6 +56,7 @@ def cmd_ask(args) -> int:
         model=args.model,
         provider=args.provider,
         force_extractive=args.no_llm,
+        surface="cli",
     )
 
     print(f"\nQ: {args.question}\n")

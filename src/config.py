@@ -23,6 +23,15 @@ UPLOAD_CORPUS = "uploaded"          # where documents added through the UI are w
 DATA_DIR = CORPORA_DIR / DEFAULT_CORPUS
 STORE_DIR = PROJECT_ROOT / ".chroma"
 
+# --- Traces (Week 5) ---
+# Append-only JSONL, one object per request. Committed to git deliberately: the whole point
+# of error analysis is that someone else can re-read the same traces and disagree with the
+# taxonomy. Claimant identifiers are stripped by src/redact.py before any line is written.
+TRACE_DIR = PROJECT_ROOT / "traces"
+TRACE_FILE = TRACE_DIR / "traces.jsonl"
+# Bumped when a field is added or renamed, so a mixed-vintage trace file stays readable.
+TRACE_SCHEMA_VERSION = "1.0"
+
 SUPPORTED_SUFFIXES = [".pdf", ".md", ".markdown", ".txt", ".html", ".htm"]
 
 

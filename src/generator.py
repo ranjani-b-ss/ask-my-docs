@@ -57,6 +57,23 @@ If the CONTEXT does not answer the question, reply exactly NOT_IN_DOCUMENTS."""
 NOT_FOUND_TOKEN = "NOT_IN_DOCUMENTS"
 _CITATION = re.compile(r"\[(\d+)\]")
 
+# The prompt identity, recorded in every trace.
+#
+# The version string is the human label; the hash is the proof. A version alone is a
+# promise that someone remembered to bump it, and the one time they don't is the one time
+# a whole week of traces becomes unreplayable. Comparing the hash catches that silently.
+PROMPT_VERSION = "claims-v1"
+
+# Context truncation is part of the prompt, so it belongs to the recorded version: the same
+# passages assembled at a different width are a different model call.
+MAX_CHARS_PER_HIT = 1800
+
+
+def prompt_sha() -> str:
+    from .trace import sha
+
+    return sha(SYSTEM_PROMPT + "\x00" + ANSWER_TEMPLATE + "\x00" + str(MAX_CHARS_PER_HIT))
+
 
 @dataclass
 class Answer:
@@ -81,7 +98,7 @@ def ollama_available(url: str = OLLAMA_URL) -> tuple[bool, str]:
     return status.ready, status.detail
 
 
-def format_context(hits: list[Hit], max_chars_per_hit: int = 1800) -> str:
+def format_context(hits: list[Hit], max_chars_per_hit: int = MAX_CHARS_PER_HIT) -> str:
     blocks = []
     for i, hit in enumerate(hits, start=1):
         meta = hit.meta
@@ -119,7 +136,7 @@ def _cited_indices(text: str, n_hits: int) -> tuple[list[int], list[int]]:
     return used, invented
 
 
-def _extractive_answer(retrieval: Retrieval, why: str = "") -> Answer:
+def _extractive_answer(retrieval: Retrieval, why: str = "", extra: dict | None = None) -> Answer:
     """Quote the winning passage instead of writing prose.
 
     ``why`` must state what actually happened. "No local model running" was hardcoded from
@@ -140,7 +157,7 @@ def _extractive_answer(retrieval: Retrieval, why: str = "") -> Answer:
         citations=[_citation_dict(1, best)],
         hits=retrieval.hits,
         mode="extractive",
-        diagnostics=retrieval.diagnostics,
+        diagnostics={**retrieval.diagnostics, **(extra or {})},
     )
 
 
@@ -166,6 +183,18 @@ def answer_from_retrieval(
     provider: str | None = None,
     force_extractive: bool = False,
 ) -> Answer:
+    # Everything a trace needs about the generation call, filled in as we go. It is built
+    # here rather than at the call site because only this function knows which gate fired.
+    gen = {
+        "prompt_version": PROMPT_VERSION,
+        "prompt_sha": prompt_sha(),
+        "provider": provider or llm.provider_name(),
+        "model": model or llm.default_model(provider),
+        "params": llm.call_params(provider),
+        "raw_output": None,
+        "context_sha": None,
+    }
+
     # Gate 1 — retrieval already decided the corpus cannot support an answer.
     if not retrieval.grounded:
         return Answer(
@@ -177,22 +206,34 @@ def answer_from_retrieval(
             hits=retrieval.hits,
             mode="abstained",
             reason=retrieval.reason,
-            diagnostics=retrieval.diagnostics,
+            # No model was called, so record no model: writing one into the trace would
+            # imply a call that never happened.
+            diagnostics={**retrieval.diagnostics, **gen, "provider": None, "model": None,
+                         "params": {}},
         )
 
     if force_extractive:
-        return _extractive_answer(retrieval, "you asked for this mode")
+        return _extractive_answer(retrieval, "you asked for this mode",
+                                  {**gen, "provider": None, "model": None, "params": {}})
     if not llm.is_ready(provider):
-        return _extractive_answer(retrieval, llm.status(provider).detail)
+        return _extractive_answer(retrieval, llm.status(provider).detail,
+                                  {**gen, "gate": "provider_unavailable"})
 
     context = format_context(retrieval.hits)
+    from .trace import sha
+
+    gen["context_sha"] = sha(context)
     try:
         raw = _call_llm(retrieval.query, context, provider, model)
     except Exception as exc:
         name = provider or llm.provider_name()
-        fallback = _extractive_answer(retrieval, f"the {name} call failed. {exc}")
+        fallback = _extractive_answer(retrieval, f"the {name} call failed. {exc}",
+                                      {**gen, "gate": "provider_error",
+                                       "error": str(exc)[:400]})
         fallback.reason = f"LLM call failed ({exc}); fell back to retrieval-only."
         return fallback
+
+    gen["raw_output"] = raw
 
     # Gate 2 — the model itself declined.
     if NOT_FOUND_TOKEN in raw.upper():
@@ -206,12 +247,12 @@ def answer_from_retrieval(
             hits=retrieval.hits,
             mode="abstained",
             reason="Model returned NOT_IN_DOCUMENTS.",
-            diagnostics=retrieval.diagnostics,
+            diagnostics={**retrieval.diagnostics, **gen, "gate": "model"},
         )
 
     # Gate 3 — verify the citations point at passages that were really supplied.
     used, invented = _cited_indices(raw, len(retrieval.hits))
-    diagnostics = dict(retrieval.diagnostics)
+    diagnostics = {**retrieval.diagnostics, **gen}
     diagnostics.update(cited=used, invented_citations=invented)
 
     if not used:
@@ -225,7 +266,7 @@ def answer_from_retrieval(
             hits=retrieval.hits,
             mode="unverified",
             reason="Answer contained no valid citation markers.",
-            diagnostics=diagnostics,
+            diagnostics={**diagnostics, "gate": "citation"},
         )
 
     citations = [_citation_dict(i, retrieval.hits[i - 1]) for i in used]

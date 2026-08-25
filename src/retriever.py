@@ -30,6 +30,7 @@ class Hit:
     text: str
     meta: dict
     cosine: float
+    chunk_id: str = ""
     rerank_score: float | None = None
     bm25: float | None = None      # keyword score, None when hybrid is off
     rrf: float | None = None       # fused rank score
@@ -120,10 +121,13 @@ def retrieve(
     if not raw:
         return Retrieval(
             question, [], False, "Nothing in the index matched the filters.",
-            {"candidates": 0},
+            {"candidates": 0, "gate": "empty"},
         )
 
-    hits = [Hit(text=r["text"], meta=r["meta"], cosine=r["cosine"]) for r in raw]
+    hits = [
+        Hit(text=r["text"], meta=r["meta"], cosine=r["cosine"], chunk_id=r.get("chunk_id", ""))
+        for r in raw
+    ]
     best_cosine = max(h.cosine for h in hits)
     fused_in = 0
 
@@ -131,7 +135,7 @@ def retrieve(
         # Keyword search over the same collection, fused by rank. Skipped when a metadata
         # filter is active: BM25 here scans the whole collection, so fusing its results
         # would smuggle back chunks the filter deliberately excluded.
-        bm25, docs, metas = keyword.get_index(collection)
+        bm25, docs, metas, ids = keyword.get_index(collection)
         kw = bm25.top_n(question, candidate_k)
         if kw:
             by_text = {h.text: h for h in hits}
@@ -142,7 +146,8 @@ def retrieve(
                 else:
                     # Found by keywords but missed by the vector search entirely — this is
                     # the class of result hybrid exists to recover.
-                    extra = Hit(text=text, meta=metas[idx], cosine=0.0)
+                    extra = Hit(text=text, meta=metas[idx], cosine=0.0,
+                                chunk_id=ids[idx] if idx < len(ids) else "")
                     extra.bm25 = round(score, 4)
                     hits.append(extra)
                     by_text[text] = extra
@@ -193,6 +198,7 @@ def retrieve(
         "keyword_only_candidates": fused_in,
         "best_bm25": max((h.bm25 or 0.0 for h in hits), default=0.0),
         "collection": store.collection_name(cfg, corpus_id),
+        "gate": "none",
     }
 
     # Two gates. The cross-encoder is the decisive one when available, because the
@@ -202,7 +208,7 @@ def retrieve(
             question, hits, False,
             f"Best vector similarity {best_cosine:.2f} is below the {min_cosine:.2f} "
             "threshold — nothing in the documents is close enough to this question.",
-            diagnostics,
+            {**diagnostics, "gate": "cosine"},
         )
 
     if use_reranker and best.rerank_score is not None and best.rerank_score < min_rerank_score:
@@ -211,7 +217,7 @@ def retrieve(
             f"Passages were retrieved, but the cross-encoder scored the best one "
             f"{best.rerank_score:.2f}, below the {min_rerank_score:.2f} threshold — they "
             "are topically near the question but do not answer it.",
-            diagnostics,
+            {**diagnostics, "gate": "rerank"},
         )
 
     return Retrieval(question, hits, True, "", diagnostics)

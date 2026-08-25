@@ -115,11 +115,15 @@ def query(collection, query_vector, n_results: int, where: dict | None = None) -
         include=["documents", "metadatas", "distances"],
     )
     hits: list[dict] = []
-    for doc, meta, distance in zip(
-        result["documents"][0], result["metadatas"][0], result["distances"][0]
+    for chunk_id, doc, meta, distance in zip(
+        result["ids"][0], result["documents"][0], result["metadatas"][0], result["distances"][0]
     ):
         hits.append(
             {
+                # Carried all the way to the trace file. Without a stable id a trace can
+                # record *that* five passages were used but not *which*, and replaying it
+                # would mean re-running the search and hoping for the same result.
+                "chunk_id": chunk_id,
                 "text": doc,
                 "meta": meta,
                 # Chroma reports cosine *distance*; similarity is 1 - distance.
@@ -127,3 +131,14 @@ def query(collection, query_vector, n_results: int, where: dict | None = None) -
             }
         )
     return hits
+
+
+def get_by_ids(collection, chunk_ids: list[str]) -> dict[str, dict]:
+    """Fetch chunks by id, for replaying a trace without re-running retrieval."""
+    if not chunk_ids:
+        return {}
+    got = collection.get(ids=chunk_ids, include=["documents", "metadatas"])
+    return {
+        cid: {"text": text, "meta": meta}
+        for cid, text, meta in zip(got["ids"], got["documents"], got["metadatas"])
+    }

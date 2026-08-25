@@ -223,6 +223,10 @@ def gemini_status(model: str = GEMINI_MODEL) -> ProviderStatus:
     return ProviderStatus(True, f"Gemini key detected · model {model}")
 
 
+# Seconds to wait before each retry of a transient 5xx.
+_BACKOFF = (4.0, 12.0, 30.0)
+
+
 def _gemini_retry_delay(response, default: float = 20.0) -> float:
     """Honour the API's own RetryInfo if it sends one, else back off a fixed amount."""
     try:
@@ -276,15 +280,22 @@ def gemini_chat(system: str, user: str, model: str = GEMINI_MODEL, attempt: int 
             "(`gemini-flash-latest` is the safe choice)."
         )
     if response.status_code in (500, 502, 503, 504):
-        # Transient server-side failure. Worth one retry: otherwise a two-second blip
-        # silently degrades a whole eval run to retrieval-only mode, and every unanswerable
-        # question gets labelled as a different outcome than it really was.
-        if attempt == 0:
-            time.sleep(5)
-            return gemini_chat(system, user, model, attempt=1)
+        # Transient server-side failure. One retry is not enough: measured over a 22-request
+        # batch, a single 5s retry still left 64% of calls failing, because the free tier
+        # returns 503 in bursts rather than as isolated blips. Three attempts with
+        # increasing backoff clears almost all of them.
+        #
+        # This matters beyond convenience. When the call fails the app degrades to quoting a
+        # passage, so an under-retried provider does not look like an outage in the logs —
+        # it looks like the app changed its answer style, and a whole batch of traces gets
+        # attributed to the wrong cause.
+        if attempt < len(_BACKOFF):
+            time.sleep(_BACKOFF[attempt])
+            return gemini_chat(system, user, model, attempt=attempt + 1)
         raise LLMError(
-            f"Gemini returned {response.status_code} (server-side, transient) twice. "
-            "Not a problem with your key or quota — try again shortly."
+            f"Gemini returned {response.status_code} (server-side, transient) on "
+            f"{len(_BACKOFF) + 1} attempts. Not a problem with your key or quota — "
+            "the endpoint is having a bad day."
         )
 
     if response.status_code == 429:
@@ -292,10 +303,12 @@ def gemini_chat(system: str, user: str, model: str = GEMINI_MODEL, attempt: int 
         # prompt carries five passages, so it trips the token quota long before the request
         # quota — a one-word probe can succeed while real questions 429. Both reset on a
         # rolling minute, so one backoff usually clears it.
+        # Shares the attempt counter with the 5xx branch above, so a call that already
+        # burned retries on 503 does not then wait out three more quota backoffs.
         retry_after = _gemini_retry_delay(response)
-        if attempt == 0:
+        if attempt < 2:
             time.sleep(retry_after)
-            return gemini_chat(system, user, model, attempt=1)
+            return gemini_chat(system, user, model, attempt=attempt + 1)
         raise LLMError(
             "Gemini quota exceeded (429) twice. This is usually the free tier's "
             "tokens-per-minute limit rather than requests-per-minute, because each question "
@@ -364,6 +377,25 @@ def default_model(provider: str | None = None) -> str:
         "anthropic": ANTHROPIC_MODEL,
         "gemini": GEMINI_MODEL,
     }.get(name, OLLAMA_MODEL)
+
+
+def call_params(provider: str | None = None) -> dict:
+    """The decoding parameters this provider is actually called with.
+
+    Recorded in every trace. Naming the provider is not enough to replay a call: two runs
+    at different temperatures are two different experiments, and Anthropic is deliberately
+    called with no temperature at all (the parameter was removed on Opus 5), which is a
+    difference a reader would otherwise have to go read the source to discover.
+    """
+    name = provider or provider_name()
+    if name == "openai":
+        return {"temperature": 0.0}
+    if name == "anthropic":
+        # No temperature by design — see anthropic_chat.
+        return {"max_tokens": ANTHROPIC_MAX_TOKENS, "thinking": "default"}
+    if name == "gemini":
+        return {"temperature": 0.0}
+    return {"temperature": 0.0, "num_ctx": 8192, "top_p": 0.9}
 
 
 def chat(system: str, user: str, provider: str | None = None, model: str | None = None) -> str:

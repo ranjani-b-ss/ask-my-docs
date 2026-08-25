@@ -147,6 +147,29 @@ To tune the abstain thresholds against your own labelled questions:
 Use it whenever you swap in a document set that behaves differently — real PDFs score lower
 across the board than clean Markdown.
 
+## Reading the traces
+
+Every request appends one replayable JSON object to `traces/traces.jsonl`, with the retrieved
+chunk ids and scores, the prompt version and hash, the model and its parameters, and the raw
+output. Claimant identifiers are stripped by `src/redact.py` **before** the line is written.
+
+```bash
+./.venv/bin/python eval/check_redaction.py                     # prove that ordering holds
+./.venv/bin/python eval/sample_traces.py --seed 20260826 --n 20 # seeded random sample
+./.venv/bin/python eval/read_trace.py --seed 20260826 --n 20    # read them with passage text
+./.venv/bin/python eval/replay_trace.py --seed 20260826 --n 20  # replay one from the trace alone
+```
+
+The error analysis built from those traces is in [`taxonomy.md`](taxonomy.md) — five ranked
+failure modes with counts, frequencies and severities — with the full working, the twenty
+open-coding sentences and the replay evidence in [`notes.md`](notes.md).
+
+To generate traffic against a corpus so there is something to read:
+
+```bash
+./.venv/bin/python scripts/generate_traffic.py --sleep 2
+```
+
 ---
 
 # Part 2 · How it works

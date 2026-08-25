@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import time
 from pathlib import Path
 
 from .chunker import chunk_corpus, chunk_stats
@@ -21,7 +22,7 @@ from .embedder import get_embedder
 from .generator import Answer, answer_from_retrieval
 from .loader import SIDECAR_NAME, load_corpus
 from .retriever import build_where, retrieve
-from . import store
+from . import store, trace
 
 
 def ingest(
@@ -126,7 +127,12 @@ def ask(
     model: str | None = None,
     provider: str | None = None,
     force_extractive: bool = False,
+    use_hybrid: bool = True,
+    surface: str = "cli",
+    trace_it: bool = True,
 ) -> Answer:
+    started = time.perf_counter()
+    where = build_where(doc_type, effective_on_or_after)
     retrieval = retrieve(
         question,
         cfg=cfg,
@@ -134,10 +140,81 @@ def ask(
         top_k=top_k,
         candidate_k=candidate_k,
         use_reranker=use_reranker,
-        where=build_where(doc_type, effective_on_or_after),
+        where=where,
         min_cosine=min_cosine,
         min_rerank_score=min_rerank_score,
+        use_hybrid=use_hybrid,
     )
-    return answer_from_retrieval(
+    answer = answer_from_retrieval(
         retrieval, model=model, provider=provider, force_extractive=force_extractive
     )
+    if trace_it:
+        _trace(question, answer, retrieval, cfg, corpus_id, top_k, candidate_k,
+               use_reranker, use_hybrid, where, min_cosine, min_rerank_score,
+               surface, int((time.perf_counter() - started) * 1000))
+    return answer
+
+
+def _trace(question, answer, retrieval, cfg, corpus_id, top_k, candidate_k, use_reranker,
+           use_hybrid, where, min_cosine, min_rerank_score, surface, latency_ms) -> None:
+    """Write one trace row. Never allowed to break a request.
+
+    A logging failure that takes down the answer would be a worse bug than the one the log
+    exists to find, so this swallows its own errors and says so on stderr.
+    """
+    d = answer.diagnostics or {}
+    try:
+        trace.record(
+            question=question,
+            corpus=corpus_id,
+            surface=surface,
+            chunking=cfg.to_dict(),
+            collection=d.get("collection", ""),
+            top_k=top_k,
+            candidate_k=candidate_k,
+            use_reranker=use_reranker,
+            use_hybrid=bool(d.get("hybrid", use_hybrid)),
+            where=where,
+            min_cosine=MIN_COSINE if min_cosine is None else min_cosine,
+            min_rerank_score=(
+                MIN_RERANK_SCORE if min_rerank_score is None else min_rerank_score
+            ),
+            retrieved=[
+                {
+                    "rank": i,
+                    "chunk_id": h.chunk_id,
+                    "document_id": h.meta.get("document_id"),
+                    "section": h.meta.get("section") or None,
+                    "page": h.meta.get("page"),
+                    "effective_date": h.meta.get("effective_date") or None,
+                    "cosine": h.cosine,
+                    "rerank": h.rerank_score,
+                    "bm25": h.bm25,
+                    "rrf": h.rrf,
+                }
+                for i, h in enumerate(retrieval.hits, start=1)
+            ],
+            candidates=d.get("candidates", 0),
+            keyword_only_candidates=d.get("keyword_only_candidates", 0),
+            prompt_version=d.get("prompt_version", ""),
+            prompt_sha=d.get("prompt_sha", ""),
+            context_sha=d.get("context_sha") or "",
+            provider=d.get("provider") or "",
+            model=d.get("model") or "",
+            params=d.get("params") or {},
+            raw_output=d.get("raw_output"),
+            gate=d.get("gate", ""),
+            gate_detail=(answer.reason or retrieval.reason or "")[:500],
+            grounded=answer.grounded,
+            mode=answer.mode,
+            answer=answer.text,
+            citations=[
+                {"n": c["n"], "label": c["label"], "document_id": c["document_id"],
+                 "section": c.get("section"), "page": c.get("page")}
+                for c in answer.citations
+            ],
+            latency_ms=latency_ms,
+            error=d.get("error"),
+        )
+    except Exception as exc:                       # pragma: no cover
+        print(f"! trace write failed: {exc}")

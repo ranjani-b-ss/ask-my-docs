@@ -1,0 +1,159 @@
+# A week of traffic for the claims assistant.
+#
+# IMPORTANT — how this file was written, because it decides whether the Week 5 frequencies
+# mean anything:
+#
+# These questions were written from the CLAIMS DOMAIN, not from the documents. Nobody
+# checked whether the corpus can answer them before adding them, and there are no gold
+# answers here. That is deliberate. A bank written by reading the corpus first would only
+# contain answerable questions, every abstention would look like a bug, and the resulting
+# frequencies would describe the bank rather than the app.
+#
+# So the mix below is what a real claims desk sends at an assistant:
+#   - straight coverage and limit questions
+#   - process and deadline questions
+#   - questions about the wrong line of business (a motor question aimed at health)
+#   - questions the documents simply do not cover
+#   - vague one-word queries, typos, lowercase, abbreviations
+#   - multi-part questions
+#   - a few carrying claimant identifiers, which exercises redaction on live traffic
+#   - a small amount of off-topic noise, which every real log contains
+#
+# No question here is known-broken and none was chosen because it fails. `set: random`
+# marks this as the population the seeded sample is drawn from; the curated showcase
+# questions live in eval/demo_set.yaml and are excluded from that population.
+
+set: random
+
+questions:
+  # ---- motor, coverage and amounts ------------------------------------------------
+  - {corpus: insurance, q: "What is the compulsory deductible for a private car above 1500cc?"}
+  - {corpus: insurance, q: "Is depreciation deducted on plastic parts in an own damage claim?"}
+  - {corpus: insurance, q: "My client's car is 3 years old. What depreciation rate applies to the rubber parts?"}
+  - {corpus: insurance, q: "Does the policy cover damage to tyres alone?"}
+  - {corpus: insurance, q: "Is engine damage from driving through a flooded road covered?"}
+  - {corpus: insurance, q: "What happens to the claim if the driver had no valid licence?"}
+  - {corpus: insurance, q: "Can I claim for a stolen stereo that was not factory fitted?"}
+  - {corpus: insurance, q: "Is the nil depreciation cover applicable to a claim in June 2026?"}
+  - {corpus: insurance, q: "how much is the deductible now"}
+  - {corpus: insurance, q: "What is the towing charge limit after an accident?"}
+  - {corpus: insurance, q: "Is there a limit on the number of own damage claims in a year?"}
+  - {corpus: insurance, q: "Does the own damage section pay for consequential loss?"}
+  - {corpus: insurance, q: "What is the depreciation on a fibreglass component?"}
+  - {corpus: insurance, q: "If the car is a total loss how is the settlement amount calculated?"}
+  - {corpus: insurance, q: "Is a windscreen-only claim treated as a full claim for NCB purposes?"}
+
+  # ---- health, coverage and amounts -----------------------------------------------
+  - {corpus: insurance, q: "What is the waiting period for pre-existing diseases?"}
+  - {corpus: insurance, q: "Is there a co-payment on hospitalisation for a 62 year old?"}
+  - {corpus: insurance, q: "What is the room rent limit under the group health policy?"}
+  - {corpus: insurance, q: "Are maternity expenses covered and after how long?"}
+  - {corpus: insurance, q: "Is cataract surgery subject to a sub-limit?"}
+  - {corpus: insurance, q: "How many days of pre-hospitalisation expenses are payable?"}
+  - {corpus: insurance, q: "Are post-hospitalisation expenses covered for 60 days?"}
+  - {corpus: insurance, q: "Is day care surgery covered without 24 hour admission?"}
+  - {corpus: insurance, q: "What is excluded in the first 30 days of the policy?"}
+  - {corpus: insurance, q: "Does the policy cover treatment taken outside India?"}
+  - {corpus: insurance, q: "Is dental treatment payable?"}
+  - {corpus: insurance, q: "co pay for senior citizens?"}
+  - {corpus: insurance, q: "Is an organ donor's hospitalisation covered?"}
+  - {corpus: insurance, q: "What is the waiting period for a hernia operation?"}
+  - {corpus: insurance, q: "Are AYUSH treatments reimbursed?"}
+  - {corpus: insurance, q: "Is mental illness treatment covered under this policy?"}
+  - {corpus: insurance, q: "What is the sum insured for the group health policy?"}
+  - {corpus: insurance, q: "Does the health policy cover a new born baby from day one?"}
+
+  # ---- claims process, deadlines, documents ---------------------------------------
+  - {corpus: insurance, q: "How many days do I have to intimate a claim?"}
+  - {corpus: insurance, q: "What documents are needed for a reimbursement claim?"}
+  - {corpus: insurance, q: "How long does the insurer take to settle after receiving all documents?"}
+  - {corpus: insurance, q: "What is the process to escalate a rejected claim?"}
+  - {corpus: insurance, q: "Who do I write to for grievance redressal and in how many days do they reply?"}
+  - {corpus: insurance, q: "Can a claim be filed after 30 days if the insured was hospitalised?"}
+  - {corpus: insurance, q: "Is there interest payable on delayed claim settlement?"}
+  - {corpus: insurance, q: "What is the turnaround time for cashless pre-authorisation?"}
+  - {corpus: insurance, q: "Can the claim be paid to the hospital directly?"}
+  - {corpus: insurance, q: "What is the Ombudsman escalation timeline?"}
+  - {corpus: insurance, q: "claim intimation deadline"}
+  - {corpus: insurance, q: "Do I need the original bills or are scans acceptable?"}
+  - {corpus: insurance, q: "What happens if documents are submitted late?"}
+  - {corpus: insurance, q: "Who is the claims officer responsible for approving above 5 lakh?"}
+
+  # ---- supersession / which version applies ---------------------------------------
+  - {corpus: insurance, q: "Which co-payment applies to a claim in July 2026, the base policy or the endorsement?"}
+  - {corpus: insurance, q: "Has the pre-existing disease waiting period changed?"}
+  - {corpus: insurance, q: "Was the motor deductible revised recently?"}
+  - {corpus: insurance, q: "What is the currently applicable co-payment percentage?"}
+  - {corpus: insurance, q: "Is endorsement 2 in force yet?"}
+
+  # ---- questions with claimant identifiers (redaction must handle these) ----------
+  - {corpus: insurance, q: "Claimant Mr. Rajesh Kumar, claim no. CLM-2026-004871 — is his knee replacement covered?"}
+  - {corpus: insurance, q: "For policyholder Anita Desai (POL/TN/88213), what is the co-payment on her claim?"}
+  - {corpus: insurance, q: "Insured person Suresh Babu called on 98765 43210 asking about his room rent limit."}
+  - {corpus: insurance, q: "Claim CLM/2026/8812 for patient Meera Nair was denied. On what ground can it be denied?"}
+
+  # ---- multi-part and comparison ---------------------------------------------------
+  - {corpus: insurance, q: "What is the deductible and the co-payment, and do both apply to the same claim?"}
+  - {corpus: insurance, q: "Explain the difference between a deductible and a co-payment in this policy."}
+  - {corpus: insurance, q: "Compare the waiting period in the base wording with the endorsement."}
+  - {corpus: insurance, q: "List every exclusion that would let us deny a hospitalisation claim."}
+  - {corpus: insurance, q: "What is the total amount payable on a 2 lakh hospital bill for a 65 year old?"}
+
+  # ---- vague, short, or badly formed ----------------------------------------------
+  - {corpus: insurance, q: "exclusions"}
+  - {corpus: insurance, q: "waiting period"}
+  - {corpus: insurance, q: "Is it covered?"}
+  - {corpus: insurance, q: "deductable amont for car claim"}
+  - {corpus: insurance, q: "what abt PED"}
+  - {corpus: insurance, q: "Tell me about the policy."}
+
+  # ---- out of scope for the corpus (real logs are full of these) ------------------
+  - {corpus: insurance, q: "What is the premium for this policy?"}
+  - {corpus: insurance, q: "Can I add my spouse to the policy mid-term and what will it cost?"}
+  - {corpus: insurance, q: "What is the GST rate on health insurance premiums?"}
+  - {corpus: insurance, q: "Does this policy cover my two wheeler?"}
+  - {corpus: insurance, q: "What is the IRDAI regulation number for claim repudiation?"}
+  - {corpus: insurance, q: "Is travel insurance included?"}
+  - {corpus: insurance, q: "What is the surrender value of this policy?"}
+  - {corpus: insurance, q: "How do I change my nominee?"}
+  - {corpus: insurance, q: "Write a python script to calculate the deductible."}
+  - {corpus: insurance, q: "Who won the cricket match yesterday?"}
+  - {corpus: insurance, q: "What is the capital of France?"}
+
+  # ---- the real uploaded policy wording (Bajaj, Tamil Nadu) ----------------------
+  - {corpus: uploaded, q: "What is the deductible under this policy?"}
+  - {corpus: uploaded, q: "What is the definition of a Hospital under this policy?"}
+  - {corpus: uploaded, q: "Is pre-existing disease covered and after what waiting period?"}
+  - {corpus: uploaded, q: "What is the co-payment applicable?"}
+  - {corpus: uploaded, q: "Which expenses are permanently excluded?"}
+  - {corpus: uploaded, q: "How do I intimate a claim under this policy?"}
+  - {corpus: uploaded, q: "What documents must be submitted for a reimbursement claim?"}
+  - {corpus: uploaded, q: "Is maternity covered?"}
+  - {corpus: uploaded, q: "What is the free look period?"}
+  - {corpus: uploaded, q: "Is there a grace period for premium payment?"}
+  - {corpus: uploaded, q: "What are the sub-limits for cataract treatment?"}
+  - {corpus: uploaded, q: "Is road ambulance covered and up to what amount?"}
+  - {corpus: uploaded, q: "What is the definition of Medically Necessary Treatment?"}
+  - {corpus: uploaded, q: "Are day care procedures covered?"}
+  - {corpus: uploaded, q: "What is the 30 day initial waiting period exclusion?"}
+  - {corpus: uploaded, q: "Is AYUSH treatment covered under this policy?"}
+  - {corpus: uploaded, q: "What is the claim settlement turnaround time?"}
+  - {corpus: uploaded, q: "How is the sum insured restored after a claim?"}
+  - {corpus: uploaded, q: "Is there a cumulative bonus for claim free years?"}
+  - {corpus: uploaded, q: "What is the portability provision?"}
+  - {corpus: uploaded, q: "Who is eligible to be covered as a dependent?"}
+  - {corpus: uploaded, q: "What is the cancellation and refund grid?"}
+  - {corpus: uploaded, q: "Does the policy cover hospitalisation for COVID-19?"}
+  - {corpus: uploaded, q: "What is the pre and post hospitalisation cover period?"}
+  - {corpus: uploaded, q: "Is a health check up benefit available?"}
+  - {corpus: uploaded, q: "What is the specific waiting period for joint replacement?"}
+  - {corpus: uploaded, q: "Are non-medical consumables payable?"}
+  - {corpus: uploaded, q: "What is the grievance redressal escalation path?"}
+  - {corpus: uploaded, q: "Is modern treatment such as robotic surgery covered?"}
+  - {corpus: uploaded, q: "What is the geographical scope of cover?"}
+  - {corpus: uploaded, q: "room rent capping"}
+  - {corpus: uploaded, q: "Can the policy be renewed after age 70?"}
+  - {corpus: uploaded, q: "What is the deductible for a motor own damage claim?"}
+  - {corpus: uploaded, q: "What is the Ombudsman address for Tamil Nadu?"}
+  - {corpus: uploaded, q: "Insured person Mr. Karthik Raman, claim CLM-2026-0912, asks if his angioplasty is payable."}
+  - {corpus: uploaded, q: "What is the premium payable for a family of four?"}
