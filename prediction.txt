@@ -1,0 +1,66 @@
+PREDICTION — written 26 August 2026, after measuring judge_v1 and reading its three
+disagreements, and BEFORE judge_v2.txt exists.
+
+Committed in its own commit, ahead of the commit that adds judge_v2.txt, so the ordering is
+checkable in git.
+
+--------------------------------------------------------------------------------------------
+STARTING POINT
+
+  judge_v1 agreement with the 25 hand labels : 22/25 = 88.0%
+  always-"GROUNDED" baseline on this set     : 20/25 = 80.0%
+  disagreements                              : 3, ALL judge-too-lenient
+                                               (judge GROUNDED, human UNGROUNDED)
+
+  The three, and the pattern in them:
+
+    cb-reimbursement-window      superseded figure: relied on the 15-day submission window
+                                 from the 2025 base wording when a 2026 endorsement had
+                                 extended it to 30 days.
+    m1-direct-hospital-payment   superseded figure: gave the 6-hour pre-authorisation
+                                 response time when a 2026 endorsement had reduced it to 4.
+    m1-room-rent-capping         misapplied exception: quoted the proportionate-deduction
+                                 exception and called the claim PAYABLE without the
+                                 precondition for that exception being established.
+
+  Two classes, then: superseded-as-current (2 cases) and an exception applied to facts it
+  does not cover (1 case). In both classes every individual sentence is quoted accurately
+  from a retrieved passage, which is why a judge reading for "is this sentence in the
+  context" passes them.
+
+--------------------------------------------------------------------------------------------
+THE ITERATION
+
+  Add TWO of the judge's own disagreements to judge_v2 as worked few-shot examples — one
+  from each class:
+
+    cb-reimbursement-window   teaches superseded-as-current
+    m1-room-rent-capping      teaches exception-applied-to-facts-it-does-not-cover
+
+  m1-direct-hospital-payment is deliberately NOT shown to the judge. It is the same
+  superseded-figure pattern as the first example, so it is the held-out test of whether the
+  judge learned the pattern or just memorised the case.
+
+--------------------------------------------------------------------------------------------
+THE PREDICTION (one sentence)
+
+  Showing judge_v2 the cb-reimbursement-window and m1-room-rent-capping disagreements as
+  few-shot examples will fix those two and generalise to the unseen m1-direct-hospital-payment
+  case, taking agreement from 88.0% (22/25) to 100% (25/25) with no new false-UNGROUNDED
+  verdicts on the 20 cases the judge already got right.
+
+--------------------------------------------------------------------------------------------
+HOW IT COULD BE WRONG
+
+  Stated in advance so the scoring afterwards is not a matter of interpretation:
+
+  * If agreement lands below 96% (24/25), the few-shot examples did not carry the pattern.
+  * If m1-direct-hospital-payment stays GROUNDED, the judge memorised the two examples
+    instead of learning the class, and the "generalise" half of the prediction is false.
+  * If any of the 20 already-correct cases flips to UNGROUNDED, the fix over-corrected and
+    bought lenience-reduction with false alarms — a real cost, because m4-what-does-this-cover
+    legitimately relies on a 2026 endorsement figure and m2-newborn-cover legitimately relies
+    on a 2026 endorsement condition, and a judge taught to be suspicious of dates could start
+    flagging those.
+
+  I consider the third the most likely of the three to happen.
