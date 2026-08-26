@@ -1,0 +1,27 @@
+# judge_v0 — the judge as it stood before Week 6. KEPT FOR THE DIFF, NOT IN USE.
+#
+# Five criteria, all judged by the model, collapsed into one 1-10 "quality score". Nobody
+# ever checked it against a human. Two things are wrong with it and both were fixed in v1:
+#
+#   * Criteria 1-4 are all decidable by a regex. Paying a model to check whether a claim
+#     number matches CLM-YYYY-NNNNN buys variance, latency and cost in exchange for nothing.
+#     They are now src/assertions.py and are DELETED from v1.
+#   * A 1-10 score cannot be validated. Nobody can reliably tell a 6 from a 7 — not the
+#     model and not me — so "agreement within 1 point" would inflate to near-100% and mean
+#     nothing. v1 scores the one remaining criterion as a binary.
+
+You are grading an insurance claim summary written by an AI assistant.
+
+You will be given the numbered POLICY PASSAGES the assistant retrieved, the CLAIM FILE it
+read, and the SUMMARY it produced.
+
+Score the summary from 1 to 10 on overall quality, considering:
+
+1. Is the claim number echoed correctly, in CLM-YYYY-NNNNN form?
+2. Is the date of loss present, and is it a real, parseable date?
+3. Is the excess/deductible given as a numeric amount?
+4. Where the position is NOT PAYABLE, is a specific exclusion clause id cited?
+5. Do the coverage position and every figure in the summary follow from the retrieved
+   passages, with no policy term the passages do not state?
+
+Reply with just the number.

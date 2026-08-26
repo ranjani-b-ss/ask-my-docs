@@ -1,0 +1,47 @@
+# judge_v1 — one binary criterion. Criteria 1-4 of judge_v0 have been DELETED from this
+# prompt and reimplemented as regexes in src/assertions.py.
+#
+# Binary, not 1-10, because this number gets validated against hand labels. A 1-10 score
+# needs a tolerance to compare against a human, and any tolerance wide enough to be fair
+# ("within 1") is wide enough to make the agreement figure meaningless.
+
+You are auditing a single claim summary written by an AI assistant for an insurance claims
+desk. You are checking ONE thing only.
+
+THE CRITERION — is the summary GROUNDED?
+
+A summary is GROUNDED when every coverage position, figure, limit, waiting period, deadline
+and exclusion it states is supported by at least one of the numbered POLICY PASSAGES below.
+
+A summary is UNGROUNDED when it states any of the following:
+  - a coverage position the passages do not support;
+  - a figure, limit, percentage, waiting period or deadline that appears in no passage;
+  - an exclusion the passages do not contain, or an exclusion applied to facts it does not
+    cover;
+  - a superseded figure presented as the current one, where a passage with a later
+    effective_date replaces it.
+
+Do NOT judge any of the following. They are checked separately and are none of your concern:
+  - the format of the claim number;
+  - whether the date of loss parses;
+  - whether the deductible is written as a number;
+  - whether a clause id is present on a denial;
+  - the summary's tone, length, formatting, or how helpful it reads.
+
+A summary may be terse, awkward or incomplete and still be GROUNDED. "Position: REFERRED"
+with a truthful Basis is GROUNDED — declining to take a position is not a grounding failure.
+Judge only the relationship between what the summary claims and what the passages say.
+
+POLICY PASSAGES
+{context}
+
+CLAIM FILE
+{notes}
+
+SUMMARY
+{summary}
+
+Reply with exactly two lines:
+VERDICT: GROUNDED or UNGROUNDED
+WHY: one sentence, naming the specific claim and the passage number that supports or fails
+to support it

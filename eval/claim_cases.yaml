@@ -1,0 +1,400 @@
+# Week 6 eval set — 27 claim files, each tagged with one Week-5 taxonomy mode.
+#
+# Every case is an adjuster's claim file. The app retrieves the policy clauses that bear on
+# it and writes an eight-line summary; the eval scores that summary with four deterministic
+# assertions plus one judged criterion.
+#
+# The `mode` tag is the Week-5 failure this case is built to expose, so the pass rate can be
+# reported per mode. An overall average would let a regression on one mode hide behind
+# another mode carrying the number, which is the whole reason the taxonomy exists.
+#
+#   refuses-answer-present    mode 1 — refuses although the answering clause was retrieved
+#   drops-limiting-condition  mode 2 — right figure, the condition that limits it dropped
+#   wrong-document-retrieved  mode 3 — the clause exists and never reaches the list
+#   placeholder-banner-cited  mode 4 — the corpus's own front matter served as a source
+#   pdf-table-mangled         mode 5 — a PDF table arrives as one-line pseudo-headings
+#   clean-baseline            the "no failure observed" row — controls, so a change that
+#                             breaks working behaviour shows up as a fall here
+#
+# NOTE ON GOLD ANSWERS: there are deliberately none in this file. The judged criterion is
+# validated against hand labels written from the produced summaries (labels_25.json), and an
+# expected verdict sitting here would be a hint to the labeller. The assertions need no gold
+# because they are predicates over the text.
+#
+# `regression_of` marks a case replayed from a real failed trace in traces/traces.jsonl. The
+# `verbatim` field is the exact query string that failed, copied from the trace, and it is
+# reproduced unchanged as the Coverage question line.
+
+cases:
+
+  # ============================ mode 1 — refuses-answer-present ============================
+
+  - id: m1-permanent-exclusions
+    mode: refuses-answer-present
+    corpus: uploaded
+    regression_of: tr_eeff25a3bea3
+    verbatim: "Which expenses are permanently excluded?"
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00418
+      Date of loss: 2026-04-02
+      Line: health
+      Insured person: 44, covered 3 years
+      Incident: Admitted 2 nights for investigation of persistent abdominal pain. Scans and
+        blood work only; no procedure performed. Hospital billed the full stay.
+      Adjuster note: Asked to confirm what is permanently excluded before I draft the letter.
+      Coverage question: Which expenses are permanently excluded?
+
+  - id: m1-cancellation-refund
+    mode: refuses-answer-present
+    corpus: uploaded
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00423
+      Date of loss: 2026-05-11
+      Line: health
+      Incident: Policyholder cancelled mid-term after 4 months, no claim made in the year.
+        Asking what refund is due.
+      Adjuster note: Annual policy, full premium taken at inception.
+      Coverage question: What refund is due on cancellation by the policyholder?
+
+  - id: m1-direct-hospital-payment
+    mode: refuses-answer-present
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00431
+      Date of loss: 2026-06-08
+      Line: health
+      Incident: Planned knee arthroscopy at a network hospital. Hospital is asking to be paid
+        directly rather than the member paying and claiming back.
+      Adjuster note: Member has not paid anything yet.
+      Coverage question: Can the claim be paid to the hospital directly?
+
+  - id: m1-room-rent-capping
+    mode: refuses-answer-present
+    corpus: uploaded
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00437
+      Date of loss: 2026-03-19
+      Line: health
+      Incident: Member occupied a deluxe room; hospital billed room rent well above the
+        standard A/C room rate.
+      Adjuster note: Need the room rent basis before I apply any deduction.
+      Coverage question: What is the room rent limit under this policy?
+
+  - id: m1-consumables
+    mode: refuses-answer-present
+    corpus: uploaded
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00442
+      Date of loss: 2026-02-27
+      Line: health
+      Incident: Final bill includes gloves, hand wash, shoe covers and attendant charges
+        totalling INR 4,180 alongside the surgical charges.
+      Adjuster note: Deciding whether to disallow the consumables line.
+      Coverage question: Are non-medical consumables payable?
+
+  # ========================== mode 2 — drops-limiting-condition ============================
+
+  - id: m2-nil-dep-old-vehicle
+    mode: drops-limiting-condition
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00455
+      Date of loss: 2026-05-22
+      Line: motor
+      Insured vehicle: private car, 1600cc, first registered 2018-11-30
+      Incident: Kerb strike. Front bumper and left headlamp assembly cracked; both plastic.
+        Tyres undamaged.
+      Adjuster note: Schedule records Nil Depreciation cover. Estimate INR 46,000. This is
+        the vehicle's first claim this policy year.
+      Coverage question: Is depreciation deducted on the plastic bumper and headlamp?
+
+  - id: m2-nil-dep-third-claim
+    mode: drops-limiting-condition
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00461
+      Date of loss: 2026-07-04
+      Line: motor
+      Insured vehicle: private car, 1200cc, first registered 2024-01-15
+      Incident: Rear quarter panel and plastic tail lamp housing damaged in a car park.
+      Adjuster note: Schedule records Nil Depreciation. This is the THIRD own damage claim
+        in the current policy year; two Nil Depreciation claims already settled.
+      Coverage question: Does Nil Depreciation apply to this claim?
+
+  - id: m2-road-ambulance
+    mode: drops-limiting-condition
+    corpus: uploaded
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00468
+      Date of loss: 2026-06-16
+      Line: health
+      Incident: Member transported by private ambulance from home to hospital, INR 3,200.
+        Admitted overnight for observation after a fall; in-patient claim still under review.
+      Adjuster note: No practitioner certificate of a life-threatening emergency on file.
+      Coverage question: Is road ambulance covered and up to what amount?
+
+  - id: m2-settlement-timeline
+    mode: drops-limiting-condition
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00472
+      Date of loss: 2026-06-30
+      Line: motor
+      Incident: Total loss claim, theft. Last document received 2026-08-04.
+      Adjuster note: Claim flagged for investigation by the fraud unit on 2026-08-06.
+        Claimant is asking when a decision is due.
+      Coverage question: How long does the insurer have to decide after the last document?
+
+  - id: m2-newborn-cover
+    mode: drops-limiting-condition
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00479
+      Date of loss: 2026-07-19
+      Line: health
+      Incident: Newborn admitted to special care nursery on day 2. Bill INR 3,40,000.
+      Adjuster note: Birth was intimated to the Company on 2026-08-25, 37 days after birth.
+        Family sum insured is INR 10,00,000.
+      Coverage question: Is the newborn covered from birth and up to what amount?
+
+  - id: m2-ncb-protection
+    mode: drops-limiting-condition
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00483
+      Date of loss: 2026-07-28
+      Line: motor
+      Incident: Side mirror and door panel damage.
+      Adjuster note: Schedule records No Claim Bonus Protection. This is the SECOND own
+        damage claim this policy year; the first was settled in May.
+      Coverage question: Does the No Claim Bonus survive this claim?
+
+  # ========================== mode 3 — wrong-document-retrieved ============================
+
+  - id: m3-motor-intimation-window
+    mode: wrong-document-retrieved
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00491
+      Date of loss: 2026-07-02
+      Line: motor
+      Incident: Single vehicle collision with a boundary wall. Front end damage.
+      Adjuster note: Loss was intimated on 2026-07-06, four days after the occurrence.
+        Insured says he was in hospital for two days.
+      Coverage question: How many days do I have to intimate a motor claim?
+
+  - id: m3-waiting-period-comparison
+    mode: wrong-document-retrieved
+    corpus: insurance
+    regression_of: tr_297f38675314
+    verbatim: "Compare the waiting period in the base wording with the endorsement."
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00496
+      Date of loss: 2026-08-01
+      Line: health
+      Insured person: 51, cover commenced 2025-09-01
+      Incident: Admitted for hernia repair.
+      Adjuster note: Need to know which waiting period governs — the wording changed part
+        way through this member's cover.
+      Coverage question: Compare the waiting period in the base wording with the endorsement.
+
+  - id: m3-cataract-sublimit
+    mode: wrong-document-retrieved
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00502
+      Date of loss: 2026-06-11
+      Line: health
+      Insured person: 68, cover commenced 2025-02-01
+      Incident: Cataract surgery, right eye, day care. Bill INR 62,000.
+      Adjuster note: Checking whether a sub-limit or a waiting period bites here.
+      Coverage question: Is cataract surgery subject to a sub-limit or a waiting period?
+
+  - id: m3-denial-grounds
+    mode: wrong-document-retrieved
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00509
+      Date of loss: 2026-05-04
+      Line: health
+      Incident: Member admitted following a fall at home. Discharge summary records blood
+        alcohol well above the legal limit at admission.
+      Adjuster note: Considering repudiation. Need the ground and what the letter must say.
+      Coverage question: On what ground can this claim be denied?
+
+  - id: m3-motor-drink-driving
+    mode: wrong-document-retrieved
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00514
+      Date of loss: 2026-04-18
+      Line: motor
+      Insured vehicle: private car, 1500cc
+      Incident: Vehicle left the road and struck a tree. Police report records the driver
+        was under the influence of liquor.
+      Adjuster note: Repair estimate INR 1,90,000. Intending to repudiate.
+      Coverage question: Is this loss excluded and which clause applies?
+
+  # ========================= mode 4 — placeholder-banner-cited =============================
+
+  - id: m4-general-cover-enquiry
+    mode: placeholder-banner-cited
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00521
+      Date of loss: 2026-07-15
+      Line: motor
+      Incident: Insured has opened a claim but has not yet described the damage; asking in
+        general terms what the policy covers.
+      Adjuster note: First contact call, no estimate yet.
+      Coverage question: Tell me about the policy.
+
+  - id: m4-what-does-this-cover
+    mode: placeholder-banner-cited
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00526
+      Date of loss: 2026-08-03
+      Line: health
+      Incident: Member enquiring before a planned admission; no diagnosis given yet.
+      Adjuster note: Pre-admission enquiry only.
+      Coverage question: What does this policy cover?
+
+  - id: m4-which-document-governs
+    mode: placeholder-banner-cited
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00533
+      Date of loss: 2026-06-25
+      Line: health
+      Incident: Member disputes the co-payment applied to an admission in June 2026.
+      Adjuster note: Two versions of the health wording are in play; need to state on the
+        file which document governs.
+      Coverage question: Which document supersedes the base health wording?
+
+  # ============================ mode 5 — pdf-table-mangled ================================
+
+  - id: m5-subsumed-room-charges
+    mode: pdf-table-mangled
+    corpus: uploaded
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00541
+      Date of loss: 2026-03-08
+      Line: health
+      Incident: Itemised bill charges cradle charges, baby charges, comb and room fresheners
+        separately from the room rent.
+      Adjuster note: Need to know which of these are subsumed into room charges rather than
+        billed on top.
+      Coverage question: Which items are to be subsumed into room charges?
+
+  - id: m5-modern-treatment-list
+    mode: pdf-table-mangled
+    corpus: uploaded
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00548
+      Date of loss: 2026-05-30
+      Line: health
+      Incident: Member underwent balloon sinuplasty as a day care procedure. Bill INR 88,000.
+      Adjuster note: Checking the modern treatment list and its ceiling.
+      Coverage question: Is balloon sinuplasty a listed modern treatment and what is the cap?
+
+  - id: m5-daycare-procedure-list
+    mode: pdf-table-mangled
+    corpus: uploaded
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00553
+      Date of loss: 2026-07-11
+      Line: health
+      Incident: Arthrotomy of the hip joint performed with under 24 hours' stay.
+      Adjuster note: Hospital has billed it as day care. Need to confirm it qualifies.
+      Coverage question: Does a procedure needing under 24 hours count as day care?
+
+  # ================================= clean-baseline ========================================
+
+  - id: cb-tyres-only
+    mode: clean-baseline
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00561
+      Date of loss: 2026-06-02
+      Line: motor
+      Insured vehicle: private car, 1600cc
+      Incident: Two tyres burst after striking a pothole. No other part of the vehicle was
+        damaged.
+      Adjuster note: Replacement cost INR 18,400 for the pair.
+      Coverage question: Is damage to tyres alone payable?
+
+  - id: cb-treatment-outside-india
+    mode: clean-baseline
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00567
+      Date of loss: 2026-04-25
+      Line: health
+      Incident: Member fell ill while travelling and was admitted to a hospital in Singapore.
+        Bill equivalent to INR 6,10,000.
+      Adjuster note: Schedule shows no worldwide cover extension.
+      Coverage question: Is treatment taken outside India payable?
+
+  - id: cb-compulsory-deductible
+    mode: clean-baseline
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00572
+      Date of loss: 2026-07-21
+      Line: motor
+      Insured vehicle: private car, 1800cc
+      Incident: Front bumper and bonnet damaged in a low speed collision.
+      Adjuster note: Assessed loss INR 58,000. No voluntary deductible on the schedule.
+      Coverage question: What compulsory deductible applies to this claim?
+
+  - id: cb-copayment-senior
+    mode: clean-baseline
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00578
+      Date of loss: 2026-07-09
+      Line: health
+      Insured person: 67
+      Incident: Admitted 4 nights for pneumonia. Admissible amount assessed at INR 1,80,000.
+      Adjuster note: Need the co-payment percentage that applies to this admission.
+      Coverage question: What co-payment applies to this member's claim?
+
+  - id: cb-reimbursement-window
+    mode: clean-baseline
+    corpus: insurance
+    notes: |
+      CLAIM FILE
+      Claim number: CLM-2026-00584
+      Date of loss: 2026-06-14
+      Line: health
+      Incident: Member treated at a non-network hospital and paid the bill himself,
+        INR 74,000. Discharged 2026-06-18.
+      Adjuster note: Reimbursement papers reached us 2026-07-15, 27 days after discharge.
+      Coverage question: Were the reimbursement documents submitted in time?

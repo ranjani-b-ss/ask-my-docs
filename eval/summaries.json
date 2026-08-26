@@ -1,0 +1,2135 @@
+[
+ {
+  "case_id": "m1-permanent-exclusions",
+  "mode": "refuses-answer-present",
+  "corpus": "uploaded",
+  "regression_of": "tr_eeff25a3bea3",
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00418\nDate of loss: 2026-04-02\nLine: health\nInsured person: 44, covered 3 years\nIncident: Admitted 2 nights for investigation of persistent abdominal pain. Scans and\n  blood work only; no procedure performed. Hospital billed the full stay.\nAdjuster note: Asked to confirm what is permanently excluded before I draft the letter.\nCoverage question: Which expenses are permanently excluded?\n",
+  "query": "Admitted 2 nights for investigation of persistent abdominal pain. Scans and Asked to confirm what is permanently excluded before I draft the letter. Which expenses are permanently excluded?",
+  "summary": "Claim number: CLM-2026-00418\nDate of loss: 2026-04-02\nLine: health\nPolicy: UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS\nPosition: NOT PAYABLE\nDeductible: none\nExclusion relied on: UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS Clause 1\nBasis: Expenses related to any admission primarily for diagnostics and evaluation purposes only are excluded even if the same requires confinement at a Hospital [1]. Any diagnostic expenses which are not related or not incidental to the current diagnosis and treatment are excluded [1].",
+  "fields": {
+   "claim number": "CLM-2026-00418",
+   "date of loss": "2026-04-02",
+   "line": "health",
+   "policy": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+   "position": "NOT PAYABLE",
+   "deductible": "none",
+   "exclusion relied on": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS Clause 1",
+   "basis": "Expenses related to any admission primarily for diagnostics and evaluation purposes only are excluded even if the same requires confinement at a Hospital [1]. Any diagnostic expenses which are not related or not incidental to the current diagnosis and treatment are excluded [1]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::119",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION D) WAITING PERIOD AND EXCLUSIONS > 1. Investigation & Evaluation (Code-Excl04)",
+    "page": 14,
+    "effective_date": null,
+    "cosine": 0.7152,
+    "rerank": 0.2421
+   },
+   {
+    "rank": 2,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::118",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION D) WAITING PERIOD AND EXCLUSIONS > 18. Bariatric Surgery",
+    "page": 14,
+    "effective_date": null,
+    "cosine": 0.6816,
+    "rerank": 0.0023
+   },
+   {
+    "rank": 3,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::124",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION D) WAITING PERIOD AND EXCLUSIONS > 8. Excluded Providers (Code-Excl11)",
+    "page": 14,
+    "effective_date": null,
+    "cosine": 0.6727,
+    "rerank": 0.0008
+   },
+   {
+    "rank": 4,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::112",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION D) WAITING PERIOD AND EXCLUSIONS > 2. Specific Disease/Procedure Waiting Period (Excl02):",
+    "page": 13,
+    "effective_date": null,
+    "cosine": 0.673,
+    "rerank": 0.0006
+   },
+   {
+    "rank": 5,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::66",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION C) COVERAGE > 2. Pre-Hospitalisation Medical Expense",
+    "page": 8,
+    "effective_date": null,
+    "cosine": 0.6806,
+    "rerank": 0.0002
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:46:44+0530"
+ },
+ {
+  "case_id": "m1-cancellation-refund",
+  "mode": "refuses-answer-present",
+  "corpus": "uploaded",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00423\nDate of loss: 2026-05-11\nLine: health\nIncident: Policyholder cancelled mid-term after 4 months, no claim made in the year.\n  Asking what refund is due.\nAdjuster note: Annual policy, full premium taken at inception.\nCoverage question: What refund is due on cancellation by the policyholder?\n",
+  "query": "Policyholder cancelled mid-term after 4 months, no claim made in the year. Annual policy, full premium taken at inception. What refund is due on cancellation by the policyholder?",
+  "summary": "Claim number: CLM-2026-00423\nDate of loss: 2026-05-11\nLine: health\nPolicy: UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS\nPosition: PAYABLE\nDeductible: none\nExclusion relied on: none\nBasis: The Policyholder can cancel this annual policy by providing a written notice of 7 days, as full premium was received at policy inception [1]. The premium refund for the unexpired risk period will be on a pro-rata basis, provided no claim has been made during the Policy Year [1].",
+  "fields": {
+   "claim number": "CLM-2026-00423",
+   "date of loss": "2026-05-11",
+   "line": "health",
+   "policy": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+   "position": "PAYABLE",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "The Policyholder can cancel this annual policy by providing a written notice of 7 days, as full premium was received at policy inception [1]. The premium refund for the unexpired risk period will be on a pro-rata basis, provided no claim has been made during the Policy Year [1]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::149",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION E) GENERAL TERMS AND CONDITIONS – STANDARD GENERAL TERMS AND CONDITIONS > 7. Cancellation",
+    "page": 17,
+    "effective_date": null,
+    "cosine": 0.7754,
+    "rerank": 0.9945
+   },
+   {
+    "rank": 2,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::150",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION E) GENERAL TERMS AND CONDITIONS – STANDARD GENERAL TERMS AND CONDITIONS > 7. Cancellation",
+    "page": 17,
+    "effective_date": null,
+    "cosine": 0.7503,
+    "rerank": 0.9135
+   },
+   {
+    "rank": 3,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::151",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION E) GENERAL TERMS AND CONDITIONS – STANDARD GENERAL TERMS AND CONDITIONS > 7. Cancellation",
+    "page": 17,
+    "effective_date": null,
+    "cosine": 0.7536,
+    "rerank": 0.6638
+   },
+   {
+    "rank": 4,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::169",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION E) GENERAL TERMS AND CONDITIONS – STANDARD GENERAL TERMS AND CONDITIONS > 16. Free Look Period",
+    "page": 19,
+    "effective_date": null,
+    "cosine": 0.6566,
+    "rerank": 0.458
+   },
+   {
+    "rank": 5,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::141",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION E) GENERAL TERMS AND CONDITIONS – STANDARD GENERAL TERMS AND CONDITIONS > 3. Premium Payment in Installments",
+    "page": 16,
+    "effective_date": null,
+    "cosine": 0.6696,
+    "rerank": 0.348
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:46:48+0530"
+ },
+ {
+  "case_id": "m1-direct-hospital-payment",
+  "mode": "refuses-answer-present",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00431\nDate of loss: 2026-06-08\nLine: health\nIncident: Planned knee arthroscopy at a network hospital. Hospital is asking to be paid\n  directly rather than the member paying and claiming back.\nAdjuster note: Member has not paid anything yet.\nCoverage question: Can the claim be paid to the hospital directly?\n",
+  "query": "Planned knee arthroscopy at a network hospital. Hospital is asking to be paid Member has not paid anything yet. Can the claim be paid to the hospital directly?",
+  "summary": "Claim number: CLM-2026-00431\nDate of loss: 2026-06-08\nLine: health\nPolicy: PW-HEALTH-002\nPosition: PAYABLE\nDeductible: none\nExclusion relied on: none\nBasis: For planned admissions at a network hospital, the Insured Person or the hospital must request pre-authorisation from the third-party administrator at least 48 hours before admission [1]. The third-party administrator will respond to a complete pre-authorisation request within 6 hours for planned admissions [1].",
+  "fields": {
+   "claim number": "CLM-2026-00431",
+   "date of loss": "2026-06-08",
+   "line": "health",
+   "policy": "PW-HEALTH-002",
+   "position": "PAYABLE",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "For planned admissions at a network hospital, the Insured Person or the hospital must request pre-authorisation from the third-party administrator at least 48 hours before admission [1]. The third-party administrator will respond to a complete pre-authorisation request within 6 hours for planned admissions [1]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "PW-HEALTH-002::8",
+    "document_id": "PW-HEALTH-002",
+    "section": "Group Health Indemnity Policy > 7. Claims — cashless",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.7008,
+    "rerank": 0.3735
+   },
+   {
+    "rank": 2,
+    "chunk_id": "PW-HEALTH-002::9",
+    "document_id": "PW-HEALTH-002",
+    "section": "Group Health Indemnity Policy > 8. Claims — reimbursement",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.7122,
+    "rerank": 0.0545
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-02::5",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 7. New Clause 3A — Modern treatments",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.6262,
+    "rerank": 0.0
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-01::3",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 3. Amendment to Clause 2.3 — Constructive total loss threshold",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.0,
+    "rerank": 0.0
+   },
+   {
+    "rank": 5,
+    "chunk_id": "PW-CLAIMS-003::6",
+    "document_id": "PW-CLAIMS-003",
+    "section": "Claims Handling and Grievance Redressal Manual > 7. Fraud",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.6259,
+    "rerank": 0.0
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:46:54+0530"
+ },
+ {
+  "case_id": "m1-room-rent-capping",
+  "mode": "refuses-answer-present",
+  "corpus": "uploaded",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00437\nDate of loss: 2026-03-19\nLine: health\nIncident: Member occupied a deluxe room; hospital billed room rent well above the\n  standard A/C room rate.\nAdjuster note: Need the room rent basis before I apply any deduction.\nCoverage question: What is the room rent limit under this policy?\n",
+  "query": "Member occupied a deluxe room; hospital billed room rent well above the Need the room rent basis before I apply any deduction. What is the room rent limit under this policy?",
+  "summary": "Claim number: CLM-2026-00437\nDate of loss: 2026-03-19\nLine: health\nPolicy: UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS\nPosition: PAYABLE\nDeductible: none\nExclusion relied on: none\nBasis: The policy provides indemnification for room and boarding expenses as a standard a/c room, specified on the policy schedule [4]. Proportionate deductions shall not apply in respect of the hospitals which do not follow differential billings or for those expenses in respect of which differential billing is not adopted based on the room category [1].",
+  "fields": {
+   "claim number": "CLM-2026-00437",
+   "date of loss": "2026-03-19",
+   "line": "health",
+   "policy": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+   "position": "PAYABLE",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "The policy provides indemnification for room and boarding expenses as a standard a/c room, specified on the policy schedule [4]. Proportionate deductions shall not apply in respect of the hospitals which do not follow differential billings or for those expenses in respect of which differential billing is not adopted based on the room category [1]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::65",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION C) COVERAGE > 1. In-patient Hospitalisation Treatment",
+    "page": 8,
+    "effective_date": null,
+    "cosine": 0.6975,
+    "rerank": 0.1019
+   },
+   {
+    "rank": 2,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::38",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION B) DEFINITIONS- STANDARD DEFINITIONS > 42. Renewal",
+    "page": 5,
+    "effective_date": null,
+    "cosine": 0.6449,
+    "rerank": 0.0561
+   },
+   {
+    "rank": 3,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::71",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION C) COVERAGE > 6. AYUSH Hospitalization Cover",
+    "page": 8,
+    "effective_date": null,
+    "cosine": 0.6473,
+    "rerank": 0.0037
+   },
+   {
+    "rank": 4,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::62",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION C) COVERAGE > 1. In-patient Hospitalisation Treatment",
+    "page": 7,
+    "effective_date": null,
+    "cosine": 0.6557,
+    "rerank": 0.0007
+   },
+   {
+    "rank": 5,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::59",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION B) DEFINITION- SPECIFIC DEFINITIONS > 22. Policy Year",
+    "page": 7,
+    "effective_date": null,
+    "cosine": 0.6432,
+    "rerank": 0.0002
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:46:58+0530"
+ },
+ {
+  "case_id": "m1-consumables",
+  "mode": "refuses-answer-present",
+  "corpus": "uploaded",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00442\nDate of loss: 2026-02-27\nLine: health\nIncident: Final bill includes gloves, hand wash, shoe covers and attendant charges\n  totalling INR 4,180 alongside the surgical charges.\nAdjuster note: Deciding whether to disallow the consumables line.\nCoverage question: Are non-medical consumables payable?\n",
+  "query": "Final bill includes gloves, hand wash, shoe covers and attendant charges Deciding whether to disallow the consumables line. Are non-medical consumables payable?",
+  "summary": "Claim number: CLM-2026-00442\nDate of loss: 2026-02-27\nLine: health\nPolicy: UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS\nPosition: NOT PAYABLE\nDeductible: none\nExclusion relied on: UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS Clause 27\nBasis: Items such as hand wash, shoe covers, and attendant charges are listed among items to be subsumed into room charges or non-payable items [1, 4]. The final bill includes gloves, hand wash, shoe covers, and attendant charges totaling INR 4,180 alongside the surgical charges.",
+  "fields": {
+   "claim number": "CLM-2026-00442",
+   "date of loss": "2026-02-27",
+   "line": "health",
+   "policy": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+   "position": "NOT PAYABLE",
+   "deductible": "none",
+   "exclusion relied on": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS Clause 27",
+   "basis": "Items such as hand wash, shoe covers, and attendant charges are listed among items to be subsumed into room charges or non-payable items [1, 4]. The final bill includes gloves, hand wash, shoe covers, and attendant charges totaling INR 4,180 alongside the surgical charges."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::252",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION E) GENERAL TERMS AND CONDITIONS – OTHER TERMS AND ONDITIONS > 27. Creams Powders Lotions (Toiletries Are Not Payable, Only...",
+    "page": 29,
+    "effective_date": null,
+    "cosine": 0.7294,
+    "rerank": 0.0312
+   },
+   {
+    "rank": 2,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::52",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION B) DEFINITION- SPECIFIC DEFINITIONS > 12. Limit of Indemnity",
+    "page": 6,
+    "effective_date": null,
+    "cosine": 0.6519,
+    "rerank": 0.0123
+   },
+   {
+    "rank": 3,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::65",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION C) COVERAGE > 1. In-patient Hospitalisation Treatment",
+    "page": 8,
+    "effective_date": null,
+    "cosine": 0.6398,
+    "rerank": 0.0002
+   },
+   {
+    "rank": 4,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::250",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION E) GENERAL TERMS AND CONDITIONS – OTHER TERMS AND ONDITIONS > 1. Baby Food",
+    "page": 29,
+    "effective_date": null,
+    "cosine": 0.6418,
+    "rerank": 0.0
+   },
+   {
+    "rank": 5,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::87",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "OPTIONAL COVERS",
+    "page": 10,
+    "effective_date": null,
+    "cosine": 0.6503,
+    "rerank": 0.0001
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:47:03+0530"
+ },
+ {
+  "case_id": "m2-nil-dep-old-vehicle",
+  "mode": "drops-limiting-condition",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00455\nDate of loss: 2026-05-22\nLine: motor\nInsured vehicle: private car, 1600cc, first registered 2018-11-30\nIncident: Kerb strike. Front bumper and left headlamp assembly cracked; both plastic.\n  Tyres undamaged.\nAdjuster note: Schedule records Nil Depreciation cover. Estimate INR 46,000. This is\n  the vehicle's first claim this policy year.\nCoverage question: Is depreciation deducted on the plastic bumper and headlamp?\n",
+  "query": "Kerb strike. Front bumper and left headlamp assembly cracked; both plastic. Schedule records Nil Depreciation cover. Estimate INR 46,000. This is Is depreciation deducted on the plastic bumper and headlamp?",
+  "summary": "Claim number: CLM-2026-00455\nDate of loss: 2026-05-22\nLine: motor\nPolicy: PW-MOTOR-001, END-2026-01\nPosition: PAYABLE\nDeductible: INR 3,000\nExclusion relied on: none\nBasis: The insured vehicle has a cubic capacity above 1500cc, so a compulsory deductible of INR 3,000 applies to the own damage claim [3]. Where Nil Depreciation cover is in force, the depreciation table in Clause 2.1 does not apply [1]. Furthermore, glass, plastic, and fibreglass parts are payable in full [1].",
+  "fields": {
+   "claim number": "CLM-2026-00455",
+   "date of loss": "2026-05-22",
+   "line": "motor",
+   "policy": "PW-MOTOR-001, END-2026-01",
+   "position": "PAYABLE",
+   "deductible": "INR 3,000",
+   "exclusion relied on": "none",
+   "basis": "The insured vehicle has a cubic capacity above 1500cc, so a compulsory deductible of INR 3,000 applies to the own damage claim [3]. Where Nil Depreciation cover is in force, the depreciation table in Clause 2.1 does not apply [1]. Furthermore, glass, plastic, and fibreglass parts are payable in full [1]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "END-2026-01::1",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 1. Nil Depreciation cover — amendment to Clause 2.1",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.7261,
+    "rerank": 0.399
+   },
+   {
+    "rank": 2,
+    "chunk_id": "END-2026-02::6",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 8. New Clause 5A — Newborn cover from birth",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.0,
+    "rerank": 0.0002
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-01::2",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 2. Amendment to Clause 2.2 — Compulsory deductible",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.6641,
+    "rerank": 0.0009
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-01::5",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 7. New Clause 6A — No Claim Bonus protection",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.664,
+    "rerank": 0.0117
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-01::3",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 3. Amendment to Clause 2.3 — Constructive total loss threshold",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.657,
+    "rerank": 0.0003
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:47:07+0530"
+ },
+ {
+  "case_id": "m2-nil-dep-third-claim",
+  "mode": "drops-limiting-condition",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00461\nDate of loss: 2026-07-04\nLine: motor\nInsured vehicle: private car, 1200cc, first registered 2024-01-15\nIncident: Rear quarter panel and plastic tail lamp housing damaged in a car park.\nAdjuster note: Schedule records Nil Depreciation. This is the THIRD own damage claim\n  in the current policy year; two Nil Depreciation claims already settled.\nCoverage question: Does Nil Depreciation apply to this claim?\n",
+  "query": "Rear quarter panel and plastic tail lamp housing damaged in a car park. Schedule records Nil Depreciation. This is the THIRD own damage claim Does Nil Depreciation apply to this claim?",
+  "summary": "Claim number: CLM-2026-00461\nDate of loss: 2026-07-04\nLine: motor\nPolicy: PW-MOTOR-001, END-2026-01\nPosition: PAYABLE\nDeductible: INR 1,500\nExclusion relied on: none\nBasis: The schedule records that Nil Depreciation cover is in force, but Nil Depreciation applies only to a maximum of two claims per policy year and the depreciation table in Clause 2.1 applies in full from the third claim onward [1]. A compulsory deductible of INR 1,500 applies to every own damage claim for vehicles with a cubic capacity up to 1500cc, superseding the previous amount of INR 1,000 [5].",
+  "fields": {
+   "claim number": "CLM-2026-00461",
+   "date of loss": "2026-07-04",
+   "line": "motor",
+   "policy": "PW-MOTOR-001, END-2026-01",
+   "position": "PAYABLE",
+   "deductible": "INR 1,500",
+   "exclusion relied on": "none",
+   "basis": "The schedule records that Nil Depreciation cover is in force, but Nil Depreciation applies only to a maximum of two claims per policy year and the depreciation table in Clause 2.1 applies in full from the third claim onward [1]. A compulsory deductible of INR 1,500 applies to every own damage claim for vehicles with a cubic capacity up to 1500cc, superseding the previous amount of INR 1,000 [5]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "END-2026-01::1",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 1. Nil Depreciation cover — amendment to Clause 2.1",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.7452,
+    "rerank": 0.3602
+   },
+   {
+    "rank": 2,
+    "chunk_id": "END-2026-01::5",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 7. New Clause 6A — No Claim Bonus protection",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.7499,
+    "rerank": 0.0693
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-03::4",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 5. New Clause 3A — Digital claim submission",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.6224,
+    "rerank": 0.0
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-02::0",
+    "document_id": "END-2026-02",
+    "section": null,
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.0,
+    "rerank": 0.0
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-01::2",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 2. Amendment to Clause 2.2 — Compulsory deductible",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.7019,
+    "rerank": 0.0005
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:47:11+0530"
+ },
+ {
+  "case_id": "m2-road-ambulance",
+  "mode": "drops-limiting-condition",
+  "corpus": "uploaded",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00468\nDate of loss: 2026-06-16\nLine: health\nIncident: Member transported by private ambulance from home to hospital, INR 3,200.\n  Admitted overnight for observation after a fall; in-patient claim still under review.\nAdjuster note: No practitioner certificate of a life-threatening emergency on file.\nCoverage question: Is road ambulance covered and up to what amount?\n",
+  "query": "Member transported by private ambulance from home to hospital, INR 3,200. No practitioner certificate of a life-threatening emergency on file. Is road ambulance covered and up to what amount?",
+  "summary": "Claim number: CLM-2026-00468\nDate of loss: 2026-06-16\nLine: health\nPolicy: UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS\nPosition: REFERRED\nDeductible: none\nExclusion relied on: none\nBasis: Claims under the road ambulance section require that the life-threatening emergency condition is certified by the Medical Practitioner [1]. We must also have accepted the claim under the In-patient Hospitalization Treatment or Day Care Procedures section of the policy [1]. We would need the adjuster to verify whether these conditions are met.",
+  "fields": {
+   "claim number": "CLM-2026-00468",
+   "date of loss": "2026-06-16",
+   "line": "health",
+   "policy": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+   "position": "REFERRED",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "Claims under the road ambulance section require that the life-threatening emergency condition is certified by the Medical Practitioner [1]. We must also have accepted the claim under the In-patient Hospitalization Treatment or Day Care Procedures section of the policy [1]. We would need the adjuster to verify whether these conditions are met."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::75",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION C) COVERAGE > 7. Road Ambulance",
+    "page": 9,
+    "effective_date": null,
+    "cosine": 0.7282,
+    "rerank": 0.0305
+   },
+   {
+    "rank": 2,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::74",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION C) COVERAGE > 7. Road Ambulance",
+    "page": 9,
+    "effective_date": null,
+    "cosine": 0.7413,
+    "rerank": 0.005
+   },
+   {
+    "rank": 3,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::86",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION C) COVERAGE > 12. Festive Protect",
+    "page": 10,
+    "effective_date": null,
+    "cosine": 0.6693,
+    "rerank": 0.0002
+   },
+   {
+    "rank": 4,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::214",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION E) GENERAL TERMS AND CONDITIONS – OTHER TERMS AND ONDITIONS > 19. Claim Procedure",
+    "page": 23,
+    "effective_date": null,
+    "cosine": 0.6362,
+    "rerank": 0.025
+   },
+   {
+    "rank": 5,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::51",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION B) DEFINITION- SPECIFIC DEFINITIONS > 11. Life threatening situation:",
+    "page": 6,
+    "effective_date": null,
+    "cosine": 0.629,
+    "rerank": 0.0016
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:47:15+0530"
+ },
+ {
+  "case_id": "m2-settlement-timeline",
+  "mode": "drops-limiting-condition",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00472\nDate of loss: 2026-06-30\nLine: motor\nIncident: Total loss claim, theft. Last document received 2026-08-04.\nAdjuster note: Claim flagged for investigation by the fraud unit on 2026-08-06.\n  Claimant is asking when a decision is due.\nCoverage question: How long does the insurer have to decide after the last document?\n",
+  "query": "Total loss claim, theft. Last document received 2026-08-04. Claim flagged for investigation by the fraud unit on 2026-08-06. How long does the insurer have to decide after the last document?",
+  "summary": "Claim number: CLM-2026-00472\nDate of loss: 2026-06-30\nLine: motor\nPolicy: PW-CLAIMS-003, END-2026-03\nPosition: REFERRED\nDeductible: none\nExclusion relied on: none\nBasis: The claim is referred because it has been flagged for investigation by the fraud unit on 2026-08-06 [2]. Where the Company has reason to believe a claim is fraudulent, the claim is referred to the Special Investigation Unit [2].",
+  "fields": {
+   "claim number": "CLM-2026-00472",
+   "date of loss": "2026-06-30",
+   "line": "motor",
+   "policy": "PW-CLAIMS-003, END-2026-03",
+   "position": "REFERRED",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "The claim is referred because it has been flagged for investigation by the fraud unit on 2026-08-06 [2]. Where the Company has reason to believe a claim is fraudulent, the claim is referred to the Special Investigation Unit [2]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "PW-MOTOR-001::6",
+    "document_id": "PW-MOTOR-001",
+    "section": "Private Car Package Policy — Section I: Own Damage > 4. Claim intimation and procedure",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.7759,
+    "rerank": 0.3531
+   },
+   {
+    "rank": 2,
+    "chunk_id": "PW-CLAIMS-003::6",
+    "document_id": "PW-CLAIMS-003",
+    "section": "Claims Handling and Grievance Redressal Manual > 7. Fraud",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.7553,
+    "rerank": 0.235
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-01::3",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 3. Amendment to Clause 2.3 — Constructive total loss threshold",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.7076,
+    "rerank": 0.2117
+   },
+   {
+    "rank": 4,
+    "chunk_id": "PW-DEFS-004::5",
+    "document_id": "PW-DEFS-004",
+    "section": "2. Definitions",
+    "page": 2,
+    "effective_date": "2025-04-01",
+    "cosine": 0.6631,
+    "rerank": 0.1804
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-03::4",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 5. New Clause 3A — Digital claim submission",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.6791,
+    "rerank": 0.083
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:47:20+0530"
+ },
+ {
+  "case_id": "m2-newborn-cover",
+  "mode": "drops-limiting-condition",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00479\nDate of loss: 2026-07-19\nLine: health\nIncident: Newborn admitted to special care nursery on day 2. Bill INR 3,40,000.\nAdjuster note: Birth was intimated to the Company on 2026-08-25, 37 days after birth.\n  Family sum insured is INR 10,00,000.\nCoverage question: Is the newborn covered from birth and up to what amount?\n",
+  "query": "Newborn admitted to special care nursery on day 2. Bill INR 3,40,000. Birth was intimated to the Company on 2026-08-25, 37 days after birth. Is the newborn covered from birth and up to what amount?",
+  "summary": "Claim number: CLM-2026-00479\nDate of loss: 2026-07-19\nLine: health\nPolicy: END-2026-02\nPosition: NOT PAYABLE\nDeductible: none\nExclusion relied on: END-2026-02 Clause 5A\nBasis: A newborn child is covered from the date of birth provided the birth is intimated to the company within 30 days [1]. In this claim, the birth was intimated 37 days after birth, which exceeds the 30-day requirement [1]. Therefore, the newborn cover does not apply [1].",
+  "fields": {
+   "claim number": "CLM-2026-00479",
+   "date of loss": "2026-07-19",
+   "line": "health",
+   "policy": "END-2026-02",
+   "position": "NOT PAYABLE",
+   "deductible": "none",
+   "exclusion relied on": "END-2026-02 Clause 5A",
+   "basis": "A newborn child is covered from the date of birth provided the birth is intimated to the company within 30 days [1]. In this claim, the birth was intimated 37 days after birth, which exceeds the 30-day requirement [1]. Therefore, the newborn cover does not apply [1]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "END-2026-02::6",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 8. New Clause 5A — Newborn cover from birth",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.7781,
+    "rerank": 0.1285
+   },
+   {
+    "rank": 2,
+    "chunk_id": "END-2026-03::1",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 1. Amendment to Clause 3 — Settlement timelines",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.0,
+    "rerank": 0.0001
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-03::2",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 2. Amendment to Clause 4 — Reminders for outstanding documents",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.0,
+    "rerank": 0.0001
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-03::5",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 6. Amendment to Clause 8.1 — Grievance response time",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.0,
+    "rerank": 0.0006
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-02::2",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 2. Amendment to Clause 1.1 — Room rent and proportionate deduction",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.6143,
+    "rerank": 0.0001
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:47:24+0530"
+ },
+ {
+  "case_id": "m2-ncb-protection",
+  "mode": "drops-limiting-condition",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00483\nDate of loss: 2026-07-28\nLine: motor\nIncident: Side mirror and door panel damage.\nAdjuster note: Schedule records No Claim Bonus Protection. This is the SECOND own\n  damage claim this policy year; the first was settled in May.\nCoverage question: Does the No Claim Bonus survive this claim?\n",
+  "query": "Side mirror and door panel damage. Schedule records No Claim Bonus Protection. This is the SECOND own Does the No Claim Bonus survive this claim?",
+  "summary": "Claim number: CLM-2026-00483\nDate of loss: 2026-07-28\nLine: motor\nPolicy: PW-MOTOR-001, END-2026-01\nPosition: PAYABLE\nDeductible: none\nExclusion relied on: none\nBasis: Where the schedule records that No Claim Bonus Protection is in force, the first own damage claim in a policy year does not affect the No Claim Bonus on renewal [1]. However, a second or subsequent claim in the same policy year results in the No Claim Bonus reverting to nil [1].",
+  "fields": {
+   "claim number": "CLM-2026-00483",
+   "date of loss": "2026-07-28",
+   "line": "motor",
+   "policy": "PW-MOTOR-001, END-2026-01",
+   "position": "PAYABLE",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "Where the schedule records that No Claim Bonus Protection is in force, the first own damage claim in a policy year does not affect the No Claim Bonus on renewal [1]. However, a second or subsequent claim in the same policy year results in the No Claim Bonus reverting to nil [1]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "END-2026-01::5",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 7. New Clause 6A — No Claim Bonus protection",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.7933,
+    "rerank": 0.9956
+   },
+   {
+    "rank": 2,
+    "chunk_id": "PW-MOTOR-001::9",
+    "document_id": "PW-MOTOR-001",
+    "section": "Private Car Package Policy — Section I: Own Damage > 6. No Claim Bonus",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.7627,
+    "rerank": 0.8787
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-03::4",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 5. New Clause 3A — Digital claim submission",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.6581,
+    "rerank": 0.0
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-03::2",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 2. Amendment to Clause 4 — Reminders for outstanding documents",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.6536,
+    "rerank": 0.0
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-02::0",
+    "document_id": "END-2026-02",
+    "section": null,
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.0,
+    "rerank": 0.0
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:47:28+0530"
+ },
+ {
+  "case_id": "m3-motor-intimation-window",
+  "mode": "wrong-document-retrieved",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00491\nDate of loss: 2026-07-02\nLine: motor\nIncident: Single vehicle collision with a boundary wall. Front end damage.\nAdjuster note: Loss was intimated on 2026-07-06, four days after the occurrence.\n  Insured says he was in hospital for two days.\nCoverage question: How many days do I have to intimate a motor claim?\n",
+  "query": "Single vehicle collision with a boundary wall. Front end damage. Loss was intimated on 2026-07-06, four days after the occurrence. How many days do I have to intimate a motor claim?",
+  "summary": "Claim number: CLM-2026-00491\nDate of loss: 2026-07-02\nLine: motor\nPolicy: END-2026-01\nPosition: REFERRED\nDeductible: none\nExclusion relied on: none\nBasis: The provided context does not contain the specific timeline or clause addressing motor claim intimation deadlines. Therefore, the claim is referred for further review. I would need the base wording PW-MOTOR-001 to determine the intimation deadline [4].",
+  "fields": {
+   "claim number": "CLM-2026-00491",
+   "date of loss": "2026-07-02",
+   "line": "motor",
+   "policy": "END-2026-01",
+   "position": "REFERRED",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "The provided context does not contain the specific timeline or clause addressing motor claim intimation deadlines. Therefore, the claim is referred for further review. I would need the base wording PW-MOTOR-001 to determine the intimation deadline [4]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "END-2026-03::1",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 1. Amendment to Clause 3 — Settlement timelines",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.0,
+    "rerank": 0.0
+   },
+   {
+    "rank": 2,
+    "chunk_id": "END-2026-03::0",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.0,
+    "rerank": 0.0005
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-02::0",
+    "document_id": "END-2026-02",
+    "section": null,
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.0,
+    "rerank": 0.0001
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-01::0",
+    "document_id": "END-2026-01",
+    "section": null,
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.6413,
+    "rerank": 0.002
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-01::5",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 7. New Clause 6A — No Claim Bonus protection",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.6672,
+    "rerank": 0.0004
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:47:32+0530"
+ },
+ {
+  "case_id": "m3-waiting-period-comparison",
+  "mode": "wrong-document-retrieved",
+  "corpus": "insurance",
+  "regression_of": "tr_297f38675314",
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00496\nDate of loss: 2026-08-01\nLine: health\nInsured person: 51, cover commenced 2025-09-01\nIncident: Admitted for hernia repair.\nAdjuster note: Need to know which waiting period governs — the wording changed part\n  way through this member's cover.\nCoverage question: Compare the waiting period in the base wording with the endorsement.\n",
+  "query": "Admitted for hernia repair. Need to know which waiting period governs — the wording changed part Compare the waiting period in the base wording with the endorsement.",
+  "summary": "Claim number: CLM-2026-00496\nDate of loss: 2026-08-01\nLine: health\nPolicy: PW-HEALTH-002, END-2026-02\nPosition: PAYABLE\nDeductible: none\nExclusion relied on: none\nBasis: The initial 30-day waiting period does not apply to hospitalisation arising from an accident [1], but hernia is a specified illness subject to waiting periods [1]. The base wording's 24-month waiting period for specified illnesses and procedures listed in Clause 4.2 has been superseded by a 12-month duration under endorsement END-2026-02 [4]. Since cover commenced on 2025-09-01 and the date of loss is 2026-08-01, the 12-month waiting period has been satisfied.",
+  "fields": {
+   "claim number": "CLM-2026-00496",
+   "date of loss": "2026-08-01",
+   "line": "health",
+   "policy": "PW-HEALTH-002, END-2026-02",
+   "position": "PAYABLE",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "The initial 30-day waiting period does not apply to hospitalisation arising from an accident [1], but hernia is a specified illness subject to waiting periods [1]. The base wording's 24-month waiting period for specified illnesses and procedures listed in Clause 4.2 has been superseded by a 12-month duration under endorsement END-2026-02 [4]. Since cover commenced on 2025-09-01 and the date of loss is 2026-08-01, the 12-month waiting period has been satisfied."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "PW-HEALTH-002::4",
+    "document_id": "PW-HEALTH-002",
+    "section": "Group Health Indemnity Policy > 4. Waiting periods > 4.1 Accident exception",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.6493,
+    "rerank": 0.0312
+   },
+   {
+    "rank": 2,
+    "chunk_id": "END-2026-03::1",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 1. Amendment to Clause 3 — Settlement timelines",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.6551,
+    "rerank": 0.0
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-03::2",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 2. Amendment to Clause 4 — Reminders for outstanding documents",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.651,
+    "rerank": 0.0
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-02::1",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 1. Amendment to Clause 4 — Waiting periods",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.7153,
+    "rerank": 0.0019
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-02::7",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 9. Unchanged provisions",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.6845,
+    "rerank": 0.0008
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:47:36+0530"
+ },
+ {
+  "case_id": "m3-cataract-sublimit",
+  "mode": "wrong-document-retrieved",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00502\nDate of loss: 2026-06-11\nLine: health\nInsured person: 68, cover commenced 2025-02-01\nIncident: Cataract surgery, right eye, day care. Bill INR 62,000.\nAdjuster note: Checking whether a sub-limit or a waiting period bites here.\nCoverage question: Is cataract surgery subject to a sub-limit or a waiting period?\n",
+  "query": "Cataract surgery, right eye, day care. Bill INR 62,000. Checking whether a sub-limit or a waiting period bites here. Is cataract surgery subject to a sub-limit or a waiting period?",
+  "summary": "Claim number: CLM-2026-00502\nDate of loss: 2026-06-11\nLine: health\nPolicy: PW-HEALTH-002, END-2026-02\nPosition: PAYABLE\nDeductible: none\nExclusion relied on: none\nBasis: Procedures listed in Annexure A that require less than 24 hours of hospitalisation because of technological advancement are payable [1]. Cataract surgery is among the listed procedures [1].",
+  "fields": {
+   "claim number": "CLM-2026-00502",
+   "date of loss": "2026-06-11",
+   "line": "health",
+   "policy": "PW-HEALTH-002, END-2026-02",
+   "position": "PAYABLE",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "Procedures listed in Annexure A that require less than 24 hours of hospitalisation because of technological advancement are payable [1]. Cataract surgery is among the listed procedures [1]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "PW-HEALTH-002::3",
+    "document_id": "PW-HEALTH-002",
+    "section": "Group Health Indemnity Policy > 3. Day care procedures",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.7404,
+    "rerank": 0.1071
+   },
+   {
+    "rank": 2,
+    "chunk_id": "END-2026-02::1",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 1. Amendment to Clause 4 — Waiting periods",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.6818,
+    "rerank": 0.0001
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-02::7",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 9. Unchanged provisions",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.6547,
+    "rerank": 0.0004
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-02::2",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 2. Amendment to Clause 1.1 — Room rent and proportionate deduction",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.7041,
+    "rerank": 0.0
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-02::5",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 7. New Clause 3A — Modern treatments",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.6323,
+    "rerank": 0.0002
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:47:40+0530"
+ },
+ {
+  "case_id": "m3-denial-grounds",
+  "mode": "wrong-document-retrieved",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00509\nDate of loss: 2026-05-04\nLine: health\nIncident: Member admitted following a fall at home. Discharge summary records blood\n  alcohol well above the legal limit at admission.\nAdjuster note: Considering repudiation. Need the ground and what the letter must say.\nCoverage question: On what ground can this claim be denied?\n",
+  "query": "Member admitted following a fall at home. Discharge summary records blood Considering repudiation. Need the ground and what the letter must say. On what ground can this claim be denied?",
+  "summary": "Claim number: CLM-2026-00509\nDate of loss: 2026-05-04\nLine: health\nPolicy: PW-CLAIMS-003, END-2026-03, END-2026-02\nPosition: REFERRED\nDeductible: none\nExclusion relied on: none\nBasis: The provided context passages do not contain policy wordings covering exclusions for alcohol consumption or intoxication [1], [2], [3], [4], [5]. We would need the specific health policy exclusion clause covering alcohol or intoxication to evaluate repudiation [1], [2], [3], [4], [5].",
+  "fields": {
+   "claim number": "CLM-2026-00509",
+   "date of loss": "2026-05-04",
+   "line": "health",
+   "policy": "PW-CLAIMS-003, END-2026-03, END-2026-02",
+   "position": "REFERRED",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "The provided context passages do not contain policy wordings covering exclusions for alcohol consumption or intoxication [1], [2], [3], [4], [5]. We would need the specific health policy exclusion clause covering alcohol or intoxication to evaluate repudiation [1], [2], [3], [4], [5]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "PW-CLAIMS-003::5",
+    "document_id": "PW-CLAIMS-003",
+    "section": "Claims Handling and Grievance Redressal Manual > 6. Repudiation",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.7391,
+    "rerank": 0.0939
+   },
+   {
+    "rank": 2,
+    "chunk_id": "END-2026-03::3",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 4. Amendment to Clause 6 — Repudiation authority",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.6651,
+    "rerank": 0.0036
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-03::2",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 2. Amendment to Clause 4 — Reminders for outstanding documents",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.6328,
+    "rerank": 0.0
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-03::4",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 5. New Clause 3A — Digital claim submission",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.6391,
+    "rerank": 0.0
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-02::3",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 4. Amendment to Clause 9 — Co-payment",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.637,
+    "rerank": 0.0
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:47:44+0530"
+ },
+ {
+  "case_id": "m3-motor-drink-driving",
+  "mode": "wrong-document-retrieved",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00514\nDate of loss: 2026-04-18\nLine: motor\nInsured vehicle: private car, 1500cc\nIncident: Vehicle left the road and struck a tree. Police report records the driver\n  was under the influence of liquor.\nAdjuster note: Repair estimate INR 1,90,000. Intending to repudiate.\nCoverage question: Is this loss excluded and which clause applies?\n",
+  "query": "Vehicle left the road and struck a tree. Police report records the driver Repair estimate INR 1,90,000. Intending to repudiate. Is this loss excluded and which clause applies?",
+  "summary": "Claim number: CLM-2026-00514\nDate of loss: 2026-04-18\nLine: motor\nPolicy: PW-MOTOR-001, END-2026-01\nPosition: REFERRED\nDeductible: none\nExclusion relied on: none\nBasis: The claim file indicates the driver was under the influence of liquor during the incident, but no exclusion clause for intoxication is present in the provided context passages. To determine if this loss is excluded, we would need to review the specific policy wording or exclusion clause relating to driving under the influence.",
+  "fields": {
+   "claim number": "CLM-2026-00514",
+   "date of loss": "2026-04-18",
+   "line": "motor",
+   "policy": "PW-MOTOR-001, END-2026-01",
+   "position": "REFERRED",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "The claim file indicates the driver was under the influence of liquor during the incident, but no exclusion clause for intoxication is present in the provided context passages. To determine if this loss is excluded, we would need to review the specific policy wording or exclusion clause relating to driving under the influence."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "PW-MOTOR-001::7",
+    "document_id": "PW-MOTOR-001",
+    "section": "Private Car Package Policy — Section I: Own Damage > 4. Claim intimation and procedure > 4.1 Documents required",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.7236,
+    "rerank": 0.096
+   },
+   {
+    "rank": 2,
+    "chunk_id": "END-2026-02::6",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 8. New Clause 5A — Newborn cover from birth",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.0,
+    "rerank": 0.0
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-01::3",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 3. Amendment to Clause 2.3 — Constructive total loss threshold",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.6962,
+    "rerank": 0.0001
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-01::4",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 5. New Clause 4.3 — Digital survey",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.7177,
+    "rerank": 0.0001
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-01::2",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 2. Amendment to Clause 2.2 — Compulsory deductible",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.6464,
+    "rerank": 0.0003
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:47:48+0530"
+ },
+ {
+  "case_id": "m4-general-cover-enquiry",
+  "mode": "placeholder-banner-cited",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00521\nDate of loss: 2026-07-15\nLine: motor\nIncident: Insured has opened a claim but has not yet described the damage; asking in\n  general terms what the policy covers.\nAdjuster note: First contact call, no estimate yet.\nCoverage question: Tell me about the policy.\n",
+  "query": "Insured has opened a claim but has not yet described the damage; asking in First contact call, no estimate yet. Tell me about the policy.",
+  "summary": "Claim number: CLM-2026-00521\nDate of loss: 2026-07-15\nLine: motor\nPolicy: PW-MOTOR-001, END-2026-01\nPosition: REFERRED\nDeductible: none\nExclusion relied on: none\nBasis: The policy indemnifies against loss or damage to the insured vehicle caused by accidental external means, fire, theft, malicious acts, terrorism, natural disasters, or transit damage [4]. The window for submitting reimbursement claims is 45 days from the date of the final repair invoice, having been extended from 30 days [1]. Further details are required regarding the specific damage and circumstances of the loss to determine full coverage [4].",
+  "fields": {
+   "claim number": "CLM-2026-00521",
+   "date of loss": "2026-07-15",
+   "line": "motor",
+   "policy": "PW-MOTOR-001, END-2026-01",
+   "position": "REFERRED",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "The policy indemnifies against loss or damage to the insured vehicle caused by accidental external means, fire, theft, malicious acts, terrorism, natural disasters, or transit damage [4]. The window for submitting reimbursement claims is 45 days from the date of the final repair invoice, having been extended from 30 days [1]. Further details are required regarding the specific damage and circumstances of the loss to determine full coverage [4]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "END-2026-01::4",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 5. New Clause 4.3 — Digital survey",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.6125,
+    "rerank": 0.0293
+   },
+   {
+    "rank": 2,
+    "chunk_id": "PW-MOTOR-001::6",
+    "document_id": "PW-MOTOR-001",
+    "section": "Private Car Package Policy — Section I: Own Damage > 4. Claim intimation and procedure",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.6752,
+    "rerank": 0.0553
+   },
+   {
+    "rank": 3,
+    "chunk_id": "PW-MOTOR-001::9",
+    "document_id": "PW-MOTOR-001",
+    "section": "Private Car Package Policy — Section I: Own Damage > 6. No Claim Bonus",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.6214,
+    "rerank": 0.0267
+   },
+   {
+    "rank": 4,
+    "chunk_id": "PW-MOTOR-001::1",
+    "document_id": "PW-MOTOR-001",
+    "section": "Private Car Package Policy — Section I: Own Damage > 1. What is covered",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.6438,
+    "rerank": 0.0281
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-01::5",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 7. New Clause 6A — No Claim Bonus protection",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.0,
+    "rerank": 0.0066
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:47:52+0530"
+ },
+ {
+  "case_id": "m4-what-does-this-cover",
+  "mode": "placeholder-banner-cited",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00526\nDate of loss: 2026-08-03\nLine: health\nIncident: Member enquiring before a planned admission; no diagnosis given yet.\nAdjuster note: Pre-admission enquiry only.\nCoverage question: What does this policy cover?\n",
+  "query": "Member enquiring before a planned admission; no diagnosis given yet. Pre-admission enquiry only. What does this policy cover?",
+  "summary": "Claim number: CLM-2026-00526\nDate of loss: 2026-08-03\nLine: health\nPolicy: PW-HEALTH-002, END-2026-02\nPosition: REFERRED\nDeductible: none\nExclusion relied on: none\nBasis: For planned admissions at a network hospital, the Insured Person or the hospital must request pre-authorisation from the third-party administrator at least 48 hours before admission [1], [2]. The third-party administrator's response time for a complete pre-authorisation request is 4 hours for planned admissions [2]. Since the claim file is a pre-admission enquiry with no diagnosis given yet, we would need the specific planned admission and diagnosis details to determine admissibility [1].",
+  "fields": {
+   "claim number": "CLM-2026-00526",
+   "date of loss": "2026-08-03",
+   "line": "health",
+   "policy": "PW-HEALTH-002, END-2026-02",
+   "position": "REFERRED",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "For planned admissions at a network hospital, the Insured Person or the hospital must request pre-authorisation from the third-party administrator at least 48 hours before admission [1], [2]. The third-party administrator's response time for a complete pre-authorisation request is 4 hours for planned admissions [2]. Since the claim file is a pre-admission enquiry with no diagnosis given yet, we would need the specific planned admission and diagnosis details to determine admissibility [1]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "PW-HEALTH-002::8",
+    "document_id": "PW-HEALTH-002",
+    "section": "Group Health Indemnity Policy > 7. Claims — cashless",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.7125,
+    "rerank": 0.4462
+   },
+   {
+    "rank": 2,
+    "chunk_id": "END-2026-02::4",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 6. Amendment to Clause 7 — Pre-authorisation response time",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.6888,
+    "rerank": 0.1816
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-02::2",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 2. Amendment to Clause 1.1 — Room rent and proportionate deduction",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.5998,
+    "rerank": 0.0002
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-02::7",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 9. Unchanged provisions",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.5824,
+    "rerank": 0.0028
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-02::0",
+    "document_id": "END-2026-02",
+    "section": null,
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.0,
+    "rerank": 0.0
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:47:56+0530"
+ },
+ {
+  "case_id": "m4-which-document-governs",
+  "mode": "placeholder-banner-cited",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00533\nDate of loss: 2026-06-25\nLine: health\nIncident: Member disputes the co-payment applied to an admission in June 2026.\nAdjuster note: Two versions of the health wording are in play; need to state on the\n  file which document governs.\nCoverage question: Which document supersedes the base health wording?\n",
+  "query": "Member disputes the co-payment applied to an admission in June 2026. Two versions of the health wording are in play; need to state on the Which document supersedes the base health wording?",
+  "summary": "Claim number: CLM-2026-00533\nDate of loss: 2026-06-25\nLine: health\nPolicy: PW-HEALTH-002, END-2026-02\nPosition: REFERRED\nDeductible: none\nExclusion relied on: none\nBasis: Endorsement END-2026-02 amends the Group Health Indemnity Policy (PW-HEALTH-002, version 3.4) and prevails where it conflicts [3]. We would need the specific co-payment and age provisions from the base policy and endorsement to determine the correct co-payment for the member's admission in June 2026.",
+  "fields": {
+   "claim number": "CLM-2026-00533",
+   "date of loss": "2026-06-25",
+   "line": "health",
+   "policy": "PW-HEALTH-002, END-2026-02",
+   "position": "REFERRED",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "Endorsement END-2026-02 amends the Group Health Indemnity Policy (PW-HEALTH-002, version 3.4) and prevails where it conflicts [3]. We would need the specific co-payment and age provisions from the base policy and endorsement to determine the correct co-payment for the member's admission in June 2026."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "END-2026-03::0",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.0,
+    "rerank": 0.004
+   },
+   {
+    "rank": 2,
+    "chunk_id": "END-2026-02::3",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 4. Amendment to Clause 9 — Co-payment",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.7122,
+    "rerank": 0.0007
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-02::0",
+    "document_id": "END-2026-02",
+    "section": null,
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.6669,
+    "rerank": 0.0001
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-02::2",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 2. Amendment to Clause 1.1 — Room rent and proportionate deduction",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.6634,
+    "rerank": 0.0
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-02::1",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 1. Amendment to Clause 4 — Waiting periods",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.6985,
+    "rerank": 0.0
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:48:01+0530"
+ },
+ {
+  "case_id": "m5-subsumed-room-charges",
+  "mode": "pdf-table-mangled",
+  "corpus": "uploaded",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00541\nDate of loss: 2026-03-08\nLine: health\nIncident: Itemised bill charges cradle charges, baby charges, comb and room fresheners\n  separately from the room rent.\nAdjuster note: Need to know which of these are subsumed into room charges rather than\n  billed on top.\nCoverage question: Which items are to be subsumed into room charges?\n",
+  "query": "Itemised bill charges cradle charges, baby charges, comb and room fresheners Need to know which of these are subsumed into room charges rather than Which items are to be subsumed into room charges?",
+  "summary": "Claim number: CLM-2026-00541\nDate of loss: 2026-03-08\nLine: health\nPolicy: UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS\nPosition: REFERRED\nDeductible: none\nExclusion relied on: none\nBasis: The policy lists items that are to be subsumed into room charges under Section E [1]. Baby charges and cradle charges are specifically included in the list of items subsumed into room charges [1]. Hand wash, shoe cover, caps, comb, eau-de-cologne/room fresheners, foot cover, gown, slippers, and tissue paper are also items subsumed into room charges [1].",
+  "fields": {
+   "claim number": "CLM-2026-00541",
+   "date of loss": "2026-03-08",
+   "line": "health",
+   "policy": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+   "position": "REFERRED",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "The policy lists items that are to be subsumed into room charges under Section E [1]. Baby charges and cradle charges are specifically included in the list of items subsumed into room charges [1]. Hand wash, shoe cover, caps, comb, eau-de-cologne/room fresheners, foot cover, gown, slippers, and tissue paper are also items subsumed into room charges [1]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::252",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION E) GENERAL TERMS AND CONDITIONS – OTHER TERMS AND ONDITIONS > 27. Creams Powders Lotions (Toiletries Are Not Payable, Only...",
+    "page": 29,
+    "effective_date": null,
+    "cosine": 0.7009,
+    "rerank": 0.9961
+   },
+   {
+    "rank": 2,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::258",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION E) GENERAL TERMS AND CONDITIONS – OTHER TERMS AND ONDITIONS > 23. Ortho bundle, Gynaec Bundle",
+    "page": 31,
+    "effective_date": null,
+    "cosine": 0.6341,
+    "rerank": 0.0392
+   },
+   {
+    "rank": 3,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::250",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION E) GENERAL TERMS AND CONDITIONS – OTHER TERMS AND ONDITIONS > 1. Baby Food",
+    "page": 29,
+    "effective_date": null,
+    "cosine": 0.6652,
+    "rerank": 0.0244
+   },
+   {
+    "rank": 4,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::255",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION E) GENERAL TERMS AND CONDITIONS – OTHER TERMS AND ONDITIONS > 32. Entrance Pass / Visitors Pass Charges",
+    "page": 30,
+    "effective_date": null,
+    "cosine": 0.6187,
+    "rerank": 0.0066
+   },
+   {
+    "rank": 5,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::26",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION B) DEFINITIONS- STANDARD DEFINITIONS > 24. ICU Charges",
+    "page": 3,
+    "effective_date": null,
+    "cosine": 0.6504,
+    "rerank": 0.003
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:48:05+0530"
+ },
+ {
+  "case_id": "m5-modern-treatment-list",
+  "mode": "pdf-table-mangled",
+  "corpus": "uploaded",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00548\nDate of loss: 2026-05-30\nLine: health\nIncident: Member underwent balloon sinuplasty as a day care procedure. Bill INR 88,000.\nAdjuster note: Checking the modern treatment list and its ceiling.\nCoverage question: Is balloon sinuplasty a listed modern treatment and what is the cap?\n",
+  "query": "Member underwent balloon sinuplasty as a day care procedure. Bill INR 88,000. Checking the modern treatment list and its ceiling. Is balloon sinuplasty a listed modern treatment and what is the cap?",
+  "summary": "Claim number: CLM-2026-00548\nDate of loss: 2026-05-30\nLine: health\nPolicy: UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS\nPosition: PAYABLE\nDeductible: none\nExclusion relied on: none\nBasis: The insured underwent balloon sinuplasty, which is an eligible modern treatment method covered under the policy [1]. We will indemnify the insured against all eligible Reasonable and Customary Medical Expenses incurred for this procedure up to the \"In-Patient Hospitalization Treatment\" Sum Insured [1].",
+  "fields": {
+   "claim number": "CLM-2026-00548",
+   "date of loss": "2026-05-30",
+   "line": "health",
+   "policy": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+   "position": "PAYABLE",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "The insured underwent balloon sinuplasty, which is an eligible modern treatment method covered under the policy [1]. We will indemnify the insured against all eligible Reasonable and Customary Medical Expenses incurred for this procedure up to the \"In-Patient Hospitalization Treatment\" Sum Insured [1]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::78",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION C) COVERAGE > 9. Modern Treatment Methods and Advancement in Technologies",
+    "page": 9,
+    "effective_date": null,
+    "cosine": 0.6352,
+    "rerank": 0.0978
+   },
+   {
+    "rank": 2,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::13",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION B) DEFINITIONS- STANDARD DEFINITIONS > 11. Day Care Treatment",
+    "page": 2,
+    "effective_date": null,
+    "cosine": 0.6573,
+    "rerank": 0.0372
+   },
+   {
+    "rank": 3,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::68",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION C) COVERAGE > 4. Day Care Treatment",
+    "page": 8,
+    "effective_date": null,
+    "cosine": 0.6394,
+    "rerank": 0.0421
+   },
+   {
+    "rank": 4,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::12",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION B) DEFINITIONS- STANDARD DEFINITIONS > 10. Day Care Centre",
+    "page": 2,
+    "effective_date": null,
+    "cosine": 0.6131,
+    "rerank": 0.001
+   },
+   {
+    "rank": 5,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::199",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION E) GENERAL TERMS AND CONDITIONS – SPECIFIC TERMS AND CONDITIONS > 16. Basis of Claim Payment",
+    "page": 22,
+    "effective_date": null,
+    "cosine": 0.6047,
+    "rerank": 0.0034
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:48:09+0530"
+ },
+ {
+  "case_id": "m5-daycare-procedure-list",
+  "mode": "pdf-table-mangled",
+  "corpus": "uploaded",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00553\nDate of loss: 2026-07-11\nLine: health\nIncident: Arthrotomy of the hip joint performed with under 24 hours' stay.\nAdjuster note: Hospital has billed it as day care. Need to confirm it qualifies.\nCoverage question: Does a procedure needing under 24 hours count as day care?\n",
+  "query": "Arthrotomy of the hip joint performed with under 24 hours' stay. Hospital has billed it as day care. Need to confirm it qualifies. Does a procedure needing under 24 hours count as day care?",
+  "summary": "Claim number: CLM-2026-00553\nDate of loss: 2026-07-11\nLine: health\nPolicy: UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS\nPosition: PAYABLE\nDeductible: none\nExclusion relied on: none\nBasis: Procedures requiring less than 24 hours hospitalisation due to technological advances are covered under the policy provided they comply with the standard definitions of Day Care Centre and Day Care treatment [3]. Day care treatment means medical treatment or surgical procedure undertaken under General or Local Anesthesia in a hospital or day care center in less than 24 hours because of technological advancement [2]. Arthrotomy Hip Joint is listed under the policy's day care treatments [1].",
+  "fields": {
+   "claim number": "CLM-2026-00553",
+   "date of loss": "2026-07-11",
+   "line": "health",
+   "policy": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+   "position": "PAYABLE",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "Procedures requiring less than 24 hours hospitalisation due to technological advances are covered under the policy provided they comply with the standard definitions of Day Care Centre and Day Care treatment [3]. Day care treatment means medical treatment or surgical procedure undertaken under General or Local Anesthesia in a hospital or day care center in less than 24 hours because of technological advancement [2]. Arthrotomy Hip Joint is listed under the policy's day care treatments [1]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::235",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION E) GENERAL TERMS AND CONDITIONS – OTHER TERMS AND ONDITIONS > 99. Conditioning Radiothearpy For Bmt 298 Arthrotomy Hip Joint",
+    "page": 26,
+    "effective_date": null,
+    "cosine": 0.6836,
+    "rerank": 0.1502
+   },
+   {
+    "rank": 2,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::13",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION B) DEFINITIONS- STANDARD DEFINITIONS > 11. Day Care Treatment",
+    "page": 2,
+    "effective_date": null,
+    "cosine": 0.7287,
+    "rerank": 0.0293
+   },
+   {
+    "rank": 3,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::248",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION E) GENERAL TERMS AND CONDITIONS – OTHER TERMS AND ONDITIONS > 99. Conditioning Radiothearpy For Bmt 298 Arthrotomy Hip Joint",
+    "page": 28,
+    "effective_date": null,
+    "cosine": 0.8114,
+    "rerank": 0.0159
+   },
+   {
+    "rank": 4,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::12",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION B) DEFINITIONS- STANDARD DEFINITIONS > 10. Day Care Centre",
+    "page": 2,
+    "effective_date": null,
+    "cosine": 0.6742,
+    "rerank": 0.002
+   },
+   {
+    "rank": 5,
+    "chunk_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS::68",
+    "document_id": "UNGALUKKAGA-TAMIL_NADU_(INCLUDING_PUDUCHERRY)_POLICY_WORDINGS",
+    "section": "SECTION C) COVERAGE > 4. Day Care Treatment",
+    "page": 8,
+    "effective_date": null,
+    "cosine": 0.6738,
+    "rerank": 0.005
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:48:13+0530"
+ },
+ {
+  "case_id": "cb-tyres-only",
+  "mode": "clean-baseline",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00561\nDate of loss: 2026-06-02\nLine: motor\nInsured vehicle: private car, 1600cc\nIncident: Two tyres burst after striking a pothole. No other part of the vehicle was\n  damaged.\nAdjuster note: Replacement cost INR 18,400 for the pair.\nCoverage question: Is damage to tyres alone payable?\n",
+  "query": "Two tyres burst after striking a pothole. No other part of the vehicle was Replacement cost INR 18,400 for the pair. Is damage to tyres alone payable?",
+  "summary": "Claim number: CLM-2026-00561\nDate of loss: 2026-06-02\nLine: motor\nPolicy: PW-MOTOR-001, END-2026-01\nPosition: PAYABLE\nDeductible: INR 3,000\nExclusion relied on: none\nBasis: Nil Depreciation does not extend to tyres, tubes, and batteries, on which depreciation of 50% continues to apply [1]. A compulsory deductible of INR 3,000 applies to every own damage claim for vehicles above 1500cc [3].",
+  "fields": {
+   "claim number": "CLM-2026-00561",
+   "date of loss": "2026-06-02",
+   "line": "motor",
+   "policy": "PW-MOTOR-001, END-2026-01",
+   "position": "PAYABLE",
+   "deductible": "INR 3,000",
+   "exclusion relied on": "none",
+   "basis": "Nil Depreciation does not extend to tyres, tubes, and batteries, on which depreciation of 50% continues to apply [1]. A compulsory deductible of INR 3,000 applies to every own damage claim for vehicles above 1500cc [3]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "END-2026-01::1",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 1. Nil Depreciation cover — amendment to Clause 2.1",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.6056,
+    "rerank": 0.0002
+   },
+   {
+    "rank": 2,
+    "chunk_id": "END-2026-01::5",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 7. New Clause 6A — No Claim Bonus protection",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.5924,
+    "rerank": 0.0004
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-01::2",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 2. Amendment to Clause 2.2 — Compulsory deductible",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.588,
+    "rerank": 0.0001
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-01::4",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 5. New Clause 4.3 — Digital survey",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.6007,
+    "rerank": 0.0
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-01::3",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 3. Amendment to Clause 2.3 — Constructive total loss threshold",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.5923,
+    "rerank": 0.0
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:48:17+0530"
+ },
+ {
+  "case_id": "cb-treatment-outside-india",
+  "mode": "clean-baseline",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00567\nDate of loss: 2026-04-25\nLine: health\nIncident: Member fell ill while travelling and was admitted to a hospital in Singapore.\n  Bill equivalent to INR 6,10,000.\nAdjuster note: Schedule shows no worldwide cover extension.\nCoverage question: Is treatment taken outside India payable?\n",
+  "query": "Member fell ill while travelling and was admitted to a hospital in Singapore. Schedule shows no worldwide cover extension. Is treatment taken outside India payable?",
+  "summary": "Claim number: CLM-2026-00567\nDate of loss: 2026-04-25\nLine: health\nPolicy: PW-HEALTH-002, END-2026-02\nPosition: NOT PAYABLE\nDeductible: none\nExclusion relied on: PW-HEALTH-002 Clause 6\nBasis: Treatment taken outside India is not covered unless the schedule provides worldwide cover [1]. The schedule shows no worldwide cover extension, and this exclusion remains unchanged [1] [2].",
+  "fields": {
+   "claim number": "CLM-2026-00567",
+   "date of loss": "2026-04-25",
+   "line": "health",
+   "policy": "PW-HEALTH-002, END-2026-02",
+   "position": "NOT PAYABLE",
+   "deductible": "none",
+   "exclusion relied on": "PW-HEALTH-002 Clause 6",
+   "basis": "Treatment taken outside India is not covered unless the schedule provides worldwide cover [1]. The schedule shows no worldwide cover extension, and this exclusion remains unchanged [1] [2]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "PW-HEALTH-002::6",
+    "document_id": "PW-HEALTH-002",
+    "section": "Group Health Indemnity Policy > 6. What is not covered",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.7581,
+    "rerank": 0.7098
+   },
+   {
+    "rank": 2,
+    "chunk_id": "END-2026-02::7",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 9. Unchanged provisions",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.6727,
+    "rerank": 0.2357
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-02::5",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 7. New Clause 3A — Modern treatments",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.6491,
+    "rerank": 0.0
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-01::1",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 1. Nil Depreciation cover — amendment to Clause 2.1",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.0,
+    "rerank": 0.0
+   },
+   {
+    "rank": 5,
+    "chunk_id": "PW-HEALTH-002::3",
+    "document_id": "PW-HEALTH-002",
+    "section": "Group Health Indemnity Policy > 3. Day care procedures",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.6995,
+    "rerank": 0.0006
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:48:21+0530"
+ },
+ {
+  "case_id": "cb-compulsory-deductible",
+  "mode": "clean-baseline",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00572\nDate of loss: 2026-07-21\nLine: motor\nInsured vehicle: private car, 1800cc\nIncident: Front bumper and bonnet damaged in a low speed collision.\nAdjuster note: Assessed loss INR 58,000. No voluntary deductible on the schedule.\nCoverage question: What compulsory deductible applies to this claim?\n",
+  "query": "Front bumper and bonnet damaged in a low speed collision. Assessed loss INR 58,000. No voluntary deductible on the schedule. What compulsory deductible applies to this claim?",
+  "summary": "Claim number: CLM-2026-00572\nDate of loss: 2026-07-21\nLine: motor\nPolicy: PW-MOTOR-001, END-2026-01\nPosition: PAYABLE\nDeductible: INR 3,000\nExclusion relied on: none\nBasis: A compulsory deductible of INR 3,000 applies to every own damage claim for vehicles above 1500cc [2]. This endorsement updates the previous amount of INR 2,000 stated in the base policy [1, 2].",
+  "fields": {
+   "claim number": "CLM-2026-00572",
+   "date of loss": "2026-07-21",
+   "line": "motor",
+   "policy": "PW-MOTOR-001, END-2026-01",
+   "position": "PAYABLE",
+   "deductible": "INR 3,000",
+   "exclusion relied on": "none",
+   "basis": "A compulsory deductible of INR 3,000 applies to every own damage claim for vehicles above 1500cc [2]. This endorsement updates the previous amount of INR 2,000 stated in the base policy [1, 2]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "PW-MOTOR-001::3",
+    "document_id": "PW-MOTOR-001",
+    "section": "Private Car Package Policy — Section I: Own Damage > 2. Basis of settlement > 2.2 Compulsory deductible",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.819,
+    "rerank": 0.3334
+   },
+   {
+    "rank": 2,
+    "chunk_id": "END-2026-01::2",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 2. Amendment to Clause 2.2 — Compulsory deductible",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.764,
+    "rerank": 0.0714
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-02::6",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 8. New Clause 5A — Newborn cover from birth",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.0,
+    "rerank": 0.0
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-01::5",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 7. New Clause 6A — No Claim Bonus protection",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.7198,
+    "rerank": 0.0012
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-01::1",
+    "document_id": "END-2026-01",
+    "section": "Endorsement 1 to the Private Car Package Policy > 1. Nil Depreciation cover — amendment to Clause 2.1",
+    "page": null,
+    "effective_date": "2026-04-01",
+    "cosine": 0.6826,
+    "rerank": 0.0001
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:48:25+0530"
+ },
+ {
+  "case_id": "cb-copayment-senior",
+  "mode": "clean-baseline",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00578\nDate of loss: 2026-07-09\nLine: health\nInsured person: 67\nIncident: Admitted 4 nights for pneumonia. Admissible amount assessed at INR 1,80,000.\nAdjuster note: Need the co-payment percentage that applies to this admission.\nCoverage question: What co-payment applies to this member's claim?\n",
+  "query": "Admitted 4 nights for pneumonia. Admissible amount assessed at INR 1,80,000. Need the co-payment percentage that applies to this admission. What co-payment applies to this member's claim?",
+  "summary": "Claim number: CLM-2026-00578\nDate of loss: 2026-07-09\nLine: health\nPolicy: PW-HEALTH-002, END-2026-02\nPosition: PAYABLE\nDeductible: none\nExclusion relied on: none\nBasis: The insured person is 67 years old, which exceeds the age of 66 years where the mandatory co-payment applies [1]. The co-payment percentage of 20% from the base policy is reduced to 10% of each admissible claim by endorsement [1], [2]. Where an endorsement and a base wording disagree, the endorsement with the later effective date prevails [4].",
+  "fields": {
+   "claim number": "CLM-2026-00578",
+   "date of loss": "2026-07-09",
+   "line": "health",
+   "policy": "PW-HEALTH-002, END-2026-02",
+   "position": "PAYABLE",
+   "deductible": "none",
+   "exclusion relied on": "none",
+   "basis": "The insured person is 67 years old, which exceeds the age of 66 years where the mandatory co-payment applies [1]. The co-payment percentage of 20% from the base policy is reduced to 10% of each admissible claim by endorsement [1], [2]. Where an endorsement and a base wording disagree, the endorsement with the later effective date prevails [4]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "END-2026-02::3",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 4. Amendment to Clause 9 — Co-payment",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.7104,
+    "rerank": 0.0588
+   },
+   {
+    "rank": 2,
+    "chunk_id": "PW-HEALTH-002::11",
+    "document_id": "PW-HEALTH-002",
+    "section": "Group Health Indemnity Policy > 9. Co-payment",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.7349,
+    "rerank": 0.0354
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-03::2",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 2. Amendment to Clause 4 — Reminders for outstanding documents",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.6185,
+    "rerank": 0.0001
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-02::0",
+    "document_id": "END-2026-02",
+    "section": null,
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.616,
+    "rerank": 0.0
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-02::2",
+    "document_id": "END-2026-02",
+    "section": "Endorsement 2 to the Group Health Indemnity Policy > 2. Amendment to Clause 1.1 — Room rent and proportionate deduction",
+    "page": null,
+    "effective_date": "2026-05-01",
+    "cosine": 0.667,
+    "rerank": 0.0003
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:48:30+0530"
+ },
+ {
+  "case_id": "cb-reimbursement-window",
+  "mode": "clean-baseline",
+  "corpus": "insurance",
+  "regression_of": null,
+  "notes": "CLAIM FILE\nClaim number: CLM-2026-00584\nDate of loss: 2026-06-14\nLine: health\nIncident: Member treated at a non-network hospital and paid the bill himself,\n  INR 74,000. Discharged 2026-06-18.\nAdjuster note: Reimbursement papers reached us 2026-07-15, 27 days after discharge.\nCoverage question: Were the reimbursement documents submitted in time?\n",
+  "query": "Member treated at a non-network hospital and paid the bill himself, Reimbursement papers reached us 2026-07-15, 27 days after discharge. Were the reimbursement documents submitted in time?",
+  "summary": "Claim number: CLM-2026-00584\nDate of loss: 2026-06-14\nLine: health\nPolicy: PW-HEALTH-002, END-2026-03\nPosition: NOT PAYABLE\nDeductible: none\nExclusion relied on: PW-HEALTH-002 Section 8\nBasis: Documents must be submitted to the third-party administrator within 15 days of discharge [1]. The insured was discharged on 2026-06-18 and reimbursement papers reached the company on 2026-07-15, which is 27 days after discharge [CLAIM FILE]. Because this submission exceeds the 15-day limit, the claim cannot be paid [1].",
+  "fields": {
+   "claim number": "CLM-2026-00584",
+   "date of loss": "2026-06-14",
+   "line": "health",
+   "policy": "PW-HEALTH-002, END-2026-03",
+   "position": "NOT PAYABLE",
+   "deductible": "none",
+   "exclusion relied on": "PW-HEALTH-002 Section 8",
+   "basis": "Documents must be submitted to the third-party administrator within 15 days of discharge [1]. The insured was discharged on 2026-06-18 and reimbursement papers reached the company on 2026-07-15, which is 27 days after discharge [CLAIM FILE]. Because this submission exceeds the 15-day limit, the claim cannot be paid [1]."
+  },
+  "retrieved": [
+   {
+    "rank": 1,
+    "chunk_id": "PW-HEALTH-002::9",
+    "document_id": "PW-HEALTH-002",
+    "section": "Group Health Indemnity Policy > 8. Claims — reimbursement",
+    "page": null,
+    "effective_date": "2025-04-01",
+    "cosine": 0.7989,
+    "rerank": 0.9541
+   },
+   {
+    "rank": 2,
+    "chunk_id": "END-2026-03::2",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 2. Amendment to Clause 4 — Reminders for outstanding documents",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.6686,
+    "rerank": 0.0
+   },
+   {
+    "rank": 3,
+    "chunk_id": "END-2026-03::5",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 6. Amendment to Clause 8.1 — Grievance response time",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.6598,
+    "rerank": 0.0001
+   },
+   {
+    "rank": 4,
+    "chunk_id": "END-2026-03::1",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 1. Amendment to Clause 3 — Settlement timelines",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.638,
+    "rerank": 0.0
+   },
+   {
+    "rank": 5,
+    "chunk_id": "END-2026-03::4",
+    "document_id": "END-2026-03",
+    "section": "Endorsement 3 to the Claims Handling Manual > 5. New Clause 3A — Digital claim submission",
+    "page": null,
+    "effective_date": "2026-06-01",
+    "cosine": 0.0,
+    "rerank": 0.0001
+   }
+  ],
+  "mode_of_generation": "gemini",
+  "reason": "",
+  "prompt_version": "summary-v1",
+  "model": "gemini-flash-lite-latest",
+  "params": {
+   "temperature": 0.0
+  },
+  "generated_at": "2026-08-26T15:48:34+0530"
+ }
+]
