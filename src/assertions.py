@@ -188,19 +188,109 @@ def assert_exclusion_cited_on_denial(summary, case: dict) -> Check:
     return Check("exclusion_cited_on_denial", True, f"{position}, no exclusion cited")
 
 
+_supersedes_cache: dict[str, dict] = {}
+
+
+def supersession_map(corpus_id: str) -> dict[str, list[tuple[str, str]]]:
+    """base document_id -> [(superseding document_id, its effective_date)].
+
+    Built from the ``supersedes`` field the corpus front matter already carries, so this is a
+    lookup and not a guess.
+    """
+    if corpus_id not in _supersedes_cache:
+        from .config import DEFAULT_CHUNKING
+        from . import store
+
+        mapping: dict[str, list[tuple[str, str]]] = {}
+        try:
+            collection = store.get_collection(DEFAULT_CHUNKING, corpus_id)
+            for meta in collection.get(include=["metadatas"])["metadatas"] or []:
+                base, doc = meta.get("supersedes"), meta.get("document_id")
+                if not base or not doc:
+                    continue
+                entry = (doc, meta.get("effective_date") or "")
+                mapping.setdefault(base, [])
+                if entry not in mapping[base]:
+                    mapping[base].append(entry)
+        except Exception:
+            mapping = {}
+        _supersedes_cache[corpus_id] = mapping
+    return _supersedes_cache[corpus_id]
+
+
+def assert_currency_declared(summary, case: dict) -> Check:
+    """A5 — if the summary leans on a wording that a later endorsement amends, it must say so.
+
+    ADDED IN RESPONSE TO EVIDENCE, not designed up front. Three judge prompts in a row
+    (v1 88%, v2 84%, v3 88%) failed to catch two summaries that quoted a 2025 figure
+    accurately and presented it as operative when a 2026 endorsement had changed it. That is
+    not a weak prompt, it is an impossible question: the amending clause was never retrieved,
+    so it is not in the judge's context and no amount of instruction can conjure it. Asked to
+    reason about currency anyway, the judge invented justifications — v2 claimed the window
+    was "confirmed as operative by passage [3] and passage [5]", which are about document
+    reminders and digital submission.
+
+    The corpus front matter has carried ``supersedes`` all along, so the question a model kept
+    getting wrong is a dictionary lookup. This is the Week-6 lesson applied a second time, and
+    the first time it was driven by measurement rather than by taste.
+
+    Passes when nothing supersedes what the summary relied on, when the superseding document
+    took effect after the date of loss, or when the summary names it.
+    """
+    if not summary.text:
+        return Check("currency_declared", False, "no summary produced")
+
+    mapping = supersession_map(case.get("corpus", ""))
+    if not mapping:
+        return Check("currency_declared", True, "corpus declares no supersessions")
+
+    # What the summary leaned on: the documents on its Policy line, plus the documents behind
+    # the passages it actually cited.
+    relied = {d for d in mapping if d and d in summary.get("policy")}
+    cited = {int(n) for n in re.findall(r"\[(\d+)\]", summary.get("basis") or "")}
+    for n in cited:
+        if 1 <= n <= len(summary.hits):
+            doc = summary.hits[n - 1].meta.get("document_id")
+            if doc in mapping:
+                relied.add(doc)
+    if not relied:
+        return Check("currency_declared", True, "relies on no superseded wording")
+
+    loss = summary.get("date of loss").strip()
+    for fmt in DATE_FORMATS:
+        try:
+            loss = datetime.strptime(loss.rstrip("."), fmt).date().isoformat()
+            break
+        except ValueError:
+            continue
+    else:
+        return Check("currency_declared", True, "date of loss unparseable; check skipped")
+
+    for base in sorted(relied):
+        for doc, eff in mapping[base]:
+            if eff and eff <= loss and doc not in summary.text:
+                return Check("currency_declared", False,
+                             f"relies on {base} but {doc} (effective {eff}) amends it before "
+                             f"the {loss} date of loss and is never mentioned")
+    return Check("currency_declared", True,
+                 f"currency of {', '.join(sorted(relied))} accounted for")
+
+
 ASSERTIONS = (
     assert_claim_number,
     assert_date_of_loss,
     assert_deductible_numeric,
     assert_exclusion_cited_on_denial,
+    assert_currency_declared,
 )
 
 ASSERTION_NAMES = ("claim_number_format", "date_of_loss_parseable",
-                   "deductible_numeric", "exclusion_cited_on_denial")
+                   "deductible_numeric", "exclusion_cited_on_denial",
+                   "currency_declared")
 
 
 def run_assertions(summary, case: dict) -> list[Check]:
-    """All four, always. Stopping at the first failure hides the other three."""
+    """All five, always. Stopping at the first failure hides the other four."""
     if not summary.text:
         return [Check(name, False, f"no summary produced ({summary.reason[:60]})")
                 for name in ASSERTION_NAMES]

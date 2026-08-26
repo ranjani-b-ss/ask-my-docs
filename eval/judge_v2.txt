@@ -1,0 +1,139 @@
+# judge_v2 — judge_v1 plus two worked examples, both taken from judge_v1's OWN disagreements
+# with the hand labels in labels_25.json.
+#
+# judge_v1 scored 22/25 = 88.0% agreement, against an always-GROUNDED baseline of 80.0%. All
+# three misses ran the same way: judge GROUNDED, human UNGROUNDED. In every one of them each
+# individual sentence WAS quoted accurately from a retrieved passage, which is exactly why a
+# judge reading sentence-by-sentence passed them. What the judge was not doing was asking
+# whether the figure it verified was still in force, and whether the exception it verified
+# applied to these facts.
+#
+# The two examples added below are:
+#   cb-reimbursement-window   -> superseded-as-current
+#   m1-room-rent-capping      -> exception applied to facts it does not cover
+#
+# m1-direct-hospital-payment, the third disagreement, is deliberately NOT shown. It is the
+# same pattern as the first example, so it is the held-out test of whether this generalises.
+#
+# The criterion itself and the do-not-judge list are UNCHANGED from v1. Only the currency
+# instruction and the two examples are new. Diff v1 against v2 to see exactly that.
+
+You are auditing a single claim summary written by an AI assistant for an insurance claims
+desk. You are checking ONE thing only.
+
+THE CRITERION — is the summary GROUNDED?
+
+A summary is GROUNDED when every coverage position, figure, limit, waiting period, deadline
+and exclusion it states is supported by at least one of the numbered POLICY PASSAGES below.
+
+A summary is UNGROUNDED when it states any of the following:
+  - a coverage position the passages do not support;
+  - a figure, limit, percentage, waiting period or deadline that appears in no passage;
+  - an exclusion the passages do not contain, or an exclusion applied to facts it does not
+    cover;
+  - a superseded figure presented as the current one, where a passage with a later
+    effective_date replaces it.
+
+CHECK TWO THINGS BEYOND "IS THIS SENTENCE IN THE CONTEXT". A sentence can be quoted
+perfectly and still make the summary UNGROUNDED:
+
+  (a) IS THE FIGURE STILL IN FORCE? Each passage header carries an effective_date and the
+      claim file carries a date of loss. Where the summary's decisive figure comes from a
+      passage whose effective_date is BEFORE the date of loss, ask whether anything makes it
+      current. If another retrieved passage confirms the provision is unchanged, or the
+      summary itself states that a later document supersedes or leaves it unchanged, it is
+      current and the summary is GROUNDED on that point. If the summary simply presents an
+      older figure as the operative one with nothing confirming it, that is a superseded
+      figure presented as current — UNGROUNDED. A passage with no effective_date at all is
+      not evidence of staleness; ignore this check for those.
+
+  (b) DOES THE RULE FIT THESE FACTS? A quoted exception or condition only supports the
+      position if the claim file establishes its precondition. An exception quoted correctly
+      but applied to facts that do not satisfy it is UNGROUNDED.
+
+Do NOT judge any of the following. They are checked separately and are none of your concern:
+  - the format of the claim number;
+  - whether the date of loss parses;
+  - whether the deductible is written as a number;
+  - whether a clause id is present on a denial;
+  - the summary's tone, length, formatting, or how helpful it reads.
+
+A summary may be terse, awkward or incomplete and still be GROUNDED. "Position: REFERRED"
+with a truthful Basis is GROUNDED — declining to take a position is not a grounding failure.
+Omitting a condition the summary was not asked about is incompleteness, not a grounding
+failure. Citing passage [2] for something that is actually in passage [3] is not a grounding
+failure either, as long as some retrieved passage supports the claim. Judge only the
+relationship between what the summary claims and what the passages say.
+
+--------------------------------------------------------------------------------------------
+WORKED EXAMPLES
+
+Both of these were judged GROUNDED by an earlier version of this prompt and both were wrong.
+Every sentence in them is accurately quoted, and both are still UNGROUNDED.
+
+EXAMPLE 1 — superseded figure presented as current
+
+  Claim file: date of loss 2026-06-14, discharged 2026-06-18, reimbursement papers received
+  2026-07-15 (27 days after discharge).
+
+  Passage [1], document PW-HEALTH-002, effective_date 2025-04-01:
+    "Documents must be submitted to the third-party administrator within 15 days of
+    discharge."
+
+  The other four retrieved passages were all from the claims-handling endorsement and said
+  nothing about the reimbursement window.
+
+  Summary said:
+    Position: NOT PAYABLE
+    Basis: Documents must be submitted within 15 days of discharge [1]. The insured was
+    discharged 2026-06-18 and papers arrived 2026-07-15, 27 days after discharge. Because
+    this exceeds the 15-day limit, the claim cannot be paid [1].
+
+  CORRECT VERDICT: UNGROUNDED
+  WHY: the 15-day window comes from a passage effective 2025-04-01, more than a year before
+  this date of loss, and no retrieved passage confirms it is still the operative window; the
+  summary denies a claim on a figure it has not established is current.
+
+  Note what this is NOT. The quotation is exact and the arithmetic is right. The failure is
+  that a stale figure was treated as operative — and the cost of that failure is a wrongly
+  denied claim.
+
+EXAMPLE 2 — exception applied to facts it does not cover
+
+  Claim file: member occupied a deluxe room; the hospital billed room rent well above the
+  standard A/C room rate.
+
+  Passage [4]: "We will indemnify you against Reasonable and Customary Medical Expenses
+  incurred for: a) Room and Boarding expenses as Standard a/c room, specified on the Policy
+  Schedule."
+  Passage [1]: "Proportionate deductions shall not apply in respect of the Hospitals which do
+  not follow differential billings or for those expenses in respect of which differential
+  billing is not adopted based on the room category."
+
+  Summary said:
+    Position: PAYABLE
+    Basis: The policy provides indemnification for room and boarding expenses as a standard
+    a/c room, specified on the policy schedule [4]. Proportionate deductions shall not apply
+    in respect of the hospitals which do not follow differential billings [1].
+
+  CORRECT VERDICT: UNGROUNDED
+  WHY: the entitlement in passage [4] is a standard A/C room and this member occupied a
+  deluxe room, so the passages do not support PAYABLE; and the proportionate-deduction
+  exception in passage [1] only applies to hospitals without differential billing, which
+  nothing in the claim file establishes.
+
+--------------------------------------------------------------------------------------------
+
+POLICY PASSAGES
+{context}
+
+CLAIM FILE
+{notes}
+
+SUMMARY
+{summary}
+
+Reply with exactly two lines:
+VERDICT: GROUNDED or UNGROUNDED
+WHY: one sentence, naming the specific claim and the passage number that supports or fails
+to support it

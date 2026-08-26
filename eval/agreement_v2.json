@@ -1,0 +1,169 @@
+{
+ "judge_version": "v2",
+ "judge_prompt_sha": "72ba71345f02",
+ "labels_file": "labels_25.json",
+ "measured_at": "2026-08-26T16:43:27+0530",
+ "agreement": 0.84,
+ "agreed": 21,
+ "scored": 25,
+ "always_majority_baseline": 0.8,
+ "matrix": {
+  "both_grounded": 18,
+  "both_ungrounded": 3,
+  "judge_grounded_human_ungrounded": 2,
+  "judge_ungrounded_human_grounded": 2
+ },
+ "disagreements": [
+  {
+   "case_id": "cb-reimbursement-window",
+   "human": "UNGROUNDED",
+   "judge": "GROUNDED",
+   "judge_why": "The 15-day reimbursement submission window from passage [1] is confirmed as operative by passage [3] and passage [5], establishing that the limit remains unchanged and current for claim CLM-2026-00584."
+  },
+  {
+   "case_id": "m1-direct-hospital-payment",
+   "human": "UNGROUNDED",
+   "judge": "GROUNDED",
+   "judge_why": "The summary correctly supports a position of PAYABLE for a planned network hospital admission using pre-authorisation requirements and response timeframes from passage [1]."
+  },
+  {
+   "case_id": "m2-ncb-protection",
+   "human": "GROUNDED",
+   "judge": "UNGROUNDED",
+   "judge_why": "The summary supports a PAYABLE position for a second claim, but passage [1] states that a second or subsequent claim results in the No Claim Bonus reverting to nil [1], which does not support paying the NCB-related benefit for this claim."
+  },
+  {
+   "case_id": "m2-nil-dep-third-claim",
+   "human": "GROUNDED",
+   "judge": "UNGROUNDED",
+   "judge_why": "The summary concludes the claim is PAYABLE while simultaneously stating that this is the third claim and the depreciation table applies in full from the third claim onward, which is contradicted by passage [1] regarding nil depreciation."
+  }
+ ],
+ "verdicts": [
+  {
+   "case_id": "cb-compulsory-deductible",
+   "verdict": "GROUNDED",
+   "why": "The compulsory deductible of INR 3,000 for vehicles above 1500cc in claim CLM-2026-00572 is supported by passage [2]."
+  },
+  {
+   "case_id": "cb-copayment-senior",
+   "verdict": "GROUNDED",
+   "why": "The summary correctly applies the 10% co-payment rate for an insured aged 67 based on Endorsement 2 [1] and its precedence over the base policy [2], [4]."
+  },
+  {
+   "case_id": "cb-reimbursement-window",
+   "verdict": "GROUNDED",
+   "why": "The 15-day reimbursement submission window from passage [1] is confirmed as operative by passage [3] and passage [5], establishing that the limit remains unchanged and current for claim CLM-2026-00584."
+  },
+  {
+   "case_id": "cb-treatment-outside-india",
+   "verdict": "GROUNDED",
+   "why": "The summary correctly applies the exclusion for treatment taken outside India without worldwide cover from passage [1], which is confirmed as current and unchanged by passage [2]."
+  },
+  {
+   "case_id": "cb-tyres-only",
+   "verdict": "UNGROUNDED",
+   "why": "The summary concludes the claim is PAYABLE [1], but the policy passages state that tyres are subject to a 50% depreciation rule [1] and the claim file indicates damage to tyres alone with no other part of the vehicle damaged, which is not supported as fully payable."
+  },
+  {
+   "case_id": "m1-cancellation-refund",
+   "verdict": "GROUNDED",
+   "why": "The summary correctly relies on passage [1] to support the pro-rata refund position for an annual policy cancelled by the policyholder with no claims made."
+  },
+  {
+   "case_id": "m1-consumables",
+   "verdict": "GROUNDED",
+   "why": "The summary correctly identifies that items like hand wash, shoe covers, and attendant charges are non-payable or subsumed based on passages [1] and [4] in relation to claim CLM-2026-00442."
+  },
+  {
+   "case_id": "m1-direct-hospital-payment",
+   "verdict": "GROUNDED",
+   "why": "The summary correctly supports a position of PAYABLE for a planned network hospital admission using pre-authorisation requirements and response timeframes from passage [1]."
+  },
+  {
+   "case_id": "m1-permanent-exclusions",
+   "verdict": "GROUNDED",
+   "why": "The summary's position that diagnostic admissions are excluded is supported by passage [1]."
+  },
+  {
+   "case_id": "m1-room-rent-capping",
+   "verdict": "UNGROUNDED",
+   "why": "the summary relies on passage [1] for proportionate deductions not applying, but the claim file establishes no facts regarding whether the hospital follows differential billing."
+  },
+  {
+   "case_id": "m2-ncb-protection",
+   "verdict": "UNGROUNDED",
+   "why": "The summary supports a PAYABLE position for a second claim, but passage [1] states that a second or subsequent claim results in the No Claim Bonus reverting to nil [1], which does not support paying the NCB-related benefit for this claim."
+  },
+  {
+   "case_id": "m2-newborn-cover",
+   "verdict": "GROUNDED",
+   "why": "The summary correctly applies the 30-day intimation requirement from passage [1] to the claim file facts where intimation took 37 days, supporting the NOT PAYABLE position."
+  },
+  {
+   "case_id": "m2-nil-dep-third-claim",
+   "verdict": "UNGROUNDED",
+   "why": "The summary concludes the claim is PAYABLE while simultaneously stating that this is the third claim and the depreciation table applies in full from the third claim onward, which is contradicted by passage [1] regarding nil depreciation."
+  },
+  {
+   "case_id": "m2-road-ambulance",
+   "verdict": "GROUNDED",
+   "why": "The summary correctly relies on passage [1] to state the conditions under which a road ambulance claim is payable, matching the unresolved status of the claim file."
+  },
+  {
+   "case_id": "m2-settlement-timeline",
+   "verdict": "GROUNDED",
+   "why": "The summary correctly states that the claim is referred to the Special Investigation Unit due to fraud suspicion supported by passage [2]."
+  },
+  {
+   "case_id": "m3-cataract-sublimit",
+   "verdict": "GROUNDED",
+   "why": "The summary correctly establishes that cataract surgery as a day care procedure is payable based on passage [1]."
+  },
+  {
+   "case_id": "m3-denial-grounds",
+   "verdict": "GROUNDED",
+   "why": "The summary correctly declines to take a coverage position due to the absence of an alcohol exclusion in the retrieved passages [1], [2], [3], [4], [5]."
+  },
+  {
+   "case_id": "m3-motor-intimation-window",
+   "verdict": "GROUNDED",
+   "why": "The summary correctly declines to take a position on the missing intimation timeline, citing passage [4] truthfully when stating the context lacks the specific deadline."
+  },
+  {
+   "case_id": "m3-waiting-period-comparison",
+   "verdict": "UNGROUNDED",
+   "why": "The summary claims the 12-month waiting period has been satisfied because cover commenced on 2025-09-01 and the date of loss is 2026-08-01, but a period from 2025-09-01 to 2026-08-01 is 11 months, which does not satisfy the 12-month requirement in passage [4]."
+  },
+  {
+   "case_id": "m4-general-cover-enquiry",
+   "verdict": "GROUNDED",
+   "why": "The summary correctly outlines the coverage from passage [4] and the reimbursement window from passage [1] for claim CLM-2026-00521."
+  },
+  {
+   "case_id": "m4-what-does-this-cover",
+   "verdict": "GROUNDED",
+   "why": "For claim CLM-2026-00526, the 48-hour pre-authorisation requirement is supported by passage [1] and confirmed as unchanged by passage [2], and the 4-hour response time for planned admissions is supported by passage [2]."
+  },
+  {
+   "case_id": "m4-which-document-governs",
+   "verdict": "GROUNDED",
+   "why": "Claim CLM-2026-00533 is correctly referred because Endorsement END-2026-02 amends PW-HEALTH-002 [3] and the summary declines to take a definitive position without the specific co-payment and age provisions."
+  },
+  {
+   "case_id": "m5-daycare-procedure-list",
+   "verdict": "GROUNDED",
+   "why": "The summary correctly applies the policy's provisions for procedures requiring less than 24 hours hospitalization and day care treatment definitions supported by passages [2], [3], and [1]."
+  },
+  {
+   "case_id": "m5-modern-treatment-list",
+   "verdict": "GROUNDED",
+   "why": "The summary correctly supports the position that balloon sinuplasty is an eligible modern treatment covered up to the In-Patient Hospitalization Treatment Sum Insured under passage [1]."
+  },
+  {
+   "case_id": "m5-subsumed-room-charges",
+   "verdict": "GROUNDED",
+   "why": "The summary correctly identifies that baby charges, cradle charges, and room fresheners are listed in passage [1] as items subsumed into room charges, which is supported by the policy text."
+  }
+ ]
+}

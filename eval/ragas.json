@@ -1,0 +1,889 @@
+[
+ {
+  "case_id": "m1-permanent-exclusions",
+  "mode": "refuses-answer-present",
+  "corpus": "uploaded",
+  "faithfulness": 1.0,
+  "context_precision": 0.8333333333333333,
+  "n_claims": 2,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Expenses for admission primarily for diagnostics are excluded."
+   },
+   {
+    "supported": true,
+    "claim": "Diagnostic expenses not related to current diagnosis are excluded."
+   }
+  ],
+  "passage_relevance": [
+   true,
+   false,
+   true,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m1-cancellation-refund",
+  "mode": "refuses-answer-present",
+  "corpus": "uploaded",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 4,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "The Policyholder can cancel this annual policy by providing a written notice of 7 days"
+   },
+   {
+    "supported": true,
+    "claim": "Full premium was received at policy inception"
+   },
+   {
+    "supported": true,
+    "claim": "Premium refund for the unexpired risk period will be on a pro-rata basis"
+   },
+   {
+    "supported": true,
+    "claim": "Refund applies provided no claim has been made during the Policy Year"
+   }
+  ],
+  "passage_relevance": [
+   true,
+   true,
+   true,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m1-direct-hospital-payment",
+  "mode": "refuses-answer-present",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 2,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Pre-authorisation must be requested at least 48 hours before planned admissions"
+   },
+   {
+    "supported": true,
+    "claim": "The administrator responds to planned admission pre-authorisations within 6 hours"
+   }
+  ],
+  "passage_relevance": [
+   true,
+   true,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m1-room-rent-capping",
+  "mode": "refuses-answer-present",
+  "corpus": "uploaded",
+  "faithfulness": 1.0,
+  "context_precision": 0.7000000000000001,
+  "n_claims": 3,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "The policy indemnifies room and boarding expenses as a standard a/c room."
+   },
+   {
+    "supported": true,
+    "claim": "Proportionate deductions do not apply to hospitals not following differential billings."
+   },
+   {
+    "supported": true,
+    "claim": "Proportionate deductions do not apply if differential billing is not adopted based on room category."
+   }
+  ],
+  "passage_relevance": [
+   true,
+   false,
+   false,
+   true,
+   true
+  ]
+ },
+ {
+  "case_id": "m1-consumables",
+  "mode": "refuses-answer-present",
+  "corpus": "uploaded",
+  "faithfulness": 1.0,
+  "context_precision": 0.5833333333333333,
+  "n_claims": 5,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Hand wash is listed as non-payable or subsumed into room charges."
+   },
+   {
+    "supported": true,
+    "claim": "Shoe covers are listed as non-payable or subsumed into room charges."
+   },
+   {
+    "supported": true,
+    "claim": "Attendant charges are listed as non-payable items."
+   },
+   {
+    "supported": true,
+    "claim": "The final bill includes gloves, hand wash, shoe covers, and attendant charges."
+   },
+   {
+    "supported": true,
+    "claim": "The total for gloves, hand wash, shoe covers, and attendant charges is INR 4,180."
+   }
+  ],
+  "passage_relevance": [
+   false,
+   true,
+   true,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m2-nil-dep-old-vehicle",
+  "mode": "drops-limiting-condition",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 3,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "A compulsory deductible of INR 3,000 applies to vehicles above 1500cc."
+   },
+   {
+    "supported": true,
+    "claim": "The depreciation table in Clause 2.1 does not apply under Nil Depreciation."
+   },
+   {
+    "supported": true,
+    "claim": "Glass, plastic, and fibreglass parts are payable in full."
+   }
+  ],
+  "passage_relevance": [
+   true,
+   false,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m2-nil-dep-third-claim",
+  "mode": "drops-limiting-condition",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 4,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Nil Depreciation applies to vehicles up to 5 years old."
+   },
+   {
+    "supported": true,
+    "claim": "A maximum of two Nil Depreciation claims are permitted per policy year."
+   },
+   {
+    "supported": true,
+    "claim": "From the third claim onward, the depreciation table applies in full."
+   },
+   {
+    "supported": true,
+    "claim": "A compulsory deductible of INR 1,500 applies to vehicles up to 1500cc."
+   }
+  ],
+  "passage_relevance": [
+   true,
+   false,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m2-road-ambulance",
+  "mode": "drops-limiting-condition",
+  "corpus": "uploaded",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 3,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Road ambulance claims require a life-threatening emergency certification."
+   },
+   {
+    "supported": true,
+    "claim": "The certification must be by a Medical Practitioner."
+   },
+   {
+    "supported": true,
+    "claim": "Claims require accepted In-patient Hospitalization Treatment or Day Care coverage."
+   }
+  ],
+  "passage_relevance": [
+   true,
+   true,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m2-settlement-timeline",
+  "mode": "drops-limiting-condition",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 0.2,
+  "n_claims": 2,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "The claim is referred because it was flagged for investigation by the fraud unit."
+   },
+   {
+    "supported": true,
+    "claim": "Where the company believes a claim is fraudulent, it is referred to the Special Investigation Unit."
+   }
+  ],
+  "passage_relevance": [
+   false,
+   false,
+   false,
+   false,
+   true
+  ]
+ },
+ {
+  "case_id": "m2-newborn-cover",
+  "mode": "drops-limiting-condition",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 5,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Newborn child is covered from date of birth"
+   },
+   {
+    "supported": true,
+    "claim": "Birth must be intimated within 30 days"
+   },
+   {
+    "supported": true,
+    "claim": "Birth was intimated 37 days after birth"
+   },
+   {
+    "supported": true,
+    "claim": "37 days exceeds the 30-day requirement"
+   },
+   {
+    "supported": true,
+    "claim": "Newborn cover does not apply"
+   }
+  ],
+  "passage_relevance": [
+   true,
+   false,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m2-ncb-protection",
+  "mode": "drops-limiting-condition",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 2,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "First own damage claim does not affect No Claim Bonus on renewal if protection is in force."
+   },
+   {
+    "supported": true,
+    "claim": "A second or subsequent claim results in No Claim Bonus reverting to nil."
+   }
+  ],
+  "passage_relevance": [
+   true,
+   true,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m3-motor-intimation-window",
+  "mode": "wrong-document-retrieved",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 0.0,
+  "n_claims": 7,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Policy is END-2026-01"
+   },
+   {
+    "supported": true,
+    "claim": "Position is referred"
+   },
+   {
+    "supported": true,
+    "claim": "Deductible is none"
+   },
+   {
+    "supported": true,
+    "claim": "Exclusion relied on is none"
+   },
+   {
+    "supported": true,
+    "claim": "Context lacks specific motor claim intimation deadlines"
+   },
+   {
+    "supported": true,
+    "claim": "Claim is referred for further review"
+   },
+   {
+    "supported": true,
+    "claim": "Base wording PW-MOTOR-001 is needed to determine the intimation deadline"
+   }
+  ],
+  "passage_relevance": [
+   false,
+   false,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m3-waiting-period-comparison",
+  "mode": "wrong-document-retrieved",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 0.7000000000000001,
+  "n_claims": 4,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "The initial 30-day waiting period does not apply to hospitalisation from an accident."
+   },
+   {
+    "supported": true,
+    "claim": "Hernia is a specified illness subject to waiting periods."
+   },
+   {
+    "supported": true,
+    "claim": "The 24-month waiting period for specified illnesses was superseded by 12 months."
+   },
+   {
+    "supported": true,
+    "claim": "The 12-month waiting period has been satisfied."
+   }
+  ],
+  "passage_relevance": [
+   true,
+   false,
+   false,
+   true,
+   true
+  ]
+ },
+ {
+  "case_id": "m3-cataract-sublimit",
+  "mode": "wrong-document-retrieved",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 2,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Cataract surgery requiring under 24 hours is payable"
+   },
+   {
+    "supported": true,
+    "claim": "Annexure A procedures under 24 hours are payable"
+   }
+  ],
+  "passage_relevance": [
+   true,
+   true,
+   true,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m3-denial-grounds",
+  "mode": "wrong-document-retrieved",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 2,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Passages do not contain exclusions for alcohol consumption or intoxication."
+   },
+   {
+    "supported": true,
+    "claim": "Specific health policy exclusion clause covering alcohol or intoxication is needed."
+   }
+  ],
+  "passage_relevance": [
+   true,
+   true,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m3-motor-drink-driving",
+  "mode": "wrong-document-retrieved",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 0.0,
+  "n_claims": 2,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "The driver was under the influence of liquor during the incident."
+   },
+   {
+    "supported": true,
+    "claim": "No exclusion clause for intoxication is present in the provided passages."
+   }
+  ],
+  "passage_relevance": [
+   false,
+   false,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m4-general-cover-enquiry",
+  "mode": "placeholder-banner-cited",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 10,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "The policy indemnifies against loss or damage caused by accidental external means"
+   },
+   {
+    "supported": true,
+    "claim": "The policy covers loss or damage caused by fire"
+   },
+   {
+    "supported": true,
+    "claim": "The policy covers loss or damage caused by theft"
+   },
+   {
+    "supported": true,
+    "claim": "The policy covers loss or damage caused by malicious acts"
+   },
+   {
+    "supported": true,
+    "claim": "The policy covers loss or damage caused by terrorism"
+   },
+   {
+    "supported": true,
+    "claim": "The policy covers loss or damage caused by natural disasters"
+   },
+   {
+    "supported": true,
+    "claim": "The policy covers loss or damage caused by transit damage"
+   },
+   {
+    "supported": true,
+    "claim": "Reimbursement claims must be submitted within 45 days of the final repair invoice"
+   },
+   {
+    "supported": true,
+    "claim": "The reimbursement window was extended from 30 days"
+   },
+   {
+    "supported": true,
+    "claim": "Further details are required regarding specific damage and circumstances for full coverage"
+   }
+  ],
+  "passage_relevance": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ]
+ },
+ {
+  "case_id": "m4-what-does-this-cover",
+  "mode": "placeholder-banner-cited",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 0.0,
+  "n_claims": 3,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Planned admissions at a network hospital require pre-authorisation 48 hours before admission."
+   },
+   {
+    "supported": true,
+    "claim": "The third-party administrator's response time for planned admissions is 4 hours."
+   },
+   {
+    "supported": true,
+    "claim": "Specific planned admission and diagnosis details are needed to determine admissibility."
+   }
+  ],
+  "passage_relevance": [
+   false,
+   false,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m4-which-document-governs",
+  "mode": "placeholder-banner-cited",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 0.3333333333333333,
+  "n_claims": 2,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Endorsement END-2026-02 amends PW-HEALTH-002 version 3.4"
+   },
+   {
+    "supported": true,
+    "claim": "Endorsement 2 prevails where it conflicts with PW-HEALTH-002"
+   }
+  ],
+  "passage_relevance": [
+   false,
+   false,
+   true,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m5-subsumed-room-charges",
+  "mode": "pdf-table-mangled",
+  "corpus": "uploaded",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 11,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Baby charges are subsumed into room charges"
+   },
+   {
+    "supported": true,
+    "claim": "Cradle charges are subsumed into room charges"
+   },
+   {
+    "supported": true,
+    "claim": "Hand wash is subsumed into room charges"
+   },
+   {
+    "supported": true,
+    "claim": "Shoe cover is subsumed into room charges"
+   },
+   {
+    "supported": true,
+    "claim": "Caps are subsumed into room charges"
+   },
+   {
+    "supported": true,
+    "claim": "Comb is subsumed into room charges"
+   },
+   {
+    "supported": true,
+    "claim": "Eau-de-cologne and room fresheners are subsumed into room charges"
+   },
+   {
+    "supported": true,
+    "claim": "Foot cover is subsumed into room charges"
+   },
+   {
+    "supported": true,
+    "claim": "Gown is subsumed into room charges"
+   },
+   {
+    "supported": true,
+    "claim": "Slippers are subsumed into room charges"
+   },
+   {
+    "supported": true,
+    "claim": "Tissue paper is subsumed into room charges"
+   }
+  ],
+  "passage_relevance": [
+   true,
+   false,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m5-modern-treatment-list",
+  "mode": "pdf-table-mangled",
+  "corpus": "uploaded",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 4,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "The insured underwent balloon sinuplasty."
+   },
+   {
+    "supported": true,
+    "claim": "Balloon sinuplasty is an eligible modern treatment covered under the policy."
+   },
+   {
+    "supported": true,
+    "claim": "The insurer will indemnify reasonable and customary medical expenses for the procedure."
+   },
+   {
+    "supported": true,
+    "claim": "Coverage is limited up to the In-Patient Hospitalization Treatment Sum Insured."
+   }
+  ],
+  "passage_relevance": [
+   true,
+   false,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "m5-daycare-procedure-list",
+  "mode": "pdf-table-mangled",
+  "corpus": "uploaded",
+  "faithfulness": 1.0,
+  "context_precision": 0.5833333333333333,
+  "n_claims": 6,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Less than 24-hour hospitalization procedures due to technological advances are covered."
+   },
+   {
+    "supported": true,
+    "claim": "Covered procedures must comply with standard Day Care Centre definitions."
+   },
+   {
+    "supported": true,
+    "claim": "Covered procedures must comply with standard Day Care treatment definitions."
+   },
+   {
+    "supported": true,
+    "claim": "Day care treatment is medical treatment or surgical procedure under anesthesia."
+   },
+   {
+    "supported": true,
+    "claim": "Day care treatment takes less than 24 hours due to technological advancement."
+   },
+   {
+    "supported": true,
+    "claim": "Arthrotomy Hip Joint is listed under the policy's day care treatments."
+   }
+  ],
+  "passage_relevance": [
+   false,
+   true,
+   true,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "cb-tyres-only",
+  "mode": "clean-baseline",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 0.0,
+  "n_claims": 3,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Nil depreciation does not extend to tyres, tubes, and batteries."
+   },
+   {
+    "supported": true,
+    "claim": "Depreciation of 50% continues to apply to tyres, tubes, and batteries."
+   },
+   {
+    "supported": true,
+    "claim": "A compulsory deductible of INR 3,000 applies to vehicles above 1500cc."
+   }
+  ],
+  "passage_relevance": [
+   false,
+   false,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "cb-treatment-outside-india",
+  "mode": "clean-baseline",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 3,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Treatment taken outside India is not covered unless the schedule provides worldwide cover."
+   },
+   {
+    "supported": true,
+    "claim": "The schedule shows no worldwide cover extension."
+   },
+   {
+    "supported": true,
+    "claim": "This exclusion remains unchanged."
+   }
+  ],
+  "passage_relevance": [
+   true,
+   true,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "cb-compulsory-deductible",
+  "mode": "clean-baseline",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 2,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Compulsory deductible is INR 3,000 for vehicles above 1500cc."
+   },
+   {
+    "supported": true,
+    "claim": "Endorsement updates the previous amount of INR 2,000."
+   }
+  ],
+  "passage_relevance": [
+   true,
+   true,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "cb-copayment-senior",
+  "mode": "clean-baseline",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 6,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "The insured person's age is 67 years old."
+   },
+   {
+    "supported": true,
+    "claim": "The age exceeds 66 years for mandatory co-payment."
+   },
+   {
+    "supported": true,
+    "claim": "The mandatory co-payment applies at 66 years."
+   },
+   {
+    "supported": true,
+    "claim": "The base policy co-payment percentage is 20%."
+   },
+   {
+    "supported": true,
+    "claim": "The co-payment percentage is reduced to 10% by endorsement."
+   },
+   {
+    "supported": true,
+    "claim": "Endorsements prevail over disagreeing base wordings."
+   }
+  ],
+  "passage_relevance": [
+   true,
+   true,
+   false,
+   false,
+   false
+  ]
+ },
+ {
+  "case_id": "cb-reimbursement-window",
+  "mode": "clean-baseline",
+  "corpus": "insurance",
+  "faithfulness": 1.0,
+  "context_precision": 1.0,
+  "n_claims": 5,
+  "claims": [
+   {
+    "supported": true,
+    "claim": "Documents must be submitted within 15 days of discharge."
+   },
+   {
+    "supported": true,
+    "claim": "The insured was discharged on 2026-06-18."
+   },
+   {
+    "supported": true,
+    "claim": "Reimbursement papers reached the company on 2026-07-15."
+   },
+   {
+    "supported": true,
+    "claim": "This date is 27 days after discharge."
+   },
+   {
+    "supported": true,
+    "claim": "The submission exceeds the 15-day limit."
+   }
+  ],
+  "passage_relevance": [
+   true,
+   false,
+   false,
+   false,
+   false
+  ]
+ }
+]

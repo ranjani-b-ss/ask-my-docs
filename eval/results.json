@@ -1,0 +1,1109 @@
+[
+ {
+  "case_id": "m1-permanent-exclusions",
+  "mode": "refuses-answer-present",
+  "regression_of": "tr_eeff25a3bea3",
+  "position": "NOT PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00418"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-04-02"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "Clause 1"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "corpus declares no supersessions"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The coverage position and exclusions stated in the summary for claim CLM-2026-00418 are fully supported by passage [1].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m1-cancellation-refund",
+  "mode": "refuses-answer-present",
+  "regression_of": null,
+  "position": "PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00423"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-05-11"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "PAYABLE, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "corpus declares no supersessions"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary's position that the annual policy is eligible for a pro-rata premium refund upon cancellation with no claims made is fully supported by passage [1].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m1-direct-hospital-payment",
+  "mode": "refuses-answer-present",
+  "regression_of": null,
+  "position": "PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00431"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-06-08"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "PAYABLE, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": false,
+    "detail": "relies on PW-HEALTH-002 but END-2026-02 (effective 2026-05-01) amends it before the 2026-06-08 date of loss and is never mentioned"
+   }
+  },
+  "assertions_passed": false,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary's position that planned admissions at a network hospital require pre-authorisation at least 48 hours before admission and a response within 6 hours for claim CLM-2026-00431 is fully supported by passage [1].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": false
+ },
+ {
+  "case_id": "m1-room-rent-capping",
+  "mode": "refuses-answer-present",
+  "regression_of": null,
+  "position": "PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00437"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-03-19"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "PAYABLE, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "corpus declares no supersessions"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1, 4]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary's position and basis regarding room and boarding expenses for claim CLM-2026-00437 are supported by policy passages [4] and [1].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m1-consumables",
+  "mode": "refuses-answer-present",
+  "regression_of": null,
+  "position": "NOT PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00442"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-02-27"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "Clause 27"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "corpus declares no supersessions"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": false,
+   "detail": "Basis carries no [n] citation"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary correctly relies on passages [1] and [4] to classify items such as hand wash, shoe covers, and attendant charges as non-payable or subsumed.",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m2-nil-dep-old-vehicle",
+  "mode": "drops-limiting-condition",
+  "regression_of": null,
+  "position": "PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00455"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-05-22"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "INR 3,000"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "PAYABLE, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "currency of PW-MOTOR-001 accounted for"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1, 3]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The coverage positions and figures stated in the summary for claim CLM-2026-00455 are fully supported by policy passages [1] and [3].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m2-nil-dep-third-claim",
+  "mode": "drops-limiting-condition",
+  "regression_of": null,
+  "position": "PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00461"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-07-04"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "INR 1,500"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "PAYABLE, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "currency of PW-MOTOR-001 accounted for"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1, 5]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary for claim CLM-2026-00461 is fully supported by passages [1] and [5] regarding the third-claim limitation on nil depreciation and the 1,500 INR compulsory deductible.",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m2-road-ambulance",
+  "mode": "drops-limiting-condition",
+  "regression_of": null,
+  "position": "REFERRED",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00468"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-06-16"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "REFERRED, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "corpus declares no supersessions"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary's basis correctly cites passages [1] for the requirements that a road ambulance claim needs certification of a life-threatening emergency by a Medical Practitioner and acceptance of the in-patient or day care claim.",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m2-settlement-timeline",
+  "mode": "drops-limiting-condition",
+  "regression_of": null,
+  "position": "REFERRED",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00472"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-06-30"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "REFERRED, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "currency of PW-CLAIMS-003 accounted for"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [2]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary's basis correctly states that the claim is referred to the Special Investigation Unit due to being flagged for fraud on 2026-08-06, which is supported by passage [2].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m2-newborn-cover",
+  "mode": "drops-limiting-condition",
+  "regression_of": null,
+  "position": "NOT PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00479"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-07-19"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "Clause 5"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "relies on no superseded wording"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary's position that newborn cover does not apply because intimation occurred after 30 days is supported by passage [1].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m2-ncb-protection",
+  "mode": "drops-limiting-condition",
+  "regression_of": null,
+  "position": "PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00483"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-07-28"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "PAYABLE, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "currency of PW-MOTOR-001 accounted for"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "Claim CLM-2026-00483 is supported by passage [1], which states that a second or subsequent own damage claim in the same policy year results in the No Claim Bonus reverting to nil.",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m3-motor-intimation-window",
+  "mode": "wrong-document-retrieved",
+  "regression_of": null,
+  "position": "REFERRED",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00491"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-07-02"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "REFERRED, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "relies on no superseded wording"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [4]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary for claim CLM-2026-00491 is grounded because its referral position and statement regarding missing intimation timeline details are supported by passage [4].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m3-waiting-period-comparison",
+  "mode": "wrong-document-retrieved",
+  "regression_of": "tr_297f38675314",
+  "position": "PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00496"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-08-01"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "PAYABLE, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "currency of PW-HEALTH-002 accounted for"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1, 4]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary for claim CLM-2026-00496 correctly identifies the hernia as a specified illness under [1] and the 12-month waiting period revision under [4].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m3-cataract-sublimit",
+  "mode": "wrong-document-retrieved",
+  "regression_of": null,
+  "position": "PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00502"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-06-11"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "PAYABLE, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "currency of PW-HEALTH-002 accounted for"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "For claim CLM-2026-00502, the summary states that cataract surgery is a payable day care procedure, which is supported by passage [1].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m3-denial-grounds",
+  "mode": "wrong-document-retrieved",
+  "regression_of": null,
+  "position": "REFERRED",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00509"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-05-04"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "REFERRED, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "currency of PW-CLAIMS-003 accounted for"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1, 2, 3, 4, 5]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary correctly states that the provided policy passages do not contain an exclusion for alcohol consumption or intoxication, as supported by passages [1], [2], [3], [4], and [5].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m3-motor-drink-driving",
+  "mode": "wrong-document-retrieved",
+  "regression_of": null,
+  "position": "REFERRED",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00514"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-04-18"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "REFERRED, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "currency of PW-MOTOR-001 accounted for"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": false,
+   "detail": "Basis carries no [n] citation"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary's position and basis regarding the missing intoxication exclusion are supported by the absence of such an exclusion in passages [1], [3], [4], and [5].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m4-general-cover-enquiry",
+  "mode": "placeholder-banner-cited",
+  "regression_of": null,
+  "position": "REFERRED",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00521"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-07-15"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "REFERRED, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "currency of PW-MOTOR-001 accounted for"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1, 4]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "Every coverage position, figure, and deadline stated in the summary of claim CLM-2026-00521 is directly supported by policy passages [1] and [4].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m4-what-does-this-cover",
+  "mode": "placeholder-banner-cited",
+  "regression_of": null,
+  "position": "REFERRED",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00526"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-08-03"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "REFERRED, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "currency of PW-HEALTH-002 accounted for"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1, 2]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary for claim CLM-2026-00526 is fully supported by passages [1] and [2].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m4-which-document-governs",
+  "mode": "placeholder-banner-cited",
+  "regression_of": null,
+  "position": "REFERRED",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00533"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-06-25"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "REFERRED, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "currency of PW-HEALTH-002 accounted for"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [3]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary for claim CLM-2026-00533 is grounded because its statement that Endorsement END-2026-02 amends the Group Health Indemnity Policy (PW-HEALTH-002, version 3.4) and prevails where it conflicts is supported by passage [3].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m5-subsumed-room-charges",
+  "mode": "pdf-table-mangled",
+  "regression_of": null,
+  "position": "REFERRED",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00541"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-03-08"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "REFERRED, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "corpus declares no supersessions"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary correctly identifies that baby charges, cradle charges, and other listed items are subsumed into room charges based on passage [1].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m5-modern-treatment-list",
+  "mode": "pdf-table-mangled",
+  "regression_of": null,
+  "position": "PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00548"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-05-30"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "PAYABLE, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "corpus declares no supersessions"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary's position that balloon sinuplasty is an eligible modern treatment covered up to the In-Patient Hospitalization Treatment Sum Insured is fully supported by passage [1] in claim CLM-2026-00548.",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "m5-daycare-procedure-list",
+  "mode": "pdf-table-mangled",
+  "regression_of": null,
+  "position": "PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00553"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-07-11"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "PAYABLE, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "corpus declares no supersessions"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1, 2, 3]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The claim for Arthrotomy Hip Joint performed with under 24 hours stay is supported by policy passages [1], [2], and [3].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "cb-tyres-only",
+  "mode": "clean-baseline",
+  "regression_of": null,
+  "position": "PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00561"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-06-02"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "INR 3,000"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "PAYABLE, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "currency of PW-MOTOR-001 accounted for"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1, 3]"
+  },
+  "judge": {
+   "verdict": "UNGROUNDED",
+   "why": "The summary claims the position is PAYABLE for tyre damage alone, but passage [1] states Nil Depreciation does not extend to tyres and passage [2] notes the exclusion/limit on tyre replacement when damaged at the same time, failing to support coverage for tyres alone.",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": false,
+  "passed": false
+ },
+ {
+  "case_id": "cb-treatment-outside-india",
+  "mode": "clean-baseline",
+  "regression_of": null,
+  "position": "NOT PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00567"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-04-25"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "Clause 6"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "currency of PW-HEALTH-002 accounted for"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1, 2]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The summary's position that treatment outside India is not covered without worldwide cover is supported by passage [1] and confirmed as unchanged by passage [2].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "cb-compulsory-deductible",
+  "mode": "clean-baseline",
+  "regression_of": null,
+  "position": "PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00572"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-07-21"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "INR 3,000"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "PAYABLE, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "currency of PW-MOTOR-001 accounted for"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [2]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The compulsory deductible of INR 3,000 for vehicles above 1500cc stated in claim CLM-2026-00572 is fully supported by passage [2].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "cb-copayment-senior",
+  "mode": "clean-baseline",
+  "regression_of": null,
+  "position": "PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00578"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-07-09"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "PAYABLE, no exclusion cited"
+   },
+   "currency_declared": {
+    "passed": true,
+    "detail": "currency of PW-HEALTH-002 accounted for"
+   }
+  },
+  "assertions_passed": true,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1, 2, 4]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The position that a 10% co-payment applies for the insured aged 67 in claim CLM-2026-00578 is supported by passages [1], [2], and [4].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": true
+ },
+ {
+  "case_id": "cb-reimbursement-window",
+  "mode": "clean-baseline",
+  "regression_of": null,
+  "position": "NOT PAYABLE",
+  "assertions": {
+   "claim_number_format": {
+    "passed": true,
+    "detail": "CLM-2026-00584"
+   },
+   "date_of_loss_parseable": {
+    "passed": true,
+    "detail": "2026-06-14"
+   },
+   "deductible_numeric": {
+    "passed": true,
+    "detail": "none (explicit)"
+   },
+   "exclusion_cited_on_denial": {
+    "passed": true,
+    "detail": "Section 8"
+   },
+   "currency_declared": {
+    "passed": false,
+    "detail": "relies on PW-HEALTH-002 but END-2026-02 (effective 2026-05-01) amends it before the 2026-06-14 date of loss and is never mentioned"
+   }
+  },
+  "assertions_passed": false,
+  "citations_resolve": {
+   "passed": true,
+   "detail": "cites [1]"
+  },
+  "judge": {
+   "verdict": "GROUNDED",
+   "why": "The 15-day submission limit for reimbursement documents is supported by passage [1].",
+   "version": "v1",
+   "sha": "d81a3e42f52b"
+  },
+  "judged_passed": true,
+  "passed": false
+ }
+]
