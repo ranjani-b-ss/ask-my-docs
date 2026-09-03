@@ -1,0 +1,66 @@
+{
+ "system": "agent",
+ "claim_id": "C-010",
+ "status": "REFERRED",
+ "payable_amount": null,
+ "exclusion_clause": null,
+ "rationale": "Stopped by a budget before reaching a decision: budget_exceeded: max_iterations (2).",
+ "stop_reason": "budget_exceeded: max_iterations (2)",
+ "iterations": 2,
+ "usage": {
+  "provider": "gemini",
+  "model": "gemini-flash-lite-latest",
+  "llm_calls": 1,
+  "prompt_tokens": 1048,
+  "completion_tokens": 57,
+  "total_tokens": 1105,
+  "cost_usd": 9.6e-05,
+  "wall_seconds": 13.707
+ },
+ "steps": [
+  {
+   "lap": 1,
+   "raw_output": "Thought: I need to fetch the claim details for C-010 to review the date of loss, vehicle engine size, amount claimed, and adjuster's notes.\nAction: get_claim\nAction Input: {\"claim_id\": \"C-010\"}",
+   "parsed": {
+    "kind": "action",
+    "tool": "get_claim",
+    "args": {
+     "claim_id": "C-010"
+    }
+   },
+   "cumulative_usage": {
+    "provider": "gemini",
+    "model": "gemini-flash-lite-latest",
+    "llm_calls": 1,
+    "prompt_tokens": 1048,
+    "completion_tokens": 57,
+    "total_tokens": 1105,
+    "cost_usd": 9.6e-05,
+    "wall_seconds": 2.027
+   },
+   "tool": "get_claim",
+   "tool_args": {
+    "claim_id": "C-010"
+   },
+   "observation": "{\"claim_id\": \"C-010\", \"date_of_loss\": \"2026-05-15\", \"vehicle_cc\": 1500, \"claim_amount\": 180000.0, \"notes\": \"Insured drove into a flooded underpass despite a police barricade diverting traffic around it; the engine subsequently hydrolocked and the vehicle had to be towed. Surveyor's report notes the water level and the barricade, but is explicit that it 'cannot determine from the physical evidence alone whether the damage should be classified as flood damage or as a mechanical failure resulting from the insured continuing to drive through standing water against a warning'. Repair estimate: INR 180,000.\"}"
+  },
+  {
+   "lap": 2,
+   "raw_output": null,
+   "parsed": {
+    "kind": "provider_error",
+    "error": "Gemini returned no usable content on 4 attempts (finishReason: MALFORMED_RESPONSE)."
+   },
+   "cumulative_usage": {
+    "provider": "gemini",
+    "model": "gemini-flash-lite-latest",
+    "llm_calls": 1,
+    "prompt_tokens": 1048,
+    "completion_tokens": 57,
+    "total_tokens": 1105,
+    "cost_usd": 9.6e-05,
+    "wall_seconds": 13.707
+   }
+  }
+ ]
+}

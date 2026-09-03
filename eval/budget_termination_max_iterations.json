@@ -1,0 +1,74 @@
+{
+ "system": "agent",
+ "claim_id": "C-010",
+ "status": "REFERRED",
+ "payable_amount": null,
+ "exclusion_clause": null,
+ "rationale": "Stopped by a budget before reaching a decision: budget_exceeded: max_iterations (2).",
+ "stop_reason": "budget_exceeded: max_iterations (2)",
+ "iterations": 2,
+ "usage": {
+  "provider": "gemini",
+  "model": "gemini-flash-lite-latest",
+  "llm_calls": 2,
+  "prompt_tokens": 2310,
+  "completion_tokens": 133,
+  "total_tokens": 2443,
+  "cost_usd": 0.000213,
+  "wall_seconds": 3.447
+ },
+ "steps": [
+  {
+   "lap": 1,
+   "raw_output": "Thought: I need to fetch the claim details for C-010 to understand the facts of the loss, the amount claimed, and the date of loss.\nAction: get_claim\nAction Input: {\"claim_id\": \"C-010\"}",
+   "parsed": {
+    "kind": "action",
+    "tool": "get_claim",
+    "args": {
+     "claim_id": "C-010"
+    }
+   },
+   "cumulative_usage": {
+    "provider": "gemini",
+    "model": "gemini-flash-lite-latest",
+    "llm_calls": 1,
+    "prompt_tokens": 1048,
+    "completion_tokens": 55,
+    "total_tokens": 1103,
+    "cost_usd": 9.5e-05,
+    "wall_seconds": 1.349
+   },
+   "tool": "get_claim",
+   "tool_args": {
+    "claim_id": "C-010"
+   },
+   "observation": "{\"claim_id\": \"C-010\", \"date_of_loss\": \"2026-05-15\", \"vehicle_cc\": 1500, \"claim_amount\": 180000.0, \"notes\": \"Insured drove into a flooded underpass despite a police barricade diverting traffic around it; the engine subsequently hydrolocked and the vehicle had to be towed. Surveyor's report notes the water level and the barricade, but is explicit that it 'cannot determine from the physical evidence alone whether the damage should be classified as flood damage or as a mechanical failure resulting from the insured continuing to drive through standing water against a warning'. Repair estimate: INR 180,000.\"}"
+  },
+  {
+   "lap": 2,
+   "raw_output": "Thought: The adjuster's notes mention ambiguity regarding whether the damage is classified as flood damage or mechanical failure due to driving through standing water against a warning. I need to search the policy to see how flood damage, mechanical failure, or driving against warnings/barricades are handled.\nAction: search_policy\nAction Input: {\"query\": \"flood damage mechanical failure water warning\"}",
+   "parsed": {
+    "kind": "action",
+    "tool": "search_policy",
+    "args": {
+     "query": "flood damage mechanical failure water warning"
+    }
+   },
+   "cumulative_usage": {
+    "provider": "gemini",
+    "model": "gemini-flash-lite-latest",
+    "llm_calls": 2,
+    "prompt_tokens": 2310,
+    "completion_tokens": 133,
+    "total_tokens": 2443,
+    "cost_usd": 0.000213,
+    "wall_seconds": 2.886
+   },
+   "tool": "search_policy",
+   "tool_args": {
+    "query": "flood damage mechanical failure water warning"
+   },
+   "observation": "[{\"document_id\": \"END-2026-03\", \"effective_date\": \"2026-06-01\", \"section\": \"Endorsement 3 to the Claims Handling Manual\", \"text\": \"# Endorsement 3 to the Claims Handling Manual\\n\\nMeridian Assurance Limited Endorsement END-2026-03 \\u2014 effective 1 June 2026\\nThis endorsement amends the Claims Handling and Grievance Redressal Manual\\n       (PW-CLAIMS-003, version 2.2). Where this endorsement conflicts with PW-CLAIMS-003, this endorsement prevails .\", \"relevance\": 0.0}, {\"document_id\": \"END-2026-03\", \"effective_date\": \"2026-06-01\", \"section\": \"Endorsement 3 to the Claims Handling Manual > 5. New Clause 3A \\u2014 Digital claim submission\", \"text\": \"## 5. New Clause 3A \\u2014 Digital claim submission\\n\\n3A. Claimants may submit all claim documents through the mobile\\n       application or the claims portal. A document uploaded digitally and legible is\\n       treated as an original for the purposes of this manual, and the Company may not\\n       require a physical original except where a statute requires it, or for a letter of\\n       subrogation, a stamped indemnity bond, or an original registration certificate in a\\n       total loss claim.\\nWhere documents are submitted digitally, the Company acknowledges receipt\\n       automatically and the 15-day decision clock in Clause 3 starts from the\\n       timestamp of the upload .\", \"relevance\": 0.0}, {\"document_id\": \"END-2026-01\", \"effective_date\": \"2026-04-01\", \"section\": \"Endorsement 1 to the Private Car Package Policy > 5. New Clause 4.3 \\u2014 Digital survey\", \"text\": \"## 5. New Clause 4.3 \\u2014 Digital survey\\n\\nThe following clause is inserted after Clause 4.2:\\n\\n> **4.3 Digital survey.** For own damage claims where the estimated loss does not exceed\\n> **INR 50,000**, the Company may conduct a digital survey by requiring the Insured to\\n> upload photographs and a short video of the damage through the mobile application, in\\n> place of a physical survey. A digital survey decision is communicated within **4 working\\n> hours** of a complete upload. The Insured may decline a digital survey and require a\\n> physical survey.\\n\\n## 6. Amendment to Clause 5 \\u2014 Reimbursement window\\n\\nThe window for submitting reimbursement claims in Clause 5 is extended from 30 days to\\n**45 days** from the date of the final repair invoice.\", \"relevance\": 0.0}]"
+  }
+ ]
+}

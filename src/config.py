@@ -92,6 +92,42 @@ GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta"
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-flash-latest").strip()
 GEMINI_TIMEOUT = 60
 
+# --- Pricing (Week 7) ---
+# USD per 1,000,000 tokens, (input, output). REFERENCE VALUES, not fetched live — vendors
+# change prices without notice and "flash-lite-latest" is a moving alias, so no number here
+# should be read as a live billing figure. They exist so cost/task in the agent-vs-workflow
+# race is a real multiplication of real measured tokens, not another estimate stacked on an
+# estimate. Verify against the vendor's current pricing page before quoting these as fact;
+# update this table when they drift.
+#
+# Keyed by (provider, model-prefix) — a prefix match so "gemini-flash-lite-latest" and a
+# future "gemini-flash-lite-2.0" both resolve without editing this table again.
+PRICING_PER_MILLION_TOKENS = {
+    ("gemini", "gemini-flash-lite"): (0.075, 0.30),
+    ("gemini", "gemini-flash"): (0.15, 0.60),
+    ("gemini", "gemini"): (0.15, 0.60),          # fallback for any other gemini-* model
+    ("openai", "gpt-4o-mini"): (0.15, 0.60),
+    ("openai", "gpt-4o"): (2.50, 10.00),
+    ("anthropic", "claude-opus"): (15.00, 75.00),
+    ("anthropic", "claude"): (3.00, 15.00),       # fallback for other Claude models
+    ("ollama", ""): (0.0, 0.0),                    # local inference, no per-token cost
+}
+
+
+def price_per_million(provider: str, model: str) -> tuple[float, float]:
+    """(input $/1M tokens, output $/1M tokens) for the given provider+model.
+
+    Longest matching model-prefix wins, so a specific entry (``gemini-flash-lite``) is
+    preferred over a generic one (``gemini``) for the same provider.
+    """
+    candidates = [(prov, prefix, rates) for (prov, prefix), rates in
+                  PRICING_PER_MILLION_TOKENS.items()
+                  if prov == provider and model.startswith(prefix)]
+    if not candidates:
+        return (0.0, 0.0)
+    return max(candidates, key=lambda c: len(c[1]))[2]
+
+
 # --- Retrieval ---
 TOP_K = 5          # chunks handed to the model after reranking
 CANDIDATE_K = 20   # chunks pulled from the vector store before reranking

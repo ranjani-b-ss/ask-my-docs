@@ -1,0 +1,109 @@
+# Gold answers for the 10-claim race. NEVER imported by src/agent/* — only eval/race.py
+# reads this file, after both systems have already produced their answers, so a tool call
+# has no way to leak the expected result back into the reasoning.
+#
+# Every "why" cites the exact clause, checked fresh against corpora/insurance/policy-wording/
+# 01-motor-own-damage.md and corpora/insurance/endorsements/END-2026-01-motor.md before this
+# file was written — the same discipline eval/claim_cases.yaml used in Week 6.
+#
+# Grading (see eval/race.py:grade): status must match exactly. Where gold status is PAYABLE,
+# payable_amount must match within 1 (rupee-level rounding). Where gold status is NOT_PAYABLE
+# or REFERRED, the amount is not checked (0 and null respectively are the only sane values
+# and checking them adds nothing). exclusion_clause is reported but does not gate pass/fail —
+# document-id phrasing is not worth making brittle, and C-007 shows why: the claim itself is
+# PAYABLE, only one line item within it is excluded, so there is no single clause name that
+# correctly answers "the exclusion clause" for a partial exclusion.
+
+cases:
+  - claim_id: C-001
+    status: PAYABLE
+    payable_amount: 7000
+    why: >
+      No exclusion applies. Loss date 2026-02-10 is before END-2026-01 (effective
+      2026-04-01), so the BASE deductible in PW-MOTOR-001 Clause 2.2 governs: INR 1,000 for
+      vehicles up to 1500cc (1400cc here). 8000 - 1000 = 7000.
+
+  - claim_id: C-002
+    status: PAYABLE
+    payable_amount: 12000
+    why: >
+      No exclusion applies. Loss date 2026-06-01 is after END-2026-01 (effective
+      2026-04-01), so the REVISED deductible in END-2026-01 Clause 2 governs: INR 3,000 for
+      vehicles above 1500cc (1800cc here). 15000 - 3000 = 12000. This is the case that
+      forces checking the date against the endorsement rather than defaulting to the base
+      wording.
+
+  - claim_id: C-003
+    status: NOT_PAYABLE
+    payable_amount: 0
+    exclusion_clause: "PW-MOTOR-001 Clause 3"
+    why: >
+      Only the tyres were damaged, no other part of the vehicle. Clause 3: "damage to tyres
+      and tubes UNLESS the vehicle is damaged at the same time" — the exception does not
+      apply here, so the loss is excluded in full.
+
+  - claim_id: C-004
+    status: NOT_PAYABLE
+    payable_amount: 0
+    exclusion_clause: "PW-MOTOR-001 Clause 3"
+    why: >
+      Driven by a person without a valid driving licence — Clause 3 excludes this outright,
+      regardless of who owns the policy or was in the vehicle.
+
+  - claim_id: C-005
+    status: NOT_PAYABLE
+    payable_amount: 0
+    exclusion_clause: "PW-MOTOR-001 Clause 3"
+    why: "Driver under the influence of liquor at the time — Clause 3 exclusion."
+
+  - claim_id: C-006
+    status: NOT_PAYABLE
+    payable_amount: 0
+    exclusion_clause: "PW-MOTOR-001 Clause 3"
+    why: >
+      Vehicle was being used for hire (paid ride-hailing pickups) at the time of the
+      accident — Clause 3 excludes "the vehicle being used outside the limitations as to
+      use stated in the schedule, such as a private car used for hire or reward" verbatim.
+
+  - claim_id: C-007
+    status: PAYABLE
+    payable_amount: 33000
+    why: >
+      The repair cost (34,000) is payable; the hire-car charges (6,000) are excluded under
+      Clause 3 ("consequential loss, including ... hire charges for a replacement
+      vehicle"). Loss date 2026-03-01 is before END-2026-01, so the base deductible applies:
+      1400cc -> INR 1,000. (34000 - 1000) = 33000, NOT (40000 - 1000). Getting this case
+      right requires excluding the hire charges BEFORE subtracting the deductible, not
+      after — a claim_amount_for_payout of 39000 or a payout of 39000 is a fail even though
+      the status is right.
+
+  - claim_id: C-008
+    status: PAYABLE
+    payable_amount: 4000
+    why: >
+      A windscreen (glass) is not in Clause 3's exclusion list — only tyres, tubes, wear and
+      tear, mechanical/electrical breakdown, no licence, drink driving, unauthorised use,
+      consequential loss and outside-geography losses are excluded. Loss date 2026-01-20 is
+      before END-2026-01, so the base deductible applies regardless of part type: 1350cc ->
+      INR 1,000. 5000 - 1000 = 4000.
+
+  - claim_id: C-009
+    status: NOT_PAYABLE
+    payable_amount: 0
+    exclusion_clause: "PW-MOTOR-001 Clause 3"
+    why: >
+      Internal transmission failure with no external impact is "mechanical or electrical
+      breakdown, failure, or breakage" — excluded by Clause 3 regardless of the repair cost.
+
+  - claim_id: C-010
+    status: REFERRED
+    payable_amount: null
+    why: >
+      Genuinely ambiguous on this corpus. Flood/inundation is an explicitly COVERED peril
+      (Clause 1), but the engine failure could also be read as "mechanical or electrical
+      breakdown" (Clause 3, excluded) since it resulted from the insured continuing to
+      drive through standing water against a barricade rather than from the flood itself.
+      The corpus does not define where covered flood damage ends and excluded consequential
+      mechanical failure begins, and the surveyor's own note says the evidence does not
+      settle it. The correct answer is to escalate, not guess either way — a confident
+      PAYABLE or NOT_PAYABLE on this claim is a fail regardless of which one is chosen.

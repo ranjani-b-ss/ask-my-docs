@@ -94,6 +94,30 @@ def ollama_chat(system: str, user: str, model: str = OLLAMA_MODEL, url: str = OL
     return response.json()["message"]["content"].strip()
 
 
+def ollama_chat_with_usage(
+    system: str, user: str, model: str = OLLAMA_MODEL, url: str = OLLAMA_URL
+) -> tuple[str, dict]:
+    payload = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": system},
+            {"role": "user", "content": user},
+        ],
+        "stream": False,
+        "options": {"temperature": 0.0, "num_ctx": 8192, "top_p": 0.9},
+    }
+    response = requests.post(f"{url}/api/chat", json=payload, timeout=OLLAMA_TIMEOUT)
+    response.raise_for_status()
+    body = response.json()
+    # Ollama reports these as prompt_eval_count / eval_count, and omits both entirely when a
+    # response is served from its internal cache — .get(..., 0) rather than a KeyError.
+    prompt = body.get("prompt_eval_count", 0)
+    completion = body.get("eval_count", 0)
+    usage = {"prompt_tokens": prompt, "completion_tokens": completion,
+              "total_tokens": prompt + completion}
+    return body["message"]["content"].strip(), usage
+
+
 # ------------------------------------------------------------------------------- openai
 
 
@@ -136,6 +160,37 @@ def openai_chat(system: str, user: str, model: str = OPENAI_MODEL) -> str:
         raise LLMError("OpenAI rate limit or quota exceeded (429).")
     response.raise_for_status()
     return response.json()["choices"][0]["message"]["content"].strip()
+
+
+def openai_chat_with_usage(system: str, user: str, model: str = OPENAI_MODEL) -> tuple[str, dict]:
+    key = openai_key()
+    if not key:
+        raise LLMError("OPENAI_API_KEY is not set.")
+
+    response = requests.post(
+        f"{OPENAI_BASE_URL}/chat/completions",
+        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+        json={
+            "model": model,
+            "messages": [
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+            "temperature": 0.0,
+        },
+        timeout=OPENAI_TIMEOUT,
+    )
+    if response.status_code == 401:
+        raise LLMError("OpenAI rejected the key (401). Check OPENAI_API_KEY.")
+    if response.status_code == 429:
+        raise LLMError("OpenAI rate limit or quota exceeded (429).")
+    response.raise_for_status()
+    body = response.json()
+    u = body.get("usage", {})
+    usage = {"prompt_tokens": u.get("prompt_tokens", 0),
+              "completion_tokens": u.get("completion_tokens", 0),
+              "total_tokens": u.get("total_tokens", 0)}
+    return body["choices"][0]["message"]["content"].strip(), usage
 
 
 # ------------------------------------------------------------------------------ claude
@@ -205,6 +260,38 @@ def anthropic_chat(system: str, user: str, model: str = ANTHROPIC_MODEL) -> str:
     return "\n".join(parts).strip()
 
 
+def anthropic_chat_with_usage(
+    system: str, user: str, model: str = ANTHROPIC_MODEL
+) -> tuple[str, dict]:
+    import anthropic
+
+    if not anthropic_key():
+        raise LLMError("ANTHROPIC_API_KEY is not set.")
+
+    client = anthropic.Anthropic()
+    try:
+        response = client.messages.create(
+            model=model,
+            max_tokens=ANTHROPIC_MAX_TOKENS,
+            system=system,
+            messages=[{"role": "user", "content": user}],
+        )
+    except anthropic.AuthenticationError as exc:
+        raise LLMError(f"Anthropic rejected the key: {exc}") from exc
+    except anthropic.RateLimitError as exc:
+        raise LLMError(f"Anthropic rate limit exceeded: {exc}") from exc
+
+    if response.stop_reason == "refusal":
+        raise LLMError("Claude declined to answer this request (stop_reason=refusal).")
+
+    parts = [block.text for block in response.content if block.type == "text"]
+    prompt = response.usage.input_tokens
+    completion = response.usage.output_tokens
+    usage = {"prompt_tokens": prompt, "completion_tokens": completion,
+              "total_tokens": prompt + completion}
+    return "\n".join(parts).strip(), usage
+
+
 # ------------------------------------------------------------------------------ gemini
 
 
@@ -239,16 +326,13 @@ def _gemini_retry_delay(response, default: float = 20.0) -> float:
     return default
 
 
-def gemini_chat(system: str, user: str, model: str = GEMINI_MODEL, attempt: int = 0) -> str:
-    """Gemini via the REST API.
+def _gemini_request(system: str, user: str, model: str, attempt: int) -> dict:
+    """POST to Gemini, handle status codes and retries, return the raw response JSON.
 
-    Shape differs from the OpenAI-style APIs in three ways worth noting:
-    the system prompt is its own ``system_instruction`` object rather than a message with
-    ``role="system"``; user turns wrap text in a ``parts`` list; and sampling settings live
-    under ``generationConfig`` instead of at the top level.
-
-    The key goes in a header, not the query string — a key in a URL ends up in server
-    logs, proxy logs, and browser history.
+    Split out of ``gemini_chat`` so that a usage-tracking caller (``gemini_chat_with_usage``,
+    needed for Week 7's cost/token budgets) shares this exact retry ladder instead of a second
+    copy of it drifting out of sync. Nothing about the request or the retry behaviour changed
+    in this split — only the point where text gets extracted moved to the callers.
     """
     key = gemini_key()
     if not key:
@@ -291,7 +375,7 @@ def gemini_chat(system: str, user: str, model: str = GEMINI_MODEL, attempt: int 
         # attributed to the wrong cause.
         if attempt < len(_BACKOFF):
             time.sleep(_BACKOFF[attempt])
-            return gemini_chat(system, user, model, attempt=attempt + 1)
+            return _gemini_request(system, user, model, attempt=attempt + 1)
         raise LLMError(
             f"Gemini returned {response.status_code} (server-side, transient) on "
             f"{len(_BACKOFF) + 1} attempts. Not a problem with your key or quota — "
@@ -308,7 +392,7 @@ def gemini_chat(system: str, user: str, model: str = GEMINI_MODEL, attempt: int 
         retry_after = _gemini_retry_delay(response)
         if attempt < 2:
             time.sleep(retry_after)
-            return gemini_chat(system, user, model, attempt=attempt + 1)
+            return _gemini_request(system, user, model, attempt=attempt + 1)
         raise LLMError(
             "Gemini quota exceeded (429) twice. This is usually the free tier's "
             "tokens-per-minute limit rather than requests-per-minute, because each question "
@@ -316,9 +400,21 @@ def gemini_chat(system: str, user: str, model: str = GEMINI_MODEL, attempt: int 
             "GEMINI_MODEL to a lite variant with a larger allowance."
         )
     response.raise_for_status()
+    return response.json()
 
-    payload = response.json()
 
+class _GeminiRetryableContent(LLMError):
+    """A 200 OK carrying no usable content, for a reason worth trying again rather than
+    surfacing — never raised past ``gemini_chat``/``gemini_chat_with_usage``."""
+
+
+def _gemini_extract(payload: dict) -> tuple[str, dict]:
+    """Text and usage counters from a successful Gemini payload.
+
+    ``usageMetadata`` is what makes the Week 7 cost budget real rather than estimated: Gemini
+    reports the exact prompt and completion token counts it billed for, so
+    ``gemini_chat_with_usage`` never has to fall back to a chars/4 guess.
+    """
     # A safety filter can block the prompt outright — no candidates come back at all.
     blocked = payload.get("promptFeedback", {}).get("blockReason")
     if blocked:
@@ -331,12 +427,72 @@ def gemini_chat(system: str, user: str, model: str = GEMINI_MODEL, attempt: int 
     finish = candidates[0].get("finishReason")
     if finish in {"SAFETY", "RECITATION", "BLOCKLIST", "PROHIBITED_CONTENT"}:
         raise LLMError(f"Gemini stopped early (finishReason: {finish}).")
+    if finish == "MALFORMED_RESPONSE":
+        # An intermittent decoding failure on Google's side — HTTP 200, empty content, no
+        # fault in the request. Observed on gemini-flash-lite-latest under a long system
+        # prompt (Week 7's tool-heavy agent prompt); a same-request retry clears it.
+        raise _GeminiRetryableContent(f"finishReason: {finish}")
 
     parts = candidates[0].get("content", {}).get("parts", [])
     text = "\n".join(p["text"] for p in parts if "text" in p).strip()
     if not text:
-        raise LLMError(f"Gemini returned an empty answer (finishReason: {finish}).")
+        raise _GeminiRetryableContent(f"empty answer, finishReason: {finish}")
+
+    meta = payload.get("usageMetadata", {})
+    usage = {
+        "prompt_tokens": meta.get("promptTokenCount", 0),
+        "completion_tokens": meta.get("candidatesTokenCount", 0),
+        "total_tokens": meta.get("totalTokenCount", 0),
+    }
+    return text, usage
+
+
+def _gemini_call(system: str, user: str, model: str, content_attempt: int = 0) -> tuple[str, dict]:
+    """``_gemini_request`` + ``_gemini_extract``, with one retry ladder of its own for a
+    200 OK that carried nothing usable — a different failure class from the 5xx/429 ladder
+    inside ``_gemini_request``, so it needs its own attempt counter rather than sharing one.
+    """
+    try:
+        return _gemini_extract(_gemini_request(system, user, model, attempt=0))
+    except _GeminiRetryableContent as exc:
+        # 4 attempts, not 3: measured on Week 7's agent prompt (~4000 chars, three tool
+        # descriptions plus the ReAct protocol), MALFORMED_RESPONSE from
+        # gemini-flash-lite-latest showed up in bursts of 3 straight failures on the same
+        # call — a fixed prompt this size on this model needs more headroom than a short
+        # single-turn prompt does, not because the request is malformed but because longer
+        # prompts appear to raise this model's chance of a bad decode.
+        if content_attempt < 3:
+            time.sleep(2.0)
+            return _gemini_call(system, user, model, content_attempt=content_attempt + 1)
+        raise LLMError(f"Gemini returned no usable content on 4 attempts ({exc}).") from exc
+
+
+def gemini_chat(system: str, user: str, model: str = GEMINI_MODEL, attempt: int = 0) -> str:
+    """Gemini via the REST API.
+
+    Shape differs from the OpenAI-style APIs in three ways worth noting:
+    the system prompt is its own ``system_instruction`` object rather than a message with
+    ``role="system"``; user turns wrap text in a ``parts`` list; and sampling settings live
+    under ``generationConfig`` instead of at the top level.
+
+    The key goes in a header, not the query string — a key in a URL ends up in server
+    logs, proxy logs, and browser history.
+    """
+    text, _usage = _gemini_call(system, user, model)
     return text
+
+
+def gemini_chat_with_usage(
+    system: str, user: str, model: str = GEMINI_MODEL, attempt: int = 0
+) -> tuple[str, dict]:
+    """Same call as ``gemini_chat``, plus the token counts Gemini billed for.
+
+    Needed wherever a caller has to enforce a token or cost budget rather than just display
+    an answer — the Week 7 agent loop resends the whole growing transcript every lap, so its
+    token spend cannot be inferred from the final call alone; it has to be summed lap by lap
+    from real usage, not estimated.
+    """
+    return _gemini_call(system, user, model)
 
 
 # ------------------------------------------------------------------------------ dispatch
@@ -408,6 +564,31 @@ def chat(system: str, user: str, provider: str | None = None, model: str | None 
         return gemini_chat(system, user, model or GEMINI_MODEL)
     if name == "ollama":
         return ollama_chat(system, user, model or OLLAMA_MODEL)
+    raise LLMError(
+        f"Unknown LLM_PROVIDER '{name}'. Use one of: {', '.join(PROVIDERS)}."
+    )
+
+
+def chat_with_usage(
+    system: str, user: str, provider: str | None = None, model: str | None = None
+) -> tuple[str, dict]:
+    """Same contract as ``chat``, plus a ``{prompt_tokens, completion_tokens, total_tokens}``
+    dict from the provider's own response — never estimated from character counts.
+
+    Week 7's agent loop needs this because it resends the whole transcript every lap: the
+    final call's token count says almost nothing about what the task actually cost, so the
+    budget enforcement in ``src/agent/react_agent.py`` sums this dict across every lap rather
+    than reading it once at the end.
+    """
+    name = provider or provider_name()
+    if name == "openai":
+        return openai_chat_with_usage(system, user, model or OPENAI_MODEL)
+    if name == "anthropic":
+        return anthropic_chat_with_usage(system, user, model or ANTHROPIC_MODEL)
+    if name == "gemini":
+        return gemini_chat_with_usage(system, user, model or GEMINI_MODEL)
+    if name == "ollama":
+        return ollama_chat_with_usage(system, user, model or OLLAMA_MODEL)
     raise LLMError(
         f"Unknown LLM_PROVIDER '{name}'. Use one of: {', '.join(PROVIDERS)}."
     )
