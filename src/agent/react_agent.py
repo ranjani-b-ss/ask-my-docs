@@ -47,10 +47,16 @@ sentences>"}}
 
 Rules:
 1. Call get_claim first, always, before anything else.
-2. Read the notes. If anything in them could exclude the claim — no valid licence, alcohol \
-or drugs, unlicensed/unauthorised use such as hire or reward, mechanical or electrical \
-breakdown with no external cause, damage limited to tyres alone, or a genuinely ambiguous \
-cause — call search_policy with a query naming that specific fact, before you decide.
+2. Before you reach ANY final decision — PAYABLE, NOT_PAYABLE, or REFERRED — call \
+search_policy AT LEAST ONCE to check the exclusion list ("what is not covered") against \
+this claim's specific facts, even when nothing in the notes looks risky. The only way to \
+know nothing excludes a claim is to check, not to notice that nothing obviously suspicious \
+was mentioned — and REFERRED without ever checking is a guess wearing a caution label, not \
+an honest one. If something in the notes suggests a specific exclusion — no valid licence, \
+alcohol or drugs, unlicensed or unauthorised use such as hire or reward, mechanical or \
+electrical breakdown with no external cause, damage limited to tyres alone, or a genuinely \
+ambiguous cause — name that fact directly in your search query; otherwise search generally \
+for what is not covered.
 3. A clause of the form "X is excluded UNLESS Y" only avoids the exclusion when Y is true \
 of THESE facts. Check Y against the claim before applying any exception inside an \
 exclusion — never grant a partial or reduced payout under an exception whose own condition \
@@ -62,13 +68,21 @@ figure you have not actually retrieved.
 5. If part of the claimed amount is for something the policy does not cover (for example \
 hire-car or replacement-vehicle charges while a covered repair is also being claimed), \
 exclude only that part before computing the payout — the rest can still be payable.
-6. Always call compute_payout to get the payable amount once status, the claim amount to \
+6. Once you have retrieved the exclusion list and the damage described does not match \
+anything in it, that IS the answer: it is not excluded, so proceed to PAYABLE. Do not \
+output REFERRED merely because you have not seen a passage that explicitly says this exact \
+kind of damage is covered — a motor policy states what is excluded, not an exhaustive list \
+of what is included, so the absence of a matching exclusion is a conclusion, not an open \
+question.
+7. Reserve REFERRED for when the passages you retrieved actively conflict about this claim \
+(for example, one clause covers the peril and a different clause could equally exclude the \
+same event), or a fact you would need is simply missing from the claim file — not for an \
+ordinary claim whose exclusion check came back clean.
+8. Always call compute_payout to get the payable amount once status, the claim amount to \
 pay against, and the deductible are all known. Never compute the subtraction yourself — copy \
 compute_payout's returned number into your Final Answer. A Final Answer whose payable_amount \
 does not match compute_payout's own returned value will be rejected.
-7. If the policy passages genuinely do not settle whether the loss is covered or excluded, \
-output status REFERRED with payable_amount null rather than guessing either way.
-8. Output exactly one Thought/Action block or one Thought/Final Answer block per turn. No \
+9. Output exactly one Thought/Action block or one Thought/Final Answer block per turn. No \
 text before "Thought:" and nothing after the JSON.
 """
 

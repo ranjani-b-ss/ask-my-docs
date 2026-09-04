@@ -4,15 +4,20 @@ Four steps, always in this order, always all four:
 
     1. get_claim            — code, no LLM
     2. search_policy         — code, no LLM (the deductible clause, always)
-    3. search_policy         — code, no LLM (an exclusion clause, ONLY if a fixed keyword
-                                map matches something in the notes)
+    3. search_policy         — code, no LLM (an exclusion query, ALWAYS — see below)
     4. one LLM call          — decide status + the amount to pay against, from what steps
                                 1-3 already fetched
     5. compute_payout        — code, no LLM
 
-Step 3's branching is the point of comparison with the agent: the agent decides whether to
-search for an exclusion by *reading and reasoning about* the notes; this workflow decides
-the identical question with a fixed keyword table. Same tools, same model for step 4, same
+Step 3's QUERY is what depends on the notes, chosen by a fixed keyword table rather than by
+reasoning about the notes the way the agent does — but the SEARCH ITSELF is no longer
+conditional on a keyword matching. It used to be: no recognised risk word in the notes meant
+step 3 never ran at all, so Clause 3 ("what is not covered") was never even fetched to
+CONFIRM there was nothing to exclude. That was WEEK7.md's C-008 finding — a windscreen claim
+with no risk keyword in it referred instead of paying, not because anything excluded it, but
+because nothing had ever been fetched to check. The deductible clause was always checked
+unconditionally; the exclusion clause now is too, falling back to a general "what is not
+covered" query when no specific keyword fires. Same tools, same model for step 4, same
 output contract as ``react_agent.run`` — the only thing this file does not contain is a loop.
 """
 
@@ -48,16 +53,24 @@ EXCLUSION_KEYWORDS: dict[str, str] = {
 }
 
 
-def _exclusion_query(notes: str) -> str | None:
-    """First matching canned query, or None if nothing in the notes trips a keyword.
+# The fallback when no keyword matches. Not a keyword-specific guess — a direct request for
+# the exclusion list itself, so a fact pattern nobody anticipated still gets checked against
+# it rather than never being looked at.
+_GENERAL_EXCLUSION_QUERY = "what is not covered, exclusions on an own damage motor claim"
+
+
+def _exclusion_query(notes: str) -> str:
+    """The canned query for this claim's exclusion check — never None any more.
 
     Fixed code, deterministic, no model involved — the workflow's answer to the same
     "does step 3 depend on what step 2 found" dependency the agent handles by reasoning.
+    Which QUERY to send still depends on the notes; WHETHER to send one no longer does — see
+    the module docstring for why that distinction is the fix, not the keyword table itself.
     """
     for pattern, query in EXCLUSION_KEYWORDS.items():
         if re.search(pattern, notes, re.IGNORECASE):
             return query
-    return None
+    return _GENERAL_EXCLUSION_QUERY
 
 
 DECISION_SYSTEM_PROMPT = """\
@@ -87,7 +100,16 @@ reduction you make here is to remove a line item the passages show is not covere
 everything else stays as claimed.
 5. If status is NOT_PAYABLE, claim_amount_for_payout should be the original claim amount \
 (the payout tool will zero it) and exclusion_clause must name the specific clause.
-6. If the passages genuinely do not settle whether the loss is covered, output REFERRED.
+6. The "EXCLUSION CHECK" passages are the policy's list of what is NOT covered. If the \
+damage described in the notes does not match anything in that list, it is NOT excluded — \
+say so and proceed to PAYABLE. Do not output REFERRED merely because you have not seen a \
+passage that explicitly says this exact kind of damage IS covered: a motor policy states \
+what is excluded, not an exhaustive list of what is included, so the absence of a matching \
+exclusion is itself the answer, not an open question.
+7. Reserve REFERRED for when the passages actively conflict about this claim (for example, \
+one covers the peril and a different clause could equally exclude the same event) or when \
+a fact you would need to decide is simply missing from the claim file — not for an ordinary \
+claim that the exclusion list simply does not mention.
 """
 
 
@@ -106,7 +128,7 @@ def _decision_user_prompt(claim: dict, deductible_hits: list[dict],
         f"POLICY PASSAGES — DEDUCTIBLE\n{fmt(deductible_hits)}",
     ]
     if exclusion_hits:
-        parts.append(f"POLICY PASSAGES — POSSIBLE EXCLUSION\n{fmt(exclusion_hits)}")
+        parts.append(f"POLICY PASSAGES — EXCLUSION CHECK\n{fmt(exclusion_hits)}")
     parts.append("Decide the claim now.")
     return "\n\n".join(parts)
 
@@ -169,13 +191,16 @@ def run(claim_id: str, provider: str | None = None, model: str | None = None,
     steps.append({"step": 2, "action": "search_policy",
                   "args": {"query": "compulsory deductible"}, "result": deductible_hits})
 
-    # Step 3 — a fixed lookup table decides whether this runs, not the model.
+    # Step 3 — always. No LLM, no branching: every claim gets its coverage checked against
+    # the exclusion list, whether or not a keyword happened to be in the notes. A fixed
+    # lookup table still decides WHICH query to send (specific if a keyword matched, the
+    # general "what is not covered" query otherwise) — see the module docstring for why
+    # this changed from conditional to unconditional.
     exclusion_query = _exclusion_query(claim["notes"])
-    exclusion_hits = None
-    if exclusion_query:
-        exclusion_hits = tools.search_policy(exclusion_query)
-    steps.append({"step": 3, "action": "search_policy (conditional, keyword-triggered)",
-                  "args": {"query": exclusion_query}, "triggered": exclusion_query is not None,
+    matched_keyword = exclusion_query != _GENERAL_EXCLUSION_QUERY
+    exclusion_hits = tools.search_policy(exclusion_query)
+    steps.append({"step": 3, "action": "search_policy (always runs; query depends on notes)",
+                  "args": {"query": exclusion_query}, "matched_keyword": matched_keyword,
                   "result": exclusion_hits})
 
     # Step 4 — the one LLM call in this whole pipeline. A provider failure here is not

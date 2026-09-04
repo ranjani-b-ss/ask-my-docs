@@ -63,14 +63,17 @@ def grade(result: dict, gold: dict) -> bool:
 # the race measures reasoning ability, not budget tuning; the deliberately tight budget that
 # *is* meant to fire is demonstrated separately in eval/budget_demo.py.
 #
-# max_tokens raised from 10,000 to 16,000 for the same reason: the payout-verification gate
-# added after C-001 (react_agent.py) rejects an unverified Final Answer and forces one more
-# lap — a full transcript resend — before accepting a corrected one. That is the gate doing
-# its job (see WEEK7.md, claim C-007), but the extra lap has a real token cost, and 10,000
-# was measured to be too tight to pay for it on a claim that also needed several
-# search_policy calls first.
-RACE_BUDGETS = Budgets(max_iterations=8, max_tokens=16_000, max_cost_usd=0.02,
-                       max_wall_seconds=150.0)
+# max_tokens raised again (16,000 -> 30,000) and max_iterations (8 -> 12) after the C-008
+# fix made an exclusion-list check mandatory on every claim, not just the ones with a
+# recognisable risk keyword: the system prompt grew ~3940 -> ~5480 chars to state that
+# requirement plus the "absence from the exclusion list means covered" reasoning rule, and
+# that whole prompt is resent every lap. A clean run of the fixed prompt on C-008 (get_claim,
+# exclusion search, deductible search, a correctly-rejected unverified Final Answer,
+# compute_payout, a verified Final Answer) already used 16,216 tokens across 6 laps; a
+# messier run hitting a few malformed/provider-error laps first used more before reaching
+# real work. See WEEK7.md for the before/after and why the extra mandatory lap is worth it.
+RACE_BUDGETS = Budgets(max_iterations=12, max_tokens=30_000, max_cost_usd=0.03,
+                       max_wall_seconds=200.0)
 
 
 def run_heat(system: str, claim_ids: list[str], sleep: float) -> list[dict]:

@@ -8,9 +8,17 @@
 This is a separate, deliberately artificial run — not part of the race, and not meant to
 reflect how the agent is actually configured for real use (see RACE_BUDGETS in race.py for
 that). Its only job is to prove the four numbers in src/agent/budgets.py are checked in code,
-not just declared: C-010 genuinely needs at least four laps (get_claim, two search_policy
-calls for the flood-vs-mechanical-breakdown ambiguity, then a Final Answer), so a budget of
-max_iterations=2 is guaranteed to fire before the agent would otherwise finish on its own.
+not just declared.
+
+max_iterations=1 rather than a looser number, deliberately: an earlier version of this file
+used max_iterations=2 on the assumption that C-010 always needs get_claim, at least one
+search_policy call, and a Final Answer — normally true, and normally at least 4 laps once
+the mandatory exclusion check (see WEEK7.md §5.1) is counted. But the system prompt is a
+rule the model follows most of the time, not a guarantee: one run skipped the mandatory
+search entirely and answered (wrongly) in 2 laps, which would have made max_iterations=2 an
+unreliable trigger. max_iterations=1 fires after the very first lap regardless of how many
+laps the model tries to shortcut to — the only way to answer in fewer than 1 lap is not to
+call the model at all, which is not something the agent can do.
 """
 
 from __future__ import annotations
@@ -27,7 +35,7 @@ from src.agent import react_agent, tools
 from src.agent.budgets import Budgets
 
 TIGHT_BUDGETS = {
-    "max_iterations": Budgets(max_iterations=2, max_tokens=100_000, max_cost_usd=10.0,
+    "max_iterations": Budgets(max_iterations=1, max_tokens=100_000, max_cost_usd=10.0,
                               max_wall_seconds=600.0),
     "max_tokens": Budgets(max_iterations=100, max_tokens=1500, max_cost_usd=10.0,
                           max_wall_seconds=600.0),
