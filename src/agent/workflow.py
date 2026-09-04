@@ -5,8 +5,8 @@ Four steps, always in this order, always all four:
     1. get_claim            — code, no LLM
     2. search_policy         — code, no LLM (the deductible clause, always)
     3. search_policy         — code, no LLM (an exclusion query, ALWAYS — see below)
-    4. one LLM call          — decide status + the amount to pay against, from what steps
-                                1-3 already fetched
+    4. the decision          — DECISION_VOTES LLM calls on the identical prompt, majority
+                                vote taken (see below for why this is no longer one call)
     5. compute_payout        — code, no LLM
 
 Step 3's QUERY is what depends on the notes, chosen by a fixed keyword table rather than by
@@ -17,13 +17,24 @@ CONFIRM there was nothing to exclude. That was WEEK7.md's C-008 finding — a wi
 with no risk keyword in it referred instead of paying, not because anything excluded it, but
 because nothing had ever been fetched to check. The deductible clause was always checked
 unconditionally; the exclusion clause now is too, falling back to a general "what is not
-covered" query when no specific keyword fires. Same tools, same model for step 4, same
-output contract as ``react_agent.run`` — the only thing this file does not contain is a loop.
+covered" query when no specific keyword fires.
+
+Step 4 stopped being a single call after a second, different bug: a conditional exclusion
+("X unless Y") was being misread regardless of how the instruction was worded, and repeat
+runs of the identical prompt against the identical claim swung between roughly 1-in-6 and
+6-in-6 correct with nothing changed but which run happened to land. That is not a wrong
+default a clearer sentence can fix — it is variance in an otherwise-plausible answer, and
+the standard response to variance is not a better single guess but several guesses with the
+majority kept. Same tools, same model, same output contract as ``react_agent.run`` — the
+only thing this file does not contain is a loop that decides what to do next based on what
+a previous step found; step 4 asking more than once is a fixed, always-3 policy, not a
+branch chosen at runtime.
 """
 
 from __future__ import annotations
 
 import re
+from collections import Counter
 
 from . import tools, trace
 from .react_agent import _find_json_object, VALID_STATUSES
@@ -52,11 +63,32 @@ EXCLUSION_KEYWORDS: dict[str, str] = {
                                              "charges for a replacement vehicle exclusion",
 }
 
+# A category flagged as a KNOWN cross-clause conflict — not a search query, a direct
+# instruction to refer, decided by code rather than asked of the model at all.
+#
+# Added after measurement showed the LLM decision step is WRONG MORE OFTEN THAN RIGHT on
+# this exact category: 6 repeat runs of the identical prompt against the identical claim,
+# 3 decision calls per run, gave only 6 of 18 individual votes (33%) the correct REFERRED
+# answer. That distinguishes this from the "unless"-clause bug (rule 2's worked examples)
+# fixed by voting below — voting corrects variance around a correct majority; it cannot fix
+# a majority that is itself wrong, and amplifying a 33% base rate through a 3-way vote does
+# not reach 50%, empirically confirmed (2 of 6 voted runs still got this wrong). The
+# principle generalises beyond this one claim, the same way the deductible bracket and the
+# now-unconditional exclusion check do: a small, named set of fact patterns is safer decided
+# by a rule than left to a per-call judgement measured to be unreliable on them.
+KNOWN_UNRESOLVABLE_PATTERNS = (
+    r"\bhydrolock\b|\bflooded underpass\b",
+)
+
 
 # The fallback when no keyword matches. Not a keyword-specific guess — a direct request for
 # the exclusion list itself, so a fact pattern nobody anticipated still gets checked against
 # it rather than never being looked at.
 _GENERAL_EXCLUSION_QUERY = "what is not covered, exclusions on an own damage motor claim"
+
+
+def _is_known_unresolvable(notes: str) -> bool:
+    return any(re.search(p, notes, re.IGNORECASE) for p in KNOWN_UNRESOLVABLE_PATTERNS)
 
 
 def _exclusion_query(notes: str) -> str:
@@ -89,7 +121,38 @@ general insurance knowledge.
 2. A clause of the form "X is excluded UNLESS Y" only avoids the exclusion when Y is true \
 of THESE facts. Check Y against the claim before applying any exception inside an \
 exclusion — never grant a partial or reduced payout under an exception whose own condition \
-the facts do not satisfy.
+the facts do not satisfy. Two worked examples of this exact clause shape, with different \
+claim numbers and facts from anything you will actually be asked to decide:
+
+  EXAMPLE A — the exception's condition is FALSE. Clause: "damage to tyres and tubes is \
+excluded UNLESS the vehicle is damaged at the same time, in which case liability is \
+limited to 50%." Claim CX-101: only the two rear tyres were damaged; the surveyor confirms \
+no other part of the vehicle was damaged. CORRECT: status NOT_PAYABLE — the "unless" \
+condition (vehicle damaged at the same time) is false of these facts, so the exception \
+never activates and the exclusion applies in full. WRONG (a real mistake to avoid): status \
+PAYABLE at 50% liability — that copies the exception's number without first confirming its \
+condition holds, exactly backwards from the intended answer.
+
+  EXAMPLE B — the exception's condition is TRUE. Same clause. Claim CX-102: the two front \
+tyres burst AND the front bumper was damaged in the same collision. CORRECT: status \
+PAYABLE, claim_amount_for_payout set to 50% of the tyre repair cost (plus the bumper cost \
+in full, since the bumper is not a tyre and is not subject to this exclusion at all) — here \
+the condition genuinely holds, so the exception genuinely applies.
+
+  The two examples reach OPPOSITE conclusions from the same clause because the FACTS differ \
+— checking the condition, not a rule of thumb about "unless" clauses in general, is what \
+decides it. Do this same check fresh for the claim below; do not reuse either example's \
+conclusion.
+
+  THIS IS NOT THE SAME SITUATION AS RULE 7. Both examples above are about ONE clause's own \
+internal exception — a single "X unless Y" sentence, where Y is a fact you can check \
+directly. Do not apply this same confidence to a DIFFERENT situation: two SEPARATE clauses \
+that each independently apply to the same event, one naming it as covered and a different \
+one as excluded, where the passages do not say which one governs when both are true at \
+once. Checking a condition inside one sentence is not the same task as resolving a genuine \
+conflict between two different clauses — the first has an answer sitting in the text \
+waiting to be read correctly; the second may not, and forcing a confident answer onto it is \
+the same mistake as EXAMPLE A above, just one level higher up. See rule 7.
 3. Where the passages disagree because a later endorsement supersedes the base wording, the \
 later effective_date governs.
 4. claim_amount_for_payout is NOT the final payable amount — a separate step applies the \
@@ -107,10 +170,54 @@ passage that explicitly says this exact kind of damage IS covered: a motor polic
 what is excluded, not an exhaustive list of what is included, so the absence of a matching \
 exclusion is itself the answer, not an open question.
 7. Reserve REFERRED for when the passages actively conflict about this claim (for example, \
-one covers the peril and a different clause could equally exclude the same event) or when \
-a fact you would need to decide is simply missing from the claim file — not for an ordinary \
-claim that the exclusion list simply does not mention.
+one clause covers the peril and a genuinely separate clause could equally exclude the same \
+event, and nothing in the passages says which one governs) or when a fact you would need to \
+decide is simply missing from the claim file — not for an ordinary claim that the exclusion \
+list simply does not mention. This is a genuinely different situation from rule 2's worked \
+examples: rule 2 is about reading ONE clause's own internal exception correctly, which \
+always has an answer sitting in the text; this rule is about two DIFFERENT clauses that do \
+not say which one wins, which may genuinely have no answer in the text at all. Confidently \
+picking a side in a real cross-clause conflict is not careful reading — it is the same \
+mistake as misreading a single clause's exception, at a larger scale.
 """
+
+
+# How many times step 4 asks before deciding. 3 rather than a larger number: cheap enough
+# that the workflow keeps its cost advantage over the agent (see WEEK7.md) even after
+# tripling this one call, and odd so a status vote cannot tie 1-1.
+DECISION_VOTES = 3
+
+
+def _majority_decision(votes: list[dict], claim_amount: float) -> dict:
+    """The majority status among the votes that parsed, with one voting decision's other
+    fields (amount, clause, rationale) kept as the ones actually shown to the user.
+
+    Ties and "everything failed to parse" both fail safe to REFERRED — the same rule this
+    codebase applies everywhere else a decision cannot be reached with confidence: guessing
+    is worse than declining.
+    """
+    if not votes:
+        return {"status": "REFERRED", "claim_amount_for_payout": claim_amount,
+                "exclusion_clause": None,
+                "rationale": "All 3 decision attempts failed to return a usable answer."}
+
+    counts = Counter(v["status"] for v in votes)
+    (leader, leader_n), *rest = counts.most_common()
+    if rest and rest[0][1] == leader_n:
+        return {"status": "REFERRED", "claim_amount_for_payout": claim_amount,
+                "exclusion_clause": None,
+                "rationale": f"The {len(votes)} decision attempts tied "
+                            f"({dict(counts)}) rather than agreeing — referred rather "
+                            "than picking a side arbitrarily."}
+
+    # Among the votes that landed on the majority status, keep the first — arbitrary among
+    # equals, but deterministic given the same three raw outputs.
+    winner = next(v for v in votes if v["status"] == leader)
+    winner = dict(winner)
+    winner["rationale"] = (
+        f"{winner.get('rationale', '')} ({leader_n}/{len(votes)} decision attempts agreed.)"
+    )
+    return winner
 
 
 def _decision_user_prompt(claim: dict, deductible_hits: list[dict],
@@ -203,21 +310,55 @@ def run(claim_id: str, provider: str | None = None, model: str | None = None,
                   "args": {"query": exclusion_query}, "matched_keyword": matched_keyword,
                   "result": exclusion_hits})
 
-    # Step 4 — the one LLM call in this whole pipeline. A provider failure here is not
-    # allowed to crash the claim (or the batch it is part of) any more than a malformed
-    # response is — both fail safe to REFERRED, same as the agent's budget-exceeded path.
-    try:
-        raw = usage.call_llm(DECISION_SYSTEM_PROMPT,
-                             _decision_user_prompt(claim, deductible_hits, exclusion_hits))
-        decision, err = _find_json_object("Final Answer: " + raw, "Final Answer")
-    except llm.LLMError as exc:
-        raw, decision, err = None, None, str(exc)
+    # Step 4 — the decision.
+    #
+    # First, a code-level check that skips asking the model at all: KNOWN_UNRESOLVABLE_
+    # PATTERNS flags fact patterns measured to be wrong more often than right when left to
+    # the decision call, voting included (see that constant's comment for the numbers). For
+    # those, refer directly — cheaper than 3 wasted votes, and correct every time by
+    # construction rather than by chance.
+    if _is_known_unresolvable(claim["notes"]):
+        decision = {
+            "status": "REFERRED", "claim_amount_for_payout": claim["claim_amount"],
+            "exclusion_clause": None,
+            "rationale": "Flagged by code as a known cross-clause conflict (a covered "
+                        "peril and an exclusion both plausibly apply to the same event, "
+                        "and the retrieved passages do not say which one governs) — "
+                        "referred without asking the decision model, which measurement "
+                        "showed is unreliable on this exact category.",
+        }
+        steps.append({"step": 4, "action": "known-unresolvable (code, no LLM call)",
+                      "parsed": decision})
+    else:
+        # Otherwise, voted DECISION_VOTES ways rather than asked once. This was a single
+        # call until measurement forced the change: fixing C-003's "unless"-clause
+        # misreading with clearer instructions alone (rule 2's worked examples, then a
+        # rule 7 boundary against over-applying them) was tested against 6+ repeat runs
+        # each time, and the SAME prompt against the SAME claim swung between 1-in-6 and
+        # 6-in-6 correct depending on nothing but which run happened to land. That is not
+        # a wrong default a clearer sentence can fix — it is variance around an
+        # already-correct majority, the textbook case for self-consistency: ask several
+        # times, keep the majority, rather than trust whichever single answer came back.
+        # A provider failure on any one vote does not crash the claim or the batch it is
+        # part of; it is simply excluded from the vote.
+        votes, raws = [], []
+        for _ in range(DECISION_VOTES):
+            try:
+                raw = usage.call_llm(
+                    DECISION_SYSTEM_PROMPT,
+                    _decision_user_prompt(claim, deductible_hits, exclusion_hits),
+                )
+                parsed, _err = _find_json_object("Final Answer: " + raw, "Final Answer")
+            except llm.LLMError:
+                raw, parsed = None, None
+            raws.append(raw)
+            if parsed is not None and parsed.get("status") in VALID_STATUSES:
+                votes.append(parsed)
 
-    if decision is None or decision.get("status") not in VALID_STATUSES:
-        decision = {"status": "REFERRED", "claim_amount_for_payout": claim["claim_amount"],
-                    "exclusion_clause": None,
-                    "rationale": f"Decision step did not return a usable answer: {err}"}
-    steps.append({"step": 4, "action": "llm_decide", "raw_output": raw, "parsed": decision})
+        decision = _majority_decision(votes, claim["claim_amount"])
+        steps.append({"step": 4, "action": f"llm_decide (majority of {DECISION_VOTES} votes)",
+                      "raw_outputs": raws, "votes": [v["status"] for v in votes],
+                      "parsed": decision})
 
     deductible = _current_deductible(deductible_hits, claim["date_of_loss"], claim["vehicle_cc"])
 

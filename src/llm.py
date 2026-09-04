@@ -338,16 +338,34 @@ def _gemini_request(system: str, user: str, model: str, attempt: int) -> dict:
     if not key:
         raise LLMError("GEMINI_API_KEY is not set.")
 
-    response = requests.post(
-        f"{GEMINI_BASE_URL}/models/{model}:generateContent",
-        headers={"x-goog-api-key": key, "Content-Type": "application/json"},
-        json={
-            "system_instruction": {"parts": [{"text": system}]},
-            "contents": [{"role": "user", "parts": [{"text": user}]}],
-            "generationConfig": {"temperature": 0.0},
-        },
-        timeout=GEMINI_TIMEOUT,
-    )
+    try:
+        response = requests.post(
+            f"{GEMINI_BASE_URL}/models/{model}:generateContent",
+            headers={"x-goog-api-key": key, "Content-Type": "application/json"},
+            json={
+                "system_instruction": {"parts": [{"text": system}]},
+                "contents": [{"role": "user", "parts": [{"text": user}]}],
+                "generationConfig": {"temperature": 0.0},
+            },
+            timeout=GEMINI_TIMEOUT,
+        )
+    except requests.exceptions.RequestException as exc:
+        # Everything above (400/403/404/429/5xx) is a response Gemini sent back — this
+        # branch is for the request never getting a response at all: a dropped SSL
+        # handshake, a DNS failure, a timeout with no bytes read. `requests.post` raises
+        # these BEFORE a `response` object exists, so they were falling straight through
+        # this function uncaught until a genuine one turned up mid-development (an
+        # `SSLEOFError` unrelated to anything in the request). Retried on the same ladder as
+        # a transient 5xx, because from the caller's side "the connection died" and "the
+        # server returned 503" are the same kind of problem: not the request's fault, worth
+        # one more try.
+        if attempt < len(_BACKOFF):
+            time.sleep(_BACKOFF[attempt])
+            return _gemini_request(system, user, model, attempt=attempt + 1)
+        raise LLMError(
+            f"Gemini connection failed on {len(_BACKOFF) + 1} attempts: {exc}"
+        ) from exc
+
     if response.status_code in (400, 403):
         raise LLMError(
             f"Gemini rejected the request ({response.status_code}). Check GEMINI_API_KEY "

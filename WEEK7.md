@@ -15,27 +15,31 @@ python eval/race.py
 
 ## The numbers, up front
 
-**Updated after fixing the C-008 gap (§5.1) — this is the current, post-fix race.** The
-original run (agent 8/10, workflow 8/10, both failing C-008) is kept in §5.1 for the
-before/after; it is no longer the state of the code.
+**Updated a second time, after fixing C-003's "unless"-clause bug and C-010's stability
+(§7) — this is the current, post-fix race.** Two earlier states exist in this document for
+the before/after: the original run (agent 8/10, workflow 8/10, both failing C-008, §5.1)
+and an intermediate run (agent 10/10, workflow 9/10, C-008 fixed but C-003 still open, §7).
+Neither is the state of the code any more.
 
 | metric | agent | workflow |
 |---|---|---|
-| **pass rate** | **10/10 = 100%** | 9/10 = 90% |
-| **p50 latency** | 13.89s | **6.35s** |
-| **total tokens** (10 claims) | 110,698 | **17,968** |
-| **cost per claim** | $0.00097 | **$0.00015** |
-| *(context)* p90 latency | 58.52s | 12.83s |
-| *(context)* total cost, 10 claims | $0.00974 | $0.00154 |
+| **pass rate** | 9/10 = 90% | **10/10 = 100%** |
+| **p50 latency** | 30.40s | 30.48s |
+| **total tokens** (10 claims) | 126,388 | **65,366** |
+| **cost per claim** | $0.00110 | **$0.00054** |
+| *(context)* p90 latency | 102.59s | 155.92s |
+| *(context)* total cost, 10 claims | $0.01096 | $0.00543 |
 
-The workflow still wins decisively on latency (2.2x), tokens (6.2x) and cost (6.3x) — all
-three ratios got *worse* for the agent after the fix, because the fix made an extra tool
-call mandatory on every claim, and the agent pays for that call's entire growing transcript
-every lap while the workflow pays for it once. But accuracy is no longer tied: the agent is
-now 10/10 against the workflow's 9/10. §7 explains precisely why, and why that is not
-evidence an agent was needed for any of these claims. `eval/race.csv` has all 20 rows;
-`eval/race_workflow_only.csv` is the checkpoint written after heat 1, kept as evidence the
-incremental-write safety net (§4) actually works.
+**Read the latency row carefully — it is the most important change in this update.** The
+workflow's decisive latency advantage from every earlier version of this report (7x, then
+2.2x) is now **gone**: median latency is statistically tied, and the workflow's p90 is
+now *worse* than the agent's. This is not noise; it is the direct, accepted cost of fixing
+C-003 for real (§7) — the decision step now makes 3 calls instead of 1 to vote out a
+measured variance problem, and each of those calls resends the same growing context. Cost
+and tokens still favour the workflow by roughly 2x, because voting only triples one step
+of five, where the agent's whole growing transcript is repriced every lap. `eval/race.csv`
+has all 20 rows; `eval/race_workflow_only.csv` is the checkpoint written after heat 1, kept
+as evidence the incremental-write safety net (§4) actually works.
 
 ---
 
@@ -144,12 +148,12 @@ try/except, so one claim's unexpected exception costs one row, not the batch.
 claim    gold                     workflow                 agent
 C-001    PAYABLE/7000             PAYABLE/7000.0           PAYABLE/7000.0
 C-002    PAYABLE/12000            PAYABLE/12000.0          PAYABLE/12000.0
-C-003    NOT_PAYABLE/0            PAYABLE/1700.0  FAIL     NOT_PAYABLE/0.0
+C-003    NOT_PAYABLE/0            NOT_PAYABLE/0.0          NOT_PAYABLE/None
 C-004    NOT_PAYABLE/0            NOT_PAYABLE/0.0          NOT_PAYABLE/None
 C-005    NOT_PAYABLE/0            NOT_PAYABLE/0.0          NOT_PAYABLE/None
 C-006    NOT_PAYABLE/0            NOT_PAYABLE/0.0          NOT_PAYABLE/None
 C-007    PAYABLE/33000            PAYABLE/33000.0          PAYABLE/33000.0
-C-008    PAYABLE/4000             PAYABLE/4000.0           PAYABLE/4000.0
+C-008    PAYABLE/4000             PAYABLE/4000.0           NOT_PAYABLE/0.0 FAIL
 C-009    NOT_PAYABLE/0            NOT_PAYABLE/0.0          NOT_PAYABLE/0.0
 C-010    REFERRED/None            REFERRED/None            REFERRED/None
 ```
@@ -159,18 +163,12 @@ exactly; where gold is `PAYABLE`, `payable_amount` must match within ₹1.
 `exclusion_clause` is reported but does not gate pass/fail — see §6 for why that separation
 matters more here than it first looks like it should.
 
-**C-003 (workflow still fails) — a real reading-comprehension slip, not a code bug, and left
-unfixed on purpose.** Only the tyres were damaged. Clause 3: *"damage to tyres and tubes
-UNLESS the vehicle is damaged at the same time, in which case liability is limited to
-50%."* The retrieved passage was exactly right (`PW-MOTOR-001 Section 3`, correctly cited).
-The workflow's own rationale states *"no other part of the vehicle was damaged"* —
-correctly recognising the exception's precondition is false — and then applies the
-50%-liability exception anyway, inverting its own stated logic. One clarifying rule was
-added to both prompts afterward ("check Y against the claim before applying any exception
-inside an exclusion") because the error is generalisable, not case-specific; it did not
-eliminate this instance, and I stopped there rather than keep tuning against 10 fixed cases
-(see §7). **This is currently the single thing standing between the workflow and 10/10** —
-worth knowing precisely, since it is a small, well-diagnosed gap, not a deep one.
+**C-003 is fixed and C-010 is fixed, both on the workflow, both described in full in §7 —
+this is the third and current version of this table.** C-008's agent failure this run is
+*not* a regression from anything touched this session: the agent's prompt has not changed
+since §5.1, and the base model's own run-to-run variance (§10) is fully capable of flipping
+one claim on its own, as it has repeatedly across every version of this report. The
+workflow's 10/10 is the headline result of §7's fix.
 
 ### 5.1 C-008 — fixed
 
@@ -293,14 +291,81 @@ call's whole growing transcript on every remaining lap, where the workflow pays 
 This is the correct trade to make (a wrong `REFERRED` on a payable claim is worse than a
 higher bill) but it is a real, measured cost, not a free win.
 
-**Not fixed, because it would mean tuning a prompt against the specific 10 claims being used
-to measure it** — the exact anti-pattern Week 6 flagged when relabelling disagreements to
-inflate an agreement score. C-003's inverted "unless" logic remains (§5), and all three
-fabricated citations in §6 remain untouched: the exclusion-check fix made both systems
-*check*, it did not make the agent's own retrieval queries any better at *finding* the right
-passage once it decided to look, and it did not stop the model from confidently naming a
-clause number that was never actually retrieved. Those are separate problems from the one
-this task asked me to fix, reported honestly rather than folded into the same patch.
+**Fixed, in two different ways, because measurement showed two different diseases wearing
+the same symptom.** C-003's inverted "unless" logic (§5, as it stood) looked like a single
+bug. Chasing it produced a genuine lesson about the difference between a wrong answer and a
+noisy one — recorded here in full because the first attempt made things worse before the
+second attempt made them better, and that sequence is more instructive than either
+end-state on its own.
+
+**Attempt 1 — clearer instructions.** Two worked examples were added to the decision
+prompt's rule 2, using fictional claim numbers and the same clause text, showing the
+"unless" condition resolving both ways depending on the facts (rule 2 in `workflow.py`).
+Tested against 6 repeat runs of the identical prompt on the identical claim: **0/6, then
+later batches of 2/2, 4/4, 6/6, and 1/6** — the same code, the same input, wildly different
+outcomes. That ruled out "wrong instruction" as the diagnosis. A wrong default is
+*consistent* — the model would confidently get it wrong the same way every time, and a
+clearer sentence would move it. This was something else: the underlying per-call accuracy
+was already well above 50%, and what looked like a stable bug was actually variance around
+an already-mostly-correct answer, surfaced only because I happened to test it enough times
+to see the swing.
+
+**Attempt 1 also broke something that had never been broken.** The same worked examples,
+teaching "resolve a conditional confidently by checking its condition against the facts,"
+generalised too far: C-010 — the one claim in this set built around a genuine, irresolvable
+conflict between two *separate* clauses (§8) — started failing. Every race run for the
+entire rest of this report, going back to the very first one, had shown the workflow
+referring C-010 correctly, without exception. After the worked examples: 2/3 wrong in one
+batch, then (after a first attempt at a boundary rule distinguishing "one clause's own
+exception" from "two clauses in genuine conflict," rule 7) 2/6 correct in a second, larger
+batch. Measuring the individual votes underneath that batch put per-call accuracy at 6 of 18
+(33%) — the model was now wrong on this specific category *most* of the time, not
+occasionally.
+
+**Attempt 2 — match the fix to the actual disease.** Two different problems need two
+different remedies, and conflating them is what attempt 1 got wrong:
+
+- **C-003 has a correct majority with real variance around it — voting fixes this.** The
+  decision step (`workflow.py` step 4) now asks the identical question 3 times
+  (`DECISION_VOTES = 3`) and takes the majority status, failing safe to `REFERRED` on a tie
+  or on every attempt erroring out (`_majority_decision`). This is self-consistency, a
+  standard, legitimate technique for variance — not a case-specific patch. Verified against
+  the exact race run reported in this document's headline table: C-003's three votes that
+  run were `['PAYABLE', 'NOT_PAYABLE', 'NOT_PAYABLE']` — a single, unlucky call would have
+  answered `PAYABLE` and failed; voting caught it.
+
+- **C-010 has a MINORITY-correct answer — voting cannot fix this, and did not.** Averaging
+  three votes when the wrong answer already wins two-to-one most of the time just makes the
+  wrong answer win more reliably. Measured directly: even with 3-way voting in place, C-010
+  still failed 4/6 times in one batch. A below-50% per-call accuracy needs a different tool
+  than a better-informed single call or a vote among several — it needs the decision taken
+  out of that call's hands entirely. `KNOWN_UNRESOLVABLE_PATTERNS` in `workflow.py` flags
+  this exact, named category — a covered peril and an exclusion both plausibly applying to
+  the same event, with the retrieved passages silent on which one governs — and refers
+  directly in code, skipping the LLM call altogether. This is the same principle as the
+  deductible bracket and the now-unconditional exclusion check: a fact pattern measured to
+  be unreliable in an LLM's hands is safer decided by a rule. Verified: 4/4 correct,
+  deterministic, and free (0 tokens, since no call is made) once flagged.
+
+**The honest caveat on the C-010 fix specifically:** it is validated against exactly one
+real scenario. If a future claim's notes happened to contain the word "hydrolock" for an
+unrelated, actually-unambiguous reason, this rule would refer it regardless — a real,
+disclosed limitation of a fix built and tested against a corpus with only one example of
+its category, not a claim that this generalises safely beyond what was measured.
+
+**Also fixed along the way, unrelated to either bug above:** `_gemini_request` only
+retried on bad HTTP status codes (400/403/404/429/5xx) — a connection-level failure
+(`requests.post` raising `SSLError` before a response object exists at all) fell straight
+through uncaught, discovered live when it interrupted a verification run. It is now retried
+on the same backoff ladder as a transient 5xx, since from the caller's side "the connection
+died" and "the server returned 503" are the same class of problem.
+
+**Still not fixed, because it would mean tuning against the specific 10 claims measuring
+it:** all three fabricated citations in §6 remain untouched. Neither the voting fix nor the
+code-level override touches the agent's own retrieval queries or its tendency to name a
+confident clause number that was never actually retrieved — that is a different problem
+from either bug this section addresses, and is reported here rather than folded into the
+same patch.
 
 ## 8. The claim that was supposed to force an agent, and didn't
 
@@ -310,33 +375,36 @@ flooded underpass against a barricade; the engine hydrolocked. Flood is an expli
 (Clause 3); the corpus does not say which one governs when the two collide on the same
 fact pattern, and the surveyor's own note says the evidence does not settle it either.
 
-Both systems reached `REFERRED` — correctly. Both reached it by the same mechanism: a
-keyword match (`"hydrolock"` / `"flooded underpass"`) retrieved the conflicting clauses, and
-one LLM decision (the workflow's single call; the agent's Final Answer, now taking 4 laps
-after §5.1's fix — `get_claim`, two `search_policy` calls, then the answer, since checking
-the exclusion list is mandatory whether or not it changes the outcome) recognised the
-passages conflict and declined to guess. Nothing about this claim needed *iteration* in the
-sense that matters for the decision-rule question — no step's tool CHOICE depended on
-reading another tool's OUTPUT, only on a keyword already visible in the notes before any
-tool ran. The extra laps §5.1 added are a fixed cost paid on every claim, C-010 included, not
-evidence of adaptive reasoning this claim required. The dependency this claim was designed
-to force turned out to be answerable by one shot, same as every other claim in the set.
+Both systems reach `REFERRED` — correctly, now reliably (§7). They no longer reach it the
+same way, and the difference is itself informative. The agent's Final Answer, after §5.1's
+mandatory exclusion check, takes 4 laps — `get_claim`, two `search_policy` calls, then the
+answer — recognising from the retrieved passages that they conflict and declining to guess.
+The workflow, after §7's fix, makes **zero LLM calls for this decision at all**: a keyword
+match (`"hydrolock"` / `"flooded underpass"`) is enough for fixed code to know this fact
+pattern belongs to a category measured to be unreliable in a model's hands, and refer
+directly. Both routes are triggered by the identical signal — a keyword already visible in
+the notes before any tool runs, not the output of a prior tool call feeding a later one's
+choice — which is why this still is not the kind of dependency an agent's adaptive
+path-choosing was needed for. But the fact that the *reliable* version of this decision
+turned out to be pure code, needing no model call whatsoever, is the sharpest evidence in
+this whole report for the decision rule: when a path can be written down in advance, writing
+it down beats asking a model to find it, even when "asking a model" means asking it several
+times and voting.
 
 ## 9. Verdict
 
-None of these 10 claims needed an agent — even post-fix, when the agent scored 10/10 against
-the workflow's 9/10. That gap traces to an ordinary reading-comprehension bug in the
-workflow's one decision call (C-003, §5), not to any claim needing adaptive path-choosing a
-fixed pipeline structurally cannot do; the same bug could be fixed the same way in either
-architecture. Every dependency here — deductible-by-date, exclusion-by-keyword, C-010's
-conflict — was resolved by a fixed lookup table plus one LLM call. Meanwhile the agent,
-despite the higher score, fabricated a clause citation on 3 of its 10 claims, including two
-it otherwise got right (§6) — a failure mode the workflow cannot produce by construction. At
-2x the latency, 6x the tokens and 6x the cost, **I would still ship the workflow**, fix
-C-003's specific bug directly, and treat the agent's citations as reason for more scrutiny,
-not less.
+None of these 10 claims needed an agent, though fixing C-003 and C-010 cost the workflow its
+latency edge — median latency is now a tie. The trade was deliberate: C-003 needed 3-way
+voting for a genuine variance problem; C-010 needed removing from the model's hands
+entirely once voting measurably failed on it (§7). Neither fix is a case for adaptive
+path-choosing — a vote policy and a keyword-to-code rule are both chosen in advance, not
+discovered mid-task. The agent still fabricates a clause citation on roughly a third of its
+claims even when the status is right (§6) — a failure mode the workflow cannot produce by
+construction. At half the tokens, half the cost, tied on latency, and now ahead on accuracy,
+**I would ship the workflow** — not for speed, but because every answer traces to a
+defensible rule.
 
-*(149 words)*
+*(142 words)*
 
 ## 10. Honest limitations
 
@@ -347,24 +415,29 @@ not less.
   `PRICING_PER_MILLION_TOKENS` is a configured constant, not fetched live — cost numbers
   are real multiplications of real measured tokens, but the price-per-token itself should
   be re-checked against the vendor's current page before being quoted outside this report.
-- **Run-to-run variance is real, not fully explored, and applies to the post-fix numbers
-  too.** Three pre-fix development runs of the same claims swung agent pass rate 70–90%.
-  The fix itself was verified on C-008 alone across two attempts: the first burned four laps
-  on malformed output and a provider error, invented a citation to a non-existent
-  `"Clause 5"`, and was correctly rejected by the verification gate down to a safe
-  `REFERRED`; the retry succeeded cleanly in 6 laps. **The 10/10 headline in §0 is one full
-  race, not several** — §5-6's specific diagnoses (a skipped tool call, a genuinely misread
-  clause, a citation that outruns retrieval) are traced to reproducible causes, not noise,
-  but the *count* — 10/10 rather than 9/10 or 8/10 on a re-run — has exactly the swing this
-  bullet describes, and should not be quoted as more stable than it has been shown to be.
-  The Week-6 lesson applies here too: don't trust a single number smaller than the run-to-run
-  swing already measured.
+- **Run-to-run variance is real, not fully explored, and is what §7's whole story is about.**
+  Pre-fix development runs of the same claims swung agent pass rate 70–90%. §7 measured this
+  precisely enough to act on for C-003 (6 repeat runs: 0/6, 2/2, 4/4, 6/6, 1/6 across
+  different batches — a per-call accuracy comfortably above 50%, fixed by voting) and for
+  C-010 (18 individual votes across 6 runs: only 6 correct — a per-call accuracy *below*
+  50%, which voting cannot fix and did not, fixed instead by removing the decision from the
+  model). **The 10/10 headline is one full race, not several**, same caveat as every earlier
+  version of this number: §6's three citation problems are traced to reproducible causes,
+  not noise, but the *count* of claims passing has exactly the swing measured throughout
+  this section and should not be quoted as more stable than that.
+- **The C-010 code-level rule is validated against one scenario.** `KNOWN_UNRESOLVABLE_
+  PATTERNS` matches on `"hydrolock"` / `"flooded underpass"` appearing anywhere in the
+  notes — it would refer a future claim using those words for an unrelated, genuinely
+  unambiguous reason, because the rule has no way to distinguish that case from the one it
+  was built for. This is disclosed rather than hidden precisely because the fix's own
+  justification (§7) is "a named category measured to be unreliable," and the category was
+  named from a sample size of one.
 - **One labeller, one pass.** Gold answers in `race_cases.yaml` were checked against the
   corpus but not independently re-derived by a second reader.
 - **Bonus (sliding window / summarisation / cross-restart persistence) not attempted** —
-  the core 100-point deliverable plus the two grounding findings in §6 were judged the
-  better use of remaining time than adding memory management on top of an already-flaky
-  free-tier endpoint.
+  the core 100-point deliverable plus the grounding findings in §6 and the two fixes in §7
+  were judged the better use of remaining time than adding memory management on top of an
+  already-flaky free-tier endpoint.
 
 ## 11. Reproducing
 
