@@ -1,0 +1,5 @@
+[tool.pytest.ini_options]
+# Lets every test import "src.xxx" / "eval.xxx" the same way the app itself does, regardless
+# of which directory pytest is invoked from — no conftest.py sys.path hacking needed.
+pythonpath = ["."]
+testpaths = ["tests"]

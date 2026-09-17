@@ -9,3 +9,4 @@ pyyaml>=6.0                # eval question set + front-matter parsing
 requests>=2.32             # talks to the local Ollama HTTP API
 anthropic>=0.40        # only needed for LLM_PROVIDER=anthropic
 python-dotenv>=1.0     # loads .env so keys never live in the code
+pytest>=8.0             # tests/ — deterministic logic only, no LLM calls, no network

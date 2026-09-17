@@ -8,6 +8,7 @@
 __pycache__/
 *.pyc
 *.pyo
+.pytest_cache/
 
 # Built vector index — rebuildable from corpora/ with `python cli.py ingest`
 .chroma/
