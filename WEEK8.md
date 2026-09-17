@@ -16,13 +16,22 @@ are the exact before/after recordings it scored.
 | tool-choice accuracy | **40%** (4/10) | **90%** (9/10) |
 | argument validity rate | 80% (8/10) | 70% (7/10) |
 | step efficiency (mean, 5 laps needed) | 1.06× | 1.56× |
-| cost per claim (p50 / max) | $0.00108 / $0.00250 | $0.00352 / $0.00605 |
+| cost per claim (p50 / p99 / max) | $0.00108 / $0.00245 / $0.00250 | $0.00352 / $0.00596 / $0.00605 |
 | outcome pass rate | 90% (9/10) | 80% (8/10) |
 | **trajectory pass rate** | **40%** | **60%** |
 | **GAP (outcome − trajectory)** | **+50 points** | **+20 points** |
 | `skipped_mandatory_tool` count | **6** | **1** |
 
 The gap shrank by more than half. It did not close, and it did not come free — see §5 and §6.
+
+*A note on p99 at n=10*: with ten claims, the 99th percentile and the max are nearly the same
+number by construction — there aren't enough samples for a real tail to separate from the worst
+single observation. It's reported because the brief asks for mean-or-p99 cost variance rather
+than a bare mean, and even at this sample size it does its job: p99 sits at 2.27x the p50
+before mitigation and 1.69x after — a real, if crude, signal that the *shape* of the cost
+distribution changed, not only its center, which a mean alone would have hidden. It should be
+read as "the worst case this sample happened to produce," not a calibrated tail estimate — that
+would need dozens of repeats per claim, not one run each.
 
 ---
 
@@ -111,6 +120,7 @@ The one survivor is **C-007**, and it is the most important trace in this report
 | | before | after | change |
 |---|---|---|---|
 | cost per claim, p50 | $0.00108 | $0.00352 | **+226%** |
+| cost per claim, p99 | $0.00245 | $0.00596 | **+143%** |
 | cost per claim, max | $0.00250 | $0.00605 | **+142%** |
 | step efficiency (mean) | 1.06× | 1.56× | **+47% more laps** |
 | outcome pass rate | 90% | 80% | **−1 claim** |
@@ -306,7 +316,31 @@ statement, as §8.3 shows directly.
 
 ---
 
-## 10. Limitations
+## 10. Where this lands on the OWASP Top 10 for LLM Applications
+
+Naming the standard category a finding belongs to is not decoration — it's what turns "the
+agent did something weird" into a searchable, prioritizable risk someone else on a security
+team can act on without re-reading this whole report. Mapped against the **OWASP Top 10 for
+LLM Applications (2025 edition)** — noted by edition because OWASP has revised this list before
+and may again; a mapping like this is only as current as the edition it cites:
+
+| Category | This report's evidence |
+|---|---|
+| **LLM01: Prompt Injection** | §8 in full — a real, live indirect injection succeeded against the undefended agent (§8.1), and got through the full defense stack in 1 of 2 identically-configured runs (§8.3). Not a theoretical entry — a demonstrated one, with a control. |
+| **LLM05: Improper Output Handling** | §6.1 / §6.2 — the agent narrating a fake `Observation:` inside its own turn to *look* verified is exactly this risk: a downstream system trusting what an LLM says happened instead of what actually happened. `react_agent.py`'s `payout_called`/`search_called` gate is the concrete mitigation this report measures, not assumes. |
+| **LLM06: Excessive Agency** | The agent decides a real financial payout with no human in the loop by design. §6.2 shows what that costs on a genuinely unresolved claim: forced-completion pressure pushed a previously-correct REFERRED to a confident, wrong PAYABLE. §8.2's `check_least_privilege()` — verifying `compute_payout` has zero I/O in its source — is this report's one concrete check against the agency this tool *could* have had. |
+| **LLM09: Misinformation** | §3 — C-003 cited a document (`POL-GEN-2024`) that does not exist anywhere in the corpus. §7 — three post-mitigation claims (C-004/005/006) invented a deductible figure never returned by any tool call that run. Both are the model producing fluent, confident, false output — not a jailbreak, just ordinary hallucination under pressure to answer. |
+| **LLM10: Unbounded Consumption** | C-007 (§6.1) spiraled through the full 12-iteration ceiling repeatedly re-attempting a gamed compliance trick — exactly the runaway-cost pattern `src/agent/budgets.py`'s four limits exist to cap, and the reason this codebase enforces them *before* a lap starts rather than after. |
+
+**Not tested in this report** — naming the gap matters as much as naming the hit: LLM02
+(Sensitive Information Disclosure — that's Week 5's redaction work, a different report), LLM03
+(Supply Chain), LLM04 (Data and Model Poisoning), LLM07 (System Prompt Leakage), LLM08 (Vector
+and Embedding Weaknesses). None of Week 8's task set touches these; claiming coverage of them
+here would be exactly the kind of unmeasured assertion this whole report argues against.
+
+---
+
+## 11. Limitations
 
 - **Two providers used across this report's live runs.** The before-mitigation data and part of
   the after-mitigation data ran on Gemini (`gemini-3.6-flash` / `gemini-3.5-flash-lite`); an
@@ -332,7 +366,7 @@ statement, as §8.3 shows directly.
 
 ---
 
-## 11. Verdict
+## 12. Verdict
 
 The mitigation did what it was built to do — `skipped_mandatory_tool` dropped 6→1, and the
 outcome-trajectory gap it was driving nearly halved (50→20 points) — at a real, measured price:

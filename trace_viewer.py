@@ -321,6 +321,8 @@ def render_week8_tab() -> None:
          "after": f"{after_summary['step_efficiency_mean']:.2f}×"},
         {"metric": "cost per claim, p50", "before": f"${before_summary['cost_p50']:.5f}",
          "after": f"${after_summary['cost_p50']:.5f}"},
+        {"metric": "cost per claim, p99", "before": f"${before_summary['cost_p99']:.5f}",
+         "after": f"${after_summary['cost_p99']:.5f}"},
         {"metric": "cost per claim, max", "before": f"${before_summary['cost_max']:.5f}",
          "after": f"${after_summary['cost_max']:.5f}"},
         {"metric": "outcome pass rate", "before": f"{before_summary['outcome_pass_rate']:.0%}",

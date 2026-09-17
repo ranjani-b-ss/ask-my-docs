@@ -275,6 +275,16 @@ def score_trace(trace_path: Path) -> dict:
     return per_claim
 
 
+def _p99(data: list[float]) -> float:
+    """The 99th percentile, or the max when there aren't enough points for that number to
+    mean anything distinct from the max — true here, at n=10. Reported anyway, because the
+    brief asks for it, but see WEEK8.md for why it should be read as "the worst case we
+    happened to sample" rather than a real tail estimate until the eval set is much larger."""
+    if len(data) < 2:
+        return data[0] if data else 0.0
+    return statistics.quantiles(data, n=100, method="inclusive")[98]
+
+
 def summarise(per_claim: dict) -> dict:
     scored = {k: v for k, v in per_claim.items() if not v.get("missing")}
     n = len(scored)
@@ -285,6 +295,7 @@ def summarise(per_claim: dict) -> dict:
         "argument_validity_rate": sum(v["argument_ok"] for v in scored.values()) / n,
         "step_efficiency_mean": sum(v["iterations"] for v in scored.values()) / n / STEPS_NEEDED,
         "cost_p50": statistics.median(costs),
+        "cost_p99": _p99(costs),
         "cost_max": max(costs),
         "outcome_pass_rate": sum(v["outcome_pass"] for v in scored.values()) / n,
         "trajectory_pass_rate": sum(v["trajectory_pass"] for v in scored.values()) / n,
@@ -331,7 +342,7 @@ def print_report(trace_path: Path) -> dict:
     print(f"step efficiency (mean)    {summary['step_efficiency_mean']:.2f}"
           f"  (mean laps taken / {STEPS_NEEDED} laps needed — see note below)")
     print(f"cost per claim            p50 ${summary['cost_p50']:.5f}   "
-          f"max ${summary['cost_max']:.5f}")
+          f"p99 ${summary['cost_p99']:.5f}   max ${summary['cost_max']:.5f}")
     print(f"\noutcome pass rate         {summary['outcome_pass_rate']:.0%}")
     print(f"trajectory pass rate      {summary['trajectory_pass_rate']:.0%}")
     print(f"GAP (outcome - trajectory) {summary['outcome_pass_rate'] - summary['trajectory_pass_rate']:+.0%}")
