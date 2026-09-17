@@ -87,9 +87,20 @@ ANTHROPIC_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-opus-5").strip()
 ANTHROPIC_MAX_TOKENS = 8000
 
 GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta"
-# An alias, deliberately, not a pinned version: Google gates older concrete versions to
-# existing users, so a pinned id that works today 404s for a key created tomorrow.
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-flash-latest").strip()
+# Pinned, not the "-latest" alias, as of 2026-09-16: the "gemini-flash-latest" alias still
+# appears in GET /v1beta/models but every generateContent call against it hangs until the
+# client's own timeout (confirmed with both curl and requests — a plain GET to the same host
+# returns in under a second, ruling out network/TLS causes; the concrete legacy ids
+# gemini-2.5-flash and gemini-2.5-flash-lite fail FAST with a clean 404 telling new callers
+# to move to the 3.x line). That is worse than a pinned id going stale: a stale pin 404s
+# immediately and loudly, where a broken alias burns a full retry ladder's worth of timeouts
+# on every single call and looks like a network outage. gemini-3.6-flash was verified live
+# (a real 200 with real content) before being set here. If this 404s for a future key, that
+# is the ordinary alias-gating problem the comment this replaced was written for — re-run the
+# GET /v1beta/models check below and move to whatever concrete id is current; do not switch
+# back to a "-latest" alias without confirming generateContent against it actually returns.
+#   curl "https://generativelanguage.googleapis.com/v1beta/models?key=$GEMINI_API_KEY"
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash").strip()
 GEMINI_TIMEOUT = 60
 
 # --- Pricing (Week 7) ---

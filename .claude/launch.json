@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "trace-viewer",
+      "runtimeExecutable": "./.venv/bin/python",
+      "runtimeArgs": ["-m", "streamlit", "run", "trace_viewer.py", "--server.port", "8502", "--server.headless", "true"],
+      "port": 8502
+    }
+  ]
+}

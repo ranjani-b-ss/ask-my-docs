@@ -183,6 +183,8 @@ def run(
     transcript = ""
     steps: list[dict] = []
     last_payout_observation: float | None = None
+    search_called = False
+    payout_called = False
     stop_reason = None
     final_answer = None
     iteration = 0
@@ -234,12 +236,20 @@ def run(
             # deductible from a non-existent endorsement id, and state a confidently wrong
             # number — exactly the failure a verification gate exists to stop, not narrate.
             claimed_amount = answer.get("payable_amount")
-            verified = (
+            amount_matches = (
                 claimed_amount is None and last_payout_observation is None
             ) or (
                 claimed_amount is not None and last_payout_observation is not None
                 and abs(float(claimed_amount) - float(last_payout_observation)) < 0.01
             )
+            # Week 8 addition: amount_matches alone has a hole — a model that never calls
+            # compute_payout and simply writes payable_amount: null passes it too, because
+            # None equals None. That hole is exactly how 6 of 10 claims skipped a mandatory
+            # tool in the Week 8 trajectory eval (see eval/trajectory_eval.py) while still
+            # reaching the right STATUS. search_called and payout_called close it: a Final
+            # Answer is only verified once both tools have actually been invoked at least
+            # once in this run, regardless of what the model claims to have already checked.
+            verified = amount_matches and search_called and payout_called
             step["payout_verified"] = verified
             steps.append(step)
 
@@ -248,12 +258,21 @@ def run(
                 stop_reason = "final_answer"
                 break
 
-            transcript += (
-                f"{raw.strip()}\nObservation: REJECTED — payable_amount "
-                f"{claimed_amount!r} does not match compute_payout's last returned value "
-                f"({last_payout_observation!r}). Call compute_payout and copy its exact "
-                "returned number into payable_amount before answering again.\n\n"
-            )
+            if not search_called:
+                reason = ("REJECTED — you have not called search_policy yet. You must check "
+                          "the policy wording (deductible and exclusions) before any final "
+                          "decision, even one that feels obvious from the notes alone.")
+            elif not payout_called:
+                reason = ("REJECTED — you have not called compute_payout yet. Call it and "
+                          "copy its exact returned number into payable_amount before "
+                          "answering, even when you believe the claim is NOT_PAYABLE or "
+                          "REFERRED.")
+            else:
+                reason = (f"REJECTED — payable_amount {claimed_amount!r} does not match "
+                          f"compute_payout's last returned value ({last_payout_observation!r}). "
+                          "Call compute_payout and copy its exact returned number into "
+                          "payable_amount before answering again.")
+            transcript += f"{raw.strip()}\nObservation: {reason}\n\n"
             continue
 
         if parsed["kind"] == "action":
@@ -262,6 +281,9 @@ def run(
                 observation = tools.dispatch(tool_name, args)
                 if tool_name == "compute_payout":
                     last_payout_observation = observation
+                    payout_called = True
+                elif tool_name == "search_policy":
+                    search_called = True
                 obs_text = json.dumps(observation, default=str)
             except Exception as exc:                       # noqa: BLE001 — surfaced as text
                 obs_text = f"ERROR: {exc}"

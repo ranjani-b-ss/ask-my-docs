@@ -79,8 +79,8 @@ def ollama_has_model(model: str, url: str = OLLAMA_URL) -> bool:
     return any(m == model or m.split(":")[0] == base for m in installed)
 
 
-def ollama_chat(system: str, user: str, model: str = OLLAMA_MODEL, url: str = OLLAMA_URL) -> str:
-    payload = {
+def _ollama_payload(system: str, user: str, model: str) -> dict:
+    return {
         "model": model,
         "messages": [
             {"role": "system", "content": system},
@@ -89,25 +89,32 @@ def ollama_chat(system: str, user: str, model: str = OLLAMA_MODEL, url: str = OL
         "stream": False,
         "options": {"temperature": 0.0, "num_ctx": 8192, "top_p": 0.9},
     }
-    response = requests.post(f"{url}/api/chat", json=payload, timeout=OLLAMA_TIMEOUT)
-    response.raise_for_status()
+
+
+def ollama_chat(system: str, user: str, model: str = OLLAMA_MODEL, url: str = OLLAMA_URL) -> str:
+    try:
+        response = requests.post(f"{url}/api/chat", json=_ollama_payload(system, user, model),
+                                 timeout=OLLAMA_TIMEOUT)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as exc:
+        # A slow response here means "still thinking on a CPU," per OLLAMA_TIMEOUT's own
+        # comment, not a dead server — but a bare requests exception left uncaught crashes
+        # whoever called this, one lap taking down an entire run. Raising LLMError instead
+        # lets react_agent.py's existing per-lap fault isolation treat it like any other
+        # provider hiccup: log it, try again next lap, still bounded by the loop's own budgets.
+        raise LLMError(f"Ollama request failed: {exc}") from exc
     return response.json()["message"]["content"].strip()
 
 
 def ollama_chat_with_usage(
     system: str, user: str, model: str = OLLAMA_MODEL, url: str = OLLAMA_URL
 ) -> tuple[str, dict]:
-    payload = {
-        "model": model,
-        "messages": [
-            {"role": "system", "content": system},
-            {"role": "user", "content": user},
-        ],
-        "stream": False,
-        "options": {"temperature": 0.0, "num_ctx": 8192, "top_p": 0.9},
-    }
-    response = requests.post(f"{url}/api/chat", json=payload, timeout=OLLAMA_TIMEOUT)
-    response.raise_for_status()
+    try:
+        response = requests.post(f"{url}/api/chat", json=_ollama_payload(system, user, model),
+                                 timeout=OLLAMA_TIMEOUT)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as exc:
+        raise LLMError(f"Ollama request failed: {exc}") from exc
     body = response.json()
     # Ollama reports these as prompt_eval_count / eval_count, and omits both entirely when a
     # response is served from its internal cache — .get(..., 0) rather than a KeyError.
