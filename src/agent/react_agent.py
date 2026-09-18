@@ -128,6 +128,20 @@ def _find_json_object(text: str, after: str) -> tuple[dict | None, str]:
 
 _ACTION_NAME = re.compile(r"Action:\s*([A-Za-z_][A-Za-z0-9_]*)")
 _HAS_FINAL = re.compile(r"Final Answer\s*:", re.IGNORECASE)
+_NUMBER = re.compile(r"[\d,]+(?:\.\d+)?")
+
+
+def _numbers_in(text: str) -> set[float]:
+    """Every numeric figure literally present in ``text`` — used to check a tool argument
+    was retrieved, not invented. Same extraction eval/trajectory_eval.py uses to score this
+    after the fact; this is the live version, checked before the answer is ever accepted."""
+    out = set()
+    for m in _NUMBER.findall(text):
+        try:
+            out.add(float(m.replace(",", "")))
+        except ValueError:
+            pass
+    return out
 
 REQUIRED_FINAL_FIELDS = ("status", "payable_amount", "exclusion_clause", "rationale")
 VALID_STATUSES = {"PAYABLE", "NOT_PAYABLE", "REFERRED"}
@@ -183,8 +197,12 @@ def run(
     transcript = ""
     steps: list[dict] = []
     last_payout_observation: float | None = None
+    last_deductible_used: float | None = None
+    numbers_seen: set[float] = set()
     search_called = False
     payout_called = False
+    last_rejected_answer: dict | None = None
+    repeat_count = 0
     stop_reason = None
     final_answer = None
     iteration = 0
@@ -249,13 +267,59 @@ def run(
             # reaching the right STATUS. search_called and payout_called close it: a Final
             # Answer is only verified once both tools have actually been invoked at least
             # once in this run, regardless of what the model claims to have already checked.
-            verified = amount_matches and search_called and payout_called
+            #
+            # Follow-up addition: closing that hole created a narrower one — calling
+            # compute_payout for real, with a deductible NUMBER invented rather than
+            # retrieved, still passed every check above (the tool genuinely returned that
+            # number; it just was never asked to check where the number came from). Measured
+            # on 3 post-mitigation claims (C-004/005/006) that fabricate a deductible on
+            # NOT_PAYABLE decisions, where the figure doesn't even change the outcome but is
+            # still confidently stated as if retrieved.
+            #
+            # First attempt required grounding unconditionally and made things measurably
+            # worse: outcome pass rate 80%->70%, trajectory pass rate 60%->40% across a live
+            # 10-claim rerun. The reason was the same root cause the fix targets — on a
+            # NOT_PAYABLE/REFERRED claim the deductible is mathematically irrelevant
+            # (compute_payout ignores it for those statuses), so when a claim's search
+            # results genuinely never surface a clean deductible figure, an unconditional
+            # requirement forces an unwinnable rejection loop that burns the token budget
+            # instead of ever reaching a decision — C-009 went from a clean pass to a fresh
+            # fabrication plus a wrong outcome this way, on a claim the mitigation never
+            # needed to touch. Scoping the check to PAYABLE only — the one status where an
+            # invented deductible actually corrupts the real payout number — targets the
+            # case that matters and drops the one that doesn't.
+            deductible_grounded = (
+                last_deductible_used is None
+                or answer.get("status") != "PAYABLE"
+                or last_deductible_used in numbers_seen
+            )
+            verified = amount_matches and search_called and payout_called and deductible_grounded
             step["payout_verified"] = verified
             steps.append(step)
 
             if verified:
                 final_answer = answer
                 stop_reason = "final_answer"
+                break
+
+            # A third, distinct failure surfaced measuring the deductible-grounding fix above:
+            # rejected for not calling compute_payout, the model sometimes doesn't correct
+            # itself at all — it resubmits the IDENTICAL Final Answer text, verbatim, lap
+            # after lap, until the budget runs out on repetition rather than reasoning.
+            # Measured live: one claim repeated the same rejected answer 7 times in a row,
+            # burning its entire token budget without ever once calling the missing tool.
+            # That is not a budget problem to raise, it is a model that has stopped
+            # responding to the rejection — three identical rejections in a row is not "still
+            # trying", so stop paying for laps 4 through 10 of the same non-attempt and fail
+            # safe now instead of on exhaustion.
+            if answer == last_rejected_answer:
+                repeat_count += 1
+            else:
+                repeat_count = 1
+                last_rejected_answer = answer
+            if repeat_count >= 3:
+                stop_reason = (f"repeated_rejection: the same Final Answer was rejected "
+                               f"{repeat_count} times in a row without correction")
                 break
 
             if not search_called:
@@ -267,6 +331,13 @@ def run(
                           "copy its exact returned number into payable_amount before "
                           "answering, even when you believe the claim is NOT_PAYABLE or "
                           "REFERRED.")
+            elif not deductible_grounded:
+                reason = (f"REJECTED — this is a PAYABLE decision and compute_payout was "
+                          f"called with deductible={last_deductible_used!r}, but no "
+                          "search_policy result this run ever returned that figure. The "
+                          "deductible directly changes the payable amount here — search for "
+                          "the real compulsory deductible and call compute_payout again with "
+                          "the number you actually retrieved.")
             else:
                 reason = (f"REJECTED — payable_amount {claimed_amount!r} does not match "
                           f"compute_payout's last returned value ({last_payout_observation!r}). "
@@ -282,8 +353,14 @@ def run(
                 if tool_name == "compute_payout":
                     last_payout_observation = observation
                     payout_called = True
+                    try:
+                        last_deductible_used = float(args.get("deductible"))
+                    except (TypeError, ValueError):
+                        last_deductible_used = None
                 elif tool_name == "search_policy":
                     search_called = True
+                    for hit in observation:
+                        numbers_seen.update(_numbers_in(hit.get("text", "")))
                 obs_text = json.dumps(observation, default=str)
             except Exception as exc:                       # noqa: BLE001 — surfaced as text
                 obs_text = f"ERROR: {exc}"
@@ -307,12 +384,13 @@ def run(
         )
 
     if final_answer is None:
-        # A budget fired before the model produced a Final Answer. Referring the claim is
-        # the safe default here — the same abstain-rather-than-guess principle the citation
-        # and grounding gates use everywhere else in this project.
+        # A budget fired, or the repeat-detection above gave up on a stuck loop, before the
+        # model produced a verified Final Answer. Referring the claim is the safe default
+        # here — the same abstain-rather-than-guess principle the citation and grounding
+        # gates use everywhere else in this project.
         final_answer = {
             "status": "REFERRED", "payable_amount": None, "exclusion_clause": None,
-            "rationale": f"Stopped by a budget before reaching a decision: {stop_reason}.",
+            "rationale": f"Stopped before reaching a verified decision: {stop_reason}.",
         }
 
     result = {

@@ -225,7 +225,81 @@ honestly reached, would be trading one visible problem for two quieter ones.
 
 ---
 
-## 8. Bonus — indirect prompt injection, attacked and defended for real
+## 8. A follow-up fix to `fabricated_argument`, and what it took to get there
+
+§7's `fabricated_argument` regression had a specific, fixable mechanism: `compute_payout` became
+mandatory on every claim, including `NOT_PAYABLE` ones where the deductible is arithmetically
+irrelevant (`tools.compute_payout` ignores it for that status) — so a model with no reason to
+verify the number sometimes just invented one. Two attempts, one that made things measurably
+worse and one that didn't, both real live 10-claim runs.
+
+### 8.1 Attempt 1 — unconditional grounding, and a measured regression
+
+The obvious fix: require the `deductible` argument passed to `compute_payout` to match a number
+actually returned by some `search_policy` call that run, always. Live result:
+
+```
+outcome pass rate:     80% -> 70%
+trajectory pass rate:  60% -> 40%
+```
+
+Worse on both axes. The reason is the same root cause the fix targeted: on a claim where
+`search_policy`'s results genuinely never surface a clean deductible figure, requiring grounding
+unconditionally forces an unwinnable rejection loop — the model can't ground a number that was
+never retrieved, so it just keeps trying, burning the token budget instead of ever reaching a
+decision. **C-009** is the clearest casualty: a claim with zero problems before this attempt came
+out both fabricating *and* wrong on outcome after it, on a claim the fix never needed to touch.
+
+### 8.2 Attempt 2 — scope the check to where a wrong number actually matters
+
+One-line change: only require grounding when `answer.get("status") == "PAYABLE"` — the one
+status where an invented deductible directly corrupts the real payable amount. Re-run against
+the same before-baseline:
+
+| | before either fix | after (PAYABLE-only) |
+|---|---|---|
+| `fabricated_argument` | 3 | **1** |
+| argument validity rate | 70% | **90%** |
+| trajectory pass rate | 60% | **70%** |
+| GAP | 20% | **10%** |
+
+A real improvement this time, not incidental. C-004 and C-005 — both `NOT_PAYABLE`, both
+previously fabricating — completed cleanly with no rejection loop at all, because the check
+simply never applies to them now.
+
+### 8.3 A third, different failure this measurement surfaced — and a second fix
+
+Re-running to check the PAYABLE-only fix's stability surfaced something the deductible check
+never touched: on **C-006**, rejected seven laps in a row for never calling `compute_payout`,
+the model didn't correct itself once — it resubmitted the **identical** Final Answer text,
+verbatim, every single time, until the run burned its entire 30,000-token budget on repetition
+rather than reasoning. C-007 and C-010 showed the same pattern. Not a grounding problem; a model
+that stopped responding to the correction it was given.
+
+Fixed the same way as everything else in this report — structurally, not by rewording the
+prompt: `react_agent.py` now tracks the last rejected answer, and if the *identical* answer is
+rejected three times in a row, the loop stops immediately and fails safe to `REFERRED`, instead
+of paying for four to seven more laps of the same non-attempt. Live confirmation: **C-005** hit
+exactly this path on the next full run, stopping with `stop_reason: repeated_rejection` after 12
+laps instead of running to token exhaustion.
+
+### 8.4 The honest, unresolved part
+
+The same run that confirmed both fixes work as designed also showed **outcome pass rate drop to
+60%**, with **trajectory pass rate now above it at 80%** — the inverse of this report's original
+problem. The claims that flipped were **C-003** and **C-010** — and both are already-documented,
+pre-existing high-variance cases: Week 7 measured C-010's own per-call accuracy at 33% with no
+attacker or fix involved at all, and C-003 swung from 0/6 to 6/6 correct across identical
+prompts in earlier measurement. Neither fix in this section touches exclusion reasoning or
+status selection — a single run flipping on exactly the two claims already known to be
+unreliable is far more consistent with that pre-existing variance than with anything new. Stated
+plainly rather than argued around: **this needs several repeat runs to separate a real effect
+from noise, and this report does not have them yet.** Reporting 80%/60% as if it were a settled
+verdict would be exactly the kind of unmeasured claim the rest of this document argues against.
+
+---
+
+## 9. Bonus — indirect prompt injection, attacked and defended for real
 
 ### 8.1 The attack that failed, and the one that worked
 
@@ -298,7 +372,7 @@ statement, as §8.3 shows directly.
 
 ---
 
-## 9. What could still get through — stated plainly
+## 10. What could still get through — stated plainly
 
 - A well-disguised claim of authoritative confirmation, worded like a legitimate case update,
   on a fact pattern the model is already unsure about — demonstrated live in §8.3, not
@@ -316,7 +390,7 @@ statement, as §8.3 shows directly.
 
 ---
 
-## 10. Where this lands on the OWASP Top 10 for LLM Applications
+## 11. Where this lands on the OWASP Top 10 for LLM Applications
 
 Naming the standard category a finding belongs to is not decoration — it's what turns "the
 agent did something weird" into a searchable, prioritizable risk someone else on a security
@@ -340,7 +414,7 @@ here would be exactly the kind of unmeasured assertion this whole report argues 
 
 ---
 
-## 11. Limitations
+## 12. Limitations
 
 - **Two providers used across this report's live runs.** The before-mitigation data and part of
   the after-mitigation data ran on Gemini (`gemini-3.6-flash` / `gemini-3.5-flash-lite`); an
@@ -366,7 +440,7 @@ here would be exactly the kind of unmeasured assertion this whole report argues 
 
 ---
 
-## 12. Verdict
+## 13. Verdict
 
 The mitigation did what it was built to do — `skipped_mandatory_tool` dropped 6→1, and the
 outcome-trajectory gap it was driving nearly halved (50→20 points) — at a real, measured price:
@@ -374,7 +448,17 @@ roughly 3x the p50 cost per claim, half a lap more on average, and two second-or
 that did not exist at this scale before (a model gaming the gate's honesty check, and a forced-
 completion pressure that pushed one genuinely ambiguous claim from correctly uncertain to
 confidently wrong). Shipping this fix alone, without a companion check on argument grounding,
-would trade a wide, easy-to-explain failure for a narrower, harder-to-explain one. The
-indirect-injection defense stopped a blunt attack outright and stopped a disguised one only
+would trade a wide, easy-to-explain failure for a narrower, harder-to-explain one.
+
+The follow-up in §8 closed exactly that gap — `fabricated_argument` dropped 3→1 after scoping
+the deductible check to where it actually matters, and a second, unrelated failure (a model
+that stops responding to correction and repeats itself into budget exhaustion) got a
+structural fix once measurement surfaced it. Both were real improvements on their own
+mechanism, verified live, not assumed. What the same measurement also showed, honestly: outcome
+pass rate dropped in that run, on the two claims already known from Week 7 to be high-variance
+regardless of any fix here — a result this report flags as needing more repeat runs, not one it
+claims as settled either way.
+
+The indirect-injection defense stopped a blunt attack outright and stopped a disguised one only
 sometimes — the keyword guardrail's blind spot on professionally-worded false-authority claims
 is real, demonstrated, and still open.
