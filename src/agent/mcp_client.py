@@ -67,7 +67,8 @@ class MCPToolRegistry:
     async def __aenter__(self) -> "MCPToolRegistry":
         self._stack = AsyncExitStack()
         for server in self._server_defs:
-            params = StdioServerParameters(command=server["command"], args=server["args"])
+            params = StdioServerParameters(command=server["command"], args=server["args"],
+                                           env=server.get("env"))
             read, write = await self._stack.enter_async_context(stdio_client(params))
             session = await self._stack.enter_async_context(ClientSession(read, write))
             await session.initialize()

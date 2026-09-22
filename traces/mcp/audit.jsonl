@@ -1,0 +1,2 @@
+{"ts": "2026-09-22T15:11:56+0530", "caller": "claim-status-only", "tool": "get_claim_status", "claim_number": "C-003", "allowed": true, "detail": ""}
+{"ts": "2026-09-22T15:12:18+0530", "caller": "claim-status-only", "tool": "get_adjuster_notes", "claim_number": "C-003", "allowed": false, "detail": "denied for token 'claim-status-only'"}

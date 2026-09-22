@@ -523,6 +523,30 @@ def render_week9_tab() -> None:
     if risk_file.exists():
         st.markdown(risk_file.read_text(encoding="utf-8"))
 
+    st.divider()
+    st.subheader("Bonus — one gateway, one audit line, a scoped denial")
+    gateway_run = load_json(str(MCP_DIR / "gateway_denial.json"))
+    if gateway_run:
+        st.write(f"**Q:** {gateway_run['question']}")
+        st.info(gateway_run["final_answer"])
+        st.caption(f"{gateway_run['iterations']} laps · "
+                  f"${gateway_run['usage']['cost_usd']:.6f} · "
+                  f"{gateway_run['usage']['wall_seconds']:.1f}s · token: claim-status-only")
+        render_mcp_steps(gateway_run["steps"])
+    else:
+        st.info("No `traces/mcp/gateway_denial.json` found.")
+
+    audit_file = MCP_DIR / "audit.jsonl"
+    if audit_file.exists():
+        st.markdown("**Audit log** — one line per `tools/call`, denials included:")
+        rows = [json.loads(line) for line in audit_file.read_text(encoding="utf-8").splitlines()
+               if line.strip()]
+        display_rows = [{"ts": r["ts"], "caller": r["caller"], "tool": r["tool"],
+                         "claim_number": r.get("claim_number") or "—",
+                         "allowed": "✅" if r["allowed"] else "❌ denied"}
+                        for r in rows]
+        st.dataframe(display_rows, use_container_width=True, hide_index=True)
+
 
 st.title("🏁 Claims Agent — Trace Viewer")
 tab7, tab8, tab9 = st.tabs(["Week 7 — Agent vs Workflow", "Week 8 — Trajectory Eval",

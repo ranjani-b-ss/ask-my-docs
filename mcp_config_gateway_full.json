@@ -1,0 +1,10 @@
+{
+  "servers": [
+    {
+      "name": "gateway",
+      "command": "./.venv/bin/python",
+      "args": ["src/mcp_servers/gateway_server.py"],
+      "env": {"GATEWAY_TOKEN": "full-access"}
+    }
+  ]
+}

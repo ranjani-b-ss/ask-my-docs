@@ -106,7 +106,16 @@ async def run(question: str, config_path: str, max_iterations: int = 8,
                 f"TRANSCRIPT SO FAR\n{transcript or '(nothing yet)'}\n\n"
                 "What is your next Thought and Action, or your Final Answer?"
             )
-            raw = usage.call_llm(system_prompt, user_turn)
+            try:
+                raw = usage.call_llm(system_prompt, user_turn)
+            except llm.LLMError as exc:
+                # Same fault isolation react_agent.py already has for this exact failure —
+                # a provider hiccup on one lap must not crash the whole run. Still counts
+                # against max_iterations, so a provider that never recovers still stops.
+                steps.append({"lap": iteration, "raw_output": None,
+                             "parsed": {"kind": "provider_error", "error": str(exc)}})
+                transcript += f"[the model call for this lap failed: {exc}. Try again.]\n\n"
+                continue
             parsed = _parse_lap(raw)
             step = {"lap": iteration, "raw_output": raw, "parsed": parsed}
 

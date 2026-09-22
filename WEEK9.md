@@ -167,13 +167,88 @@ a slow embedder load.
 
 ---
 
-## 9. What's not done — stated plainly, not hidden
+## 9. Bonus — one gateway, one audit line, a scoped denial that reaches the model
 
-The bonus (one gateway process fronting both servers, a single audit line per `tools/call`
-with caller/tool/claim number, and a scoped token that denies `get_adjuster_notes` while
-`get_claim_status` still works) is **not built** in this submission. It's the direct
-mechanical fix for two of `risk_note.md`'s five lines (no logging, one undifferentiated
-token) — worth doing, tracked as a separate follow-up rather than rushed into this one.
+`src/mcp_servers/gateway_server.py` fronts both backends behind a single MCP server. The
+agent's config (`mcp_config_gateway_full.json` / `mcp_config_gateway_scoped.json`) now lists
+**one** entry — "gateway" — not two; the gateway is itself an MCP client to policy-search and
+claims-system internally, and re-exposes their tools under its own name.
+
+**Disclosed simplification**: the gateway hand-defines one proxy tool per capability the two
+backends currently have, rather than dynamically mirroring whatever `tools/list` happens to
+return. A production gateway should do the latter; three hand-written proxies were the
+reliable choice for this exercise's scope, not a claim that this is a fully generic reverse
+proxy.
+
+### 9.1 A real bug, not a design choice, cost the first attempt
+
+The first version opened backend connections **lazily, inside the first tool call**. It
+worked once, then crashed the whole gateway process on the very next call:
+
+```
+RuntimeError: Attempted to exit a cancel scope that isn't the current task's current
+cancel scope
+```
+
+`anyio` (which both `fastmcp` and the `mcp` SDK use) ties a cancel scope to the exact task
+that opened it. Each incoming `tools/call` runs as its own task — a connection opened inside
+request-task-1 is invalid to reuse from request-task-2, `run_in_thread=False` notwithstanding
+(that fixed a *different*, thread-related half of the same class of bug, not this one).
+Fixed by moving the backend connections into FastMCP's `lifespan` hook — the one place a
+resource is guaranteed to outlive every individual request that uses it, entered once when
+the gateway process starts and never torn down mid-session.
+
+### 9.2 Live proof, both halves
+
+**Fan-out, full-access token** — all three tools, one front door, in sequence, no crash after
+the fix:
+
+```
+get_claim_status(C-001)   -> real data, routed to claims-system
+get_adjuster_notes(C-001) -> real data, routed to claims-system
+search_policy(...)        -> real data, routed to policy-search
+```
+
+**Scoped denial reaching a real model**, not just a raw client — asked *"What do the
+adjuster's notes say about claim C-003, and what is its current status?"* against the
+`claim-status-only` token:
+
+```
+Lap 1: get_claim_status(C-003) -> real data
+Lap 4: get_adjuster_notes(C-003) -> ERROR: access denied: this token ('claim-status-only')
+       is not scoped to call 'get_adjuster_notes'. Tools this token CAN call:
+       ['get_claim_status', 'search_policy']. get_claim_status is still available for this
+       claim's status/amount.
+Lap 5: Final Answer: For claim C-003, the current status details available are: Date of
+       Loss: 2026-05-01, Vehicle CC: 1400, and Claim Amount: $6,400.0. Regarding the
+       adjuster's notes, the system returned an access denied error [...] so those notes
+       could not be retrieved.
+```
+
+The model didn't just fail — it explained *why* to the user and still delivered every piece
+of information it genuinely had access to. That is what "reaches the model as a recoverable
+message" is supposed to produce, demonstrated, not asserted.
+
+**A second real bug surfaced in this same run**, unrelated to the gateway: laps 2–3 hit
+`Gemini returned no usable content ... MALFORMED_RESPONSE` — and `mcp_agent.py`'s loop, unlike
+`react_agent.py`'s, had no per-lap fault isolation for that yet, so the entire run crashed the
+first time. Fixed by adding the exact same `try/except llm.LLMError` pattern `react_agent.py`
+already uses — one lap's provider hiccup now costs a retry, not the whole run. This edit
+happened after §4's zero-line diff was already captured and is unrelated to that claim: it is
+a separate fix, to a different failure, found during bonus work.
+
+### 9.3 The audit log
+
+One line per `tools/call`, denials included — this is the entire fix for two of
+`risk_note.md`'s five lines (no logging, one undifferentiated token):
+
+```json
+{"ts": "2026-09-22T15:11:56+0530", "caller": "claim-status-only", "tool": "get_claim_status", "claim_number": "C-003", "allowed": true, "detail": ""}
+{"ts": "2026-09-22T15:12:18+0530", "caller": "claim-status-only", "tool": "get_adjuster_notes", "claim_number": "C-003", "allowed": false, "detail": "denied for token 'claim-status-only'"}
+```
+
+A compromised or misbehaving instance now leaves a trail — the exact gap `risk_note.md`
+named as a reason not to ship.
 
 ---
 
@@ -182,7 +257,11 @@ token) — worth doing, tracked as a separate follow-up rather than rushed into 
 Every core requirement is backed by a real artifact, not a claim: a live trace naming the
 tool it called, a byte-for-byte identical agent module either side of a five-line config
 change, a hand-annotated raw wire capture, and a measured before/after (4 laps → 2, no wasted
-retry) on the exact error-handling mistake the brief warns about. The one honest gap is the
-risk note's own conclusion catching up with the build: this server, as it stands, logs
-nothing and scopes nothing — real, disclosed, and the reason it's flagged "don't ship" rather
-than quietly shipped anyway.
+retry) on the exact error-handling mistake the brief warns about. The bonus closes two of
+`risk_note.md`'s five lines for real — an audit log with denials in it, and a token scope that
+reaches the model as something it can act on rather than a crash — after a genuine anyio
+cancel-scope bug forced the backend connections into the right lifecycle instead of the
+convenient one. What's left open, honestly: `risk_note.md` line 2 (no visibility into
+whatever a real backing claims database would be) and line 5's broader caution — a gateway
+with an audit log and two token scopes is a demonstration of the pattern, not a production
+access-control system.
