@@ -1,0 +1,5 @@
+1. **Who wrote it:** the claims platform team, treated here as a third party we did not author or audit (this repo builds it too, only so a solo learner can test the swap — there is no separate team).
+2. **What it can reach:** everything in `claims_store` — 10 synthetic claims now, but no declared boundary; in production it would hold whatever credential the platform team gave it to their real claims database, outside our visibility.
+3. **What it logs:** nothing — no `logging` import anywhere in the module, so a compromised instance leaves no audit trail on our side (the bonus's gateway audit line exists to close exactly this gap).
+4. **What a stolen token could do:** read every claim's status, amount, and full adjuster-note narrative via `get_claim_status` and `get_adjuster_notes` — both sit behind one undifferentiated token today.
+5. **Ship or don't:** don't ship as-is — add the audit log and scope adjuster-notes access separately from claim-status first; fine for this week's discovery exercise, not for a real caseload.

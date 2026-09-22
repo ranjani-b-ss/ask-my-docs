@@ -1,0 +1,23 @@
+Requirement 1/2 — the config change that adds server two. Everything requirement 2's
+agent_diff.txt shows staying at zero lines happened because of this one file.
+
+--- mcp_config.json, server one only -> server one + two ---
+--- /tmp/week9_diff_proof/v1_config/mcp_config.json
++++ mcp_config.json
+@@ -4,6 +4,11 @@
+       "name": "policy-search",
+       "command": "./.venv/bin/python",
+       "args": ["src/mcp_servers/policy_search_server.py"]
++    },
++    {
++      "name": "claims-system",
++      "command": "./.venv/bin/python",
++      "args": ["src/mcp_servers/claims_system_server.py"]
+     }
+   ]
+ }
+
+Five added lines, all inside mcp_config.json, all data (a name and how to start the process)
+— no code. src/agent/mcp_client.py reads this list generically (see load_config()) and
+connects to whatever it finds; it has no idea "claims-system" exists until it reads this file
+at runtime.

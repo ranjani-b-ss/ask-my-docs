@@ -1,0 +1,92 @@
+{
+  "_readme": "Raw JSON-RPC captured by speaking the protocol directly over the claims-system server's stdin/stdout — no mcp SDK client involved in this capture, only subprocess pipes, so every field below is exactly what crossed the wire. The 'request'/'response' objects are untouched; '_annotations' is hand-written commentary added alongside, never inside, the raw messages. Captured by /private/tmp/.../scratchpad/capture_wire.py, reproducible against src/mcp_servers/claims_system_server.py.",
+
+  "exchanges": [
+    {
+      "step": "1. initialize",
+      "_annotations": {
+        "jsonrpc": "Protocol version tag JSON-RPC 2.0 itself requires on every message — present on both request and response, always this literal string.",
+        "id": "Client-chosen correlation id (here: 1). The server echoes it back on the matching response so an async client can match replies to requests out of order — irrelevant over stdio with one request in flight at a time, but the wire format doesn't know that.",
+        "method (request)": "'initialize' — the mandatory first call of any MCP session. Nothing else may be sent before this.",
+        "params.protocolVersion": "The MCP spec version the client speaks (2024-11-05 here). The server can refuse an incompatible version — it didn't need to.",
+        "params.capabilities (request)": "What the CLIENT supports (empty here — this capture client declares none). In a real client this would list e.g. sampling support.",
+        "params.clientInfo": "Free-text client identity for logging/debugging on the server side — not used for authorization.",
+        "result.protocolVersion (response)": "The server confirming it will speak the same version back.",
+        "result.capabilities (response)": "What the SERVER supports: logging, prompts, resources, and tools (listChanged: true — meaning it will tell a subscribed client if its tool list changes at runtime). This server exposes tools only, hence prompts/resources report as present-but-empty capabilities.",
+        "result.serverInfo": "Which server answered, and its version — 'claims-system', fastmcp 4.0.5. This is the field that would tell an auditor which of the two servers a given wire log came from."
+      },
+      "request": {"jsonrpc": "2.0", "id": 1, "method": "initialize",
+                  "params": {"protocolVersion": "2024-11-05", "capabilities": {},
+                             "clientInfo": {"name": "wire-capture", "version": "1.0"}}},
+      "response": {"jsonrpc": "2.0", "id": 1,
+                  "result": {"protocolVersion": "2024-11-05",
+                             "capabilities": {"logging": {}, "prompts": {"listChanged": false},
+                                              "resources": {"subscribe": false, "listChanged": false},
+                                              "tools": {"listChanged": true}},
+                             "serverInfo": {"name": "claims-system", "version": "4.0.5"}}}
+    },
+    {
+      "step": "2. notifications/initialized",
+      "_annotations": {
+        "jsonrpc/method": "A NOTIFICATION, not a request — note there is no 'id' field at all. JSON-RPC notifications never get a response; this is the client's one-way signal 'handshake complete, I'm ready for real calls now'.",
+        "params": "Empty — this notification carries no payload, it is purely a state transition.",
+        "response": "null, by design — a notification is fire-and-forget. This row exists in this capture only to document that fact, not because a response was expected and missing."
+      },
+      "request": {"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}},
+      "response": null
+    },
+    {
+      "step": "3. tools/list",
+      "_annotations": {
+        "id": "2 — a fresh correlation id, independent of the initialize call's id=1.",
+        "method": "'tools/list' — this is THE discovery call requirement 1/3 depend on: the client asks 'what can you do', the server answers with real schemas, and nothing about which specific tools exist is hardcoded on either side.",
+        "params": "Empty here; a real client could page a very long tool list via a cursor param — this server has only two tools, no paging needed.",
+        "result.tools[].name": "The literal string the model must send back on Action/tools-call — 'get_claim_status', 'get_adjuster_notes'.",
+        "result.tools[].description": "THIS is the docstring-as-prompt, verbatim. 'Get claim status.' / 'Get adjuster notes.' — both deliberately bad right now, on purpose, to capture the BEFORE state for error_before_after.md; see that file for the improved version and what changed once it was rewritten.",
+        "result.tools[].inputSchema": "JSON Schema the client must satisfy — claim_number is a required string, additionalProperties:false means an extra/misspelled argument is rejected before the tool body even runs.",
+        "result.tools[].outputSchema": "Declared as an open object (additionalProperties:true) — fastmcp inferred this from the Python return type (a plain dict), not hand-written.",
+        "result.tools[]._meta": "fastmcp's own bookkeeping (tags, etc.) — not part of the core MCP spec, safe for a client to ignore."
+      },
+      "request": {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}},
+      "response": {"jsonrpc": "2.0", "id": 2, "result": {"tools": [
+        {"_meta": {"fastmcp": {"tags": []}}, "description": "Get claim status.",
+         "inputSchema": {"properties": {"claim_number": {"type": "string"}},
+                         "required": ["claim_number"], "type": "object",
+                         "additionalProperties": false},
+         "name": "get_claim_status",
+         "outputSchema": {"type": "object", "additionalProperties": true},
+         "title": "Get Claim Status"},
+        {"_meta": {"fastmcp": {"tags": []}}, "description": "Get adjuster notes.",
+         "inputSchema": {"properties": {"claim_number": {"type": "string"}},
+                         "required": ["claim_number"], "type": "object",
+                         "additionalProperties": false},
+         "name": "get_adjuster_notes",
+         "outputSchema": {"type": "object", "additionalProperties": true},
+         "title": "Get Adjuster Notes"}
+      ]}}
+    },
+    {
+      "step": "4. tools/call",
+      "_annotations": {
+        "id": "3 — the third and last correlation id used in this capture.",
+        "method": "'tools/call' — the only message type that actually executes application code. Everything before this was pure discovery/metadata; this is the one line in the whole exchange where the claims_store lookup for C-001 actually ran.",
+        "params.name": "Which discovered tool to invoke — 'get_claim_status', copied verbatim from tools/list's result.tools[].name; the client never invents this string.",
+        "params.arguments": "The claim_number argument, validated against the inputSchema from step 3 before the tool body ran (a malformed argument would fail here, before touching claims_store.py at all).",
+        "result.content": "A list of content blocks — here one TextContent block whose .text is the tool's return value, JSON-encoded as a string. This is what a client reads to get the answer.",
+        "result.isError": "false — this specific call succeeded. See error_before_after.md for what this same field looks like on a failing claim_number, before and after the error-message rewrite.",
+        "result.structuredContent": "The SAME data as result.content[0].text, but already parsed into a real JSON object instead of a string — a newer MCP convenience so a client doesn't have to re-parse text it already has structured. Both fields always carry the same information here; a client can use either."
+      },
+      "request": {"jsonrpc": "2.0", "id": 3, "method": "tools/call",
+                  "params": {"name": "get_claim_status", "arguments": {"claim_number": "C-001"}}},
+      "response": {"jsonrpc": "2.0", "id": 3, "result": {
+        "content": [{"text": "{\"claim_id\":\"C-001\",\"date_of_loss\":\"2026-02-10\",\"vehicle_cc\":1400,\"claim_amount\":8000.0}",
+                     "type": "text"}],
+        "isError": false,
+        "structuredContent": {"claim_id": "C-001", "date_of_loss": "2026-02-10",
+                              "vehicle_cc": 1400, "claim_amount": 8000.0}
+      }}
+    }
+  ],
+
+  "_where_the_model_runs": "In none of the four exchanges above. Every message here is the client (a plain Python subprocess-pipe script, not an agent) talking JSON-RPC to the claims-system SERVER process — no LLM, no prompt, no API key exists on either side of this exchange. The one and only place an LLM is called anywhere in this system is inside src/agent/mcp_agent.py's ReAct loop, one layer above this file entirely, when it calls usage.call_llm() to decide WHICH of these already-discovered tools to invoke and with what arguments — a decision this wire capture has no part in making."
+}

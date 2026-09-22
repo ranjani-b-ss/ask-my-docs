@@ -388,9 +388,148 @@ def render_week8_tab() -> None:
         render_agent_column(after_rows.get(claim_id), gold_row)
 
 
+# ---------------------------------------------------------------------------------- Week 9
+
+MCP_DIR = ROOT / "traces" / "mcp"
+
+
+@st.cache_data
+def load_json(path_str: str) -> dict | None:
+    path = Path(path_str)
+    if not path.exists():
+        return None
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def render_mcp_steps(steps: list[dict]) -> None:
+    for step in steps:
+        parsed = step.get("parsed", {})
+        kind = parsed.get("kind", "?")
+        with st.expander(f"Lap {step['lap']} — {kind}", expanded=False):
+            st.code(step.get("raw_output", ""), language="text")
+            if step.get("tool"):
+                st.markdown(f"**Observation** (`{step['tool']}`):")
+                st.code(str(step.get("observation", ""))[:1500], language="json")
+            elif kind == "final":
+                st.caption(f"Final Answer: {parsed.get('answer', '')}")
+
+
+def render_week9_tab() -> None:
+    st.caption(
+        "Read-only viewer over the real MCP artifacts this week produced — "
+        "`agent_diff.txt`, `config_diff.txt`, `wire.json`, `risk_note.md`, and the captured "
+        "query/error transcripts under `traces/mcp/`. No LLM calls and no MCP server "
+        "processes are started by opening this page."
+    )
+
+    st.subheader("Tool discovery — before vs after adding server two")
+    discovery = load_json(str(MCP_DIR / "discovery.json"))
+    if discovery:
+        cols = st.columns(2)
+        with cols[0]:
+            st.metric("Tools before", len(discovery["before"]))
+            for t in discovery["before"]:
+                st.write(f"- `{t['name']}` ({t['server']})")
+        with cols[1]:
+            st.metric("Tools after", len(discovery["after"]))
+            for t in discovery["after"]:
+                st.write(f"- `{t['name']}` ({t['server']})")
+    else:
+        st.info("No `traces/mcp/discovery.json` found.")
+
+    st.divider()
+    st.subheader("Requirement 2 — the agent module didn't change")
+    diff_file = ROOT / "agent_diff.txt"
+    config_diff_file = ROOT / "config_diff.txt"
+    col_a, col_b = st.columns(2)
+    with col_a:
+        st.markdown("**`agent_diff.txt`**")
+        if diff_file.exists():
+            st.code(diff_file.read_text(encoding="utf-8"), language="text")
+    with col_b:
+        st.markdown("**`config_diff.txt`**")
+        if config_diff_file.exists():
+            st.code(config_diff_file.read_text(encoding="utf-8"), language="diff")
+
+    st.divider()
+    st.subheader("Requirement 1 — one real query against each server")
+    q1 = load_json(str(MCP_DIR / "query_server_one.json"))
+    q2 = load_json(str(MCP_DIR / "query_server_two.json"))
+    col_q1, col_q2 = st.columns(2)
+    with col_q1:
+        st.markdown("### server one — policy-search")
+        if q1:
+            st.write(f"**Q:** {q1['question']}")
+            st.success(q1["final_answer"])
+            st.caption(f"{q1['iterations']} laps · ${q1['usage']['cost_usd']:.6f} · "
+                      f"{q1['usage']['wall_seconds']:.1f}s")
+            render_mcp_steps(q1["steps"])
+    with col_q2:
+        st.markdown("### server two — claims-system")
+        if q2:
+            st.write(f"**Q:** {q2['question']}")
+            st.success(q2["final_answer"])
+            st.caption(f"{q2['iterations']} laps · ${q2['usage']['cost_usd']:.6f} · "
+                      f"{q2['usage']['wall_seconds']:.1f}s")
+            render_mcp_steps(q2["steps"])
+
+    st.divider()
+    st.subheader("Requirement 5 — docstring + error rewrite, before vs after")
+    err_before = load_json(str(MCP_DIR / "error_before.json"))
+    err_after = load_json(str(MCP_DIR / "error_after.json"))
+    if err_before and err_after:
+        m1, m2, m3 = st.columns(3)
+        m1.metric("Laps", err_after["iterations"],
+                  delta=int(err_after["iterations"]) - int(err_before["iterations"]),
+                  delta_color="inverse")
+        m2.metric("Cost", f"${err_after['usage']['cost_usd']:.6f}",
+                  delta=f"{err_after['usage']['cost_usd'] - err_before['usage']['cost_usd']:.6f}",
+                  delta_color="inverse")
+        m3.metric("Wall time", f"{err_after['usage']['wall_seconds']:.1f}s",
+                  delta=f"{err_after['usage']['wall_seconds'] - err_before['usage']['wall_seconds']:.1f}s",
+                  delta_color="inverse")
+        col_before, col_after = st.columns(2)
+        with col_before:
+            st.markdown("### Before — `\"Error 3\"`")
+            st.error(err_before["final_answer"])
+            render_mcp_steps(err_before["steps"])
+        with col_after:
+            st.markdown("### After — recoverable error")
+            st.success(err_after["final_answer"])
+            render_mcp_steps(err_after["steps"])
+    else:
+        st.info("No `traces/mcp/error_before.json` / `error_after.json` found.")
+
+    st.divider()
+    st.subheader("Requirement 4 — raw JSON-RPC, annotated")
+    wire = load_json(str(ROOT / "wire.json"))
+    if wire:
+        st.caption(wire.get("_readme", ""))
+        for exchange in wire["exchanges"]:
+            with st.expander(exchange["step"], expanded=False):
+                st.markdown("**Request**")
+                st.code(json.dumps(exchange["request"], indent=1), language="json")
+                st.markdown("**Response**")
+                st.code(json.dumps(exchange["response"], indent=1), language="json")
+                if exchange.get("_annotations"):
+                    st.markdown("**Annotations**")
+                    for field, note in exchange["_annotations"].items():
+                        st.write(f"- **{field}**: {note}")
+        st.info(wire.get("_where_the_model_runs", ""))
+
+    st.divider()
+    st.subheader("Requirement 6 — the risk note")
+    risk_file = ROOT / "risk_note.md"
+    if risk_file.exists():
+        st.markdown(risk_file.read_text(encoding="utf-8"))
+
+
 st.title("🏁 Claims Agent — Trace Viewer")
-tab7, tab8 = st.tabs(["Week 7 — Agent vs Workflow", "Week 8 — Trajectory Eval"])
+tab7, tab8, tab9 = st.tabs(["Week 7 — Agent vs Workflow", "Week 8 — Trajectory Eval",
+                           "Week 9 — MCP"])
 with tab7:
     render_week7_tab()
 with tab8:
     render_week8_tab()
+with tab9:
+    render_week9_tab()

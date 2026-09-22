@@ -1,0 +1,10 @@
+{
+  "before": [
+    {"name": "search_policy", "server": "policy-search"}
+  ],
+  "after": [
+    {"name": "search_policy", "server": "policy-search"},
+    {"name": "get_claim_status", "server": "claims-system"},
+    {"name": "get_adjuster_notes", "server": "claims-system"}
+  ]
+}

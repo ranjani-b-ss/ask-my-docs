@@ -1,0 +1,32 @@
+Requirement 2 — proof that adding server two changed zero lines in the agent module.
+
+Method: src/agent/mcp_agent.py and src/agent/mcp_client.py were snapshotted immediately
+after server one (policy-search) alone was working end-to-end, BEFORE mcp_config.json was
+edited to add server two (claims-system). `diff -u` below compares that snapshot against the
+current files, taken AFTER server two was added to the config and the agent was re-run
+against it successfully (see the tool count and the get_claim_status call in the trace).
+
+`diff`'s own exit code is the proof: 0 means "these files are byte-for-byte identical" — 1
+would mean a difference was found. Both diffs below report empty output and exit code 0.
+
+--- diff: src/agent/mcp_agent.py (server-one-only vs server-one+two) ---
+(no output — files are identical)
+exit code: 0
+
+--- diff: src/agent/mcp_client.py (server-one-only vs server-one+two) ---
+(no output — files are identical)
+exit code: 0
+
+SHA-256, for a second, independent check that this isn't an empty-diff artifact of comparing
+a file to itself by accident:
+
+  before  9947420fc65d6b84ac76fc15d49d43a93798fd85ca832a1d3d8d12ad640683d8  mcp_agent.py
+  after   9947420fc65d6b84ac76fc15d49d43a93798fd85ca832a1d3d8d12ad640683d8  mcp_agent.py
+  before  fe34b50094bd6f3416e3e23c78d62e394a87b46a4c05cbe5393d996723dfbb4a  mcp_client.py
+  after   fe34b50094bd6f3416e3e23c78d62e394a87b46a4c05cbe5393d996723dfbb4a  mcp_client.py
+
+The only file that changed between the two states is mcp_config.json — see config_diff.txt.
+Neither src/agent/mcp_agent.py nor src/agent/mcp_client.py contains the string
+"claims-system", "get_claim_status", or "get_adjuster_notes" anywhere — grep confirms zero
+matches in both files, which is what makes the zero-line diff possible in the first place:
+there was nothing server-specific in either file to have to not-change.

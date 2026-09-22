@@ -10,3 +10,5 @@ requests>=2.32             # talks to the local Ollama HTTP API
 anthropic>=0.40        # only needed for LLM_PROVIDER=anthropic
 python-dotenv>=1.0     # loads .env so keys never live in the code
 pytest>=8.0             # tests/ — deterministic logic only, no LLM calls, no network
+mcp>=1.0                # Week 9 — the client SDK: ClientSession, stdio transport
+fastmcp>=2.0            # Week 9 — server framework for src/mcp_servers/*.py
