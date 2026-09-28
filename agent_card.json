@@ -1,0 +1,37 @@
+{
+  "_readme": "Week 10 bonus — the AgentCard this orchestrator (src/agent/orchestrator.py) would advertise if it were reachable over A2A instead of called in-process by eval/race_multiagent.py. Nothing here is served over a network in this exercise; this file is the card a real A2A deployment's /.well-known/agent.json would return, hand-written against the same shape.",
+  "name": "motor-claims-triage-team",
+  "description": "A manager plus two narrow specialists that triage a motor own-damage claim: decides PAYABLE, NOT_PAYABLE, or REFERRED, and the exact amount owed. Raced against a single hand-built ReAct agent on the same 10 claims — see race_table.md before assuming this is the one to keep.",
+  "url": "https://claims.internal.example/a2a/v1",
+  "provider": {
+    "organization": "Team JDC — AI Engineering League, Week 10 Task Set D",
+    "url": "https://softsuave.internal.example"
+  },
+  "version": "0.1.0",
+  "documentationUrl": "https://claims.internal.example/docs/orchestrator",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": true
+  },
+  "defaultInputModes": ["application/json"],
+  "defaultOutputModes": ["application/json", "text/plain"],
+  "authentication": {
+    "schemes": ["bearer"],
+    "_note": "Not implemented in this exercise — src/mcp_servers/gateway_server.py's token scoping (Week 9 bonus) is the closest thing actually built to this; a real A2A deployment would put an equivalent scoped token here, not leave the team open."
+  },
+  "skills": [
+    {
+      "id": "triage-motor-claim",
+      "name": "Triage a motor own-damage claim",
+      "description": "Given a claim_id, returns a coverage decision (PAYABLE/NOT_PAYABLE/REFERRED) and, if payable, the exact amount owed — with the facts-specialist summary and the coverage-specialist's cited exclusion clause attached as supporting detail.",
+      "tags": ["insurance", "claims-triage", "motor"],
+      "examples": [
+        "Triage claim C-005.",
+        "Is claim C-008 payable, and if so for how much?"
+      ],
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json", "text/plain"]
+    }
+  ]
+}

@@ -548,12 +548,107 @@ def render_week9_tab() -> None:
         st.dataframe(display_rows, use_container_width=True, hide_index=True)
 
 
+def render_week10_tab() -> None:
+    st.caption(
+        "Read-only viewer over the real Week 10 race — `race_table.md`, `handoffs.log`, "
+        "`failure_case.md`, `verdict.md`, and `race_multiagent_raw.json`, all produced by "
+        "`eval/race_multiagent.py` against the real single agent (`react_agent.py`) and the "
+        "real manager+2-worker orchestrator (`src/agent/orchestrator.py`). No LLM calls "
+        "happen here."
+    )
+
+    st.subheader("The race — single agent vs orchestrator, same 10 claims")
+    race_table_file = ROOT / "race_table.md"
+    if race_table_file.exists():
+        st.markdown(race_table_file.read_text(encoding="utf-8"))
+    else:
+        st.info("No `race_table.md` found — run `python eval/race_multiagent.py` first.")
+
+    st.divider()
+    st.subheader("Per-claim detail — gold vs both arms")
+    raw = load_json(str(ROOT / "race_multiagent_raw.json"))
+    cases = {}
+    if RACE_CASES.exists():
+        cases = {c["claim_id"]: c for c in yaml.safe_load(RACE_CASES.read_text())["cases"]}
+    if raw:
+        agent_by_id = {r["claim_id"]: r for r in raw["agent"]}
+        orch_by_id = {r["claim_id"]: r for r in raw["orchestrator"]}
+        rows = []
+        for cid in sorted(set(agent_by_id) | set(orch_by_id)):
+            g = cases.get(cid, {})
+            a, o = agent_by_id.get(cid, {}), orch_by_id.get(cid, {})
+            rows.append({
+                "claim": cid,
+                "gold": f"{g.get('status')}/{g.get('payable_amount')}",
+                "agent": f"{a.get('status')}/{a.get('payable_amount')}",
+                "orchestrator": f"{o.get('status')}/{o.get('payable_amount')}"
+                               + (" (degraded)" if o.get("degraded") else ""),
+                "agent tokens": a.get("usage", {}).get("total_tokens"),
+                "orchestrator tokens": o.get("usage", {}).get("total_tokens"),
+            })
+        st.dataframe(rows, use_container_width=True, hide_index=True)
+
+        with st.expander("Orchestrator rationale per claim", expanded=False):
+            for cid in sorted(orch_by_id):
+                o = orch_by_id[cid]
+                st.markdown(f"**{cid}** — {o.get('status')}/{o.get('payable_amount')}")
+                st.caption(f"plan: {o.get('plan', '')}")
+                st.write(o.get("rationale", ""))
+    else:
+        st.info("No `race_multiagent_raw.json` found.")
+
+    st.divider()
+    st.subheader("Hand-off cost — where the orchestrator's tokens actually go")
+    handoffs_file = ROOT / "handoffs.log"
+    if handoffs_file.exists():
+        handoff_rows = [json.loads(line)
+                        for line in handoffs_file.read_text(encoding="utf-8").splitlines()
+                        if line.strip()]
+        by_name: dict[str, int] = {}
+        for h in handoff_rows:
+            by_name[h["handoff"]] = by_name.get(h["handoff"], 0) + h["total_tokens"]
+        st.bar_chart(by_name)
+        st.dataframe(handoff_rows, use_container_width=True, hide_index=True)
+    else:
+        st.info("No `handoffs.log` found.")
+
+    st.divider()
+    st.subheader("Requirement 4 — injected worker failure")
+    failure_file = ROOT / "failure_case.md"
+    if failure_file.exists():
+        st.markdown(failure_file.read_text(encoding="utf-8"))
+    else:
+        st.info("No `failure_case.md` found.")
+
+    st.divider()
+    st.subheader("Verdict")
+    verdict_file = ROOT / "verdict.md"
+    if verdict_file.exists():
+        st.markdown(verdict_file.read_text(encoding="utf-8"))
+    else:
+        st.info("No `verdict.md` found.")
+
+    st.divider()
+    st.subheader("Bonus — AgentCard and the A2A task lifecycle")
+    card = load_json(str(ROOT / "agent_card.json"))
+    if card:
+        st.json(card)
+    week10_file = ROOT / "WEEK10.md"
+    if week10_file.exists():
+        text = week10_file.read_text(encoding="utf-8")
+        marker = "## Bonus"
+        if marker in text:
+            st.markdown(text[text.index(marker):])
+
+
 st.title("🏁 Claims Agent — Trace Viewer")
-tab7, tab8, tab9 = st.tabs(["Week 7 — Agent vs Workflow", "Week 8 — Trajectory Eval",
-                           "Week 9 — MCP"])
+tab7, tab8, tab9, tab10 = st.tabs(["Week 7 — Agent vs Workflow", "Week 8 — Trajectory Eval",
+                                  "Week 9 — MCP", "Week 10 — Multi-Agent Race"])
 with tab7:
     render_week7_tab()
 with tab8:
     render_week8_tab()
 with tab9:
     render_week9_tab()
+with tab10:
+    render_week10_tab()
