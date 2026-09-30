@@ -1,6 +1,6 @@
 """The only place that knows which LLM vendor is in use.
 
-Four providers, same interface, chosen by ``LLM_PROVIDER`` in .env:
+Five providers, same interface, chosen by ``LLM_PROVIDER`` in .env:
 
 ``ollama``     local, free, offline, no key. Slower and weaker at following the citation
                format, so the citation-verification gate in generator.py earns its keep.
@@ -8,7 +8,12 @@ Four providers, same interface, chosen by ``LLM_PROVIDER`` in .env:
 ``anthropic``  hosted, costs per call, needs a key. Strongest at the supersession rule —
                noticing that an endorsement overrides a base clause and saying so.
 ``gemini``     hosted, costs per call, needs a key. Generous free tier, so it is the
-               cheapest way to see real generated answers.
+               cheapest way to see real generated answers — until its per-day quota runs
+               out (see GEMINI_MODEL's own comment in config.py), which is why groq exists.
+``groq``       hosted, OpenAI-compatible chat API, needs a key. Fast inference, added
+               specifically as a fallback for when Gemini's daily quota is exhausted.
+               Pricing is NOT verified for this provider (see PRICING_PER_MILLION_TOKENS
+               in config.py) — its cost_usd is a placeholder 0.0, not a measured figure.
 
 Retrieval quality is unaffected by this choice — only the wording of the final answer is.
 That is worth understanding: if the app returns a wrong figure, changing provider will not
@@ -32,6 +37,9 @@ from .config import (
     GEMINI_BASE_URL,
     GEMINI_MODEL,
     GEMINI_TIMEOUT,
+    GROQ_BASE_URL,
+    GROQ_MODEL,
+    GROQ_TIMEOUT,
     LLM_PROVIDER,
     OLLAMA_MODEL,
     OLLAMA_TIMEOUT,
@@ -193,6 +201,95 @@ def openai_chat_with_usage(system: str, user: str, model: str = OPENAI_MODEL) ->
         raise LLMError("OpenAI rate limit or quota exceeded (429).")
     response.raise_for_status()
     body = response.json()
+    u = body.get("usage", {})
+    usage = {"prompt_tokens": u.get("prompt_tokens", 0),
+              "completion_tokens": u.get("completion_tokens", 0),
+              "total_tokens": u.get("total_tokens", 0)}
+    return body["choices"][0]["message"]["content"].strip(), usage
+
+
+# --------------------------------------------------------------------------------- groq
+# Groq's Chat Completions endpoint is OpenAI-compatible — same request/response shape as
+# openai_chat above, just a different base URL, key, and model. Added 2026-09-29 as a
+# fallback for when Gemini's per-day quota (see GEMINI_MODEL's comment) runs out mid-work.
+#
+# Models returned by GET /v1/models were checked live before picking GROQ_MODEL's default
+# (see config.py) — this key's catalog does not include any "llama-*" ids, which earlier
+# Groq documentation would suggest; verify with the same GET before assuming a model name.
+#
+# gpt-oss models return an extra "reasoning" field on the message alongside "content" —
+# confirmed live, a real chat completion with content="OK" alongside a populated
+# "reasoning" field. Only "content" is extracted below, exactly like every other provider.
+#
+# A first version had no retry/backoff on 429 at all, unlike gemini_chat's ladder — and a
+# live race against this key immediately proved why that matters: this key's real limit is
+# 8,000 tokens/minute (confirmed from the 429 body: "Limit 8000, Used 7519, Requested
+# 2111"), far tighter than it looks from a handful of quick manual tests. react_agent.py's
+# per-lap transcript resend burns that budget fast, and with no backoff the loop's 12
+# max_iterations all failed within about a second each, spending zero real work. Groq's
+# 429 response carries a standard ``retry-after`` header (confirmed live: 13s on a real
+# 429) — honoured below the same way _gemini_retry_delay honours Gemini's RetryInfo.
+
+_GROQ_BACKOFF_ATTEMPTS = 3
+
+
+def groq_key() -> str | None:
+    key = os.environ.get("GROQ_API_KEY", "").strip()
+    return key or None
+
+
+def groq_status(model: str = GROQ_MODEL) -> ProviderStatus:
+    if not groq_key():
+        return ProviderStatus(
+            False,
+            "GROQ_API_KEY is not set. Put it in .env (see .env.example) — the app reads "
+            "it from the environment and never stores it.",
+        )
+    return ProviderStatus(True, f"Groq key detected · model {model}")
+
+
+def _groq_request(system: str, user: str, model: str, attempt: int = 0) -> dict:
+    key = groq_key()
+    if not key:
+        raise LLMError("GROQ_API_KEY is not set.")
+
+    response = requests.post(
+        f"{GROQ_BASE_URL}/chat/completions",
+        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+        json={
+            "model": model,
+            "messages": [
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+            "temperature": 0.0,
+        },
+        timeout=GROQ_TIMEOUT,
+    )
+    if response.status_code == 401:
+        raise LLMError("Groq rejected the key (401). Check GROQ_API_KEY.")
+    if response.status_code == 429:
+        # retry-after is in seconds, straight from the header — no RetryInfo digging
+        # needed the way Gemini's error body requires.
+        retry_after = min(60.0, float(response.headers.get("retry-after", 20)))
+        if attempt < _GROQ_BACKOFF_ATTEMPTS:
+            time.sleep(retry_after + 0.5)
+            return _groq_request(system, user, model, attempt=attempt + 1)
+        raise LLMError(
+            f"Groq rate limit exceeded (429) on {_GROQ_BACKOFF_ATTEMPTS + 1} attempts. "
+            f"{response.text[:200]}"
+        )
+    response.raise_for_status()
+    return response.json()
+
+
+def groq_chat(system: str, user: str, model: str = GROQ_MODEL) -> str:
+    body = _groq_request(system, user, model)
+    return body["choices"][0]["message"]["content"].strip()
+
+
+def groq_chat_with_usage(system: str, user: str, model: str = GROQ_MODEL) -> tuple[str, dict]:
+    body = _groq_request(system, user, model)
     u = body.get("usage", {})
     usage = {"prompt_tokens": u.get("prompt_tokens", 0),
               "completion_tokens": u.get("completion_tokens", 0),
@@ -522,7 +619,7 @@ def gemini_chat_with_usage(
 
 # ------------------------------------------------------------------------------ dispatch
 
-PROVIDERS = ("ollama", "openai", "anthropic", "gemini")
+PROVIDERS = ("ollama", "openai", "anthropic", "gemini", "groq")
 
 
 def provider_name() -> str:
@@ -537,6 +634,8 @@ def status(provider: str | None = None) -> ProviderStatus:
         return anthropic_status()
     if name == "gemini":
         return gemini_status()
+    if name == "groq":
+        return groq_status()
     return ollama_status()
 
 
@@ -548,6 +647,8 @@ def is_ready(provider: str | None = None) -> bool:
         return anthropic_status().ready
     if name == "gemini":
         return gemini_status().ready
+    if name == "groq":
+        return groq_status().ready
     return ollama_has_model(OLLAMA_MODEL)
 
 
@@ -557,6 +658,7 @@ def default_model(provider: str | None = None) -> str:
         "openai": OPENAI_MODEL,
         "anthropic": ANTHROPIC_MODEL,
         "gemini": GEMINI_MODEL,
+        "groq": GROQ_MODEL,
     }.get(name, OLLAMA_MODEL)
 
 
@@ -576,6 +678,8 @@ def call_params(provider: str | None = None) -> dict:
         return {"max_tokens": ANTHROPIC_MAX_TOKENS, "thinking": "default"}
     if name == "gemini":
         return {"temperature": 0.0}
+    if name == "groq":
+        return {"temperature": 0.0}
     return {"temperature": 0.0, "num_ctx": 8192, "top_p": 0.9}
 
 
@@ -587,6 +691,8 @@ def chat(system: str, user: str, provider: str | None = None, model: str | None 
         return anthropic_chat(system, user, model or ANTHROPIC_MODEL)
     if name == "gemini":
         return gemini_chat(system, user, model or GEMINI_MODEL)
+    if name == "groq":
+        return groq_chat(system, user, model or GROQ_MODEL)
     if name == "ollama":
         return ollama_chat(system, user, model or OLLAMA_MODEL)
     raise LLMError(
@@ -612,6 +718,8 @@ def chat_with_usage(
         return anthropic_chat_with_usage(system, user, model or ANTHROPIC_MODEL)
     if name == "gemini":
         return gemini_chat_with_usage(system, user, model or GEMINI_MODEL)
+    if name == "groq":
+        return groq_chat_with_usage(system, user, model or GROQ_MODEL)
     if name == "ollama":
         return ollama_chat_with_usage(system, user, model or OLLAMA_MODEL)
     raise LLMError(

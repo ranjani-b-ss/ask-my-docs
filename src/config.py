@@ -66,9 +66,9 @@ RERANK_MODEL = "Xenova/ms-marco-MiniLM-L-6-v2"  # cross-encoder, ~90MB
 BGE_QUERY_PREFIX = "Represent this sentence for searching relevant passages: "
 
 # --- Generation ---
-# "ollama" (local, free, no key) or "openai" / "anthropic" / "gemini" (hosted, each needs
-# its own key in .env). If the selected provider is unreachable the app degrades to
-# retrieval-only mode and quotes the winning passage instead of writing prose.
+# "ollama" (local, free, no key) or "openai" / "anthropic" / "gemini" / "groq" (hosted,
+# each needs its own key in .env). If the selected provider is unreachable the app degrades
+# to retrieval-only mode and quotes the winning passage instead of writing prose.
 LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "ollama").strip().lower()
 
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434").strip()
@@ -103,6 +103,17 @@ GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta"
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash").strip()
 GEMINI_TIMEOUT = 60
 
+# Groq — hosted, OpenAI-compatible chat API, generous free tier, notably fast inference.
+# Added 2026-09-29 specifically because the Gemini free tier's per-day request quota (see
+# GEMINI_MODEL's own comment) kept blocking work mid-session. "openai/gpt-oss-120b" was
+# verified live (GET /v1/models listed it, a real chat completion returned real content)
+# before being set here — same discipline as GEMINI_MODEL's pin. Note this model returns a
+# separate "reasoning" field alongside "content" in its response message; only "content" is
+# extracted below, same as every other provider's chat function.
+GROQ_BASE_URL = "https://api.groq.com/openai/v1"
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b").strip()
+GROQ_TIMEOUT = 60
+
 # --- Pricing (Week 7) ---
 # USD per 1,000,000 tokens, (input, output). REFERENCE VALUES, not fetched live — vendors
 # change prices without notice and "flash-lite-latest" is a moving alias, so no number here
@@ -122,6 +133,15 @@ PRICING_PER_MILLION_TOKENS = {
     ("anthropic", "claude-opus"): (15.00, 75.00),
     ("anthropic", "claude"): (3.00, 15.00),       # fallback for other Claude models
     ("ollama", ""): (0.0, 0.0),                    # local inference, no per-token cost
+    # Left at 0.0/0.0 as an explicit placeholder, not a checked rate: unlike every other
+    # row in this table, Groq's actual per-token pricing was never verified against
+    # console.groq.com/pricing before this provider was added (2026-09-29, mid-session, to
+    # route around Gemini's exhausted daily quota) — asserting a plausible-looking number
+    # here would be exactly the "another estimate stacked on an estimate" this table's own
+    # docstring warns against. Whether this specific key is on a free or paid tier is also
+    # unverified. Any cost_usd this provider reports is 0.0 by construction, not a measured
+    # figure — check the real rate and this key's tier before trusting that number.
+    ("groq", ""): (0.0, 0.0),
 }
 
 
