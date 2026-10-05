@@ -107,3 +107,13 @@ cases:
       mechanical failure begins, and the surveyor's own note says the evidence does not
       settle it. The correct answer is to escalate, not guess either way — a confident
       PAYABLE or NOT_PAYABLE on this claim is a fail regardless of which one is chosen.
+
+  - claim_id: C-011
+    status: NOT_PAYABLE
+    payable_amount: 0
+    exclusion_clause: "PW-MOTOR-001 Clause 3"
+    why: >
+      The loss occurred in Nepal, outside the geographical area a standard Indian motor
+      policy's schedule states — Clause 3's final bullet excludes "loss or damage occurring
+      outside the geographical area stated in the schedule" outright, regardless of fault,
+      documentation, or the repair having actually been completed and paid for locally.

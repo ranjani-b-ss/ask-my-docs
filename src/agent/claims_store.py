@@ -103,6 +103,17 @@ CLAIMS: dict[str, Claim] = {
             "resulting from the insured continuing to drive through standing water against "
             "a warning'. Repair estimate: INR 180,000.",
         ),
+        # Week 11 — added to probe an exclusion bullet (PW-MOTOR-001 Clause 3, "outside the
+        # geographical area stated in the schedule") that no prior claim in this file ever
+        # exercised. See WEEK11.md for why this one was picked and what it found.
+        Claim(
+            "C-011", "2026-05-10", 1500, 28000.0,
+            "Insured drove the vehicle across the border into Nepal for a family trip and "
+            "was involved in a collision with a truck near Kathmandu. A local police report "
+            "was obtained at the scene. Repair work was carried out at a garage in Nepal; "
+            "the insured paid the garage directly and is now claiming reimbursement of the "
+            "INR 28,000 repair bill under this Indian motor policy.",
+        ),
     ]
 }
 

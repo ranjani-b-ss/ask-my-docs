@@ -16,6 +16,7 @@ step visible" checkable rather than asserted.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import time
@@ -54,9 +55,13 @@ know nothing excludes a claim is to check, not to notice that nothing obviously 
 was mentioned — and REFERRED without ever checking is a guess wearing a caution label, not \
 an honest one. If something in the notes suggests a specific exclusion — no valid licence, \
 alcohol or drugs, unlicensed or unauthorised use such as hire or reward, mechanical or \
-electrical breakdown with no external cause, damage limited to tyres alone, or a genuinely \
+electrical breakdown with no external cause, damage limited to tyres alone, the vehicle \
+taken, driven, or repaired outside India or across a national border, or a genuinely \
 ambiguous cause — name that fact directly in your search query; otherwise search generally \
-for what is not covered.
+for what is not covered. For the geographical case specifically, search using the policy's \
+own wording — "outside the geographical area stated in the schedule" — not a paraphrase \
+like "abroad" or "cross-border": a paraphrase can fail to retrieve the clause even when it \
+exists and says exactly that.
 3. A clause of the form "X is excluded UNLESS Y" only avoids the exclusion when Y is true \
 of THESE facts. Check Y against the claim before applying any exception inside an \
 exclusion — never grant a partial or reduced payout under an exception whose own condition \
@@ -84,6 +89,11 @@ compute_payout's returned number into your Final Answer. A Final Answer whose pa
 does not match compute_payout's own returned value will be rejected.
 9. Output exactly one Thought/Action block or one Thought/Final Answer block per turn. No \
 text before "Thought:" and nothing after the JSON.
+10. Never state a clause, a figure, an endorsement, or an exception you have not seen \
+verbatim inside a tool's Observation THIS run. If several search_policy calls in a row have \
+not returned a passage that directly answers what you are checking, stop searching and \
+reserve REFERRED, naming what you could not confirm — an invented clause stated with \
+confidence is a worse outcome than an honest "could not verify."
 """
 
 
@@ -96,6 +106,23 @@ def _tool_block() -> str:
 
 
 SYSTEM_PROMPT = SYSTEM_PROMPT_TEMPLATE.format(tool_block=_tool_block())
+
+# Week 11 — a trace that names "the prompt" without proving which text produced the
+# decision is not replayable (same discipline src/trace.py's own prompt_version/prompt_sha
+# pair already enforces for the Week 5 RAG path — this agent never had an equivalent until
+# now). PROMPT_VERSION is bumped by hand on a deliberate change; PROMPT_SHA is computed, not
+# typed, so an edit nobody bumped the version for still shows up as a hash mismatch in the
+# logs rather than silently passing as "v1" forever.
+#
+# v1 -> v2 (Week 11): rule 2 names the geographical-area exclusion explicitly and gives the
+# exact clause wording to search with — v1 left the agent to construct that query from the
+# claim notes' own vocabulary ("Nepal", "cross-border"), which measurably never retrieved
+# the governing chunk (see WEEK11.md / drill.md / trace.json — C-011, found via a real,
+# live failure, not asserted). Rule 10 is new: a hard stop on inventing clause text after
+# repeated failed searches — the SAME live trace shows the v1 agent fabricating a fictional
+# policy clause under exactly this pressure.
+PROMPT_VERSION = "v2"
+PROMPT_SHA = hashlib.sha256(SYSTEM_PROMPT.encode("utf-8")).hexdigest()[:12]
 
 
 def _find_json_object(text: str, after: str) -> tuple[dict | None, str]:
@@ -182,8 +209,15 @@ def run(
     provider: str | None = None,
     model: str | None = None,
     write_trace: bool = True,
+    submitted_by: str | None = None,
 ) -> dict:
-    """Triage one claim. Returns a result dict with the decision, usage, and every step."""
+    """Triage one claim. Returns a result dict with the decision, usage, and every step.
+
+    ``submitted_by`` is who filed the request — an adjuster id in production, a traffic
+    generator's synthetic name when building Week 11's log volume. Optional and unvalidated
+    on purpose: the field exists so a request can be found by requester later, not so this
+    function can enforce who is allowed to ask.
+    """
     usage = UsageAccumulator()
     if provider:
         usage.provider = provider
@@ -198,6 +232,13 @@ def run(
     steps: list[dict] = []
     last_payout_observation: float | None = None
     last_deductible_used: float | None = None
+    # Week 11 — cost/time broken down by stage (retrieval / generation / tools), not one
+    # lump sum. In this architecture ALL billed cost is generation (retrieval is local
+    # embedding+reranking, tools are pure Python arithmetic) — stage_seconds still separates
+    # wall-clock time three ways so a slow claim can be attributed to "the model thought
+    # for a while" versus "retrieval was slow" versus neither.
+    stage_seconds = {"retrieval": 0.0, "generation": 0.0, "tools": 0.0}
+    retrieved_chunk_ids: list[str] = []
     numbers_seen: set[float] = set()
     search_called = False
     payout_called = False
@@ -220,7 +261,9 @@ def run(
             "What is your next Thought and Action, or your Final Answer?"
         )
         try:
+            _t0 = time.perf_counter()
             raw = usage.call_llm(SYSTEM_PROMPT, user_turn)
+            stage_seconds["generation"] += time.perf_counter() - _t0
         except llm.LLMError as exc:
             # One lap's provider failure must not take down the claim, and must not take
             # down the whole 10-claim batch it is part of. The failed call still counts
@@ -348,6 +391,7 @@ def run(
 
         if parsed["kind"] == "action":
             tool_name, args = parsed["tool"], parsed["args"]
+            _t0 = time.perf_counter()
             try:
                 observation = tools.dispatch(tool_name, args)
                 if tool_name == "compute_payout":
@@ -361,9 +405,19 @@ def run(
                     search_called = True
                     for hit in observation:
                         numbers_seen.update(_numbers_in(hit.get("text", "")))
+                        if hit.get("chunk_id"):
+                            retrieved_chunk_ids.append(hit["chunk_id"])
                 obs_text = json.dumps(observation, default=str)
             except Exception as exc:                       # noqa: BLE001 — surfaced as text
                 obs_text = f"ERROR: {exc}"
+            # search_policy is the only tool here that leaves the Python process (an ONNX
+            # embed + rerank pass); get_claim and compute_payout are pure in-process
+            # dict/arithmetic work. Keeping them in separate buckets is what makes
+            # cost_by_stage.md's "retrieval" row mean something instead of being
+            # "everything that wasn't an LLM call."
+            stage_seconds["retrieval" if tool_name == "search_policy" else "tools"] += (
+                time.perf_counter() - _t0
+            )
             step["tool"] = tool_name
             step["tool_args"] = args
             step["observation"] = obs_text
@@ -393,16 +447,27 @@ def run(
             "rationale": f"Stopped before reaching a verified decision: {stop_reason}.",
         }
 
+    usage_dict = usage.as_dict()
     result = {
         "system": "agent",
         "claim_id": claim_id,
+        "submitted_by": submitted_by,
+        "prompt_version": PROMPT_VERSION,
+        "prompt_sha": PROMPT_SHA,
         "status": final_answer["status"],
         "payable_amount": final_answer.get("payable_amount"),
         "exclusion_clause": final_answer.get("exclusion_clause"),
         "rationale": final_answer.get("rationale"),
         "stop_reason": stop_reason,
         "iterations": iteration,
-        "usage": usage.as_dict(),
+        "usage": usage_dict,
+        "retrieved_chunk_ids": retrieved_chunk_ids,
+        "stage_seconds": {k: round(v, 3) for k, v in stage_seconds.items()},
+        # All billed cost in this architecture is generation — retrieval and tools never
+        # leave the local process or call a priced API. Stated explicitly here rather than
+        # left for cost_by_stage.md to assert without a field backing it up.
+        "stage_cost_usd": {"retrieval": 0.0, "generation": usage_dict["cost_usd"],
+                           "tools": 0.0},
         "steps": steps,
     }
     if write_trace:

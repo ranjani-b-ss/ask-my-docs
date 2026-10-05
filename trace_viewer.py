@@ -641,9 +641,106 @@ def render_week10_tab() -> None:
             st.markdown(text[text.index(marker):])
 
 
+def render_week11_tab() -> None:
+    st.caption(
+        "Read-only viewer over the real Week 11 observability work — `drill.md`, "
+        "`trace.json`, `cost_by_stage.md`, `tenx.md`, `suite_red.txt`/`suite_green.txt`, "
+        "and the live `traces/agent_traces.jsonl` population. No LLM calls happen here."
+    )
+
+    st.subheader("The support drill")
+    drill_file = ROOT / "drill.md"
+    if drill_file.exists():
+        st.markdown(drill_file.read_text(encoding="utf-8"))
+    else:
+        st.info("No `drill.md` found.")
+
+    st.divider()
+    st.subheader("The found trace — per-span latency, tokens, cost, chunk ids")
+    trace_json = load_json(str(ROOT / "trace.json"))
+    if trace_json:
+        u = trace_json["usage"]
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Status served", trace_json["status"])
+        c2.metric("Total tokens", f"{u['total_tokens']:,}")
+        c3.metric("Cost", f"${u['cost_usd']:.5f}")
+        c4.metric("Prompt version", trace_json.get("prompt_version", "?"))
+        st.caption(f"prompt_sha: `{trace_json.get('prompt_sha', '?')}` · "
+                  f"submitted_by: `{trace_json.get('submitted_by', '?')}` · "
+                  f"{trace_json.get('iterations')} laps · "
+                  f"{u['wall_seconds']:.1f}s wall")
+
+        ann = trace_json.get("_annotations", {})
+        if ann:
+            with st.expander("Annotations", expanded=True):
+                for k, v in ann.items():
+                    st.markdown(f"**{k}**")
+                    st.write(v)
+
+        st.markdown("**Per-span (per-lap) latency, tokens, cost**")
+        spans = trace_json.get("_spans", [])
+        if spans:
+            st.dataframe(spans, use_container_width=True, hide_index=True)
+
+        st.markdown("**Retrieved chunk ids, in order** — the chunk actually containing the "
+                   "missed exclusion (`PW-MOTOR-001::5`) never appears below:")
+        st.code(", ".join(trace_json.get("retrieved_chunk_ids", [])), language="text")
+
+        render_mcp_steps(trace_json.get("steps", []))
+    else:
+        st.info("No `trace.json` found.")
+
+    st.divider()
+    st.subheader("The eval case, and the suite RED -> GREEN")
+    col_a, col_b = st.columns(2)
+    with col_a:
+        st.markdown("**RED — before the fix (v1 prompt)**")
+        red_file = ROOT / "suite_red.txt"
+        if red_file.exists():
+            st.code(red_file.read_text(encoding="utf-8"), language="text")
+    with col_b:
+        st.markdown("**GREEN — after the fix (v2 prompt)**")
+        green_file = ROOT / "suite_green.txt"
+        if green_file.exists():
+            st.code(green_file.read_text(encoding="utf-8"), language="text")
+
+    st.divider()
+    st.subheader("Cost per query, by stage")
+    cost_file = ROOT / "cost_by_stage.md"
+    if cost_file.exists():
+        st.markdown(cost_file.read_text(encoding="utf-8"))
+
+    st.divider()
+    st.subheader("At 10x volume, what breaks first")
+    tenx_file = ROOT / "tenx.md"
+    if tenx_file.exists():
+        st.markdown(tenx_file.read_text(encoding="utf-8"))
+
+    st.divider()
+    st.subheader("Today's real log population (agent_traces.jsonl)")
+    all_rows = [json.loads(l) for l in (ROOT / "traces" / "agent_traces.jsonl")
+               .read_text(encoding="utf-8").splitlines() if l.strip()] \
+        if (ROOT / "traces" / "agent_traces.jsonl").exists() else []
+    today_rows = [r for r in all_rows if r.get("system") == "agent" and "submitted_by" in r]
+    if today_rows:
+        display = sorted(
+            [{"claim_id": r.get("claim_id"), "submitted_by": r.get("submitted_by"),
+             "status": r.get("status"), "prompt_version": r.get("prompt_version"),
+             "tokens": r.get("usage", {}).get("total_tokens"),
+             "cost_usd": r.get("usage", {}).get("cost_usd"),
+             "wall_s": r.get("usage", {}).get("wall_seconds")}
+            for r in today_rows],
+            key=lambda d: d["cost_usd"] or 0, reverse=True,
+        )
+        st.dataframe(display, use_container_width=True, hide_index=True)
+    else:
+        st.info("No Week 11-schema rows found in traces/agent_traces.jsonl yet.")
+
+
 st.title("🏁 Claims Agent — Trace Viewer")
-tab7, tab8, tab9, tab10 = st.tabs(["Week 7 — Agent vs Workflow", "Week 8 — Trajectory Eval",
-                                  "Week 9 — MCP", "Week 10 — Multi-Agent Race"])
+tab7, tab8, tab9, tab10, tab11 = st.tabs(
+    ["Week 7 — Agent vs Workflow", "Week 8 — Trajectory Eval", "Week 9 — MCP",
+     "Week 10 — Multi-Agent Race", "Week 11 — Observability"])
 with tab7:
     render_week7_tab()
 with tab8:
@@ -652,3 +749,5 @@ with tab9:
     render_week9_tab()
 with tab10:
     render_week10_tab()
+with tab11:
+    render_week11_tab()

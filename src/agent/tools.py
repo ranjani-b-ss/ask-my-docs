@@ -103,6 +103,7 @@ def search_policy(query: str, top_k: int = 3) -> list[dict]:
                       candidate_k=CANDIDATE_K, min_cosine=0.0, min_rerank_score=0.0)
     return [
         {
+            "chunk_id": hit.chunk_id,
             "document_id": hit.meta.get("document_id"),
             "effective_date": hit.meta.get("effective_date"),
             "section": hit.meta.get("section"),

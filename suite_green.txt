@@ -1,0 +1,22 @@
+
+PASS 1/1
+   1/11  C-001  (submitted_by=adjuster_priya_after-fix) ... FAIL  REFERRED    tokens=33686  $0.00598 50.3s
+   2/11  C-002  (submitted_by=adjuster_karthik_after-fix) ... PASS  PAYABLE     tokens=22520  $0.00383 12.3s
+   3/11  C-003  (submitted_by=adjuster_meena_after-fix) ... FAIL  REFERRED    tokens=20547  $0.00382 13.3s
+   4/11  C-004  (submitted_by=adjuster_rohit_after-fix) ... PASS  NOT_PAYABLE tokens=8948   $0.00154 43.6s
+   5/11  C-005  (submitted_by=adjuster_priya_after-fix) ... PASS  NOT_PAYABLE tokens=17715  $0.00300 57.9s
+   6/11  C-006  (submitted_by=adjuster_karthik_after-fix) ... PASS  NOT_PAYABLE tokens=13363  $0.00228 73.2s
+   7/11  C-007  (submitted_by=adjuster_meena_after-fix) ... PASS  PAYABLE     tokens=25465  $0.00491 93.8s
+   8/11  C-008  (submitted_by=adjuster_rohit_after-fix) ... PASS  PAYABLE     tokens=26629  $0.00446 65.7s
+   9/11  C-009  (submitted_by=adjuster_priya_after-fix) ... PASS  NOT_PAYABLE tokens=11938  $0.00208 7.4s
+  10/11  C-010  (submitted_by=adjuster_karthik_after-fix) ... FAIL  NOT_PAYABLE tokens=18348  $0.00335 11.4s
+  11/11  C-011  (submitted_by=adjuster_meena_after-fix) ... PASS  NOT_PAYABLE tokens=14027  $0.00237 43.0s
+
+============================================================
+SUITE RESULT: 8/11 passed
+============================================================
+  FAIL  C-001  got REFERRED/None  gold PAYABLE/7000
+  FAIL  C-003  got REFERRED/None  gold NOT_PAYABLE/0
+  FAIL  C-010  got NOT_PAYABLE/0.0  gold REFERRED/None
+
+[exited with code 1]
