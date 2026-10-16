@@ -1,0 +1,275 @@
+[
+ {
+  "claim": "CLM-2026-00601",
+  "kind": "before",
+  "loss_date": "2026-03-31",
+  "condition": "off",
+  "run": 1,
+  "trace_id": "cap_fe9cb679d85a",
+  "stop_reason": "final_answer",
+  "tokens": 18780,
+  "all_passed": false,
+  "failed": [
+   "citations_in_force"
+  ],
+  "exposed_to": [
+   "END-2026-01"
+  ],
+  "cited_not_yet_in_force": [
+   "END-2026-01"
+  ]
+ },
+ {
+  "claim": "CLM-2026-00601",
+  "kind": "before",
+  "loss_date": "2026-03-31",
+  "condition": "on",
+  "run": 1,
+  "trace_id": "cap_37b70ce5ba9a",
+  "stop_reason": "final_answer",
+  "tokens": 22641,
+  "all_passed": true,
+  "failed": [],
+  "exposed_to": [],
+  "cited_not_yet_in_force": []
+ },
+ {
+  "claim": "CLM-2026-00607",
+  "kind": "before",
+  "loss_date": "2026-04-30",
+  "condition": "off",
+  "run": 1,
+  "trace_id": "cap_e11ada5612ad",
+  "stop_reason": "final_answer",
+  "tokens": 20309,
+  "all_passed": false,
+  "failed": [
+   "citations_in_force"
+  ],
+  "exposed_to": [
+   "END-2026-02"
+  ],
+  "cited_not_yet_in_force": [
+   "END-2026-02"
+  ]
+ },
+ {
+  "claim": "CLM-2026-00607",
+  "kind": "before",
+  "loss_date": "2026-04-30",
+  "condition": "on",
+  "run": 1,
+  "trace_id": "cap_3d54fd2cb08c",
+  "stop_reason": "final_answer",
+  "tokens": 20548,
+  "all_passed": true,
+  "failed": [],
+  "exposed_to": [],
+  "cited_not_yet_in_force": []
+ },
+ {
+  "claim": "CLM-2026-00609",
+  "kind": "before",
+  "loss_date": "2026-04-30",
+  "condition": "off",
+  "run": 1,
+  "trace_id": "cap_dee1322666b0",
+  "stop_reason": "final_answer",
+  "tokens": 16043,
+  "all_passed": true,
+  "failed": [],
+  "exposed_to": [
+   "END-2026-02"
+  ],
+  "cited_not_yet_in_force": []
+ },
+ {
+  "claim": "CLM-2026-00609",
+  "kind": "before",
+  "loss_date": "2026-04-30",
+  "condition": "on",
+  "run": 1,
+  "trace_id": "cap_5a1b1769306e",
+  "stop_reason": "final_answer",
+  "tokens": 19903,
+  "all_passed": true,
+  "failed": [],
+  "exposed_to": [],
+  "cited_not_yet_in_force": []
+ },
+ {
+  "claim": "CLM-2026-00437",
+  "kind": "before",
+  "loss_date": "2026-03-19",
+  "condition": "off",
+  "run": 1,
+  "trace_id": "cap_edb5d178cffc",
+  "stop_reason": "final_answer",
+  "tokens": 26350,
+  "all_passed": true,
+  "failed": [],
+  "exposed_to": [
+   "END-2026-02"
+  ],
+  "cited_not_yet_in_force": []
+ },
+ {
+  "claim": "CLM-2026-00437",
+  "kind": "before",
+  "loss_date": "2026-03-19",
+  "condition": "on",
+  "run": 1,
+  "trace_id": "cap_98c4507191d1",
+  "stop_reason": "final_answer",
+  "tokens": 26335,
+  "all_passed": true,
+  "failed": [],
+  "exposed_to": [],
+  "cited_not_yet_in_force": []
+ },
+ {
+  "claim": "CLM-2026-00442",
+  "kind": "before",
+  "loss_date": "2026-02-27",
+  "condition": "off",
+  "run": 1,
+  "trace_id": "cap_dc06e9842086",
+  "stop_reason": "final_answer",
+  "tokens": 30271,
+  "all_passed": false,
+  "failed": [
+   "citations_in_force"
+  ],
+  "exposed_to": [
+   "END-2026-02"
+  ],
+  "cited_not_yet_in_force": [
+   "END-2026-02"
+  ]
+ },
+ {
+  "claim": "CLM-2026-00442",
+  "kind": "before",
+  "loss_date": "2026-02-27",
+  "condition": "on",
+  "run": 1,
+  "trace_id": "cap_6269e078b41a",
+  "stop_reason": "final_answer",
+  "tokens": 27275,
+  "all_passed": true,
+  "failed": [],
+  "exposed_to": [],
+  "cited_not_yet_in_force": []
+ },
+ {
+  "claim": "CLM-2026-00602",
+  "kind": "control",
+  "loss_date": "2026-04-01",
+  "condition": "off",
+  "run": 1,
+  "trace_id": "cap_d1cec3ab60f5",
+  "stop_reason": "final_answer",
+  "tokens": 20645,
+  "all_passed": true,
+  "failed": [],
+  "exposed_to": [],
+  "cited_not_yet_in_force": []
+ },
+ {
+  "claim": "CLM-2026-00602",
+  "kind": "control",
+  "loss_date": "2026-04-01",
+  "condition": "on",
+  "run": 1,
+  "trace_id": "cap_7168a82f9b77",
+  "stop_reason": "final_answer",
+  "tokens": 20009,
+  "all_passed": true,
+  "failed": [],
+  "exposed_to": [],
+  "cited_not_yet_in_force": []
+ },
+ {
+  "claim": "CLM-2026-00608",
+  "kind": "control",
+  "loss_date": "2026-05-01",
+  "condition": "off",
+  "run": 1,
+  "trace_id": "cap_3e571cf1cfbe",
+  "stop_reason": "final_answer",
+  "tokens": 20268,
+  "all_passed": true,
+  "failed": [],
+  "exposed_to": [],
+  "cited_not_yet_in_force": []
+ },
+ {
+  "claim": "CLM-2026-00608",
+  "kind": "control",
+  "loss_date": "2026-05-01",
+  "condition": "on",
+  "run": 1,
+  "trace_id": "cap_a2fe6fa1afa1",
+  "stop_reason": "budget_exceeded: max_wall_seconds (240.0s, elapsed 262.6s)",
+  "tokens": 17824,
+  "all_passed": false,
+  "failed": [
+   "citations_in_force"
+  ],
+  "exposed_to": [],
+  "cited_not_yet_in_force": []
+ },
+ {
+  "claim": "CLM-2026-00601",
+  "kind": "before",
+  "loss_date": "2026-03-31",
+  "condition": "off",
+  "run": 2,
+  "trace_id": "cap_7ad2b09d8813",
+  "stop_reason": "budget_exceeded: max_wall_seconds (240.0s, elapsed 245.8s)",
+  "tokens": 3780,
+  "all_passed": false,
+  "failed": [
+   "citations_in_force",
+   "numbers_distinct_and_correct"
+  ],
+  "exposed_to": [],
+  "cited_not_yet_in_force": []
+ },
+ {
+  "claim": "CLM-2026-00601",
+  "kind": "before",
+  "loss_date": "2026-03-31",
+  "condition": "on",
+  "run": 2,
+  "trace_id": "cap_dd66119217d3",
+  "stop_reason": "budget_exceeded: max_wall_seconds (240.0s, elapsed 254.0s)",
+  "tokens": 1775,
+  "all_passed": false,
+  "failed": [
+   "in_force_checked",
+   "citations_in_force",
+   "numbers_distinct_and_correct"
+  ],
+  "exposed_to": [],
+  "cited_not_yet_in_force": []
+ },
+ {
+  "claim": "CLM-2026-00607",
+  "kind": "before",
+  "loss_date": "2026-04-30",
+  "condition": "off",
+  "run": 2,
+  "trace_id": "cap_7098a818ae0c",
+  "stop_reason": "budget_exceeded: max_wall_seconds (240.0s, elapsed 250.2s)",
+  "tokens": 8726,
+  "all_passed": false,
+  "failed": [
+   "citations_in_force"
+  ],
+  "exposed_to": [
+   "END-2026-02"
+  ],
+  "cited_not_yet_in_force": []
+ }
+]

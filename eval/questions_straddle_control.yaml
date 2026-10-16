@@ -1,0 +1,26 @@
+# Week 12 bonus — NON-STRADDLING control questions, to measure what the loss-date filter costs.
+#
+# Authored 2026-10-13 from the corpus text alone, BEFORE any retrieval was run on them, so they could not be tuned
+# to the filter. Each asks about a clause that NO endorsement amends (checked against the raw corpus, not the
+# index-derived map, which misses 5 of 16 amendments — SEAMS.md S17). 15 questions here + the 7 `answerable` ones
+# in eval/questions.yaml = 22 control questions.
+#
+# `product` is the line the claim would be on when the question is asked. Questions answered by a document that
+# applies to every line (claims manual, definitions) are run under BOTH products.
+# `expect_text` must all appear in the hit chunk; validated against the index before any score is trusted.
+
+- {id: motor-perils, product: motor, expect_doc: PW-MOTOR-001, question: "Which events is the insured vehicle protected against?", expect_text: ["burglary, housebreaking, or theft"]}
+- {id: motor-basis, product: motor, expect_doc: PW-MOTOR-001, question: "On what basis is an own damage claim settled?", expect_text: ["Insured Declared Value (IDV) less depreciation"]}
+- {id: motor-documents, product: motor, expect_doc: PW-MOTOR-001, question: "What documents must accompany a motor claim?", expect_text: ["completed and signed claim form"]}
+- {id: motor-survey, product: motor, expect_doc: PW-MOTOR-001, question: "How quickly will the insurer send a surveyor after a motor claim is intimated?", expect_text: ["within **24 hours** of intimation"]}
+- {id: motor-ncb-transfer, product: motor, expect_doc: PW-MOTOR-001, question: "Can a No Claim Bonus be moved to a replacement vehicle?", expect_text: ["transferable by the Insured to a replacement vehicle"]}
+- {id: health-maternity-caesarean, product: health, expect_doc: PW-HEALTH-002, question: "How much is payable for a caesarean delivery?", expect_text: ["INR 75,000 for a caesarean"]}
+- {id: health-accident-exception, product: health, expect_doc: PW-HEALTH-002, question: "Does the initial waiting period apply when the admission follows an accident?", expect_text: ["does not apply to hospitalisation arising from an"]}
+- {id: health-specified-illnesses, product: health, expect_doc: PW-HEALTH-002, question: "Which conditions are on the list of specified illnesses?", expect_text: ["hernia of all types"]}
+- {id: health-cosmetic, product: health, expect_doc: PW-HEALTH-002, question: "Is cosmetic surgery excluded from the health policy?", expect_text: ["cosmetic or plastic surgery"]}
+- {id: health-hospitalisation-hours, product: health, expect_doc: PW-HEALTH-002, question: "How long must an inpatient stay last to count as hospitalisation?", expect_text: ["24 consecutive"]}
+- {id: claims-registration, product: all, expect_doc: PW-CLAIMS-003, question: "Within what time must a claim intimation be registered?", expect_text: ["one working day"]}
+- {id: claims-subrogation, product: all, expect_doc: PW-CLAIMS-003, question: "What must the insured sign when a third party is liable for the loss?", expect_text: ["letter of subrogation in favour of the Company"]}
+- {id: claims-ombudsman-deadline, product: all, expect_doc: PW-CLAIMS-003, question: "How long does a claimant have to approach the Ombudsman after the final response?", expect_text: ["within **one year**"]}
+- {id: defs-free-look, product: all, expect_doc: PW-DEFS-004, question: "How many days is the free look period?", expect_text: ["within 15 days of receipt"]}
+- {id: defs-cancellation-notice, product: all, expect_doc: PW-DEFS-004, question: "How much notice must the insured give to cancel a policy?", expect_text: ["7 days written notice"]}

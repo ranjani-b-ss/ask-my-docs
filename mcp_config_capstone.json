@@ -1,0 +1,14 @@
+{
+  "servers": [
+    {
+      "name": "policy-wording",
+      "command": "./.venv/bin/python",
+      "args": ["src/mcp_servers/wording_server.py"]
+    },
+    {
+      "name": "claims-system",
+      "command": "./.venv/bin/python",
+      "args": ["src/mcp_servers/claims_cap_server.py"]
+    }
+  ]
+}

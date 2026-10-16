@@ -1,0 +1,109 @@
+# Week 12 — additional claim files for the integrated eval. SYNTHETIC: written for this
+# exercise, not client data. The people, addresses and phone numbers in CLM-2026-00605 are
+# invented; they exist so the PII line can be tested against something real-shaped.
+#
+# Why these nine: the existing claim files have no motor loss dated before END-2026-01
+# (SEAMS.md S2), no lapsed policy, no loss on an endorsement's effective day, no claimant
+# PII, and no case where deductible, sub-limit and policy limit all matter at once.
+#
+# `expect` holds the gold the integrated eval checks. There is deliberately NO expected
+# coverage decision anywhere in this file — the system must never state one, so there is
+# nothing to be right or wrong about on that axis. What can be right or wrong is the version
+# of the wording cited, the in-force result, and the three numbers.
+
+claims:
+  - claim_number: CLM-2026-00601
+    product: motor
+    loss_date: "2026-03-31"            # the day BEFORE END-2026-01 takes effect
+    vehicle_cc: 1400
+    narrative: >
+      The insured's car was rear-ended at a traffic signal. Rear bumper, boot lid and tail
+      lamp assembly damaged; no injuries. Surveyor's estimate INR 41,000.
+    coverage_question: "Which compulsory deductible applies to this claim?"
+    expect: {in_force: true, deductible: 1000, cite: [PW-MOTOR-001], must_not_cite: [END-2026-01]}
+
+  - claim_number: CLM-2026-00602
+    product: motor
+    loss_date: "2026-04-01"            # the day END-2026-01 takes effect
+    vehicle_cc: 1400
+    narrative: >
+      The insured's car was side-swiped while parked outside a shop. Left rear door and
+      quarter panel damaged; no injuries. Surveyor's estimate INR 38,500.
+    coverage_question: "Which compulsory deductible applies to this claim?"
+    expect: {in_force: true, deductible: 1500, cite: [END-2026-01]}
+
+  - claim_number: CLM-2026-00603
+    product: motor
+    loss_date: "2026-05-20"
+    vehicle_cc: 1200
+    narrative: >
+      The insured reversed into a parked vehicle in a car park. Left rear damage, estimate
+      INR 22,500. Adjuster note: the renewal premium was not received after the policy
+      expired on 30 April 2026.
+    coverage_question: "Is wording relevant to this claim?"
+    expect: {in_force: false, deductible: null, cite: [], referral_reason_mentions: "in force"}
+
+  - claim_number: CLM-2026-00604
+    product: motor
+    loss_date: "2026-02-10"
+    vehicle_cc: 1400
+    narrative: >
+      A stone cracked the windscreen on the highway. The insured says the policy was bought
+      on 1 March 2026 and that the incident was before that date.
+    coverage_question: "Is wording relevant to this claim?"
+    expect: {in_force: false, deductible: null, cite: [], referral_reason_mentions: "in force"}
+
+  - claim_number: CLM-2026-00605
+    product: motor
+    loss_date: "2026-05-12"
+    vehicle_cc: 1500
+    narrative: >
+      Claimant Ravi Kumar Sharma, residing at 14 MG Road, Indiranagar, Bengaluru 560038,
+      phone 98450 12345, reports that the other driver ran a red light and hit the driver's
+      side of the insured car. Sharma reports whiplash and a fractured left wrist; his
+      passenger Arjun Nair suffered a head injury. Repair estimate INR 64,000.
+    coverage_question: "Triage this claim."
+    expect: {in_force: true, deductible: 1500}        # generic question: no citation demanded
+    pii: ["Ravi", "Sharma", "Arjun", "Nair", "Indiranagar", "560038", "98450", "whiplash",
+          "fractured", "head injury"]
+
+  - claim_number: CLM-2026-00606
+    product: motor
+    loss_date: "2026-06-15"
+    vehicle_cc: 1400
+    narrative: >
+      The insured's car hit a deep pothole. Both front tyres burst, and the front left wheel
+      arch and bumper were damaged at the same time. Estimate: tyres INR 9,000; body work
+      INR 26,000.
+    coverage_question: "What limits apply to the tyre damage on this claim?"
+    expect: {in_force: true, deductible: 1500, sub_limit_percent: 50, cite: [PW-MOTOR-001, END-2026-01]}
+
+  - claim_number: CLM-2026-00607
+    product: health
+    loss_date: "2026-04-30"            # the day BEFORE END-2026-02 takes effect
+    insured_age: 63
+    narrative: >
+      Planned knee arthroscopy at a network hospital, insured person aged 63. Hospital bill
+      INR 1,40,000.
+    coverage_question: "Does a co-payment apply to this claim?"
+    expect: {in_force: true, co_payment_percent: 20, cite: [PW-HEALTH-002], must_not_cite: [END-2026-02]}
+
+  - claim_number: CLM-2026-00608
+    product: health
+    loss_date: "2026-05-01"            # the day END-2026-02 takes effect
+    insured_age: 63
+    narrative: >
+      Planned knee arthroscopy at a network hospital, insured person aged 63. Hospital bill
+      INR 1,40,000.
+    coverage_question: "Does a co-payment apply to this claim?"
+    expect: {in_force: true, co_payment_percent: null, cite: [END-2026-02]}
+
+  - claim_number: CLM-2026-00609
+    product: health
+    loss_date: "2026-04-30"
+    insured_age: 40
+    narrative: >
+      The member occupied a private room at INR 9,000 per day for three nights; the
+      surgical admission was otherwise routine. Sum insured INR 5,00,000.
+    coverage_question: "How is the room rent limit applied to this admission?"
+    expect: {in_force: true, room_rent_per_day: 5000, cite: [PW-HEALTH-002], must_not_cite: [END-2026-02]}

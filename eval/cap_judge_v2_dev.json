@@ -1,0 +1,658 @@
+{
+ "natural:v1:CLM-2026-00437": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00437",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statements concerning the 1% room rent limit and the proportionate deduction rule are supported by passage [1], and the numerical figures are supported by the tool result for sub_limit.",
+    "error": "",
+    "seconds": 2.2
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00437": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00437",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "Every statement regarding the room rent limit, percentage, amount, and proportionate deduction mechanism is fully supported by passage [1] and the corresponding tool results.",
+    "error": "",
+    "seconds": 1.9
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00442": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00442",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement about the policy excluding non-medical items including gloves is supported by passage [1].",
+    "error": "",
+    "seconds": 1.4
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00442": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00442",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement correctly quotes the exclusion for non-medical items from passage [1], which is in force on the date of loss.",
+    "error": "",
+    "seconds": 1.4
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00455": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00455",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statements regarding Nil Depreciation cover and the standard 50% depreciation rate for plastic parts are fully supported by passages [1] and [2] respectively.",
+    "error": "",
+    "seconds": 1.3
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00455": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00455",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy was in force is supported by the tool result, and the statements regarding the 5-year age limit, claim count, and plastic parts are supported by passage [1].",
+    "error": "",
+    "seconds": 1.9
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00472": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00472",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "Every statement regarding the decision timelines and endorsement amendments is supported by passages [1] and [2].",
+    "error": "",
+    "seconds": 1.6
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00472": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00472",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "All statements about the decision timelines are supported by passage [1], which is in force on the date of loss.",
+    "error": "",
+    "seconds": 1.7
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00479": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00479",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states the policy limit is INR 10,00,000, which contradicts the policy limit tool result showing INR 5,00,000.",
+    "error": "",
+    "seconds": 1.6
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00479": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00479",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "the text asserts that intimation after 37 days fails the 30-day requirement (applying the rule to facts it does not fit, as intimation was 37 days while the requirement is 30 days), which is unsupported by passage [1] because [1] merely sets the 30-day requirement without the text itself applying it to the claim facts.",
+    "error": "",
+    "seconds": 1.4
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00483": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00483",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The text correctly points the adjuster to clause 6A in Endorsement 1 [1] regarding No Claim Bonus protection without making an ungrounded assertion about its outcome.",
+    "error": "",
+    "seconds": 1.4
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00483": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00483",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "every statement regarding the policy wording is directly supported by passage [1], which is in force on the date of loss.",
+    "error": "",
+    "seconds": 2.1
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00491": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00491",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "Every statement regarding policy wording, limits, and endorsements is fully supported by the policy passages and tool results.",
+    "error": "",
+    "seconds": 1.8
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00491": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00491",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The text makes no claims about policy wording, limits, periods, conditions, or exclusions.",
+    "error": "",
+    "seconds": 1.1
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00509": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00509",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "Every statement regarding policy wording is supported by passage [7].",
+    "error": "",
+    "seconds": 1.5
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00514": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00514",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "Every statement regarding policy terms, exclusions, and tool figures is supported by passage [1] or the tool results, and the text correctly points to the applicable exclusion without misapplying its facts or rules.",
+    "error": "",
+    "seconds": 1.7
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00521": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00521",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statements about coverage and limits are supported by policy passage [1] and the tool results confirming the policy is in force and retrieving the applicable limits.",
+    "error": "",
+    "seconds": 61.1
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00521": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00521",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "Every statement made about the policy wording, limits, and deductibles is fully supported by the policy passages and tool results.",
+    "error": "",
+    "seconds": 1.9
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00526": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00526",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The text makes no statements about policy wording or endorsements.",
+    "error": "",
+    "seconds": 1.4
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00526": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00526",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement accurately reflects the hospitalisation benefit provisions set out in passage [1].",
+    "error": "",
+    "seconds": 1.3
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00553": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00553",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "Every statement regarding the policy wording is directly supported by passage [1].",
+    "error": "",
+    "seconds": 2.2
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00553": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00553",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "every statement concerning the policy wording is supported by passage [1].",
+    "error": "",
+    "seconds": 1.7
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00578": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00578",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement regarding the general 20% co-payment rule for ages 61 and above is supported by passage [1], and the amendment changing the age threshold to 66 years and the co-payment percentage to 10% is supported by passage [2], both of which are in force on the date of loss.",
+    "error": "",
+    "seconds": 1.7
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00578": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00578",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "the 10% co-payment and the age threshold of 66 years are supported by passage [2], which is in force on the date of loss.",
+    "error": "",
+    "seconds": 1.3
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00584": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00584",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement concerning the 30-day reimbursement submission window is supported by passage [1], which is in force on the date of loss.",
+    "error": "",
+    "seconds": 1.3
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00584": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00584",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the reimbursement submission window is 30 days from discharge under Endorsement 2 is fully supported by passage [2].",
+    "error": "",
+    "seconds": 1.3
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00605": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00605",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "Every statement made about the policy wording, limits, and exclusions is supported by the corresponding policy passages or tool results.",
+    "error": "",
+    "seconds": 1.9
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00605": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00605",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "All statements concerning policy limits, deductibles, and coverage provisions are fully supported by the policy passages and tool results.",
+    "error": "",
+    "seconds": 1.6
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00606": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00606",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "Every stated limit, sub-limit, and policy condition is fully supported by the corresponding policy passages [1] and [2] and the tool results in force on the date of loss.",
+    "error": "",
+    "seconds": 1.6
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00606": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00606",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statements regarding the 50% tyre sub-limit and the INR 1,500 compulsory deductible are supported by passages [1] and [3] respectively.",
+    "error": "",
+    "seconds": 1.4
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00607": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00607",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "Every statement regarding what the policy wording provides is fully supported by passage [1].",
+    "error": "",
+    "seconds": 2.0
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00607": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00607",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statements about the 20% co-payment and the age threshold of 61 and above are fully supported by passage [1].",
+    "error": "",
+    "seconds": 1.5
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00608": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00608",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "Every statement regarding the co-payment age threshold and percentages is supported by passage [2] and the tool results, which are in force on the date of loss.",
+    "error": "",
+    "seconds": 1.8
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00608": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00608",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statements regarding the co-payment age threshold are directly supported by passage [2] and the tool results.",
+    "error": "",
+    "seconds": 35.1
+   }
+  ]
+ },
+ "planted:P03": {
+  "kind": "planted",
+  "key": "P03",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that the reimbursement submission window remains 15 days relies on [1], but [2], effective prior to the date of loss, amends the window to 30 days.",
+    "error": "",
+    "seconds": 1.5
+   }
+  ]
+ },
+ "planted:P05": {
+  "kind": "planted",
+  "key": "P05",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "the text states that a 20% co-payment applies for insured persons aged 61 and above, but Endorsement [2] (which is in force on the date of loss) amends this to a 10% co-payment for persons aged 66 and above.",
+    "error": "",
+    "seconds": 1.9
+   }
+  ]
+ },
+ "planted:P06": {
+  "kind": "planted",
+  "key": "P06",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text falsely claims that the policy specifies a 10% co-payment for insured persons aged 66 and above, which is not supported by any passage or tool result.",
+    "error": "",
+    "seconds": 1.5
+   }
+  ]
+ },
+ "planted:P07": {
+  "kind": "planted",
+  "key": "P07",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement claims the room rent cap is INR 10,000 per day, which directly contradicts the tool result and passage [1] showing the limit is 1% of the sum insured, equating to INR 5,000 per day for a sum insured of INR 500,000.",
+    "error": "",
+    "seconds": 1.4
+   }
+  ]
+ },
+ "planted:P09": {
+  "kind": "planted",
+  "key": "P09",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states the newborn sub-limit is INR 5,00,000, which contradicts passage [1] limiting it to INR 2,00,000.",
+    "error": "",
+    "seconds": 1.5
+   }
+  ]
+ },
+ "planted:P10": {
+  "kind": "planted",
+  "key": "P10",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "Every statement regarding settlement timelines and investigation decision windows accurately reflects either the base policy [2] or Endorsement 3 [1] which is in force on the date of loss.",
+    "error": "",
+    "seconds": 1.6
+   }
+  ]
+ },
+ "planted:P12": {
+  "kind": "planted",
+  "key": "P12",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that a second claim halves the bonus and only a third claim reverts it to nil contradicts passage [1], which states that a second or subsequent claim results in the No Claim Bonus reverting to nil.",
+    "error": "",
+    "seconds": 1.9
+   }
+  ]
+ },
+ "planted:P15": {
+  "kind": "planted",
+  "key": "P15",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "the statement that day care procedures cover any procedure completed within 48 hours and that Annexure A need not be checked contradicts passage [1], which specifies procedures requiring less than 24 hours and listed in Annexure A.",
+    "error": "",
+    "seconds": 2.2
+   }
+  ]
+ },
+ "planted:P16": {
+  "kind": "planted",
+  "key": "P16",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that the policy excludes prescribed medicines, which is not supported by passage [1] or any other passage.",
+    "error": "",
+    "seconds": 1.3
+   }
+  ]
+ },
+ "planted:P18": {
+  "kind": "planted",
+  "key": "P18",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that the policy wording contains no limit on tyre replacement contradicts passage [1], which expressly provides for a 50% limit on tyre replacement when the vehicle is damaged at the same time.",
+    "error": "",
+    "seconds": 1.6
+   }
+  ]
+ },
+ "planted:P20": {
+  "kind": "planted",
+  "key": "P20",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text is ungrounded because it introduces a \"0.03% threshold\" for blood alcohol that appears in no policy passage and no tool result.",
+    "error": "",
+    "seconds": 2.1
+   }
+  ]
+ },
+ "planted:P23": {
+  "kind": "planted",
+  "key": "P23",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The self-inflicted injury exclusion is asserted to apply to a fall at home, which is a rule applied to facts it does not fit.",
+    "error": "",
+    "seconds": 1.8
+   }
+  ]
+ },
+ "planted:C02": {
+  "kind": "planted",
+  "key": "C02",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statements regarding the 1% room rent limit, proportionate deduction, and the INR 5,000 limit based on the sum insured are fully supported by passage [1] and the tool results.",
+    "error": "",
+    "seconds": 1.8
+   }
+  ]
+ },
+ "planted:C03": {
+  "kind": "planted",
+  "key": "C03",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The 30-day submission window statement is supported by passage [2], which is in force on the date of loss.",
+    "error": "",
+    "seconds": 1.2
+   }
+  ]
+ },
+ "planted:C04": {
+  "kind": "planted",
+  "key": "C04",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "All statements regarding the 15-day decision timeline and the 30-day investigation decision timeline under Endorsement 3 are fully supported by passage [1], which is in force on the date of loss.",
+    "error": "",
+    "seconds": 2.1
+   }
+  ]
+ },
+ "planted:C05": {
+  "kind": "planted",
+  "key": "C05",
+  "split": "dev",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a 20% co-payment applies to insured persons aged 61 and above is fully supported by passage [1].",
+    "error": "",
+    "seconds": 34.0
+   }
+  ]
+ },
+ "_meta": {
+  "judge_prompt": "v2",
+  "prompt_sha": "d434b9c41925",
+  "model": "gemini-3.5-flash-lite",
+  "written_at": "2026-10-13T14:15:01+0530"
+ }
+}

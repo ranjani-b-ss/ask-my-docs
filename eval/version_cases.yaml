@@ -1,0 +1,80 @@
+# Week 12 — loss-date boundary cases.
+#
+# Each topic is a clause that a real endorsement in this corpus amended, so the governing
+# wording genuinely flips on the endorsement's effective date. Every topic yields two cases:
+# a loss dated the DAY BEFORE the endorsement took effect (the base wording governs) and a
+# loss dated ON the effective day (the endorsement governs). Those are the two dates a
+# date comparison most often gets wrong.
+#
+# `marker` is a literal substring that appears in exactly one chunk and identifies which
+# version of the clause that chunk is — checked against the live index by
+# eval/version_check.py before any result is trusted, so a typo here fails loudly.
+#
+# The figures and clause numbers were copied from corpora/insurance/ — not from memory:
+#   motor  : PW-MOTOR-001 (effective 2025-04-01)  /  END-2026-01 (effective 2026-04-01)
+#   health : PW-HEALTH-002 (effective 2025-04-01) /  END-2026-02 (effective 2026-05-01)
+
+topics:
+  - id: motor-deductible
+    product: motor
+    query: "What is the compulsory deductible on an own damage claim for a 1400cc car?"
+    boundary: "2026-04-01"
+    endorsement: END-2026-01
+    base: {doc: PW-MOTOR-001, marker: "deductible of **INR 1,000**"}
+    amended: {doc: END-2026-01, marker: "deductible of **INR 1,500**"}
+
+  - id: motor-ctl-threshold
+    product: motor
+    query: "At what percentage of the IDV is a repair claim treated as a constructive total loss?"
+    boundary: "2026-04-01"
+    endorsement: END-2026-01
+    base: {doc: PW-MOTOR-001, marker: "exceeds **75% of the IDV**"}
+    amended: {doc: END-2026-01, marker: "reduced from 75% to **70%"}
+
+  - id: motor-intimation
+    product: motor
+    query: "How soon must the insured give notice of a motor loss to the company?"
+    boundary: "2026-04-01"
+    endorsement: END-2026-01
+    base: {doc: PW-MOTOR-001, marker: "within **48 hours** of the occurrence"}
+    amended: {doc: END-2026-01, marker: "to **72 hours** of the"}
+
+  - id: motor-reimbursement-window
+    product: motor
+    query: "By when must a motor reimbursement claim be submitted after the final repair invoice?"
+    boundary: "2026-04-01"
+    endorsement: END-2026-01
+    base: {doc: PW-MOTOR-001, marker: "within **30 days** of the date of the final repair"}
+    amended: {doc: END-2026-01, marker: "**45 days** from the date of the final repair"}
+
+  - id: health-copayment
+    product: health
+    query: "What co-payment applies to an insured person aged 62?"
+    boundary: "2026-05-01"
+    endorsement: END-2026-02
+    base: {doc: PW-HEALTH-002, marker: "co-payment of **20%** applies"}
+    amended: {doc: END-2026-02, marker: "reduced from 20% to **10%**"}
+
+  - id: health-reimbursement-window
+    product: health
+    query: "Within how many days of discharge must reimbursement documents be submitted?"
+    boundary: "2026-05-01"
+    endorsement: END-2026-02
+    base: {doc: PW-HEALTH-002, marker: "within **15 days of"}
+    amended: {doc: END-2026-02, marker: "**30 days from discharge**"}
+
+  - id: health-prepost-hospitalisation
+    product: health
+    query: "How many days before admission are pre-hospitalisation expenses covered?"
+    boundary: "2026-05-01"
+    endorsement: END-2026-02
+    base: {doc: PW-HEALTH-002, marker: "**30 days immediately before**"}
+    amended: {doc: END-2026-02, marker: "**60 days** before admission"}
+
+  - id: health-initial-waiting-period
+    product: health
+    query: "What is the initial waiting period for illnesses other than accident?"
+    boundary: "2026-05-01"
+    endorsement: END-2026-02
+    base: {doc: PW-HEALTH-002, marker: "except accident | 30 days"}
+    amended: {doc: END-2026-02, marker: "except accident | 15 days"}

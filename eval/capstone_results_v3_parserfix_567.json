@@ -1,0 +1,224 @@
+[
+ {
+  "claim_number": "CLM-2026-00567",
+  "group": "w6-clean-baseline",
+  "product": "health",
+  "loss_date": "2026-04-25",
+  "trace_id": "cap_b2daaadf30bf",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-9F7EE88B"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-HEALTH-002']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 6,
+  "tokens": 16462,
+  "cost_usd": 0.002899,
+  "wall_seconds": 9.255,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [
+   {
+    "field": "referral_reason",
+    "matched": [
+     "covered"
+    ]
+   },
+   {
+    "field": "summary_for_adjuster",
+    "matched": [
+     "covered"
+    ]
+   },
+   {
+    "field": "exclusion_why[0]",
+    "matched": [
+     "covered",
+     "covered"
+    ]
+   },
+   {
+    "field": "relevant_why[0]",
+    "matched": [
+     "payable"
+    ]
+   },
+   {
+    "tool": "refer_to_adjuster",
+    "field": "reason",
+    "matched": [
+     "covered"
+    ]
+   }
+  ],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v3",
+  "prompt_sha": "f7b0c7dacc59",
+  "packet": {
+   "trace_id": "cap_b2daaadf30bf",
+   "claim_number": "CLM-2026-00567",
+   "policy_number": "HLT-2025-0016",
+   "product": "health",
+   "loss_date": "2026-04-25",
+   "in_force": {
+    "policy_number": "HLT-2025-0016",
+    "loss_date": "2026-04-25",
+    "in_force": true,
+    "reason": "loss date 2026-04-25 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Member fell ill while travelling and was admitted to a hospital in Singapore",
+    "Incurred a medical bill equivalent to INR 6,10,000",
+    "Schedule shows no worldwide cover extension"
+   ],
+   "wording": [
+    {
+     "role": "exclusion_candidate",
+     "chunk_id": "PW-HEALTH-002::6",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 6. What is not covered",
+     "resolved_against": "2026-04-25",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 6. What is not covered [resolved against loss date 2026-04-25]",
+     "why": "[withheld: this line stated an outcome \u2014 for the adjuster to decide]",
+     "excerpt": "## 6. What is not covered\n\n- treatment taken outside India, unless the schedule provides worldwide cover;\n- cosmetic or plastic surgery, unless required to treat an injury, burn, or cancer;\n- dental treatment, unless requiring hospitalisation following an accident;\n- spectacles, contact lenses, and hearing aids;\n- treatment of obesity and weight control, other than bariatric surgery meeting the\n  "
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::6",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 6. What is not covered",
+     "resolved_against": "2026-04-25",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 6. What is not covered [resolved against loss date 2026-04-25]",
+     "why": "[withheld: this line stated an outcome \u2014 for the adjuster to decide]",
+     "excerpt": "## 6. What is not covered\n\n- treatment taken outside India, unless the schedule provides worldwide cover;\n- cosmetic or plastic surgery, unless required to treat an injury, burn, or cancer;\n- dental treatment, unless requiring hospitalisation following an accident;\n- spectacles, contact lenses, and hearing aids;\n- treatment of obesity and weight control, other than bariatric surgery meeting the\n  "
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-04-25",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": null,
+     "needs": "insured_age",
+     "percent": 20,
+     "applies_from_age": 61,
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "clause": "9. Co-payment",
+     "effective_date": "2025-04-01",
+     "resolved_against": "2026-04-25"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 1,
+      "document_id": "PW-HEALTH-002",
+      "version": "3.4",
+      "clause": "1.1 Room rent limits",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-04-25",
+      "proportionate_deduction": true,
+      "amount_per_day": 5000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0016",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-9F7EE88B",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00567",
+    "recorded": true,
+    "reason": "[withheld: this text stated an outcome \u2014 for the adjuster to decide]"
+   },
+   "summary_for_adjuster": "[withheld: this text stated an outcome \u2014 for the adjuster to decide]",
+   "decision": null,
+   "guard_violations": [
+    {
+     "field": "referral_reason",
+     "matched": [
+      "covered"
+     ]
+    },
+    {
+     "field": "summary_for_adjuster",
+     "matched": [
+      "covered"
+     ]
+    },
+    {
+     "field": "exclusion_why[0]",
+     "matched": [
+      "covered",
+      "covered"
+     ]
+    },
+    {
+     "field": "relevant_why[0]",
+     "matched": [
+      "payable"
+     ]
+    },
+    {
+     "tool": "refer_to_adjuster",
+     "field": "reason",
+     "matched": [
+      "covered"
+     ]
+    }
+   ],
+   "superseded_dropped": []
+  }
+ }
+]

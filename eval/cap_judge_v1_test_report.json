@@ -1,0 +1,53 @@
+{
+ "meta": {
+  "judge_prompt": "v1",
+  "prompt_sha": "e075e1818e0e",
+  "model": "gemini-3.5-flash-lite",
+  "written_at": "2026-10-13T14:24:21+0530"
+ },
+ "split": "test",
+ "natural": {
+  "n": 36,
+  "agreement": 0.9722222222222222,
+  "agreed": 35,
+  "wilson95": [
+   0.858,
+   0.995
+  ],
+  "always_majority_baseline": 0.972,
+  "baseline_label": "GROUNDED",
+  "kappa": 0.654,
+  "confusion": {
+   "both_grounded": 34,
+   "both_ungrounded": 1,
+   "judge_grounded_human_ungrounded(missed)": 0,
+   "judge_ungrounded_human_grounded(false alarm)": 1
+  },
+  "disagreements": [
+   {
+    "case": "natural:v2:CLM-2026-00418",
+    "human": "GROUNDED",
+    "judge": "UNGROUNDED"
+   }
+  ],
+  "human_ungrounded_n": 1
+ },
+ "planted": {
+  "recall": "12/12",
+  "recall_wilson95": [
+   0.757,
+   1
+  ],
+  "by_type": {
+   "stale": "4/4",
+   "contra": "7/7",
+   "fit": "1/1"
+  },
+  "controls_flagged": "0/2",
+  "missed": [],
+  "controls_flagged_ids": []
+ },
+ "provider_errors": 1,
+ "cases_with_repeat_runs": 50,
+ "cases_whose_verdict_flipped_between_runs": 1
+}

@@ -1,0 +1,1258 @@
+{
+ "natural:v1:CLM-2026-00418": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00418",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wordings or tool results, as triage did not complete.",
+    "error": "",
+    "seconds": 1.5
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wordings or tool results, noting only that triage did not complete.",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording or exclusions, merely stating that triage did not complete and referring the file to the adjuster.",
+    "error": "",
+    "seconds": 1.2
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00418": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00418",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that clause 6 excludes expenses for hospital stays involving investigation only is unsupported by [2], which contains no such exclusion for investigation-only stays.",
+    "error": "",
+    "seconds": 1.4
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that clause 6 lists permanently excluded expenses for hospital stays involving investigation only is not supported by passage [2], which contains no such qualification regarding investigation only.",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that clause 6 excludes expenses for hospital stays involving investigation only, but passage [2] contains no such exclusion for investigation-only stays.",
+    "error": "",
+    "seconds": 1.2
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00423": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00423",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the insured may cancel on 7 days written notice with a short-period refund scale is supported by passage [1].",
+    "error": "",
+    "seconds": 1.5
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the insured may cancel on 7 days written notice with a refund on a short-period scale is supported by passage [1].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the insured may cancel on 7 days written notice with a short-period refund scale is supported by passage [1].",
+    "error": "",
+    "seconds": 1.1
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00423": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00423",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the Insured may cancel at any time on 7 days written notice with premium refunded on a short-period scale is supported by passage [1].",
+    "error": "",
+    "seconds": 1.4
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the Insured may cancel at any time on 7 days written notice with a short-period scale refund is supported by passage [1].",
+    "error": "",
+    "seconds": 1.5
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the Insured may cancel at any time on 7 days written notice with premium refunded on a short-period scale is supported by passage [1].",
+    "error": "",
+    "seconds": 1.1
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00431": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00431",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that room rent is capped at INR 10,000 per day is supported by the tool result `get_limits sub_limit`.",
+    "error": "",
+    "seconds": 1.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the sum insured is INR 500,000, room rent is capped at INR 10,000 per day, and a 10% co-payment applies from age 66 are supported by the tool results.",
+    "error": "",
+    "seconds": 1.6
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that room rent is capped at INR 10,000 per day is supported by the tool result for get_limits sub_limit.",
+    "error": "",
+    "seconds": 1.3
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00431": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00431",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that pre-authorisation is required at least 48 hours before admission for planned admissions at a network hospital is supported by passage [1].",
+    "error": "",
+    "seconds": 1.6
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that pre-authorisation is required at least 48 hours before admission is supported by passage [1].",
+    "error": "",
+    "seconds": 1.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that cashless facility is defined as direct payment to a network provider is supported by passage [3].",
+    "error": "",
+    "seconds": 1.1
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00461": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00461",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a maximum of two Nil Depreciation claims are permitted per policy year is supported by passage [1].",
+    "error": "",
+    "seconds": 1.4
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a maximum of two Nil Depreciation claims are permitted per policy year is supported by passage [1].",
+    "error": "",
+    "seconds": 1.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a maximum of two Nil Depreciation claims are permitted per policy year is supported by passage [1].",
+    "error": "",
+    "seconds": 1.1
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00461": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00461",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement 1 permits a maximum of two Nil Depreciation claims per policy year is supported by passage [1].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement 1 permits a maximum of two Nil Depreciation claims per policy year is supported by passage [1].",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "ERROR",
+    "why": "",
+    "error": "Gemini quota exceeded (429) twice. This is usually the free tier's tokens-per-minute limit rather than requests-per-minute, because each question sends five passages. Wait a minute, lower top-k to sen",
+    "seconds": 10.2
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00468": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00468",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording or tool results, only a triage failure notification.",
+    "error": "",
+    "seconds": 59.7
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording to evaluate, merely stating that triage did not complete and the adjuster should review the file.",
+    "error": "",
+    "seconds": 1.4
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording or tool results, only an administrative referral message.",
+    "error": "",
+    "seconds": 1.4
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00468": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00468",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording to evaluate.",
+    "error": "",
+    "seconds": 1.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text makes no policy statements, only reporting that triage did not complete.",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text makes no claims about policy wording or endorsements, merely noting that triage did not complete.",
+    "error": "",
+    "seconds": 1.0
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00496": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00496",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the endorsement reduces the specified illnesses waiting period to 12 months is supported by passage [1].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement 2 sets the waiting period for specified illnesses at 12 months is supported by passage [1].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement 2 reduces the specified illnesses waiting period to 12 months is supported by passage [1].",
+    "error": "",
+    "seconds": 1.4
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00496": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00496",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement 2 amended the specified illness waiting period to 12 months is supported by passage [1].",
+    "error": "",
+    "seconds": 1.5
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the base wording specified a 24-month waiting period for specified illnesses including hernia is supported by passages [2] and [3].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement 2 amended the specified illness waiting period to 12 months and the initial waiting period to 15 days is supported by passage [1].",
+    "error": "",
+    "seconds": 1.2
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00502": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00502",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that cataract is subject to a 12-month waiting period by endorsement is supported by passages [2] and [3].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that cataract is subject to a 12-month waiting period as amended by endorsement is supported by passages [2] and [3].",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that cataract is subject to a 12-month waiting period as amended by endorsement is supported by passages [2] and [3].",
+    "error": "",
+    "seconds": 1.1
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00502": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00502",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that cataract is subject to a 12-month waiting period under Endorsement 2 is supported by [3].",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that cataract is subject to a 12-month waiting period under Endorsement 2 is supported by [3].",
+    "error": "",
+    "seconds": 1.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that cataract is subject to a 12-month waiting period under Endorsement 2 is supported by passages [2] and [3].",
+    "error": "",
+    "seconds": 39.6
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00533": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00533",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The text makes no policy wording claims and merely reports that triage did not complete due to budget exhaustion.",
+    "error": "",
+    "seconds": 1.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text makes no statements about policy wording or tool results, only reporting an incomplete triage.",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording or tool results, only a triage failure notice and a deferral to the adjuster.",
+    "error": "",
+    "seconds": 1.1
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00533": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00533",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement END-2026-02 amends clause 9 regarding the co-payment percentage is supported by passage [2].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement END-2026-02 amends clause 9 regarding the co-payment percentage is supported by passage [2].",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement END-2026-02 amends clause 9 regarding the co-payment percentage is supported by passage [2].",
+    "error": "",
+    "seconds": 1.2
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00541": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00541",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The reference to reviewing Clause 6 regarding non-medical items is a supported deferral directing the adjuster to passages [3] and [4] which list non-medical items.",
+    "error": "",
+    "seconds": 1.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The reference to Clause 6 for non-medical items is supported by passage [3] and [4], and the remaining text consists of deferrals and restated claim file facts.",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement pointing the adjuster to Clause 6 regarding non-medical items is supported by passage [3] and [4] which list non-medical items.",
+    "error": "",
+    "seconds": 1.3
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00541": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00541",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy wording does not explicitly mention cradle charges, baby charges, combs, or room fresheners is supported by the absence of those items in passages [1], [2], and [3].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy wording does not explicitly mention specific miscellaneous items is supported by passages [1] and [3].",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy wording does not explicitly mention cradle charges, baby charges, combs, or room fresheners is supported by the absence of those items in passages [1], [2], and [3].",
+    "error": "",
+    "seconds": 1.2
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00548": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00548",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The text defers the review to the modern treatments clause in Endorsement 2, which exists in passage [1], and points to limits and co-payment terms without asserting unverified figures.",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text defers the determination of the modern treatments clause and limits to the adjuster, which is supported by passage [1].",
+    "error": "",
+    "seconds": 1.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text defers the determination of whether balloon sinuplasty is a listed modern treatment to the modern treatments clause in Endorsement 2, which exists in passage [1].",
+    "error": "",
+    "seconds": 1.7
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00548": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00548",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The 50% sum insured cap for modern treatments is supported by passage [1].",
+    "error": "",
+    "seconds": 41.7
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The 50% sum insured cap for modern treatments is supported by passage [1].",
+    "error": "",
+    "seconds": 1.8
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The 50% sum insured cap for modern treatments is supported by passage [1].",
+    "error": "",
+    "seconds": 1.3
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00561": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00561",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Nil Depreciation does not extend to tyres, tubes, and batteries, on which depreciation of 50% continues to apply, is supported by passage [2].",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Nil Depreciation does not extend to tyres, tubes, and batteries, on which depreciation of 50% continues to apply, is supported by passage [2].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Nil Depreciation does not extend to tyres, tubes, and batteries, on which depreciation of 50% continues to apply, is supported by passage [2].",
+    "error": "",
+    "seconds": 1.8
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00561": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00561",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a compulsory deductible of INR 3,000 applies is supported by passage [3] and tool results.",
+    "error": "",
+    "seconds": 1.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a compulsory deductible of INR 3,000 applies is supported by tool result get_limits deductible and policy passage [3].",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the compulsory deductible is INR 3,000 is supported by passage [3] and the tool results.",
+    "error": "",
+    "seconds": 1.2
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00567": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00567",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement regarding the exclusion for treatment taken outside India is supported by passage [1].",
+    "error": "",
+    "seconds": 1.0
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement regarding the exclusion for treatment taken outside India is supported by passage [1].",
+    "error": "",
+    "seconds": 1.0
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement regarding the exclusion for treatment taken outside India is supported by passage [1].",
+    "error": "",
+    "seconds": 1.8
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00567": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00567",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy wording excludes treatment taken outside India unless the schedule provides worldwide cover is supported by passage [3].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy excludes treatment taken outside India unless the schedule provides worldwide cover is supported by passage [3].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy excludes treatment taken outside India unless the schedule provides worldwide cover is supported by passage [3].",
+    "error": "",
+    "seconds": 42.5
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00572": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00572",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the compulsory deductible is INR 3,000 for vehicles exceeding 1500cc is supported by passage [1] and the tool results.",
+    "error": "",
+    "seconds": 1.6
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the compulsory deductible is INR 3,000 for vehicles above 1500cc is supported by passage [1] and the tool results.",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the compulsory deductible is INR 3,000 for vehicles above 1500cc is supported by passage [1].",
+    "error": "",
+    "seconds": 1.1
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00572": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00572",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a compulsory deductible of INR 3,000 applies to vehicles above 1500cc is supported by passage [1] and the tool results.",
+    "error": "",
+    "seconds": 1.6
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a compulsory deductible of INR 3,000 applies to vehicles above 1500cc is supported by passage [1].",
+    "error": "",
+    "seconds": 1.0
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a compulsory deductible of INR 3,000 applies to vehicles above 1500cc is supported by passage [1] and the corresponding tool result.",
+    "error": "",
+    "seconds": 1.7
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00601": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00601",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the compulsory deductible is INR 1,000 is supported by passage [1] and the tool results.",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the compulsory deductible is INR 1,000 is supported by passage [1] and the tool results.",
+    "error": "",
+    "seconds": 1.5
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the compulsory deductible is INR 1,000 is supported by policy passage [1].",
+    "error": "",
+    "seconds": 1.4
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00601": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00601",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the compulsory deductible is INR 1,000 for vehicles with a cubic capacity up to 1500cc is supported by passage [1] and the tool results.",
+    "error": "",
+    "seconds": 1.5
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a compulsory deductible of INR 1,000 applies to vehicles with a cubic capacity up to 1500cc is supported by passage [1] and the tool results.",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the compulsory deductible is INR 1,000 for vehicles with a cubic capacity up to 1500cc is supported by passage [1] and the tool results.",
+    "error": "",
+    "seconds": 1.4
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00602": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00602",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement 1 specifies an INR 1,500 deductible for vehicles up to 1500cc is supported by passage [2].",
+    "error": "",
+    "seconds": 1.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement 1 amends the compulsory deductible to INR 1,500 for vehicles with a cubic capacity up to 1500cc is supported by passage [2].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement 1 specifies an INR 1,500 deductible for vehicles up to 1500cc is supported by passage [2].",
+    "error": "",
+    "seconds": 41.9
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00602": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00602",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a compulsory deductible of INR 1,500 applies for vehicles with a cubic capacity up to 1500cc is supported by passage [1].",
+    "error": "",
+    "seconds": 1.4
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a compulsory deductible of INR 1,500 applies for vehicles with a cubic capacity up to 1500cc is supported by passage [1].",
+    "error": "",
+    "seconds": 1.9
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a compulsory deductible of INR 1,500 applies for vehicles with a cubic capacity up to 1500cc is supported by passage [1].",
+    "error": "",
+    "seconds": 1.3
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00603": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00603",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement concerning the policy's in-force window ending on 2026-04-30 is supported by the tool result, and the remaining text consists of factual restatements and permissible deferrals.",
+    "error": "",
+    "seconds": 1.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement regarding the in-force window and loss date is supported by the tool result.",
+    "error": "",
+    "seconds": 1.9
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement concerning the policy's in-force window and loss date is supported by the tool results.",
+    "error": "",
+    "seconds": 0.9
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00603": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00603",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy was not in force is supported by the tool result confirming the loss date falls after the policy's in-force window ended.",
+    "error": "",
+    "seconds": 1.5
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the date of loss falls after the policy's expiration date is supported by the tool result check_in_force.",
+    "error": "",
+    "seconds": 1.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the date of loss falls after the policy's expiration date is supported by the tool result check_in_force.",
+    "error": "",
+    "seconds": 1.1
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00604": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00604",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the loss date is before the policy's in-force window is supported by the tool results.",
+    "error": "",
+    "seconds": 0.9
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the loss date is before the policy's in-force window is supported by the tool result confirming that the loss date 2026-02-10 is before 2026-03-01.",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the loss date is before the policy's in-force window is supported by the tool result check_in_force.",
+    "error": "",
+    "seconds": 1.2
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00604": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00604",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the loss date is before the policy's in-force window is supported by the TOOL RESULTS confirming the loss date predates the in-force window, and the remainder is a valid deferral.",
+    "error": "",
+    "seconds": 1.5
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that the loss occurred prior to the policy's effective start date relies on tool results for policy dates rather than any numbered policy passage.",
+    "error": "",
+    "seconds": 1.0
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the loss occurred prior to the policy's effective start date is supported by the tool result showing the loss date 2026-02-10 is before the policy's in-force window began (2026-03-01).",
+    "error": "",
+    "seconds": 42.1
+   }
+  ]
+ },
+ "natural:v1:CLM-2026-00609": {
+  "kind": "natural",
+  "key": "v1:CLM-2026-00609",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the normal ward room rent limit is 1% of the sum insured per day is supported by passage [1].",
+    "error": "",
+    "seconds": 1.6
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the normal ward room rent limit is 1% of the sum insured per day is supported by passage [1].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the normal ward room rent limit is 1% of the sum insured per day is supported by passage [1].",
+    "error": "",
+    "seconds": 1.4
+   }
+  ]
+ },
+ "natural:v2:CLM-2026-00609": {
+  "kind": "natural",
+  "key": "v2:CLM-2026-00609",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement in Why line 1 that the sum insured is INR 5,000,000 contradicts the tool result and claim file showing INR 5,00,000, making the calculated figure of INR 5,000 unsupported.",
+    "error": "",
+    "seconds": 1.4
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement in Why line 1 that the sum insured is INR 5,000,000 is contradicted by the tool results and claim file which state the sum insured is INR 500,000.",
+    "error": "",
+    "seconds": 1.7
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that the sum insured is INR 5,000,000 gives an incorrect figure unsupported by the tool results, which state the sum insured is INR 500,000.",
+    "error": "",
+    "seconds": 1.7
+   }
+  ]
+ },
+ "planted:P01": {
+  "kind": "planted",
+  "key": "P01",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states in the summary that a compulsory deductible of INR 1,000 applies, which uses a superseded figure from [2] that is amended by [1].",
+    "error": "",
+    "seconds": 1.6
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The summary states that a compulsory deductible of INR 1,000 applies, which is superseded by the INR 1,500 figure in passage [1] that is in force on the date of loss.",
+    "error": "",
+    "seconds": 1.9
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that a compulsory deductible of INR 1,000 applies, which is superseded by the INR 1,500 figure in passage [1] that is in force on the date of loss.",
+    "error": "",
+    "seconds": 1.6
+   }
+  ]
+ },
+ "planted:P02": {
+  "kind": "planted",
+  "key": "P02",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The summary states that a compulsory deductible of INR 2,000 applies based on endorsement END-2026-01, which contradicts the correct figure of INR 3,000 specified in passage [1] and the tool results for an 1800cc vehicle.",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The summary states that a compulsory deductible of INR 2,000 applies based on endorsement END-2026-01, which contradicts endorsement [1] where the deductible for vehicles above 1500cc is revised to INR 3,000.",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that a compulsory deductible of INR 2,000 applies based on endorsement END-2026-01, which contradicts passage [1] and the tool result that set the amount to INR 3,000 for vehicles above 1500cc.",
+    "error": "",
+    "seconds": 1.3
+   }
+  ]
+ },
+ "planted:P04": {
+  "kind": "planted",
+  "key": "P04",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that Endorsement 2 kept the initial waiting period at 30 days and specified illness waiting period at 24 months, which contradicts passage [1] showing them changed to 15 days and 12 months respectively.",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that Endorsement 2 kept the initial waiting period at 30 days and specified illness waiting period at 24 months, which contradicts passage [1] showing them changed to 15 days and 12 months respectively.",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that Endorsement 2 kept the initial waiting period at 30 days and specified illness waiting period at 24 months, which contradicts passage [1] showing they were changed to 15 days and 12 months respectively.",
+    "error": "",
+    "seconds": 1.3
+   }
+  ]
+ },
+ "planted:P08": {
+  "kind": "planted",
+  "key": "P08",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that the sum insured is INR 5,000,000 conflicts with the tool result showing a sum insured of INR 500,000, leading to an incorrect normal ward limit calculation of INR 10,000 and INR 5,000,000.",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that the normal ward room rent limit is 2% of the sum insured per day, which contradicts passage [1] stating it is 1% of the sum insured per day.",
+    "error": "",
+    "seconds": 37.0
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that the sum insured is INR 5,000,000, which contradicts the policy registry tool result of INR 500,000.",
+    "error": "",
+    "seconds": 1.9
+   }
+  ]
+ },
+ "planted:P11": {
+  "kind": "planted",
+  "key": "P11",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that Endorsement 1 permits a maximum of three Nil Depreciation claims per policy year is ungrounded because passage [1] states that a maximum of two Nil Depreciation claims are permitted per policy year.",
+    "error": "",
+    "seconds": 1.4
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that Endorsement 1 permits a maximum of three claims is contradicted by passage [1], which states that a maximum of two claims are permitted.",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that Endorsement 1 permits a maximum of three Nil Depreciation claims per policy year, whereas passage [1] specifies a maximum of two claims.",
+    "error": "",
+    "seconds": 1.3
+   }
+  ]
+ },
+ "planted:P13": {
+  "kind": "planted",
+  "key": "P13",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that the waiting period for specified illnesses like cataract is 6 months is not supported by any passage, as passage [3] sets it to 12 months.",
+    "error": "",
+    "seconds": 1.3
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that the waiting period for specified illnesses is 6 months is not supported by any passage or tool result.",
+    "error": "",
+    "seconds": 1.4
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that the waiting period for specified illnesses like cataract is 6 months is unsupported by any passage or tool result.",
+    "error": "",
+    "seconds": 1.7
+   }
+  ]
+ },
+ "planted:P14": {
+  "kind": "planted",
+  "key": "P14",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that the compulsory deductible is resolved as INR 1,500 is not supported by any passage or tool result, which state the deductible is INR 1,000.",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that the compulsory deductible is INR 1,500 is not supported by any passage or tool result, which state INR 1,000.",
+    "error": "",
+    "seconds": 1.4
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that the compulsory deductible is resolved as INR 1,500 is not supported by any policy passage or tool result, which state INR 1,000 for vehicles up to 1500cc.",
+    "error": "",
+    "seconds": 1.2
+   }
+  ]
+ },
+ "planted:P17": {
+  "kind": "planted",
+  "key": "P17",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that Clause 4 provides a full premium refund on cancellation within 30 days, whereas passage [1] provides for a refund on a short-period scale.",
+    "error": "",
+    "seconds": 1.7
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that Clause 4 provides a full premium refund on cancellation within 30 days, whereas passage [1] provides that cancellation by the Insured on 7 days notice refunds premium on a short-period scale and makes no mention of a 30-day full refund.",
+    "error": "",
+    "seconds": 1.4
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that Clause 4 provides a full premium refund on cancellation within 30 days, which is not supported by passage [1] which states premium is refunded on a short-period scale.",
+    "error": "",
+    "seconds": 1.5
+   }
+  ]
+ },
+ "planted:P19": {
+  "kind": "planted",
+  "key": "P19",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that the policy wording excludes treatment taken outside India in all circumstances is unsupported, as passage [3] allows treatment outside India if the schedule provides worldwide cover.",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement in \"Why line 1\" that the policy excludes treatment taken outside India in all circumstances is ungrounded because passage [3] provides an exception \"unless the schedule provides worldwide cover\", which matches the policy schedule condition.",
+    "error": "",
+    "seconds": 1.4
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement in \"Why line 1\" that the policy wording excludes treatment taken outside India in all circumstances is ungrounded because passage [3] allows treatment outside India if the schedule provides worldwide cover.",
+    "error": "",
+    "seconds": 37.8
+   }
+  ]
+ },
+ "planted:P21": {
+  "kind": "planted",
+  "key": "P21",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that pre-authorisation is required at least 24 hours prior to admission for a planned admission is contradicted by passage [1], which specifies 48 hours for planned admissions.",
+    "error": "",
+    "seconds": 1.5
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that pre-authorisation is required at least 24 hours prior to admission is contradicted by passage [1], which states that pre-authorisation for planned admissions must be requested at least 48 hours before admission.",
+    "error": "",
+    "seconds": 1.5
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that pre-authorisation is required at least 24 hours prior to admission misstates the 48-hour requirement for planned admissions in passage [1].",
+    "error": "",
+    "seconds": 1.5
+   }
+  ]
+ },
+ "planted:P22": {
+  "kind": "planted",
+  "key": "P22",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that a compulsory deductible of INR 1,500 applies, which conflicts with the tool result of INR 3,000 for vehicles above 1500cc and the policy passage [3].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that a compulsory deductible of INR 1,500 applies, which contradicts passage [3] and the tool result of INR 3,000 for vehicles above 1500cc.",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that a compulsory deductible of INR 1,500 applies, which conflicts with passage [3] and tool results showing the vehicle is above 1500cc and subject to a INR 3,000 deductible.",
+    "error": "",
+    "seconds": 1.5
+   }
+  ]
+ },
+ "planted:P24": {
+  "kind": "planted",
+  "key": "P24",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement in the referral reason that \"this is the second own damage claim, so Nil Depreciation applies in full\" contradicts the claim file and passage [1], which states that a maximum of two Nil Depreciation claims are permitted per policy year and this is the third claim.",
+    "error": "",
+    "seconds": 1.5
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that this is the second own damage claim contradicts the claim file and passage [1] which state it is the third claim.",
+    "error": "",
+    "seconds": 2.2
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that this is the second own damage claim contradicts the claim file and passage [1] which state it is the third claim.",
+    "error": "",
+    "seconds": 1.5
+   }
+  ]
+ },
+ "planted:C01": {
+  "kind": "planted",
+  "key": "C01",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the compulsory deductible is INR 1,500 for vehicles up to 1500cc is supported by passage [1].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the compulsory deductible is INR 1,500 for vehicles up to 1500cc is supported by passage [1].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the compulsory deductible is INR 1,500 for vehicles up to 1500cc is supported by passage [1].",
+    "error": "",
+    "seconds": 1.3
+   }
+  ]
+ },
+ "planted:C06": {
+  "kind": "planted",
+  "key": "C06",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that hernia is listed under specified illnesses is supported by passage [2].",
+    "error": "",
+    "seconds": 1.4
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that hernia is listed under specified illnesses is supported by passage [2].",
+    "error": "",
+    "seconds": 1.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the base wording specified a 24-month waiting period for specified illnesses and a 30-day initial waiting period is supported by passage [3].",
+    "error": "",
+    "seconds": 1.6
+   }
+  ]
+ },
+ "_meta": {
+  "judge_prompt": "v1",
+  "prompt_sha": "e075e1818e0e",
+  "model": "gemini-3.5-flash-lite",
+  "written_at": "2026-10-13T14:24:21+0530"
+ }
+}

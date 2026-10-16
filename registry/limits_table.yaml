@@ -1,0 +1,54 @@
+# Week 12 — deductible / co-payment / sub-limit table by product, effective-dated.
+#
+# Hand-transcribed from corpora/insurance/ — every row names the document, version and clause
+# it came from, and tests/test_limits.py greps the corpus for each figure, so a transcription
+# slip fails a test rather than a claim.
+#
+# Why a table and not "ask the model": Week 10 measured a narrow LLM call picking the WRONG
+# one of two retrieved deductible figures four times out of four. Which row governs is a date
+# comparison with exactly one right answer, so it is done in code (src/limits.py), the same
+# reason compute_payout exists.
+#
+# The THIRD number — the policy limit (IDV for motor, sum insured for health) — is not here:
+# it is a property of the individual policy and comes from registry/policy_registry.yaml.
+
+motor:
+  deductible:                          # amount in INR, tier chosen by engine capacity
+    - effective_from: "2025-04-01"
+      source: {document_id: PW-MOTOR-001, version: "5.1", clause: "2.2 Compulsory deductible"}
+      tiers: [{max_cc: 1500, amount: 1000}, {max_cc: null, amount: 2000}]
+    - effective_from: "2026-04-01"
+      source: {document_id: END-2026-01, version: "1.0", clause: "2. Amendment to Clause 2.2 — Compulsory deductible"}
+      tiers: [{max_cc: 1500, amount: 1500}, {max_cc: null, amount: 3000}]
+  sub_limits:
+    - name: tyre_replacement_when_vehicle_also_damaged
+      description: "Damage to tyres and tubes is excluded unless the vehicle is damaged at the same time, in which case liability is limited to a percentage of the cost of replacement."
+      effective_from: "2025-04-01"
+      source: {document_id: PW-MOTOR-001, version: "5.1", clause: "3. What is not covered"}
+      kind: percent_of_cost
+      value: 50
+
+health:
+  deductible: null                     # health policies in this corpus use a co-payment instead
+  co_payment:
+    - effective_from: "2025-04-01"
+      source: {document_id: PW-HEALTH-002, version: "3.4", clause: "9. Co-payment"}
+      percent: 20
+      applies_from_age: 61
+    - effective_from: "2026-05-01"
+      source: {document_id: END-2026-02, version: "1.0", clause: "4. Amendment to Clause 9 — Co-payment"}
+      percent: 10
+      applies_from_age: 66
+  sub_limits:
+    - name: room_rent_normal_ward_per_day
+      effective_from: "2025-04-01"
+      source: {document_id: PW-HEALTH-002, version: "3.4", clause: "1.1 Room rent limits"}
+      kind: percent_of_sum_insured_per_day
+      value: 1
+      proportionate_deduction: true
+    - name: room_rent_normal_ward_per_day
+      effective_from: "2026-05-01"
+      source: {document_id: END-2026-02, version: "1.0", clause: "2. Amendment to Clause 1.1 — Room rent and proportionate deduction"}
+      kind: percent_of_sum_insured_per_day
+      value: 2
+      proportionate_deduction: false

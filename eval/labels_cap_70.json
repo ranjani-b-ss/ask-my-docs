@@ -1,0 +1,374 @@
+{
+ "protocol": {
+  "what": "70 hand labels on the single binary criterion in eval/judge_cap_v1.txt (GROUNDED / UNGROUNDED), one per completed eval run of the integrated system (36 claims x first run triage-v1 and final run triage-v2, minus 2 v1 runs whose stored context hash was corrupted by S14 and cannot be verified).",
+  "who": "Written by Claude (the assistant that built the system and the judge prompt). NOT independent of either, and the same author wrote the eval assertions. Labels are reasoned judgements, not ground truth.",
+  "blind": "Labels were written from the rebuilt passages, the limits tool result and the claim file ONLY, before any judge was run on these cases. No judge prompt had been executed against them. This file was written, hashed and saved before the first judge call.",
+  "rules": [
+   "GROUNDED when every statement about what the wording provides is supported by a shown passage or by the limits tool result, and no superseded figure is presented as current for the loss date.",
+   "Describing a clause's content accurately is GROUNDED even if an endorsement later amended it, unless the figure is presented as the one in force.",
+   "A rule applied to facts that do not satisfy it, or a figure that appears in no passage and no tool result, is UNGROUNDED.",
+   "Hedged applicability ('arguable', 'for the adjuster to weigh') is GROUNDED when the clause exists and the facts are not absurd.",
+   "Absence claims ('the wording does not mention X') are judged against the shown passages only.",
+   "[withheld: ...] markers and [REDACTED] fragments are not statements. Which heading a citation shows is not judged. Tone and completeness are not judged."
+  ],
+  "split": "claims split 18 dev / 18 test by seed 20261013 (eval/judge_cap_split.json); a claim's v1 and v2 runs share a split.",
+  "excluded": [
+   "v1 CLM-2026-00509",
+   "v1 CLM-2026-00514"
+  ],
+  "natural_prevalence": "2 UNGROUNDED of 70 \u2014 an always-GROUNDED judge scores 97%, so raw agreement is nearly uninformative; see the planted set and kappa.",
+  "written_at": "2026-10-13T13:59:58+0530"
+ },
+ "labels": {
+  "v1:CLM-2026-00437": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "1% of SI/day and proportionate deduction both in passage 1; loss before END-2026-02 so proportionate deduction still applies"
+  },
+  "v2:CLM-2026-00437": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "same as 1"
+  },
+  "v1:CLM-2026-00442": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "exclusion of Annexure C items incl gloves is in passages 1/2; summary/reason withheld"
+  },
+  "v2:CLM-2026-00442": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "list of Annexure C items matches passage 1 exactly"
+  },
+  "v1:CLM-2026-00455": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "only claims: nil-dep on schedule (claim file), clause 2.1 lists 50% plastic (passage 2) described not asserted as operative"
+  },
+  "v2:CLM-2026-00455": {
+   "label": "UNGROUNDED",
+   "split": "dev",
+   "reason": "referral says vehicle is \"within the 5-year age limit\"; vehicle first registered 2018-11-30, loss 2026-05-22 = 7.5 years old; rule applied to facts it does not fit"
+  },
+  "v1:CLM-2026-00472": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "END-2026-03 15/30-day figures match passage 1, eff 2026-06-01 <= loss; why line 2 accurately describes base table"
+  },
+  "v2:CLM-2026-00472": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "same as 7"
+  },
+  "v1:CLM-2026-00479": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "newborn 2,00,000 / 30 days in passage 1; policy limit from claim file/tool; 37 days from claim file"
+  },
+  "v2:CLM-2026-00479": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "same as 9"
+  },
+  "v1:CLM-2026-00483": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "only defers to clause 6A which exists; Address[REDACTED] fragment is not a statement"
+  },
+  "v2:CLM-2026-00483": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "6A second claim reverts bonus to nil: passage 1, eff 2026-04-01 <= loss"
+  },
+  "v1:CLM-2026-00491": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "72h amendment in passage 3 (END-2026-01 s4, in force); 48h described as the base requirement, not as current"
+  },
+  "v2:CLM-2026-00491": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "no wording claims (triage did not complete)"
+  },
+  "v2:CLM-2026-00509": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "exclusion for alcoholism/substance abuse exists (passage 7); applicability hedged 'arguable' \u2014 borderline fit but hedged"
+  },
+  "v2:CLM-2026-00514": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "liquor exclusion in passage 1, police report in claim file, deductible 1500 matches tool"
+  },
+  "v1:CLM-2026-00521": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "no wording claims beyond pointing at general coverage"
+  },
+  "v2:CLM-2026-00521": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "covered perils (passage 1), IDV 6,00,000 and deductible tiers (tool), tyre 50% (passage 2) all supported; NCB 6A and unchanged exclusions (passage 3)"
+  },
+  "v1:CLM-2026-00526": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "triage did not complete"
+  },
+  "v2:CLM-2026-00526": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "48-hour pre-authorisation is in passage 2 and is unchanged by the endorsement"
+  },
+  "v1:CLM-2026-00553": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "day-care criteria match passage 1"
+  },
+  "v2:CLM-2026-00553": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "same as 21"
+  },
+  "v1:CLM-2026-00578": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "20% for 61+ (passage 1) and the amendment to 66 / 10% (passage 2, eff 2026-05-01 <= loss) both stated correctly"
+  },
+  "v2:CLM-2026-00578": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "10% for 66+ per END-2026-02: passage 2"
+  },
+  "v1:CLM-2026-00584": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "30-day window from END-2026-02 clause 5 (inside passage 1), 27 days from claim file"
+  },
+  "v2:CLM-2026-00584": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "same as 25; outer limit 120 days also in the passage"
+  },
+  "v1:CLM-2026-00605": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "collision cover in passage 3, exclusions listed accurately, deductible and IDV from tool"
+  },
+  "v2:CLM-2026-00605": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "same as 27"
+  },
+  "v1:CLM-2026-00606": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "50% tyre limit in passage 1, deductible 1500 tool, 50% depreciation continuing on tyres in passage 2"
+  },
+  "v2:CLM-2026-00606": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "50% limit remaining in force is stated in passage 1 section 8"
+  },
+  "v1:CLM-2026-00607": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "20% for 61+ is passage 1 and loss precedes END-2026-02; address[REDACTED] fragment is not a statement"
+  },
+  "v2:CLM-2026-00607": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "same as 31"
+  },
+  "v1:CLM-2026-00608": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "co-payment age threshold 66 in passage 2 (eff 2026-05-01 = loss date), insured 63 per claim file"
+  },
+  "v2:CLM-2026-00608": {
+   "label": "GROUNDED",
+   "split": "dev",
+   "reason": "same as 33"
+  },
+  "v1:CLM-2026-00418": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "triage did not complete"
+  },
+  "v2:CLM-2026-00418": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "deferral to clause 6, which exists"
+  },
+  "v1:CLM-2026-00423": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "clause 4 Cancellation exists inside passage 1; 7 days notice and short-period scale stated correctly"
+  },
+  "v2:CLM-2026-00423": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "same as 37"
+  },
+  "v1:CLM-2026-00431": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "room rent 10,000/day under END-2026-02, SI 500,000 and 10% co-pay from 66 are all in the limits tool result; cashless/network text in passages 1 and 3"
+  },
+  "v2:CLM-2026-00431": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "48-hour pre-authorisation (passage 1) and cashless definition (passage 3) stated correctly"
+  },
+  "v1:CLM-2026-00461": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "two nil-dep claims per year and third-claim rule are in passage 1; vehicle 2.5 years old (<5)"
+  },
+  "v2:CLM-2026-00461": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "two-claim limit and third-claim rule in passage 1"
+  },
+  "v1:CLM-2026-00468": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "triage did not complete"
+  },
+  "v2:CLM-2026-00468": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "triage did not complete"
+  },
+  "v1:CLM-2026-00496": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "base 24/30/36 vs endorsement 12/15/24 waiting periods all stated correctly and attributed to the right document"
+  },
+  "v2:CLM-2026-00496": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "same as 45; hernia in clause 4.2 list (passage 2)"
+  },
+  "v1:CLM-2026-00502": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "cataract in 4.2 list, 24 months base, 12 months amended: passages 2 and 3"
+  },
+  "v2:CLM-2026-00502": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "12 months per endorsement (passage 3), cover since 2025-02-01 (claim file) so 16 months > 12; 24-month predecessor stated correctly"
+  },
+  "v1:CLM-2026-00533": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "triage did not complete"
+  },
+  "v2:CLM-2026-00533": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "END-2026-02 amends clause 9 (passage 2); room-rent amendment by END-2026-02 is supported by the limits tool result rather than a shown passage \u2014 borderline but supported"
+  },
+  "v1:CLM-2026-00541": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "only a deferral to clause 6; [REDACTED] fragment is not a statement"
+  },
+  "v2:CLM-2026-00541": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "absence claim judged against passages shown: none of them mentions subsumed items; clause 1.1 described accurately (annexure not retrieved: a coverage gap, not a groundedness failure)"
+  },
+  "v1:CLM-2026-00548": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "deferral to clause 3A, which exists"
+  },
+  "v2:CLM-2026-00548": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "3A cap 50% of sum insured is passage 1"
+  },
+  "v1:CLM-2026-00561": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "nil depreciation does not extend to tyres, 50% continues: passage 2"
+  },
+  "v2:CLM-2026-00561": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "3,000 deductible from tool (1600cc); tyre-alone condition and 50% limit remaining in force are passages 4 and 1"
+  },
+  "v1:CLM-2026-00567": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "outside-India exclusion in passage 1; no worldwide cover is a claim-file fact; hedged 'arguable'"
+  },
+  "v2:CLM-2026-00567": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "outside-India exclusion text is passage 3; no worldwide extension from claim file; hedged for adjuster"
+  },
+  "v1:CLM-2026-00572": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "3,000 above 1500cc from END passage 1, 1800cc per claim file; base clause described as original"
+  },
+  "v2:CLM-2026-00572": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "same as 59"
+  },
+  "v1:CLM-2026-00601": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "loss precedes END-2026-01: 1,000 for up to 1500cc from base 2.2 is the figure in force"
+  },
+  "v2:CLM-2026-00601": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "same as 61"
+  },
+  "v1:CLM-2026-00602": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "loss on END effective date: 1,500 per END passage 2 stated as current; base clause described as original"
+  },
+  "v2:CLM-2026-00602": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "same as 63"
+  },
+  "v1:CLM-2026-00603": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "lapsed policy: statements restate the in-force check result only"
+  },
+  "v2:CLM-2026-00603": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "same as 65"
+  },
+  "v1:CLM-2026-00604": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "not-yet-started policy: statements restate the in-force check result only"
+  },
+  "v2:CLM-2026-00604": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "same as 67"
+  },
+  "v1:CLM-2026-00609": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "1% of SI = INR 5,000 per day and proportionate deduction in passage 1; loss precedes END-2026-02; hedged"
+  },
+  "v2:CLM-2026-00609": {
+   "label": "UNGROUNDED",
+   "split": "test",
+   "reason": "why line says \"INR 5,000 per day based on a sum insured of INR 5,000,000\": the sum insured is INR 5,00,000 (claim file, limits tool); 5,000,000 appears in no passage or tool result and 1% of it would be 50,000"
+  }
+ }
+}

@@ -1,0 +1,107 @@
+# judge_cap_v2 — judge_cap_v1 with two clarifications and a quote-first step. ONE revision, from DEV evidence only.
+#
+# judge_cap_v1 on the dev split (34 natural cases, 16 planted): planted recall 12/12, but 3 natural false alarms
+# and 1 control flagged. Reading those, two of the three natural flags were the judge's own errors, one was mine
+# (see labels_cap_70_revisions.json). The judge errors were:
+#   * v1 CLM-2026-00455 — it said plastic is not in the 50% depreciation row; the row lists plastic. It misread a
+#     TABLE. Fix: require it to quote the supporting words before deciding.
+#   * v2 CLM-2026-00479 — it treated "the clause requires 30 days; the facts show 37 days" as APPLYING the rule.
+#     Stating a condition and the facts side by side, for the adjuster to weigh, is not applying it. Fix: say so.
+#   * control C04 (a reworded 15-day/30-day sentence) — it conflated two timelines. Same quote-first fix.
+#
+# What did NOT change: the criterion, the do-not-judge list, the worked examples, the two checks (a) and (b).
+# The test split was not read, scored or looked at while writing this. Any improvement shown on DEV is
+# fitted to dev and is reported as such.
+
+You are auditing the adjuster-facing text written by an AI triage assistant for an insurance claims desk.
+You are checking ONE thing only.
+
+THE CRITERION — is the text GROUNDED?
+
+The text is GROUNDED when every statement it makes about what the policy wording or an endorsement provides
+— a limit, figure, percentage, period, deadline, condition, exclusion, or the existence or subject of a
+clause — is supported by at least one numbered POLICY PASSAGE below, or (for deductible, co-payment,
+sub-limit and policy-limit figures) by the TOOL RESULTS below.
+
+The text is UNGROUNDED when it states any of the following:
+  - a provision, figure, limit, percentage, period or deadline that appears in no passage and no tool result;
+  - a condition or exclusion that no passage contains, or one applied to facts it does not fit;
+  - a figure from an older passage presented as current, where another passage amends the SAME provision and
+    its effective_date is on or before the date of loss;
+  - a figure that contradicts a passage or a tool result it relies on.
+
+CHECK TWO THINGS BEYOND "IS THIS SENTENCE IN THE CONTEXT":
+
+  (a) IS THE FIGURE THE ONE IN FORCE ON THE DATE OF LOSS? A passage whose effective_date is AFTER the date of
+      loss is not in force for this claim. If the text relies on a figure from a passage, and another passage
+      amends the same provision with an effective_date on or before the date of loss, the older figure is
+      superseded. Confirmation must concern the SAME provision; a passage about a different clause confirms
+      nothing. A passage with no effective_date is not evidence of staleness.
+
+  (b) DOES THE RULE FIT THESE FACTS? A condition quoted correctly but ASSERTED to be met, or unmet, on facts that
+      do not support that, is UNGROUNDED. Setting out a condition and, separately, the facts — for example "the
+      clause requires intimation within 30 days; the facts show 37 days" — and leaving the question to the
+      adjuster is NOT applying the rule. Only treat it as applying the rule when the text itself says the
+      condition is satisfied or not satisfied.
+
+Do NOT judge any of the following:
+  - tone, length, formatting or helpfulness; the text may be terse or incomplete and still be GROUNDED;
+  - text of the form "[withheld: ...]" — it is a redaction marker, not a statement; ignore it;
+  - which heading or clause number a passage sits under, as long as the statement is supported by the passage text;
+  - facts restated from the CLAIM FILE (dates, amounts, what happened) — those are not wording claims;
+  - a deferral such as "the adjuster should review clause X" — pointing at a clause is GROUNDED if that clause
+    exists in the passages; it is not a claim about what the clause says.
+
+A statement that the wording is SILENT on something ("the policy does not mention X") is judged against the
+passages shown only: GROUNDED if none of them mentions X, UNGROUNDED if one does.
+
+HOW TO WORK — quote before you decide. Passages contain tables; read them row by row. For each statement in the
+text that is about the wording, write one CHECKS line giving the statement, the passage number (or tool result)
+and the exact words that support it, or NONE if nothing does. Only then give the verdict.
+
+--------------------------------------------------------------------------------------------
+WORKED EXAMPLES — invented documents and claims, not from any real file.
+
+EXAMPLE 1 — superseded figure presented as current  -> UNGROUNDED
+  Date of loss 2026-03-10.
+  [1] document EX-BASE v1, effective_date 2025-01-01: "The pre-hospitalisation period is 30 days."
+  [2] document EX-END v1, effective_date 2026-02-01, section "Amendment to the pre-hospitalisation period":
+      "The pre-hospitalisation period is extended from 30 days to 60 days."
+  TEXT: "Expenses incurred in the 30 days before admission fall within the pre-hospitalisation period."
+  VERDICT: UNGROUNDED
+  WHY: the 30-day figure comes from [1], but [2], effective before the date of loss, amends the same period to 60 days.
+
+EXAMPLE 2 — rule applied to facts it does not fit  -> UNGROUNDED
+  Date of loss 2026-05-02. Claim file: repair estimate is 40% of the IDV.
+  [1] document EX-BASE v1, effective_date 2025-01-01: "A claim is treated as a total loss where the cost of
+      repair exceeds 75% of the IDV."
+  TEXT: "Because the claim is a total loss under the 75% threshold, the IDV is payable in full."
+  VERDICT: UNGROUNDED
+  WHY: [1] applies only above 75% of the IDV and the claim file puts repair at 40%, so the precondition is not met.
+
+EXAMPLE 3 — accurate and current, merely terse  -> GROUNDED
+  Date of loss 2026-03-10.
+  [1] and [2] as in Example 1. TOOL RESULTS: none.
+  TEXT: "Under the endorsement the pre-hospitalisation period is 60 days. The adjuster should confirm the
+  admission date."
+  VERDICT: GROUNDED
+  WHY: the 60-day figure is stated in [2], which is in force on the date of loss; the rest is a deferral.
+
+--------------------------------------------------------------------------------------------
+
+POLICY PASSAGES
+{passages}
+
+TOOL RESULTS
+{tool_results}
+
+CLAIM FILE
+{claim_file}
+
+TEXT TO AUDIT
+{prose}
+
+Reply in exactly this form:
+CHECKS: one line per statement about the wording — the statement, then the passage number and the exact supporting words, or NONE
+VERDICT: GROUNDED or UNGROUNDED
+WHY: one sentence naming the specific statement and the passage number that supports or fails to support it

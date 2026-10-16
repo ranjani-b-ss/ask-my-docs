@@ -1,0 +1,550 @@
+{
+ "boundary": [
+  {
+   "topic": "motor-deductible",
+   "kind": "day_before",
+   "loss_date": "2026-03-31",
+   "condition": "baseline",
+   "right_first": false,
+   "wrong_first": true,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-01::2",
+    "PW-MOTOR-001::3",
+    "PW-MOTOR-001::9"
+   ]
+  },
+  {
+   "topic": "motor-deductible",
+   "kind": "day_before",
+   "loss_date": "2026-03-31",
+   "condition": "scoped",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": false,
+   "in_force_in_top3": true,
+   "top3": [
+    "PW-MOTOR-001::3",
+    "PW-MOTOR-001::9",
+    "PW-MOTOR-001::5"
+   ]
+  },
+  {
+   "topic": "motor-deductible",
+   "kind": "effective_day",
+   "loss_date": "2026-04-01",
+   "condition": "baseline",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-01::2",
+    "PW-MOTOR-001::3",
+    "PW-MOTOR-001::9"
+   ]
+  },
+  {
+   "topic": "motor-deductible",
+   "kind": "effective_day",
+   "loss_date": "2026-04-01",
+   "condition": "scoped",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-01::2",
+    "PW-MOTOR-001::3",
+    "PW-MOTOR-001::9"
+   ]
+  },
+  {
+   "topic": "motor-ctl-threshold",
+   "kind": "day_before",
+   "loss_date": "2026-03-31",
+   "condition": "baseline",
+   "right_first": false,
+   "wrong_first": true,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-01::3",
+    "PW-MOTOR-001::3",
+    "END-2026-03::4"
+   ]
+  },
+  {
+   "topic": "motor-ctl-threshold",
+   "kind": "day_before",
+   "loss_date": "2026-03-31",
+   "condition": "scoped",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": false,
+   "in_force_in_top3": true,
+   "top3": [
+    "PW-MOTOR-001::3",
+    "PW-MOTOR-001::1",
+    "PW-DEFS-004::2"
+   ]
+  },
+  {
+   "topic": "motor-ctl-threshold",
+   "kind": "effective_day",
+   "loss_date": "2026-04-01",
+   "condition": "baseline",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-01::3",
+    "PW-MOTOR-001::3",
+    "END-2026-03::4"
+   ]
+  },
+  {
+   "topic": "motor-ctl-threshold",
+   "kind": "effective_day",
+   "loss_date": "2026-04-01",
+   "condition": "scoped",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-01::3",
+    "PW-MOTOR-001::3",
+    "END-2026-01::4"
+   ]
+  },
+  {
+   "topic": "motor-intimation",
+   "kind": "day_before",
+   "loss_date": "2026-03-31",
+   "condition": "baseline",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": false,
+   "in_force_in_top3": true,
+   "top3": [
+    "PW-MOTOR-001::6",
+    "PW-DEFS-004::2",
+    "PW-MOTOR-001::8"
+   ]
+  },
+  {
+   "topic": "motor-intimation",
+   "kind": "day_before",
+   "loss_date": "2026-03-31",
+   "condition": "scoped",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": false,
+   "in_force_in_top3": true,
+   "top3": [
+    "PW-MOTOR-001::6",
+    "PW-DEFS-004::2",
+    "PW-MOTOR-001::8"
+   ]
+  },
+  {
+   "topic": "motor-intimation",
+   "kind": "effective_day",
+   "loss_date": "2026-04-01",
+   "condition": "baseline",
+   "right_first": false,
+   "wrong_first": true,
+   "stale_in_top3": true,
+   "in_force_in_top3": false,
+   "top3": [
+    "PW-MOTOR-001::6",
+    "PW-DEFS-004::2",
+    "PW-MOTOR-001::8"
+   ]
+  },
+  {
+   "topic": "motor-intimation",
+   "kind": "effective_day",
+   "loss_date": "2026-04-01",
+   "condition": "scoped",
+   "right_first": false,
+   "wrong_first": true,
+   "stale_in_top3": true,
+   "in_force_in_top3": false,
+   "top3": [
+    "PW-MOTOR-001::6",
+    "PW-DEFS-004::2",
+    "PW-MOTOR-001::8"
+   ]
+  },
+  {
+   "topic": "motor-reimbursement-window",
+   "kind": "day_before",
+   "loss_date": "2026-03-31",
+   "condition": "baseline",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "PW-MOTOR-001::8",
+    "END-2026-01::4",
+    "PW-HEALTH-002::9"
+   ]
+  },
+  {
+   "topic": "motor-reimbursement-window",
+   "kind": "day_before",
+   "loss_date": "2026-03-31",
+   "condition": "scoped",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": false,
+   "in_force_in_top3": true,
+   "top3": [
+    "PW-MOTOR-001::8",
+    "PW-MOTOR-001::7",
+    "PW-MOTOR-001::6"
+   ]
+  },
+  {
+   "topic": "motor-reimbursement-window",
+   "kind": "effective_day",
+   "loss_date": "2026-04-01",
+   "condition": "baseline",
+   "right_first": false,
+   "wrong_first": true,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "PW-MOTOR-001::8",
+    "END-2026-01::4",
+    "PW-HEALTH-002::9"
+   ]
+  },
+  {
+   "topic": "motor-reimbursement-window",
+   "kind": "effective_day",
+   "loss_date": "2026-04-01",
+   "condition": "scoped",
+   "right_first": false,
+   "wrong_first": true,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "PW-MOTOR-001::8",
+    "END-2026-01::4",
+    "PW-MOTOR-001::7"
+   ]
+  },
+  {
+   "topic": "health-copayment",
+   "kind": "day_before",
+   "loss_date": "2026-04-30",
+   "condition": "baseline",
+   "right_first": false,
+   "wrong_first": true,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-02::3",
+    "PW-HEALTH-002::11",
+    "PW-DEFS-004::1"
+   ]
+  },
+  {
+   "topic": "health-copayment",
+   "kind": "day_before",
+   "loss_date": "2026-04-30",
+   "condition": "scoped",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": false,
+   "in_force_in_top3": true,
+   "top3": [
+    "PW-HEALTH-002::11",
+    "PW-DEFS-004::1",
+    "PW-DEFS-004::7"
+   ]
+  },
+  {
+   "topic": "health-copayment",
+   "kind": "effective_day",
+   "loss_date": "2026-05-01",
+   "condition": "baseline",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-02::3",
+    "PW-HEALTH-002::11",
+    "PW-DEFS-004::1"
+   ]
+  },
+  {
+   "topic": "health-copayment",
+   "kind": "effective_day",
+   "loss_date": "2026-05-01",
+   "condition": "scoped",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-02::3",
+    "PW-HEALTH-002::11",
+    "PW-DEFS-004::1"
+   ]
+  },
+  {
+   "topic": "health-reimbursement-window",
+   "kind": "day_before",
+   "loss_date": "2026-04-30",
+   "condition": "baseline",
+   "right_first": false,
+   "wrong_first": true,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-02::3",
+    "PW-HEALTH-002::9",
+    "PW-MOTOR-001::8"
+   ]
+  },
+  {
+   "topic": "health-reimbursement-window",
+   "kind": "day_before",
+   "loss_date": "2026-04-30",
+   "condition": "scoped",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": false,
+   "in_force_in_top3": true,
+   "top3": [
+    "PW-HEALTH-002::9",
+    "PW-CLAIMS-003::3",
+    "PW-HEALTH-002::10"
+   ]
+  },
+  {
+   "topic": "health-reimbursement-window",
+   "kind": "effective_day",
+   "loss_date": "2026-05-01",
+   "condition": "baseline",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-02::3",
+    "PW-HEALTH-002::9",
+    "PW-MOTOR-001::8"
+   ]
+  },
+  {
+   "topic": "health-reimbursement-window",
+   "kind": "effective_day",
+   "loss_date": "2026-05-01",
+   "condition": "scoped",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-02::3",
+    "PW-HEALTH-002::9",
+    "PW-CLAIMS-003::3"
+   ]
+  },
+  {
+   "topic": "health-prepost-hospitalisation",
+   "kind": "day_before",
+   "loss_date": "2026-04-30",
+   "condition": "baseline",
+   "right_first": false,
+   "wrong_first": true,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-02::2",
+    "PW-HEALTH-002::8",
+    "PW-HEALTH-002::2"
+   ]
+  },
+  {
+   "topic": "health-prepost-hospitalisation",
+   "kind": "day_before",
+   "loss_date": "2026-04-30",
+   "condition": "scoped",
+   "right_first": false,
+   "wrong_first": false,
+   "stale_in_top3": false,
+   "in_force_in_top3": true,
+   "top3": [
+    "PW-HEALTH-002::8",
+    "PW-HEALTH-002::2",
+    "PW-HEALTH-002::1"
+   ]
+  },
+  {
+   "topic": "health-prepost-hospitalisation",
+   "kind": "effective_day",
+   "loss_date": "2026-05-01",
+   "condition": "baseline",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-02::2",
+    "PW-HEALTH-002::8",
+    "PW-HEALTH-002::2"
+   ]
+  },
+  {
+   "topic": "health-prepost-hospitalisation",
+   "kind": "effective_day",
+   "loss_date": "2026-05-01",
+   "condition": "scoped",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-02::2",
+    "PW-HEALTH-002::8",
+    "PW-HEALTH-002::2"
+   ]
+  },
+  {
+   "topic": "health-initial-waiting-period",
+   "kind": "day_before",
+   "loss_date": "2026-04-30",
+   "condition": "baseline",
+   "right_first": false,
+   "wrong_first": true,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-02::1",
+    "PW-HEALTH-002::4",
+    "PW-HEALTH-002::3"
+   ]
+  },
+  {
+   "topic": "health-initial-waiting-period",
+   "kind": "day_before",
+   "loss_date": "2026-04-30",
+   "condition": "scoped",
+   "right_first": false,
+   "wrong_first": false,
+   "stale_in_top3": false,
+   "in_force_in_top3": true,
+   "top3": [
+    "PW-HEALTH-002::4",
+    "PW-HEALTH-002::3",
+    "PW-HEALTH-002::5"
+   ]
+  },
+  {
+   "topic": "health-initial-waiting-period",
+   "kind": "effective_day",
+   "loss_date": "2026-05-01",
+   "condition": "baseline",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-02::1",
+    "PW-HEALTH-002::4",
+    "PW-HEALTH-002::3"
+   ]
+  },
+  {
+   "topic": "health-initial-waiting-period",
+   "kind": "effective_day",
+   "loss_date": "2026-05-01",
+   "condition": "scoped",
+   "right_first": true,
+   "wrong_first": false,
+   "stale_in_top3": true,
+   "in_force_in_top3": true,
+   "top3": [
+    "END-2026-02::1",
+    "PW-HEALTH-002::4",
+    "PW-HEALTH-002::3"
+   ]
+  }
+ ],
+ "non_straddle": [
+  {
+   "id": "ncb-three-years",
+   "expect_doc": "PW-MOTOR-001",
+   "product": "motor",
+   "baseline_hit3": true,
+   "scoped_hit3": true,
+   "baseline_top1": "PW-MOTOR-001::9",
+   "scoped_top1": "PW-MOTOR-001::9"
+  },
+  {
+   "id": "file-retention",
+   "expect_doc": "PW-CLAIMS-003",
+   "product": null,
+   "baseline_hit3": true,
+   "scoped_hit3": true,
+   "baseline_top1": "PW-CLAIMS-003::7",
+   "scoped_top1": "PW-CLAIMS-003::7"
+  },
+  {
+   "id": "grace-period",
+   "expect_doc": "PW-DEFS-004",
+   "product": null,
+   "baseline_hit3": true,
+   "scoped_hit3": true,
+   "baseline_top1": "PW-DEFS-004::2",
+   "scoped_top1": "PW-DEFS-004::2"
+  },
+  {
+   "id": "portability-window",
+   "expect_doc": "PW-DEFS-004",
+   "product": null,
+   "baseline_hit3": true,
+   "scoped_hit3": true,
+   "baseline_top1": "PW-DEFS-004::7",
+   "scoped_top1": "PW-DEFS-004::7"
+  },
+  {
+   "id": "tyre-limit",
+   "expect_doc": "PW-MOTOR-001",
+   "product": "motor",
+   "baseline_hit3": true,
+   "scoped_hit3": true,
+   "baseline_top1": "PW-MOTOR-001::4",
+   "scoped_top1": "PW-MOTOR-001::4"
+  },
+  {
+   "id": "day-care-opd",
+   "expect_doc": "PW-HEALTH-002",
+   "product": "health",
+   "baseline_hit3": true,
+   "scoped_hit3": true,
+   "baseline_top1": "PW-HEALTH-002::3",
+   "scoped_top1": "PW-HEALTH-002::3"
+  },
+  {
+   "id": "ombudsman-ceiling",
+   "expect_doc": "PW-CLAIMS-003",
+   "product": null,
+   "baseline_hit3": true,
+   "scoped_hit3": true,
+   "baseline_top1": "PW-CLAIMS-003::7",
+   "scoped_top1": "PW-CLAIMS-003::7"
+  }
+ ],
+ "non_straddle_loss_date": "2026-03-31"
+}

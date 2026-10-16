@@ -1,0 +1,21 @@
+{
+ "query": "What is not covered",
+ "recursive": {
+  "CLM-2026-00514 liquor (motor)": true,
+  "CLM-2026-00561 tyres alone (motor)": true,
+  "C-011 outside India (motor)": false,
+  "C-007 hire-car bill (motor)": false,
+  "CLM-2026-00509 alcohol (health)": true,
+  "CLM-2026-00567 outside India (health)": true,
+  "CLM-2026-00442 non-medical items (health)": true
+ },
+ "structured": {
+  "CLM-2026-00514 liquor (motor)": true,
+  "CLM-2026-00561 tyres alone (motor)": true,
+  "C-011 outside India (motor)": true,
+  "C-007 hire-car bill (motor)": true,
+  "CLM-2026-00509 alcohol (health)": true,
+  "CLM-2026-00567 outside India (health)": true,
+  "CLM-2026-00442 non-medical items (health)": true
+ }
+}

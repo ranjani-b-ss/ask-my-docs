@@ -1,0 +1,18 @@
+{
+  "n": 24,
+  "sequential": {
+    "wall_s": 5.92,
+    "p50_ms": 270,
+    "p95_ms": 380,
+    "searches_per_s": 4.05
+  },
+  "concurrent": {
+    "wall_s": 5.2,
+    "p50_ms": 4527,
+    "p95_ms": 5200,
+    "max_ms": 5200,
+    "searches_per_s": 4.61
+  },
+  "wording_server_rss_mb": 1258,
+  "probe_rows_removed_from_log": 49
+}

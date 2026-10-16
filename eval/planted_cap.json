@@ -1,0 +1,302 @@
+[
+ {
+  "id": "P01",
+  "base": "v2:CLM-2026-00602",
+  "field": "summary",
+  "type": "stale",
+  "label": "UNGROUNDED",
+  "split": "test",
+  "edited_text": "The insured vehicle sustained own damage while parked, with an estimated repair cost of INR 38,500. The policy was in force on the loss date, and a compulsory deductible of INR 1,000 applies based on the vehicle's cubic capacity of 1400cc.",
+  "original_text": "The insured vehicle sustained own damage while parked, with an estimated repair cost of INR 38,500. The policy was in force on the loss date, and a compulsory deductible of INR 1,500 applies based on the vehicle's cubic capacity of 1400cc."
+ },
+ {
+  "id": "P02",
+  "base": "v2:CLM-2026-00572",
+  "field": "summary",
+  "type": "stale",
+  "label": "UNGROUNDED",
+  "split": "test",
+  "edited_text": "The claim involves front bumper and bonnet damage assessed at INR 58,000 for an 1800cc vehicle. The policy was in-force on the date of loss (2026-07-21), and a compulsory deductible of INR 2,000 applies based on endorsement END-2026-01.",
+  "original_text": "The claim involves front bumper and bonnet damage assessed at INR 58,000 for an 1800cc vehicle. The policy was in-force on the date of loss (2026-07-21), and a compulsory deductible of INR 3,000 applies based on endorsement END-2026-01."
+ },
+ {
+  "id": "P03",
+  "base": "v2:CLM-2026-00584",
+  "field": "summary",
+  "type": "stale",
+  "label": "UNGROUNDED",
+  "split": "dev",
+  "edited_text": "The policy was in force on the date of loss. The reimbursement submission window remains 15 days from discharge. The claim documents were submitted 27 days post-discharge.",
+  "original_text": "The policy was in force on the date of loss. Endorsement 2 amends the reimbursement submission window to 30 days from discharge. The claim documents were submitted 27 days post-discharge."
+ },
+ {
+  "id": "P04",
+  "base": "v2:CLM-2026-00496",
+  "field": "summary",
+  "type": "stale",
+  "label": "UNGROUNDED",
+  "split": "test",
+  "edited_text": "The claim involves a hernia repair hospitalization during an active policy period. The base wording specified a 24-month waiting period for specified illnesses (including hernia) and a 30-day initial waiting period, whereas Endorsement 2 (effective 2026-05-01) kept the specified illness waiting period at 24 months and the initial waiting period at 30 days. The adjuster should determine which waiting period governs this claim.",
+  "original_text": "The claim involves a hernia repair hospitalization during an active policy period. The base wording specified a 24-month waiting period for specified illnesses (including hernia) and a 30-day initial waiting period, whereas Endorsement 2 (effective 2026-05-01) amended the specified illness waiting period to 12 months and the initial waiting period to 15 days. The adjuster should determine which waiting period governs this claim."
+ },
+ {
+  "id": "P05",
+  "base": "v2:CLM-2026-00578",
+  "field": "referral_reason",
+  "type": "stale",
+  "label": "UNGROUNDED",
+  "split": "dev",
+  "edited_text": "The policy was in force on the loss date. The adjuster should review the co-payment percentage of 20% applicable for insured persons aged 61 years and above pursuant to Endorsement END-2026-02.",
+  "original_text": "The policy was in force on the loss date. The adjuster should review the co-payment percentage of 10% applicable for insured persons aged 66 years and above pursuant to Endorsement END-2026-02."
+ },
+ {
+  "id": "P06",
+  "base": "v2:CLM-2026-00607",
+  "field": "summary",
+  "type": "stale",
+  "label": "UNGROUNDED",
+  "split": "dev",
+  "edited_text": "The claim involves a planned knee arthroscopy at a network hospital for a 63-year-old insured with a hospital bill of INR 1,40,000 under an in-force health policy. The policy wording under '9. Co-payment' specifies a 10% co-payment for insured persons aged 66 and above.",
+  "original_text": "The claim involves a planned knee arthroscopy at a network hospital for a 63-year-old insured with a hospital bill of INR 1,40,000 under an in-force health policy. The policy wording under '9. Co-payment' specifies a 20% co-payment for insured persons aged 61 and above."
+ },
+ {
+  "id": "P07",
+  "base": "v2:CLM-2026-00437",
+  "field": "summary",
+  "type": "invent",
+  "label": "UNGROUNDED",
+  "split": "dev",
+  "edited_text": "The policy was active on the date of loss. Room rent is capped at 1% of the sum insured per day for a normal ward (INR 10,000 per day), with proportionate deduction applying to associated medical expenses if a higher-priced room is occupied.",
+  "original_text": "The policy was active on the date of loss. Room rent is capped at 1% of the sum insured per day for a normal ward (INR 5,000 per day), with proportionate deduction applying to associated medical expenses if a higher-priced room is occupied."
+ },
+ {
+  "id": "P08",
+  "base": "v2:CLM-2026-00609",
+  "field": "summary",
+  "type": "stale",
+  "label": "UNGROUNDED",
+  "split": "test",
+  "edited_text": "The claim involves a private room stay at INR 9,000 per day for three nights under a health policy with a sum insured of INR 5,00,000. The normal ward room rent limit is 2% of the sum insured per day (INR 10,000), and clause 1.1 governs proportionate deductions when the actual room rent exceeds this limit.",
+  "original_text": "The claim involves a private room stay at INR 9,000 per day for three nights under a health policy with a sum insured of INR 5,00,000. The normal ward room rent limit is 1% of the sum insured per day (INR 5,000), and clause 1.1 governs proportionate deductions when the actual room rent exceeds this limit."
+ },
+ {
+  "id": "P09",
+  "base": "v2:CLM-2026-00479",
+  "field": "summary",
+  "type": "invent",
+  "label": "UNGROUNDED",
+  "split": "dev",
+  "edited_text": "The claim involves a newborn admission with a bill of INR 3,40,000 where intimation took place 37 days post-birth. Endorsement 2 Clause 5A provides cover from birth up to INR 5,00,000 until renewal, subject to a 30-day intimation requirement.",
+  "original_text": "The claim involves a newborn admission with a bill of INR 3,40,000 where intimation took place 37 days post-birth. Endorsement 2 Clause 5A provides cover from birth up to INR 2,00,000 until renewal, subject to a 30-day intimation requirement."
+ },
+ {
+  "id": "P10",
+  "base": "v2:CLM-2026-00472",
+  "field": "summary",
+  "type": "stale",
+  "label": "UNGROUNDED",
+  "split": "dev",
+  "edited_text": "The claim is a total loss theft incident where the last document was received on 2026-08-04 and an investigation was flagged on 2026-08-06. Endorsement 3 applies to settlement timelines, specifying a 30-day decision window after receipt of the last document and a 45-day window where an investigation is warranted.",
+  "original_text": "The claim is a total loss theft incident where the last document was received on 2026-08-04 and an investigation was flagged on 2026-08-06. Endorsement 3 applies to settlement timelines, specifying a 15-day decision window after receipt of the last document and a 30-day window where an investigation is warranted."
+ },
+ {
+  "id": "P11",
+  "base": "v2:CLM-2026-00461",
+  "field": "summary",
+  "type": "contra",
+  "label": "UNGROUNDED",
+  "split": "test",
+  "edited_text": "The claim involves damage to the rear quarter panel and plastic tail lamp housing. While the schedule records Nil Depreciation, Endorsement 1 permits a maximum of three Nil Depreciation claims per policy year, and this is the third claim.",
+  "original_text": "The claim involves damage to the rear quarter panel and plastic tail lamp housing. While the schedule records Nil Depreciation, Endorsement 1 permits a maximum of two Nil Depreciation claims per policy year, and this is the third claim."
+ },
+ {
+  "id": "P12",
+  "base": "v2:CLM-2026-00483",
+  "field": "summary",
+  "type": "contra",
+  "label": "UNGROUNDED",
+  "split": "dev",
+  "edited_text": "The policy was in force at the time of the incident involving side mirror and door panel damage. The schedule records No Claim Bonus Protection, and this is the second own damage claim of the policy year. Wording under 'New Clause 6A \u2014 No Claim Bonus protection' provides that a second claim halves the bonus and only a third claim reverts it to nil.",
+  "original_text": "The policy was in force at the time of the incident involving side mirror and door panel damage. The schedule records No Claim Bonus Protection, and this is the second own damage claim of the policy year. Wording under 'New Clause 6A \u2014 No Claim Bonus protection' provides that a second or subsequent claim results in the bonus reverting to nil."
+ },
+ {
+  "id": "P13",
+  "base": "v2:CLM-2026-00502",
+  "field": "summary",
+  "type": "contra",
+  "label": "UNGROUNDED",
+  "split": "test",
+  "edited_text": "The claim involves a day care cataract surgery totalling INR 62,000 for an insured aged 68 whose policy was in force on the loss date. The waiting period for specified illnesses like cataract is 6 months per Endorsement 2, and the policy has been active since 2025-02-01, exceeding this duration.",
+  "original_text": "The claim involves a day care cataract surgery totalling INR 62,000 for an insured aged 68 whose policy was in force on the loss date. The waiting period for specified illnesses like cataract is 12 months per Endorsement 2, and the policy has been active since 2025-02-01, exceeding this duration."
+ },
+ {
+  "id": "P14",
+  "base": "v2:CLM-2026-00601",
+  "field": "summary",
+  "type": "contra",
+  "label": "UNGROUNDED",
+  "split": "test",
+  "edited_text": "The motor claim involves rear-end damage with a surveyor's estimate of INR 41,000. The policy was in force, and the compulsory deductible is resolved as INR 1,500 under clause 2.2 of document PW-MOTOR-001 (version 5.1, effective 2025-04-01).",
+  "original_text": "The motor claim involves rear-end damage with a surveyor's estimate of INR 41,000. The policy was in force, and the compulsory deductible is resolved as INR 1,000 under clause 2.2 of document PW-MOTOR-001 (version 5.1, effective 2025-04-01)."
+ },
+ {
+  "id": "P15",
+  "base": "v2:CLM-2026-00553",
+  "field": "summary",
+  "type": "contra",
+  "label": "UNGROUNDED",
+  "split": "dev",
+  "edited_text": "The policy was in force on the loss date. The claim involves an arthrotomy of the hip joint performed with under 24 hours of stay, billed as day care. The relevant wording under '3. Day care procedures' covers any procedure completed within 48 hours, and Annexure A need not be checked.",
+  "original_text": "The policy was in force on the loss date. The claim involves an arthrotomy of the hip joint performed with under 24 hours of stay, billed as day care. The relevant wording under '3. Day care procedures' requires checking against Annexure A for qualifying procedures due to technological advancement."
+ },
+ {
+  "id": "P16",
+  "base": "v2:CLM-2026-00442",
+  "field": "why:0",
+  "type": "invent",
+  "label": "UNGROUNDED",
+  "split": "dev",
+  "edited_text": "The policy wording under \"What is not covered\" excludes non-medical items listed in Annexure C, including gloves, administrative charges, telephone charges, attendant comfort items and prescribed medicines, which makes the disallowance of these specific items arguable.",
+  "original_text": "The policy wording under \"What is not covered\" excludes non-medical items listed in Annexure C, including gloves, administrative charges, telephone charges, and attendant comfort items, which makes the disallowance of these specific items arguable."
+ },
+ {
+  "id": "P17",
+  "base": "v2:CLM-2026-00423",
+  "field": "summary",
+  "type": "contra",
+  "label": "UNGROUNDED",
+  "split": "test",
+  "edited_text": "The policy was in force when cancelled mid-term after 4 months with no prior claims. Clause '4. Cancellation' in document PW-DEFS-004 provides a full premium refund on cancellation within 30 days, which the adjuster should review.",
+  "original_text": "The policy was in force when cancelled mid-term after 4 months with no prior claims. Clause '4. Cancellation' in document PW-DEFS-004 governs policyholder cancellations and short-period scale refunds, which the adjuster should review."
+ },
+ {
+  "id": "P18",
+  "base": "v2:CLM-2026-00606",
+  "field": "referral_reason",
+  "type": "absent",
+  "label": "UNGROUNDED",
+  "split": "dev",
+  "edited_text": "The policy wording contains no limit on tyre replacement, so the adjuster should treat the tyres as fully recoverable.",
+  "original_text": "The adjuster should review the tyre damage limits and the 50% sub-limit applicable when tyres and the vehicle are damaged simultaneously."
+ },
+ {
+  "id": "P19",
+  "base": "v2:CLM-2026-00567",
+  "field": "why:0",
+  "type": "contra",
+  "label": "UNGROUNDED",
+  "split": "test",
+  "edited_text": "The policy wording excludes treatment taken outside India in all circumstances, and the schedule lacks this extension.",
+  "original_text": "The policy wording excludes treatment taken outside India unless the schedule provides worldwide cover, and the schedule lacks this extension."
+ },
+ {
+  "id": "P20",
+  "base": "v2:CLM-2026-00514",
+  "field": "summary",
+  "type": "invent",
+  "label": "UNGROUNDED",
+  "split": "dev",
+  "edited_text": "The policy was in force on the date of loss (2026-04-18). The repair estimate is INR 1,90,000, with a compulsory deductible of INR 1,500 and an IDV policy limit of INR 6,00,000. The adjuster should review the police report indicating a blood alcohol reading above the 0.03% threshold set in the exclusion clause in \"What is not covered\".",
+  "original_text": "The policy was in force on the date of loss (2026-04-18). The repair estimate is INR 1,90,000, with a compulsory deductible of INR 1,500 and an IDV policy limit of INR 6,00,000. The adjuster should review the police report indicating intoxication against the exclusion clause in \"What is not covered\"."
+ },
+ {
+  "id": "P21",
+  "base": "v2:CLM-2026-00431",
+  "field": "summary",
+  "type": "contra",
+  "label": "UNGROUNDED",
+  "split": "test",
+  "edited_text": "The claim involves a planned knee arthroscopy at a network hospital requesting direct payment. The policy is in force, and relevant provisions regarding cashless claims and definitions apply, requiring pre-authorisation at least 24 hours prior to admission.",
+  "original_text": "The claim involves a planned knee arthroscopy at a network hospital requesting direct payment. The policy is in force, and relevant provisions regarding cashless claims and definitions apply, requiring pre-authorisation at least 48 hours prior to admission."
+ },
+ {
+  "id": "P22",
+  "base": "v2:CLM-2026-00561",
+  "field": "summary",
+  "type": "contra",
+  "label": "UNGROUNDED",
+  "split": "test",
+  "edited_text": "The insured vehicle sustained damage exclusively to two tyres after hitting a pothole with no other parts damaged. The adjuster should examine the exclusion under \"What is not covered\" regarding tyre damage alone versus simultaneous vehicle damage, noting a compulsory deductible of INR 1,500 applies.",
+  "original_text": "The insured vehicle sustained damage exclusively to two tyres after hitting a pothole with no other parts damaged. The adjuster should examine the exclusion under \"What is not covered\" regarding tyre damage alone versus simultaneous vehicle damage, noting a compulsory deductible of INR 3,000 applies."
+ },
+ {
+  "id": "P23",
+  "base": "v2:CLM-2026-00509",
+  "field": "summary",
+  "type": "fit",
+  "label": "UNGROUNDED",
+  "split": "dev",
+  "edited_text": "The policy HLT-2025-0010 was in force on the date of loss (2026-05-04). The discharge summary records blood alcohol well above the legal limit. Because the member fell at home, the self-inflicted injury exclusion in clause 6 applies in \"Group Health Indemnity Policy > 6. What is not covered\" (chunk id PW-HEALTH-002::6). Policy limits and co-payment terms have been successfully resolved.",
+  "original_text": "The policy HLT-2025-0010 was in force on the date of loss (2026-05-04). The discharge summary records blood alcohol well above the legal limit. The adjuster should examine the exclusion for treatment of alcoholism, drug or substance abuse in \"Group Health Indemnity Policy > 6. What is not covered\" (chunk id PW-HEALTH-002::6). Policy limits and co-payment terms have been successfully resolved."
+ },
+ {
+  "id": "P24",
+  "base": "v2:CLM-2026-00461",
+  "field": "referral_reason",
+  "type": "fit",
+  "label": "UNGROUNDED",
+  "split": "test",
+  "edited_text": "The schedule records Nil Depreciation, but Endorsement 1 limits Nil Depreciation to a maximum of two claims per policy year, and this is the second own damage claim, so Nil Depreciation applies in full. The adjuster should weigh whether Nil Depreciation applies to this third claim or if the standard depreciation table in Clause 2.1 applies.",
+  "original_text": "The schedule records Nil Depreciation, but Endorsement 1 limits Nil Depreciation to a maximum of two claims per policy year, and this is the third own damage claim. The adjuster should weigh whether Nil Depreciation applies to this third claim or if the standard depreciation table in Clause 2.1 applies."
+ },
+ {
+  "id": "C01",
+  "base": "v2:CLM-2026-00602",
+  "field": "summary",
+  "type": "ctrl",
+  "label": "GROUNDED",
+  "split": "test",
+  "edited_text": "The insured vehicle sustained own damage while parked, with an estimated repair cost of INR 38,500. The policy was in force on the loss date, and the compulsory deductible is INR 1,500, which follows from the vehicle's 1400cc engine.",
+  "original_text": "The insured vehicle sustained own damage while parked, with an estimated repair cost of INR 38,500. The policy was in force on the loss date, and a compulsory deductible of INR 1,500 applies based on the vehicle's cubic capacity of 1400cc."
+ },
+ {
+  "id": "C02",
+  "base": "v2:CLM-2026-00437",
+  "field": "summary",
+  "type": "ctrl",
+  "label": "GROUNDED",
+  "split": "dev",
+  "edited_text": "The policy was active on the date of loss. For a normal ward the room rent limit is 1% of the sum insured a day, which is INR 5,000, with proportionate deduction applying to associated medical expenses if a higher-priced room is occupied.",
+  "original_text": "The policy was active on the date of loss. Room rent is capped at 1% of the sum insured per day for a normal ward (INR 5,000 per day), with proportionate deduction applying to associated medical expenses if a higher-priced room is occupied."
+ },
+ {
+  "id": "C03",
+  "base": "v2:CLM-2026-00584",
+  "field": "summary",
+  "type": "ctrl",
+  "label": "GROUNDED",
+  "split": "dev",
+  "edited_text": "The policy was in force on the date of loss. Under Endorsement 2 the reimbursement documents are due within 30 days of discharge. The claim documents were submitted 27 days post-discharge.",
+  "original_text": "The policy was in force on the date of loss. Endorsement 2 amends the reimbursement submission window to 30 days from discharge. The claim documents were submitted 27 days post-discharge."
+ },
+ {
+  "id": "C04",
+  "base": "v2:CLM-2026-00472",
+  "field": "summary",
+  "type": "ctrl",
+  "label": "GROUNDED",
+  "split": "dev",
+  "edited_text": "The claim is a total loss theft incident where the last document was received on 2026-08-04 and an investigation was flagged on 2026-08-06. Endorsement 3 applies to settlement timelines, which sets 15 days to decide after the last document, extended to 30 days where an investigation is warranted.",
+  "original_text": "The claim is a total loss theft incident where the last document was received on 2026-08-04 and an investigation was flagged on 2026-08-06. Endorsement 3 applies to settlement timelines, specifying a 15-day decision window after receipt of the last document and a 30-day window where an investigation is warranted."
+ },
+ {
+  "id": "C05",
+  "base": "v2:CLM-2026-00607",
+  "field": "summary",
+  "type": "ctrl",
+  "label": "GROUNDED",
+  "split": "dev",
+  "edited_text": "The claim involves a planned knee arthroscopy at a network hospital for a 63-year-old insured with a hospital bill of INR 1,40,000 under an in-force health policy. The policy wording under '9. Co-payment' provides for a 20% co-payment where the insured person is 61 or older.",
+  "original_text": "The claim involves a planned knee arthroscopy at a network hospital for a 63-year-old insured with a hospital bill of INR 1,40,000 under an in-force health policy. The policy wording under '9. Co-payment' specifies a 20% co-payment for insured persons aged 61 and above."
+ },
+ {
+  "id": "C06",
+  "base": "v2:CLM-2026-00496",
+  "field": "summary",
+  "type": "ctrl",
+  "label": "GROUNDED",
+  "split": "test",
+  "edited_text": "The claim involves a hernia repair hospitalization during an active policy period. The base wording specified a 24-month waiting period for specified illnesses (including hernia) and a 30-day initial waiting period, whereas Endorsement 2 (effective 2026-05-01) changed the specified-illness waiting period to 12 months and the initial waiting period to 15 days. The adjuster should determine which waiting period governs this claim.",
+  "original_text": "The claim involves a hernia repair hospitalization during an active policy period. The base wording specified a 24-month waiting period for specified illnesses (including hernia) and a 30-day initial waiting period, whereas Endorsement 2 (effective 2026-05-01) amended the specified illness waiting period to 12 months and the initial waiting period to 15 days. The adjuster should determine which waiting period governs this claim."
+ }
+]

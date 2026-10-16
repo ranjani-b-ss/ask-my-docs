@@ -74,6 +74,38 @@ def build_where(doc_type: str | None = None, effective_on_or_after: str | None =
     return clauses[0] if len(clauses) == 1 else {"$and": clauses}
 
 
+def in_force_hits(hits: list["Hit"], loss_date: str | None,
+                  product: str | None) -> tuple[list["Hit"], int]:
+    """Week 12 — drop every chunk that was not in force for this loss, in code.
+
+    Coverage is decided against the wording in force on the LOSS date, not the wording that
+    happens to retrieve best today. A prompt can ask the model to remember that; this cannot
+    be forgotten, because the out-of-force chunk never reaches the model at all.
+
+    * ``loss_date`` (ISO ``YYYY-MM-DD``): a chunk whose ``effective_date`` is later than the
+      loss date is not yet in force and is removed. ISO dates sort chronologically as plain
+      strings, so no parsing is needed. A chunk with no ``effective_date`` is kept — an
+      unknown date is not evidence of a wrong date — and the count of those is the caller's to
+      watch (see ``Retrieval.diagnostics["undated_kept"]``).
+    * ``product``: a chunk whose ``line_of_business`` is neither this product nor ``all`` is
+      removed. This is also what stops a motor claim retrieving health-policy endorsements.
+
+    Returns ``(kept, dropped_count)``. Pure and model-free, so it is unit-tested directly.
+    """
+    kept, dropped = [], 0
+    for h in hits:
+        eff = str(h.meta.get("effective_date") or "")
+        lob = str(h.meta.get("line_of_business") or "all")
+        if loss_date and eff and eff > loss_date:
+            dropped += 1
+            continue
+        if product and lob not in (product, "all"):
+            dropped += 1
+            continue
+        kept.append(h)
+    return kept, dropped
+
+
 RRF_K = 60   # standard damping constant; large enough that rank 1 vs 2 is not a landslide
 
 
@@ -108,6 +140,8 @@ def retrieve(
     corpus_id: str = DEFAULT_CORPUS,
     prefer_recent: bool = True,
     use_hybrid: bool = True,
+    loss_date: str | None = None,
+    product: str | None = None,
 ) -> Retrieval:
     # None means "use the defaults from config"; an explicit number always wins, so the UI
     # sliders and eval/calibrate.py can override per call.
@@ -161,6 +195,23 @@ def retrieve(
             hits.sort(key=lambda h: h.rrf or 0.0, reverse=True)
             hits = hits[:candidate_k]
 
+    dropped_not_in_force = 0
+    undated_kept = 0
+    if loss_date or product:
+        hits, dropped_not_in_force = in_force_hits(hits, loss_date, product)
+        undated_kept = sum(1 for h in hits if not h.meta.get("effective_date"))
+        if not hits:
+            return Retrieval(
+                question, [], False,
+                f"No wording in the index was in force for product={product!r} on "
+                f"loss date {loss_date!r}.",
+                {"candidates": len(raw), "gate": "date", "loss_date": loss_date,
+                 "product": product, "dropped_not_in_force": dropped_not_in_force},
+            )
+        # The cosine gate below must judge what the model will actually be shown, not a
+        # chunk this filter just removed.
+        best_cosine = max(h.cosine for h in hits)
+
     if use_reranker:
         scores = get_reranker().score(question, [h.text for h in hits])
         for hit, score in zip(hits, scores):
@@ -199,6 +250,10 @@ def retrieve(
         "best_bm25": max((h.bm25 or 0.0 for h in hits), default=0.0),
         "collection": store.collection_name(cfg, corpus_id),
         "gate": "none",
+        "loss_date": loss_date,
+        "product": product,
+        "dropped_not_in_force": dropped_not_in_force,
+        "undated_kept": undated_kept,
     }
 
     # Two gates. The cross-encoder is the decisive one when available, because the

@@ -1,0 +1,402 @@
+[
+ {
+  "claim_number": "CLM-2026-00509",
+  "group": "w6-wrong-document-retrieved",
+  "product": "health",
+  "loss_date": "2026-05-04",
+  "trace_id": "cap_072b34d31a4a",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-EB1A9BCB"
+   },
+   "in_force_checked": {
+    "passed": false,
+    "detail": "lookup_policy / check_in_force not both called: ['refer_to_adjuster']"
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited []"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": false,
+    "detail": "no numbers reported (get_limits was not called or failed)"
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": false,
+  "completed": false,
+  "stop_reason": "budget_exceeded: max_wall_seconds (240.0s, elapsed 243.3s)",
+  "laps": 2,
+  "tokens": 0,
+  "cost_usd": 0.0,
+  "wall_seconds": 243.361,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v3",
+  "prompt_sha": "f7b0c7dacc59",
+  "packet": {
+   "trace_id": "cap_072b34d31a4a",
+   "claim_number": "CLM-2026-00509",
+   "policy_number": null,
+   "product": null,
+   "loss_date": null,
+   "in_force": null,
+   "facts": [],
+   "wording": [],
+   "numbers": null,
+   "referral": {
+    "referral_id": "REF-EB1A9BCB",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00509",
+    "recorded": true,
+    "reason": "Triage did not complete: budget_exceeded: max_wall_seconds (240.0s, elapsed 243.3s)."
+   },
+   "summary_for_adjuster": "Triage did not complete; adjuster to review the file.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00514",
+  "group": "w6-wrong-document-retrieved",
+  "product": "motor",
+  "loss_date": "2026-04-18",
+  "trace_id": "cap_25700f745eaf",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-7FF16A85"
+   },
+   "in_force_checked": {
+    "passed": false,
+    "detail": "lookup_policy / check_in_force not both called: ['refer_to_adjuster']"
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited []"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": false,
+    "detail": "no numbers reported (get_limits was not called or failed)"
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": false,
+  "completed": false,
+  "stop_reason": "budget_exceeded: max_wall_seconds (240.0s, elapsed 243.6s)",
+  "laps": 2,
+  "tokens": 0,
+  "cost_usd": 0.0,
+  "wall_seconds": 243.64,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v3",
+  "prompt_sha": "f7b0c7dacc59",
+  "packet": {
+   "trace_id": "cap_25700f745eaf",
+   "claim_number": "CLM-2026-00514",
+   "policy_number": null,
+   "product": null,
+   "loss_date": null,
+   "in_force": null,
+   "facts": [],
+   "wording": [],
+   "numbers": null,
+   "referral": {
+    "referral_id": "REF-7FF16A85",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00514",
+    "recorded": true,
+    "reason": "Triage did not complete: budget_exceeded: max_wall_seconds (240.0s, elapsed 243.6s)."
+   },
+   "summary_for_adjuster": "Triage did not complete; adjuster to review the file.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00567",
+  "group": "w6-clean-baseline",
+  "product": "health",
+  "loss_date": "2026-04-25",
+  "trace_id": "cap_4783a2fa8f61",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-D9EF6ED9"
+   },
+   "in_force_checked": {
+    "passed": false,
+    "detail": "lookup_policy / check_in_force not both called: ['refer_to_adjuster']"
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited []"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": false,
+    "detail": "no numbers reported (get_limits was not called or failed)"
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": false,
+  "completed": false,
+  "stop_reason": "budget_exceeded: max_wall_seconds (240.0s, elapsed 242.9s)",
+  "laps": 2,
+  "tokens": 0,
+  "cost_usd": 0.0,
+  "wall_seconds": 242.865,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v3",
+  "prompt_sha": "f7b0c7dacc59",
+  "packet": {
+   "trace_id": "cap_4783a2fa8f61",
+   "claim_number": "CLM-2026-00567",
+   "policy_number": null,
+   "product": null,
+   "loss_date": null,
+   "in_force": null,
+   "facts": [],
+   "wording": [],
+   "numbers": null,
+   "referral": {
+    "referral_id": "REF-D9EF6ED9",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00567",
+    "recorded": true,
+    "reason": "Triage did not complete: budget_exceeded: max_wall_seconds (240.0s, elapsed 242.9s)."
+   },
+   "summary_for_adjuster": "Triage did not complete; adjuster to review the file.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00561",
+  "group": "w6-clean-baseline",
+  "product": "motor",
+  "loss_date": "2026-06-02",
+  "trace_id": "cap_5b43aa5e84e9",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-E9CB9F19"
+   },
+   "in_force_checked": {
+    "passed": false,
+    "detail": "lookup_policy / check_in_force not both called: ['refer_to_adjuster']"
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited []"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": false,
+    "detail": "no numbers reported (get_limits was not called or failed)"
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": false,
+  "completed": false,
+  "stop_reason": "budget_exceeded: max_wall_seconds (240.0s, elapsed 243.3s)",
+  "laps": 2,
+  "tokens": 0,
+  "cost_usd": 0.0,
+  "wall_seconds": 243.288,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v3",
+  "prompt_sha": "f7b0c7dacc59",
+  "packet": {
+   "trace_id": "cap_5b43aa5e84e9",
+   "claim_number": "CLM-2026-00561",
+   "policy_number": null,
+   "product": null,
+   "loss_date": null,
+   "in_force": null,
+   "facts": [],
+   "wording": [],
+   "numbers": null,
+   "referral": {
+    "referral_id": "REF-E9CB9F19",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00561",
+    "recorded": true,
+    "reason": "Triage did not complete: budget_exceeded: max_wall_seconds (240.0s, elapsed 243.3s)."
+   },
+   "summary_for_adjuster": "Triage did not complete; adjuster to review the file.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00442",
+  "group": "w6-refuses-answer-present",
+  "product": "health",
+  "loss_date": "2026-02-27",
+  "trace_id": "cap_72f665dde5e5",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-533B1FA0"
+   },
+   "in_force_checked": {
+    "passed": false,
+    "detail": "lookup_policy / check_in_force not both called: ['refer_to_adjuster']"
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited []"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": false,
+    "detail": "no numbers reported (get_limits was not called or failed)"
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": false,
+  "completed": false,
+  "stop_reason": "budget_exceeded: max_wall_seconds (240.0s, elapsed 242.9s)",
+  "laps": 2,
+  "tokens": 0,
+  "cost_usd": 0.0,
+  "wall_seconds": 242.952,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v3",
+  "prompt_sha": "f7b0c7dacc59",
+  "packet": {
+   "trace_id": "cap_72f665dde5e5",
+   "claim_number": "CLM-2026-00442",
+   "policy_number": null,
+   "product": null,
+   "loss_date": null,
+   "in_force": null,
+   "facts": [],
+   "wording": [],
+   "numbers": null,
+   "referral": {
+    "referral_id": "REF-533B1FA0",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00442",
+    "recorded": true,
+    "reason": "Triage did not complete: budget_exceeded: max_wall_seconds (240.0s, elapsed 242.9s)."
+   },
+   "summary_for_adjuster": "Triage did not complete; adjuster to review the file.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ }
+]

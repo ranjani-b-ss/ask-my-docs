@@ -191,6 +191,23 @@ class ChunkConfig:
 
 DEFAULT_CHUNKING = ChunkConfig()
 
+# Week 12 capstone only. `structured` repairs the chunk-boundary defect that cut the exclusion lists (WEEK11.md §9) and is built as a
+# SEPARATE collection, so DEFAULT_CHUNKING — and every chunk id and context hash stored by Weeks 3-12 under it — is untouched.
+CAPSTONE_CHUNKING_SLUG = "structured_800_150"
+LEGACY_CAPSTONE_SLUG = "recursive_800_150"      # what every capstone trace recorded before 2026-10-13 was produced on
+
+
+def chunking_from_slug(slug: str) -> "ChunkConfig":
+    strategy, size, overlap = slug.split("_")
+    return ChunkConfig(strategy, int(size), int(overlap))
+
+
+def capstone_chunking() -> "ChunkConfig":
+    """The index the capstone's wording server and its offline evals read. CAPSTONE_CHUNKING=<slug> overrides it for a
+    before/after measurement; nothing else should set it."""
+    import os
+    return chunking_from_slug(os.environ.get("CAPSTONE_CHUNKING", CAPSTONE_CHUNKING_SLUG))
+
 # The configurations compared in eval/run_eval.py. Deliberately spans "too small to hold
 # a complete clause" through "so big the answer is buried in noise".
 CHUNK_SWEEP = [

@@ -1,0 +1,17 @@
+{
+ "note": "labels_cap_70.json is frozen (sha256 in labels_cap_70.sha256) and is never edited. A label may be revised here only when reading a disagreement revealed a VERIFIABLE factual error of mine — not a matter of opinion. Revising after seeing the judge is a bias route, so every revision is listed with its reason, and agreement is reported both as frozen and as revised.",
+ "revisions": [
+  {
+   "case": "v1:CLM-2026-00479",
+   "was": "GROUNDED",
+   "now": "UNGROUNDED",
+   "revised_at": "2026-10-13",
+   "reason": "The summary says 'The policy limit is INR 10,00,000' (from the claim file). The limits tool result in the same packet says policy_limit amount 500000 (registry). My labeling sheet truncated the tool results and hid the policy_limit line, so I never saw the contradiction. The packet shows two different policy limits.",
+   "found_by": "judge disagreement on the dev split, then checked by hand against the rebuilt tool result"
+  }
+ ],
+ "reviewed_and_kept": [
+  {"case": "v1:CLM-2026-00455", "judge_said": "UNGROUNDED: plastic is not in the 50% category of passage [2]", "kept": "GROUNDED", "why": "passage [2] row 'Rubber, nylon, plastic parts, tyres, tubes, batteries, airbags | 50%' lists plastic at 50%; the judge misread the table"},
+  {"case": "v2:CLM-2026-00479", "judge_said": "UNGROUNDED: applies the 30-day condition to a 37-day fact that does not satisfy it", "kept": "GROUNDED", "why": "the text states the 30-day requirement and, separately, the 37-day fact, and asks the adjuster to weigh them; it does not assert the condition is met or unmet"}
+ ]
+}

@@ -1,0 +1,5471 @@
+[
+ {
+  "claim_number": "CLM-2026-00418",
+  "group": "w6-refuses-answer-present",
+  "product": "health",
+  "loss_date": "2026-04-02",
+  "trace_id": "cap_288af0834d12",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-49677BEC"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-HEALTH-002']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 7,
+  "tokens": 21268,
+  "cost_usd": 0.003789,
+  "wall_seconds": 14.587,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [
+   {
+    "field": "summary_for_adjuster",
+    "matched": [
+     "covered"
+    ]
+   },
+   {
+    "field": "relevant_why[0]",
+    "matched": [
+     "covered",
+     "covered"
+    ]
+   }
+  ],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_288af0834d12",
+   "claim_number": "CLM-2026-00418",
+   "policy_number": "HLT-2025-0001",
+   "product": "health",
+   "loss_date": "2026-04-02",
+   "in_force": {
+    "policy_number": "HLT-2025-0001",
+    "loss_date": "2026-04-02",
+    "in_force": true,
+    "reason": "loss date 2026-04-02 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "The insured person is 44 years old with a policy active for 3 years.",
+    "The insured was admitted for 2 nights for investigation of persistent abdominal pain involving scans and blood work only with no procedure performed.",
+    "The hospital billed the full stay and the adjuster asked to confirm permanently excluded expenses before drafting the letter."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::6",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 6. What is not covered",
+     "resolved_against": "2026-04-02",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 6. What is not covered [resolved against loss date 2026-04-02]",
+     "why": "[withheld: this line stated an outcome \u2014 for the adjuster to decide]"
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-04-02",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": false,
+     "percent": null,
+     "applies_from_age": 61,
+     "insured_age": 44,
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "clause": "9. Co-payment",
+     "effective_date": "2025-04-01",
+     "resolved_against": "2026-04-02"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 1,
+      "document_id": "PW-HEALTH-002",
+      "version": "3.4",
+      "clause": "1.1 Room rent limits",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-04-02",
+      "proportionate_deduction": true,
+      "amount_per_day": 5000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0001",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-49677BEC",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00418",
+    "recorded": true,
+    "reason": "The policy was in force on the loss date and limits have been resolved. The adjuster should review the exclusions listed in clause 6 of the policy wording regarding permanently excluded expenses for hospital stays involving investigation only."
+   },
+   "summary_for_adjuster": "[withheld: this text stated an outcome \u2014 for the adjuster to decide]",
+   "decision": null,
+   "guard_violations": [
+    {
+     "field": "summary_for_adjuster",
+     "matched": [
+      "covered"
+     ]
+    },
+    {
+     "field": "relevant_why[0]",
+     "matched": [
+      "covered",
+      "covered"
+     ]
+    }
+   ],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00423",
+  "group": "w6-refuses-answer-present",
+  "product": "health",
+  "loss_date": "2026-05-11",
+  "trace_id": "cap_06204240eb25",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-917423B6"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-DEFS-004']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 6,
+  "tokens": 15992,
+  "cost_usd": 0.002694,
+  "wall_seconds": 9.698,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_06204240eb25",
+   "claim_number": "CLM-2026-00423",
+   "policy_number": "HLT-2025-0002",
+   "product": "health",
+   "loss_date": "2026-05-11",
+   "in_force": {
+    "policy_number": "HLT-2025-0002",
+    "loss_date": "2026-05-11",
+    "in_force": true,
+    "reason": "loss date 2026-05-11 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "The policyholder cancelled the policy mid-term after 4 months.",
+    "No claim was made during the policy year.",
+    "Full premium was taken at inception."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "PW-DEFS-004::6",
+     "document_id": "PW-DEFS-004",
+     "version": "1.8",
+     "effective_date": "2025-04-01",
+     "clause": "3. Free look period",
+     "resolved_against": "2026-05-11",
+     "citation": "PW-DEFS-004 v1.8 (effective 2025-04-01) \u2014 3. Free look period [resolved against loss date 2026-05-11]",
+     "why": "Contains clause '4. Cancellation' which specifies that the Insured may cancel at any time on 7 days written notice and premium is refunded on a short-period scale."
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-05-11",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": null,
+     "needs": "insured_age",
+     "percent": 10,
+     "applies_from_age": 66,
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "clause": "4. Amendment to Clause 9 \u2014 Co-payment",
+     "effective_date": "2026-05-01",
+     "resolved_against": "2026-05-11"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 2,
+      "document_id": "END-2026-02",
+      "version": "1.0",
+      "clause": "2. Amendment to Clause 1.1 \u2014 Room rent and proportionate deduction",
+      "effective_date": "2026-05-01",
+      "resolved_against": "2026-05-11",
+      "proportionate_deduction": false,
+      "amount_per_day": 10000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0002",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-917423B6",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00423",
+    "recorded": true,
+    "reason": "The policyholder cancelled the policy mid-term after 4 months; the adjuster should review clause '4. Cancellation' in document PW-DEFS-004 regarding refunds on a short-period scale."
+   },
+   "summary_for_adjuster": "The policy was in force when cancelled mid-term after 4 months with no prior claims. Clause '4. Cancellation' in document PW-DEFS-004 governs policyholder cancellations and short-period scale refunds, which the adjuster should review.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00431",
+  "group": "w6-refuses-answer-present",
+  "product": "health",
+  "loss_date": "2026-06-08",
+  "trace_id": "cap_410b83799285",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-9D72B405"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-DEFS-004']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 8,
+  "tokens": 18636,
+  "cost_usd": 0.003195,
+  "wall_seconds": 23.839,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_410b83799285",
+   "claim_number": "CLM-2026-00431",
+   "policy_number": "HLT-2025-0003",
+   "product": "health",
+   "loss_date": "2026-06-08",
+   "in_force": {
+    "policy_number": "HLT-2025-0003",
+    "loss_date": "2026-06-08",
+    "in_force": true,
+    "reason": "loss date 2026-06-08 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Planned knee arthroscopy at a network hospital.",
+    "Hospital is asking for direct payment rather than member paying and claiming back.",
+    "Member has not paid anything yet."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "PW-DEFS-004::1",
+     "document_id": "PW-DEFS-004",
+     "version": "1.8",
+     "effective_date": "2025-04-01",
+     "clause": "2. Definitions",
+     "resolved_against": "2026-06-08",
+     "citation": "PW-DEFS-004 v1.8 (effective 2025-04-01) \u2014 2. Definitions [resolved against loss date 2026-06-08]",
+     "why": "Defines cashless facility as direct payment to a network provider to the extent pre-authorisation is granted."
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-06-08",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": null,
+     "needs": "insured_age",
+     "percent": 10,
+     "applies_from_age": 66,
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "clause": "4. Amendment to Clause 9 \u2014 Co-payment",
+     "effective_date": "2026-05-01",
+     "resolved_against": "2026-06-08"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 2,
+      "document_id": "END-2026-02",
+      "version": "1.0",
+      "clause": "2. Amendment to Clause 1.1 \u2014 Room rent and proportionate deduction",
+      "effective_date": "2026-05-01",
+      "resolved_against": "2026-06-08",
+      "proportionate_deduction": false,
+      "amount_per_day": 10000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0003",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-9D72B405",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00431",
+    "recorded": true,
+    "reason": "The policy is in force and provides for cashless settlement at a network hospital subject to pre-authorisation at least 48 hours before admission."
+   },
+   "summary_for_adjuster": "The claim involves a planned knee arthroscopy at a network hospital requesting direct payment. The policy is in force, and relevant provisions regarding cashless claims and definitions apply, requiring pre-authorisation at least 48 hours prior to admission.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": [
+    {
+     "chunk_id": "PW-HEALTH-002::8",
+     "clause": "Group Health Indemnity Policy > 7. Claims \u2014 cashless",
+     "amended_by": "END-2026-02"
+    }
+   ]
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00437",
+  "group": "w6-refuses-answer-present",
+  "product": "health",
+  "loss_date": "2026-03-19",
+  "trace_id": "cap_cc47feba33ca",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-15732007"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-HEALTH-002']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 8,
+  "tokens": 18793,
+  "cost_usd": 0.003269,
+  "wall_seconds": 58.456,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_cc47feba33ca",
+   "claim_number": "CLM-2026-00437",
+   "policy_number": "HLT-2025-0004",
+   "product": "health",
+   "loss_date": "2026-03-19",
+   "in_force": {
+    "policy_number": "HLT-2025-0004",
+    "loss_date": "2026-03-19",
+    "in_force": true,
+    "reason": "loss date 2026-03-19 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "The member occupied a deluxe room and the hospital billed room rent well above the standard A/C room rate.",
+    "The policy sum insured is INR 500,000.",
+    "The loss date is 2026-03-19."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::2",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 1. Hospitalisation benefit > 1.1 Room rent limits",
+     "resolved_against": "2026-03-19",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 1. Hospitalisation benefit > 1.1 Room rent limits [resolved against loss date 2026-03-19]",
+     "why": "It outlines the room rent limit (1% of the sum insured per day for a normal ward) and details the proportionate deduction mechanism when a room exceeding the eligible limit is occupied."
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-03-19",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": null,
+     "needs": "insured_age",
+     "percent": 20,
+     "applies_from_age": 61,
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "clause": "9. Co-payment",
+     "effective_date": "2025-04-01",
+     "resolved_against": "2026-03-19"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 1,
+      "document_id": "PW-HEALTH-002",
+      "version": "3.4",
+      "clause": "1.1 Room rent limits",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-03-19",
+      "proportionate_deduction": true,
+      "amount_per_day": 5000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0004",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-15732007",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00437",
+    "recorded": true,
+    "reason": "The policy was in force on the loss date. The room rent limit is 1% of the sum insured per day for a normal ward (INR 5,000 per day based on a sum insured of INR 500,000), and proportionate deduction applies if a room exceeding the eligible limit is occupied."
+   },
+   "summary_for_adjuster": "The policy was active on the date of loss. Room rent is capped at 1% of the sum insured per day for a normal ward (INR 5,000 per day), with proportionate deduction applying to associated medical expenses if a higher-priced room is occupied.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00442",
+  "group": "w6-refuses-answer-present",
+  "product": "health",
+  "loss_date": "2026-02-27",
+  "trace_id": "cap_5768c90e38da",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-820D4D95"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-HEALTH-002']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 7,
+  "tokens": 20125,
+  "cost_usd": 0.003517,
+  "wall_seconds": 10.372,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [
+   {
+    "field": "referral_reason",
+    "matched": [
+     "are excluded"
+    ]
+   },
+   {
+    "field": "relevant_why[0]",
+    "matched": [
+     "payable"
+    ]
+   },
+   {
+    "tool": "refer_to_adjuster",
+    "field": "reason",
+    "matched": [
+     "are excluded"
+    ]
+   }
+  ],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_5768c90e38da",
+   "claim_number": "CLM-2026-00442",
+   "policy_number": "HLT-2025-0005",
+   "product": "health",
+   "loss_date": "2026-02-27",
+   "in_force": {
+    "policy_number": "HLT-2025-0005",
+    "loss_date": "2026-02-27",
+    "in_force": true,
+    "reason": "loss date 2026-02-27 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Final bill includes gloves, hand wash, shoe covers and attendant charges totalling INR 4,180 alongside surgical charges."
+   ],
+   "wording": [
+    {
+     "role": "exclusion_candidate",
+     "chunk_id": "PW-HEALTH-002::7",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 6. What is not covered",
+     "resolved_against": "2026-02-27",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 6. What is not covered [resolved against loss date 2026-02-27]",
+     "why": "The policy wording under \"What is not covered\" excludes non-medical items listed in Annexure C, including gloves, administrative charges, telephone charges, and attendant comfort items, which makes the disallowance of these specific items arguable."
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::7",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 6. What is not covered",
+     "resolved_against": "2026-02-27",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 6. What is not covered [resolved against loss date 2026-02-27]",
+     "why": "[withheld: this line stated an outcome \u2014 for the adjuster to decide]"
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-02-27",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": null,
+     "needs": "insured_age",
+     "percent": 20,
+     "applies_from_age": 61,
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "clause": "9. Co-payment",
+     "effective_date": "2025-04-01",
+     "resolved_against": "2026-02-27"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 1,
+      "document_id": "PW-HEALTH-002",
+      "version": "3.4",
+      "clause": "1.1 Room rent limits",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-02-27",
+      "proportionate_deduction": true,
+      "amount_per_day": 5000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0005",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-820D4D95",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00442",
+    "recorded": true,
+    "reason": "[withheld: this text stated an outcome \u2014 for the adjuster to decide]"
+   },
+   "summary_for_adjuster": "The policy was in force on the date of loss. The claim file includes a final bill with non-medical items totaling INR 4,180, which relates to the exclusion clause for non-medical items in the policy wording.",
+   "decision": null,
+   "guard_violations": [
+    {
+     "field": "referral_reason",
+     "matched": [
+      "are excluded"
+     ]
+    },
+    {
+     "field": "relevant_why[0]",
+     "matched": [
+      "payable"
+     ]
+    },
+    {
+     "tool": "refer_to_adjuster",
+     "field": "reason",
+     "matched": [
+      "are excluded"
+     ]
+    }
+   ],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00455",
+  "group": "w6-drops-limiting-condition",
+  "product": "motor",
+  "loss_date": "2026-05-22",
+  "trace_id": "cap_0dc24564a1e3",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-86933B29"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-01']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 6,
+  "tokens": 16805,
+  "cost_usd": 0.002892,
+  "wall_seconds": 42.199,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [
+   {
+    "field": "summary_for_adjuster",
+    "matched": [
+     "payable"
+    ]
+   },
+   {
+    "field": "relevant_why[0]",
+    "matched": [
+     "payable"
+    ]
+   }
+  ],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_0dc24564a1e3",
+   "claim_number": "CLM-2026-00455",
+   "policy_number": "MOT-2025-0012",
+   "product": "motor",
+   "loss_date": "2026-05-22",
+   "in_force": {
+    "policy_number": "MOT-2025-0012",
+    "loss_date": "2026-05-22",
+    "in_force": true,
+    "reason": "loss date 2026-05-22 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Insured vehicle is a private car of 1600cc, first registered on 2018-11-30.",
+    "Incident involved a kerb strike causing a cracked front bumper and left headlamp assembly (both plastic); tyres undamaged.",
+    "Estimated repair cost is INR 46,000.",
+    "This is the vehicle's first claim this policy year."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-01::1",
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "effective_date": "2026-04-01",
+     "clause": "Endorsement 1 to the Private Car Package Policy > 1. Nil Depreciation cover \u2014 amendment to Clause 2.1",
+     "resolved_against": "2026-05-22",
+     "citation": "END-2026-01 v1.0 (effective 2026-04-01) \u2014 Endorsement 1 to the Private Car Package Policy > 1. Nil Depreciation cover \u2014 amendment to Clause 2.1 [resolved against loss date 2026-05-22]",
+     "why": "[withheld: this line stated an outcome \u2014 for the adjuster to decide]"
+    }
+   ],
+   "numbers": {
+    "product": "motor",
+    "loss_date": "2026-05-22",
+    "deductible": {
+     "applies": true,
+     "amount": 3000,
+     "currency": "INR",
+     "vehicle_cc": 1600,
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "clause": "2. Amendment to Clause 2.2 \u2014 Compulsory deductible",
+     "effective_date": "2026-04-01",
+     "resolved_against": "2026-05-22"
+    },
+    "sub_limits": [
+     {
+      "name": "tyre_replacement_when_vehicle_also_damaged",
+      "kind": "percent_of_cost",
+      "value": 50,
+      "document_id": "PW-MOTOR-001",
+      "version": "5.1",
+      "clause": "3. What is not covered",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-05-22"
+     }
+    ],
+    "policy_limit": {
+     "type": "IDV",
+     "amount": 900000,
+     "currency": "INR",
+     "policy_number": "MOT-2025-0012",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-86933B29",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00455",
+    "recorded": true,
+    "reason": "The policy was in force at the date of loss. The adjuster should review Endorsement 1 chunk END-2026-01::1 regarding Nil Depreciation cover and plastic parts, noting that the vehicle is within the 5-year age limit and this is the first claim of the policy year."
+   },
+   "summary_for_adjuster": "[withheld: this text stated an outcome \u2014 for the adjuster to decide]",
+   "decision": null,
+   "guard_violations": [
+    {
+     "field": "summary_for_adjuster",
+     "matched": [
+      "payable"
+     ]
+    },
+    {
+     "field": "relevant_why[0]",
+     "matched": [
+      "payable"
+     ]
+    }
+   ],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00461",
+  "group": "w6-drops-limiting-condition",
+  "product": "motor",
+  "loss_date": "2026-07-04",
+  "trace_id": "cap_928bece548b1",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-C5A3D32B"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-01']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 7,
+  "tokens": 18859,
+  "cost_usd": 0.003189,
+  "wall_seconds": 9.976,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [
+   {
+    "field": "relevant_why[0]",
+    "matched": [
+     "payable"
+    ]
+   }
+  ],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_928bece548b1",
+   "claim_number": "CLM-2026-00461",
+   "policy_number": "MOT-2025-0013",
+   "product": "motor",
+   "loss_date": "2026-07-04",
+   "in_force": {
+    "policy_number": "MOT-2025-0013",
+    "loss_date": "2026-07-04",
+    "in_force": true,
+    "reason": "loss date 2026-07-04 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Insured vehicle is a private car, 1200cc, first registered on 2024-01-15.",
+    "Rear quarter panel and plastic tail lamp housing damaged in a car park.",
+    "This is the third own damage claim in the current policy year, with two Nil Depreciation claims already settled."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-01::1",
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "effective_date": "2026-04-01",
+     "clause": "Endorsement 1 to the Private Car Package Policy > 1. Nil Depreciation cover \u2014 amendment to Clause 2.1",
+     "resolved_against": "2026-07-04",
+     "citation": "END-2026-01 v1.0 (effective 2026-04-01) \u2014 Endorsement 1 to the Private Car Package Policy > 1. Nil Depreciation cover \u2014 amendment to Clause 2.1 [resolved against loss date 2026-07-04]",
+     "why": "[withheld: this line stated an outcome \u2014 for the adjuster to decide]"
+    }
+   ],
+   "numbers": {
+    "product": "motor",
+    "loss_date": "2026-07-04",
+    "deductible": {
+     "applies": true,
+     "amount": 1500,
+     "currency": "INR",
+     "vehicle_cc": 1200,
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "clause": "2. Amendment to Clause 2.2 \u2014 Compulsory deductible",
+     "effective_date": "2026-04-01",
+     "resolved_against": "2026-07-04"
+    },
+    "sub_limits": [
+     {
+      "name": "tyre_replacement_when_vehicle_also_damaged",
+      "kind": "percent_of_cost",
+      "value": 50,
+      "document_id": "PW-MOTOR-001",
+      "version": "5.1",
+      "clause": "3. What is not covered",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-07-04"
+     }
+    ],
+    "policy_limit": {
+     "type": "IDV",
+     "amount": 600000,
+     "currency": "INR",
+     "policy_number": "MOT-2025-0013",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-C5A3D32B",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00461",
+    "recorded": true,
+    "reason": "The schedule records Nil Depreciation, but Endorsement 1 limits Nil Depreciation to a maximum of two claims per policy year, and this is the third own damage claim. The adjuster should weigh whether Nil Depreciation applies to this third claim or if the standard depreciation table in Clause 2.1 applies."
+   },
+   "summary_for_adjuster": "The claim involves damage to the rear quarter panel and plastic tail lamp housing. While the schedule records Nil Depreciation, Endorsement 1 permits a maximum of two Nil Depreciation claims per policy year, and this is the third claim.",
+   "decision": null,
+   "guard_violations": [
+    {
+     "field": "relevant_why[0]",
+     "matched": [
+      "payable"
+     ]
+    }
+   ],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00468",
+  "group": "w6-drops-limiting-condition",
+  "product": "health",
+  "loss_date": "2026-06-16",
+  "trace_id": "cap_35f4fbc3c0b5",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-9028F4BF"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited []"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": false,
+  "stop_reason": "budget_exceeded: max_iterations (12)",
+  "laps": 12,
+  "tokens": 29335,
+  "cost_usd": 0.00495,
+  "wall_seconds": 61.18,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_35f4fbc3c0b5",
+   "claim_number": "CLM-2026-00468",
+   "policy_number": "HLT-2025-0006",
+   "product": "health",
+   "loss_date": "2026-06-16",
+   "in_force": {
+    "policy_number": "HLT-2025-0006",
+    "loss_date": "2026-06-16",
+    "in_force": true,
+    "reason": "loss date 2026-06-16 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [],
+   "wording": [],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-06-16",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": null,
+     "needs": "insured_age",
+     "percent": 10,
+     "applies_from_age": 66,
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "clause": "4. Amendment to Clause 9 \u2014 Co-payment",
+     "effective_date": "2026-05-01",
+     "resolved_against": "2026-06-16"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 2,
+      "document_id": "END-2026-02",
+      "version": "1.0",
+      "clause": "2. Amendment to Clause 1.1 \u2014 Room rent and proportionate deduction",
+      "effective_date": "2026-05-01",
+      "resolved_against": "2026-06-16",
+      "proportionate_deduction": false,
+      "amount_per_day": 10000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0006",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-9028F4BF",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00468",
+    "recorded": true,
+    "reason": "Triage did not complete: budget_exceeded: max_iterations (12)."
+   },
+   "summary_for_adjuster": "Triage did not complete; adjuster to review the file.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00472",
+  "group": "w6-drops-limiting-condition",
+  "product": "motor",
+  "loss_date": "2026-06-30",
+  "trace_id": "cap_6dcff180a2ea",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-5BFCBDF6"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-03']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 7,
+  "tokens": 21213,
+  "cost_usd": 0.003763,
+  "wall_seconds": 54.249,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_6dcff180a2ea",
+   "claim_number": "CLM-2026-00472",
+   "policy_number": "MOT-2025-0014",
+   "product": "motor",
+   "loss_date": "2026-06-30",
+   "in_force": {
+    "policy_number": "MOT-2025-0014",
+    "loss_date": "2026-06-30",
+    "in_force": true,
+    "reason": "loss date 2026-06-30 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "A total loss claim for theft was submitted, with the last document received on 2026-08-04.",
+    "The claim was flagged for investigation by the fraud unit on 2026-08-06.",
+    "The claimant is inquiring about when a decision is due."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-03::1",
+     "document_id": "END-2026-03",
+     "version": "1.0",
+     "effective_date": "2026-06-01",
+     "clause": "Endorsement 3 to the Claims Handling Manual > 1. Amendment to Clause 3 \u2014 Settlement timelines",
+     "resolved_against": "2026-06-30",
+     "citation": "END-2026-03 v1.0 (effective 2026-06-01) \u2014 Endorsement 3 to the Claims Handling Manual > 1. Amendment to Clause 3 \u2014 Settlement timelines [resolved against loss date 2026-06-30]",
+     "why": "Sets out the amended settlement timelines under \"Endorsement 3 to the Claims Handling Manual > 1. Amendment to Clause 3 \u2014 Settlement timelines\", providing 15 days for a decision after receipt of the last document and 30 days where an investigation is warranted."
+    }
+   ],
+   "numbers": {
+    "product": "motor",
+    "loss_date": "2026-06-30",
+    "deductible": {
+     "applies": true,
+     "amount": null,
+     "currency": "INR",
+     "needs": "vehicle_cc",
+     "tiers": [
+      {
+       "max_cc": 1500,
+       "amount": 1500
+      },
+      {
+       "max_cc": null,
+       "amount": 3000
+      }
+     ],
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "clause": "2. Amendment to Clause 2.2 \u2014 Compulsory deductible",
+     "effective_date": "2026-04-01",
+     "resolved_against": "2026-06-30"
+    },
+    "sub_limits": [
+     {
+      "name": "tyre_replacement_when_vehicle_also_damaged",
+      "kind": "percent_of_cost",
+      "value": 50,
+      "document_id": "PW-MOTOR-001",
+      "version": "5.1",
+      "clause": "3. What is not covered",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-06-30"
+     }
+    ],
+    "policy_limit": {
+     "type": "IDV",
+     "amount": 600000,
+     "currency": "INR",
+     "policy_number": "MOT-2025-0014",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-5BFCBDF6",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00472",
+    "recorded": true,
+    "reason": "The adjuster should review the settlement timelines under Endorsement 3, which establishes a 15-day decision window after receipt of the last document and a 30-day decision window where an investigation is warranted."
+   },
+   "summary_for_adjuster": "The claim is a total loss theft incident where the last document was received on 2026-08-04 and an investigation was flagged on 2026-08-06. Endorsement 3 applies to settlement timelines, specifying a 15-day decision window after receipt of the last document and a 30-day window where an investigation is warranted.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00479",
+  "group": "w6-drops-limiting-condition",
+  "product": "health",
+  "loss_date": "2026-07-19",
+  "trace_id": "cap_ffee6e89feb4",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-661C24AD"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-02']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 6,
+  "tokens": 16618,
+  "cost_usd": 0.002931,
+  "wall_seconds": 13.461,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [
+   {
+    "field": "relevant_why[0]",
+    "matched": [
+     "covered"
+    ]
+   }
+  ],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_ffee6e89feb4",
+   "claim_number": "CLM-2026-00479",
+   "policy_number": "HLT-2025-0007",
+   "product": "health",
+   "loss_date": "2026-07-19",
+   "in_force": {
+    "policy_number": "HLT-2025-0007",
+    "loss_date": "2026-07-19",
+    "in_force": true,
+    "reason": "loss date 2026-07-19 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Newborn admitted to special care nursery on day 2 with a bill of INR 3,40,000.",
+    "Birth was intimated to the Company on 2026-08-25, which is 37 days after birth.",
+    "Family sum insured is INR 10,00,000."
+   ],
+   "wording": [
+    {
+     "role": "exclusion_candidate",
+     "chunk_id": "END-2026-02::6",
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "effective_date": "2026-05-01",
+     "clause": "Endorsement 2 to the Group Health Indemnity Policy > 8. New Clause 5A \u2014 Newborn cover from birth",
+     "resolved_against": "2026-07-19",
+     "citation": "END-2026-02 v1.0 (effective 2026-05-01) \u2014 Endorsement 2 to the Group Health Indemnity Policy > 8. New Clause 5A \u2014 Newborn cover from birth [resolved against loss date 2026-07-19]",
+     "why": "Endorsement 2 Clause 5A states newborn cover from birth is provided provided the birth is intimated within 30 days, and the intimation occurred after 37 days."
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-02::6",
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "effective_date": "2026-05-01",
+     "clause": "Endorsement 2 to the Group Health Indemnity Policy > 8. New Clause 5A \u2014 Newborn cover from birth",
+     "resolved_against": "2026-07-19",
+     "citation": "END-2026-02 v1.0 (effective 2026-05-01) \u2014 Endorsement 2 to the Group Health Indemnity Policy > 8. New Clause 5A \u2014 Newborn cover from birth [resolved against loss date 2026-07-19]",
+     "why": "[withheld: this line stated an outcome \u2014 for the adjuster to decide]"
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-07-19",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": null,
+     "needs": "insured_age",
+     "percent": 10,
+     "applies_from_age": 66,
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "clause": "4. Amendment to Clause 9 \u2014 Co-payment",
+     "effective_date": "2026-05-01",
+     "resolved_against": "2026-07-19"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 2,
+      "document_id": "END-2026-02",
+      "version": "1.0",
+      "clause": "2. Amendment to Clause 1.1 \u2014 Room rent and proportionate deduction",
+      "effective_date": "2026-05-01",
+      "resolved_against": "2026-07-19",
+      "proportionate_deduction": false,
+      "amount_per_day": 10000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0007",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-661C24AD",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00479",
+    "recorded": true,
+    "reason": "The adjuster should review whether the intimation of birth after 37 days complies with the 30-day requirement in Endorsement 2 Clause 5A, and note the newborn sub-limit of INR 2,00,000 until renewal."
+   },
+   "summary_for_adjuster": "The claim involves a newborn admission with a bill of INR 3,40,000 where intimation took place 37 days post-birth. Endorsement 2 Clause 5A provides cover from birth up to INR 2,00,000 until renewal, subject to a 30-day intimation requirement.",
+   "decision": null,
+   "guard_violations": [
+    {
+     "field": "relevant_why[0]",
+     "matched": [
+      "covered"
+     ]
+    }
+   ],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00483",
+  "group": "w6-drops-limiting-condition",
+  "product": "motor",
+  "loss_date": "2026-07-28",
+  "trace_id": "cap_9765f1819b63",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-9C50A6B7"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-01']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 9,
+  "tokens": 22630,
+  "cost_usd": 0.003847,
+  "wall_seconds": 45.919,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_9765f1819b63",
+   "claim_number": "CLM-2026-00483",
+   "policy_number": "MOT-2025-0015",
+   "product": "motor",
+   "loss_date": "2026-07-28",
+   "in_force": {
+    "policy_number": "MOT-2025-0015",
+    "loss_date": "2026-07-28",
+    "in_force": true,
+    "reason": "loss date 2026-07-28 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "The insured vehicle suffered side mirror and door panel damage.",
+    "The schedule records No Claim Bonus Protection.",
+    "This is the second own damage claim in the current policy year, following a previous settlement in May."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-01::5",
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "effective_date": "2026-04-01",
+     "clause": "Endorsement 1 to the Private Car Package Policy > 7. New Clause 6A \u2014 No Claim Bonus protection",
+     "resolved_against": "2026-07-28",
+     "citation": "END-2026-01 v1.0 (effective 2026-04-01) \u2014 Endorsement 1 to the Private Car Package Policy > 7. New Clause 6A \u2014 No Claim Bonus protection [resolved against loss date 2026-07-28]",
+     "why": "Specifies that where No Claim Bonus Protection is in force, the first own damage claim does not affect the bonus, but a second or subsequent claim results in the No Claim Bonus reverting to nil."
+    }
+   ],
+   "numbers": {
+    "product": "motor",
+    "loss_date": "2026-07-28",
+    "deductible": {
+     "applies": true,
+     "amount": null,
+     "currency": "INR",
+     "needs": "vehicle_cc",
+     "tiers": [
+      {
+       "max_cc": 1500,
+       "amount": 1500
+      },
+      {
+       "max_cc": null,
+       "amount": 3000
+      }
+     ],
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "clause": "2. Amendment to Clause 2.2 \u2014 Compulsory deductible",
+     "effective_date": "2026-04-01",
+     "resolved_against": "2026-07-28"
+    },
+    "sub_limits": [
+     {
+      "name": "tyre_replacement_when_vehicle_also_damaged",
+      "kind": "percent_of_cost",
+      "value": 50,
+      "document_id": "PW-MOTOR-001",
+      "version": "5.1",
+      "clause": "3. What is not covered",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-07-28"
+     }
+    ],
+    "policy_limit": {
+     "type": "IDV",
+     "amount": 600000,
+     "currency": "INR",
+     "policy_number": "MOT-2025-0015",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-9C50A6B7",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00483",
+    "recorded": true,
+    "reason": "The adjuster should review the No Claim Bonus protection wording in relation to the second own damage claim in this policy year."
+   },
+   "summary_for_adjuster": "The policy was in force at the time of the incident involving side mirror and door panel damage. The schedule records No Claim Bonus Protection, and this is the second own damage claim of the policy year. Wording under 'New Clause 6A \u2014 No Claim Bonus protection' provides that a second or subsequent claim results in the bonus reverting to nil.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00491",
+  "group": "w6-wrong-document-retrieved",
+  "product": "motor",
+  "loss_date": "2026-07-02",
+  "trace_id": "cap_d01f24346ba7",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-018260EF"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited []"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": false,
+  "stop_reason": "budget_exceeded: max_tokens (30000, used 31709)",
+  "laps": 10,
+  "tokens": 31709,
+  "cost_usd": 0.005538,
+  "wall_seconds": 51.431,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [
+   {
+    "tool": "refer_to_adjuster",
+    "reason": "BLOCKED: before referring, you still need to call: get_limits."
+   }
+  ],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_d01f24346ba7",
+   "claim_number": "CLM-2026-00491",
+   "policy_number": "MOT-2025-0016",
+   "product": "motor",
+   "loss_date": "2026-07-02",
+   "in_force": {
+    "policy_number": "MOT-2025-0016",
+    "loss_date": "2026-07-02",
+    "in_force": true,
+    "reason": "loss date 2026-07-02 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [],
+   "wording": [],
+   "numbers": {
+    "product": "motor",
+    "loss_date": "2026-07-02",
+    "deductible": {
+     "applies": true,
+     "amount": null,
+     "currency": "INR",
+     "needs": "vehicle_cc",
+     "tiers": [
+      {
+       "max_cc": 1500,
+       "amount": 1500
+      },
+      {
+       "max_cc": null,
+       "amount": 3000
+      }
+     ],
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "clause": "2. Amendment to Clause 2.2 \u2014 Compulsory deductible",
+     "effective_date": "2026-04-01",
+     "resolved_against": "2026-07-02"
+    },
+    "sub_limits": [
+     {
+      "name": "tyre_replacement_when_vehicle_also_damaged",
+      "kind": "percent_of_cost",
+      "value": 50,
+      "document_id": "PW-MOTOR-001",
+      "version": "5.1",
+      "clause": "3. What is not covered",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-07-02"
+     }
+    ],
+    "policy_limit": {
+     "type": "IDV",
+     "amount": 600000,
+     "currency": "INR",
+     "policy_number": "MOT-2025-0016",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-018260EF",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00491",
+    "recorded": true,
+    "reason": "Triage did not complete: budget_exceeded: max_tokens (30000, used 31709)."
+   },
+   "summary_for_adjuster": "Triage did not complete; adjuster to review the file.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00496",
+  "group": "w6-wrong-document-retrieved",
+  "product": "health",
+  "loss_date": "2026-08-01",
+  "trace_id": "cap_d1062cc74ef3",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-2FB416B7"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-02', 'PW-HEALTH-002']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 7,
+  "tokens": 20962,
+  "cost_usd": 0.003735,
+  "wall_seconds": 15.82,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_d1062cc74ef3",
+   "claim_number": "CLM-2026-00496",
+   "policy_number": "HLT-2025-0008",
+   "product": "health",
+   "loss_date": "2026-08-01",
+   "in_force": {
+    "policy_number": "HLT-2025-0008",
+    "loss_date": "2026-08-01",
+    "in_force": true,
+    "reason": "loss date 2026-08-01 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "The insured person is 51 years old.",
+    "Cover commenced on 2025-09-01.",
+    "The incident involved admission for hernia repair.",
+    "The date of loss is 2026-08-01."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-02::1",
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "effective_date": "2026-05-01",
+     "clause": "Endorsement 2 to the Group Health Indemnity Policy > 1. Amendment to Clause 4 \u2014 Waiting periods",
+     "resolved_against": "2026-08-01",
+     "citation": "END-2026-02 v1.0 (effective 2026-05-01) \u2014 Endorsement 2 to the Group Health Indemnity Policy > 1. Amendment to Clause 4 \u2014 Waiting periods [resolved against loss date 2026-08-01]",
+     "why": "Shows the amended waiting period table under Endorsement 2 (effective 2026-05-01), where the initial waiting period is 15 days, specified illnesses are 12 months, pre-existing diseases are 24 months, and maternity benefit is 9 months."
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::4",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 4. Waiting periods > 4.1 Accident exception",
+     "resolved_against": "2026-08-01",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 4. Waiting periods > 4.1 Accident exception [resolved against loss date 2026-08-01]",
+     "why": "Lists hernia under specified illnesses subject to the waiting period."
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::3",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 3. Day care procedures",
+     "resolved_against": "2026-08-01",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 3. Day care procedures [resolved against loss date 2026-08-01]",
+     "why": "Shows the base wording waiting period table where initial waiting period was 30 days, specified illnesses were 24 months, and pre-existing diseases were 36 months."
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-08-01",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": false,
+     "percent": null,
+     "applies_from_age": 66,
+     "insured_age": 51,
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "clause": "4. Amendment to Clause 9 \u2014 Co-payment",
+     "effective_date": "2026-05-01",
+     "resolved_against": "2026-08-01"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 2,
+      "document_id": "END-2026-02",
+      "version": "1.0",
+      "clause": "2. Amendment to Clause 1.1 \u2014 Room rent and proportionate deduction",
+      "effective_date": "2026-05-01",
+      "resolved_against": "2026-08-01",
+      "proportionate_deduction": false,
+      "amount_per_day": 10000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0008",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-2FB416B7",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00496",
+    "recorded": true,
+    "reason": "The adjuster should review the waiting period comparison between the base policy and the endorsement for a hernia repair claim on a policy in force on the loss date."
+   },
+   "summary_for_adjuster": "The claim involves a hernia repair hospitalization during an active policy period. The base wording specified a 24-month waiting period for specified illnesses (including hernia) and a 30-day initial waiting period, whereas Endorsement 2 (effective 2026-05-01) amended the specified illness waiting period to 12 months and the initial waiting period to 15 days. The adjuster should determine which waiting period governs this claim.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00502",
+  "group": "w6-wrong-document-retrieved",
+  "product": "health",
+  "loss_date": "2026-06-11",
+  "trace_id": "cap_f7a25de9adfb",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-62909FF0"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-02', 'PW-HEALTH-002']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 8,
+  "tokens": 27367,
+  "cost_usd": 0.004696,
+  "wall_seconds": 41.668,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_f7a25de9adfb",
+   "claim_number": "CLM-2026-00502",
+   "policy_number": "HLT-2025-0009",
+   "product": "health",
+   "loss_date": "2026-06-11",
+   "in_force": {
+    "policy_number": "HLT-2025-0009",
+    "loss_date": "2026-06-11",
+    "in_force": true,
+    "reason": "loss date 2026-06-11 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "The insured person is 68 years old with cover commencing on 2025-02-01.",
+    "The incident is a cataract surgery of the right eye performed as a day care procedure.",
+    "The bill amount is INR 62,000."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::3",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 3. Day care procedures",
+     "resolved_against": "2026-06-11",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 3. Day care procedures [resolved against loss date 2026-06-11]",
+     "why": "Defines day care procedures and lists cataract surgery among them under '3. Day care procedures', and outlines the waiting period table under '4. Waiting periods'."
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::4",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 4. Waiting periods > 4.1 Accident exception",
+     "resolved_against": "2026-06-11",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 4. Waiting periods > 4.1 Accident exception [resolved against loss date 2026-06-11]",
+     "why": "Lists cataract as a specified illness subject to the specified waiting period under '4.2 Specified illnesses subject to the 24-month waiting period'."
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-02::1",
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "effective_date": "2026-05-01",
+     "clause": "Endorsement 2 to the Group Health Indemnity Policy > 1. Amendment to Clause 4 \u2014 Waiting periods",
+     "resolved_against": "2026-06-11",
+     "citation": "END-2026-02 v1.0 (effective 2026-05-01) \u2014 Endorsement 2 to the Group Health Indemnity Policy > 1. Amendment to Clause 4 \u2014 Waiting periods [resolved against loss date 2026-06-11]",
+     "why": "Amends the waiting period for specified illnesses and procedures to 12 months (effective 2026-05-01), superseding the previous 24-month period."
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-06-11",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": true,
+     "percent": 10,
+     "applies_from_age": 66,
+     "insured_age": 68,
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "clause": "4. Amendment to Clause 9 \u2014 Co-payment",
+     "effective_date": "2026-05-01",
+     "resolved_against": "2026-06-11"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 2,
+      "document_id": "END-2026-02",
+      "version": "1.0",
+      "clause": "2. Amendment to Clause 1.1 \u2014 Room rent and proportionate deduction",
+      "effective_date": "2026-05-01",
+      "resolved_against": "2026-06-11",
+      "proportionate_deduction": false,
+      "amount_per_day": 10000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0009",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-62909FF0",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00502",
+    "recorded": true,
+    "reason": "The adjuster should review the waiting period requirements and the applicable co-payment for the day care cataract surgery."
+   },
+   "summary_for_adjuster": "The claim involves a day care cataract surgery totalling INR 62,000 for an insured aged 68 whose policy was in force on the loss date. The waiting period for specified illnesses like cataract is 12 months per Endorsement 2, and the policy has been active since 2025-02-01, exceeding this duration.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00509",
+  "group": "w6-wrong-document-retrieved",
+  "product": "health",
+  "loss_date": "2026-05-04",
+  "trace_id": "cap_3175e0307732",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-E269CE72"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-HEALTH-002']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 8,
+  "tokens": 27383,
+  "cost_usd": 0.004568,
+  "wall_seconds": 12.326,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [
+   {
+    "field": "referral_reason",
+    "matched": [
+     "covered"
+    ]
+   },
+   {
+    "tool": "refer_to_adjuster",
+    "field": "reason",
+    "matched": [
+     "covered"
+    ]
+   }
+  ],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_3175e0307732",
+   "claim_number": "CLM-2026-00509",
+   "policy_number": "HLT-2025-0010",
+   "product": "health",
+   "loss_date": "2026-05-04",
+   "in_force": {
+    "policy_number": "HLT-2025-0010",
+    "loss_date": "2026-05-04",
+    "in_force": true,
+    "reason": "loss date 2026-05-04 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "A member was admitted to the hospital following a fall at home.",
+    "The discharge summary records a blood alcohol level well above the legal limit at admission."
+   ],
+   "wording": [
+    {
+     "role": "exclusion_candidate",
+     "chunk_id": "PW-HEALTH-002::6",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 6. What is not covered",
+     "resolved_against": "2026-05-04",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 6. What is not covered [resolved against loss date 2026-05-04]",
+     "why": "The policy excludes treatment for alcoholism, drug or substance abuse under \"Group Health Indemnity Policy > 6. What is not covered\", which is arguable given the high blood alcohol level recorded at admission."
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::6",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 6. What is not covered",
+     "resolved_against": "2026-05-04",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 6. What is not covered [resolved against loss date 2026-05-04]",
+     "why": "It outlines exclusions including treatment for alcoholism, drug or substance abuse."
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-05-04",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": null,
+     "needs": "insured_age",
+     "percent": 10,
+     "applies_from_age": 66,
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "clause": "4. Amendment to Clause 9 \u2014 Co-payment",
+     "effective_date": "2026-05-01",
+     "resolved_against": "2026-05-04"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 2,
+      "document_id": "END-2026-02",
+      "version": "1.0",
+      "clause": "2. Amendment to Clause 1.1 \u2014 Room rent and proportionate deduction",
+      "effective_date": "2026-05-01",
+      "resolved_against": "2026-05-04",
+      "proportionate_deduction": false,
+      "amount_per_day": 10000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0010",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-E269CE72",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00509",
+    "recorded": true,
+    "reason": "[withheld: this text stated an outcome \u2014 for the adjuster to decide]"
+   },
+   "summary_for_adjuster": "The policy HLT-2025-0010 was in force on the date of loss (2026-05-04). The discharge summary records blood alcohol well above the legal limit. The adjuster should examine the exclusion for treatment of alcoholism, drug or substance abuse in \"Group Health Indemnity Policy > 6. What is not covered\" (chunk id PW-HEALTH-002::6). Policy limits and co-payment terms have been successfully resolved.",
+   "decision": null,
+   "guard_violations": [
+    {
+     "field": "referral_reason",
+     "matched": [
+      "covered"
+     ]
+    },
+    {
+     "tool": "refer_to_adjuster",
+     "field": "reason",
+     "matched": [
+      "covered"
+     ]
+    }
+   ],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00514",
+  "group": "w6-wrong-document-retrieved",
+  "product": "motor",
+  "loss_date": "2026-04-18",
+  "trace_id": "cap_9902b4fca139",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-275E1639"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-MOTOR-001']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 7,
+  "tokens": 19486,
+  "cost_usd": 0.003318,
+  "wall_seconds": 45.02,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [
+   {
+    "field": "referral_reason",
+    "matched": [
+     "covered"
+    ]
+   },
+   {
+    "tool": "refer_to_adjuster",
+    "field": "reason",
+    "matched": [
+     "covered"
+    ]
+   }
+  ],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_9902b4fca139",
+   "claim_number": "CLM-2026-00514",
+   "policy_number": "MOT-2025-0017",
+   "product": "motor",
+   "loss_date": "2026-04-18",
+   "in_force": {
+    "policy_number": "MOT-2025-0017",
+    "loss_date": "2026-04-18",
+    "in_force": true,
+    "reason": "loss date 2026-04-18 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Vehicle left the road and struck a tree.",
+    "Police report records the driver was under the influence of liquor.",
+    "Repair estimate is INR 1,90,000."
+   ],
+   "wording": [
+    {
+     "role": "exclusion_candidate",
+     "chunk_id": "PW-MOTOR-001::4",
+     "document_id": "PW-MOTOR-001",
+     "version": "5.1",
+     "effective_date": "2025-04-01",
+     "clause": "Private Car Package Policy \u2014 Section I: Own Damage > 3. What is not covered",
+     "resolved_against": "2026-04-18",
+     "citation": "PW-MOTOR-001 v5.1 (effective 2025-04-01) \u2014 Private Car Package Policy \u2014 Section I: Own Damage > 3. What is not covered [resolved against loss date 2026-04-18]",
+     "why": "The police report records that the driver was under the influence of liquor, which directly implicates the exclusion for loss or damage caused while the driver is under the influence of intoxicating liquor or drugs under \"What is not covered\"."
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "PW-MOTOR-001::4",
+     "document_id": "PW-MOTOR-001",
+     "version": "5.1",
+     "effective_date": "2025-04-01",
+     "clause": "Private Car Package Policy \u2014 Section I: Own Damage > 3. What is not covered",
+     "resolved_against": "2026-04-18",
+     "citation": "PW-MOTOR-001 v5.1 (effective 2025-04-01) \u2014 Private Car Package Policy \u2014 Section I: Own Damage > 3. What is not covered [resolved against loss date 2026-04-18]",
+     "why": "Contains the specific exclusion clause regarding a driver under the influence of intoxicating liquor or drugs."
+    }
+   ],
+   "numbers": {
+    "product": "motor",
+    "loss_date": "2026-04-18",
+    "deductible": {
+     "applies": true,
+     "amount": 1500,
+     "currency": "INR",
+     "vehicle_cc": 1500,
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "clause": "2. Amendment to Clause 2.2 \u2014 Compulsory deductible",
+     "effective_date": "2026-04-01",
+     "resolved_against": "2026-04-18"
+    },
+    "sub_limits": [
+     {
+      "name": "tyre_replacement_when_vehicle_also_damaged",
+      "kind": "percent_of_cost",
+      "value": 50,
+      "document_id": "PW-MOTOR-001",
+      "version": "5.1",
+      "clause": "3. What is not covered",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-04-18"
+     }
+    ],
+    "policy_limit": {
+     "type": "IDV",
+     "amount": 600000,
+     "currency": "INR",
+     "policy_number": "MOT-2025-0017",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-275E1639",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00514",
+    "recorded": true,
+    "reason": "[withheld: this text stated an outcome \u2014 for the adjuster to decide]"
+   },
+   "summary_for_adjuster": "The policy was in force on the date of loss (2026-04-18). The repair estimate is INR 1,90,000, with a compulsory deductible of INR 1,500 and an IDV policy limit of INR 6,00,000. The adjuster should review the police report indicating intoxication against the exclusion clause in \"What is not covered\".",
+   "decision": null,
+   "guard_violations": [
+    {
+     "field": "referral_reason",
+     "matched": [
+      "covered"
+     ]
+    },
+    {
+     "tool": "refer_to_adjuster",
+     "field": "reason",
+     "matched": [
+      "covered"
+     ]
+    }
+   ],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00521",
+  "group": "w6-placeholder-banner-cited",
+  "product": "motor",
+  "loss_date": "2026-07-15",
+  "trace_id": "cap_b47b48a26a2b",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-DAB3A58A"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-01', 'PW-MOTOR-001']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 7,
+  "tokens": 21204,
+  "cost_usd": 0.003754,
+  "wall_seconds": 11.472,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [
+   {
+    "field": "relevant_why[0]",
+    "matched": [
+     "covered"
+    ]
+   },
+   {
+    "field": "relevant_why[1]",
+    "matched": [
+     "covered"
+    ]
+   }
+  ],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_b47b48a26a2b",
+   "claim_number": "CLM-2026-00521",
+   "policy_number": "MOT-2025-0018",
+   "product": "motor",
+   "loss_date": "2026-07-15",
+   "in_force": {
+    "policy_number": "MOT-2025-0018",
+    "loss_date": "2026-07-15",
+    "in_force": true,
+    "reason": "loss date 2026-07-15 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "The insured has opened a claim under policy MOT-2025-0018 for a motor product, with a date of loss of 2026-07-15.",
+    "The policy was in force on the loss date.",
+    "The damage has not yet been described and no estimate has been provided yet."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "PW-MOTOR-001::1",
+     "document_id": "PW-MOTOR-001",
+     "version": "5.1",
+     "effective_date": "2025-04-01",
+     "clause": "Private Car Package Policy \u2014 Section I: Own Damage > 1. What is covered",
+     "resolved_against": "2026-07-15",
+     "citation": "PW-MOTOR-001 v5.1 (effective 2025-04-01) \u2014 Private Car Package Policy \u2014 Section I: Own Damage > 1. What is covered [resolved against loss date 2026-07-15]",
+     "why": "[withheld: this line stated an outcome \u2014 for the adjuster to decide]"
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "PW-MOTOR-001::4",
+     "document_id": "PW-MOTOR-001",
+     "version": "5.1",
+     "effective_date": "2025-04-01",
+     "clause": "Private Car Package Policy \u2014 Section I: Own Damage > 3. What is not covered",
+     "resolved_against": "2026-07-15",
+     "citation": "PW-MOTOR-001 v5.1 (effective 2025-04-01) \u2014 Private Car Package Policy \u2014 Section I: Own Damage > 3. What is not covered [resolved against loss date 2026-07-15]",
+     "why": "[withheld: this line stated an outcome \u2014 for the adjuster to decide]"
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-01::5",
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "effective_date": "2026-04-01",
+     "clause": "Endorsement 1 to the Private Car Package Policy > 7. New Clause 6A \u2014 No Claim Bonus protection",
+     "resolved_against": "2026-07-15",
+     "citation": "END-2026-01 v1.0 (effective 2026-04-01) \u2014 Endorsement 1 to the Private Car Package Policy > 7. New Clause 6A \u2014 No Claim Bonus protection [resolved against loss date 2026-07-15]",
+     "why": "Provides provisions regarding No Claim Bonus protection and confirms unchanged exclusions."
+    }
+   ],
+   "numbers": {
+    "product": "motor",
+    "loss_date": "2026-07-15",
+    "deductible": {
+     "applies": true,
+     "amount": null,
+     "currency": "INR",
+     "needs": "vehicle_cc",
+     "tiers": [
+      {
+       "max_cc": 1500,
+       "amount": 1500
+      },
+      {
+       "max_cc": null,
+       "amount": 3000
+      }
+     ],
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "clause": "2. Amendment to Clause 2.2 \u2014 Compulsory deductible",
+     "effective_date": "2026-04-01",
+     "resolved_against": "2026-07-15"
+    },
+    "sub_limits": [
+     {
+      "name": "tyre_replacement_when_vehicle_also_damaged",
+      "kind": "percent_of_cost",
+      "value": 50,
+      "document_id": "PW-MOTOR-001",
+      "version": "5.1",
+      "clause": "3. What is not covered",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-07-15"
+     }
+    ],
+    "policy_limit": {
+     "type": "IDV",
+     "amount": 600000,
+     "currency": "INR",
+     "policy_number": "MOT-2025-0018",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-DAB3A58A",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00521",
+    "recorded": true,
+    "reason": "The insured has opened a claim without describing the damage yet, and the adjuster has asked about general policy coverage."
+   },
+   "summary_for_adjuster": "The policy MOT-2025-0018 was in force on the date of loss (2026-07-15). The policy covers own damage under Section I for external means, fire, theft, malicious acts, transit, and natural events. The policy limit is INR 6,00,000 (IDV), the compulsory deductible varies by engine size (INR 1,500 for <= 1500cc and INR 3,000 above), and tyre replacement when damaged at the same time is sub-limited to 50% of the cost.",
+   "decision": null,
+   "guard_violations": [
+    {
+     "field": "relevant_why[0]",
+     "matched": [
+      "covered"
+     ]
+    },
+    {
+     "field": "relevant_why[1]",
+     "matched": [
+      "covered"
+     ]
+    }
+   ],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00526",
+  "group": "w6-placeholder-banner-cited",
+  "product": "health",
+  "loss_date": "2026-08-03",
+  "trace_id": "cap_dfecd0c899a9",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-0328D9A5"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-HEALTH-002']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 7,
+  "tokens": 19146,
+  "cost_usd": 0.003247,
+  "wall_seconds": 9.133,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_dfecd0c899a9",
+   "claim_number": "CLM-2026-00526",
+   "policy_number": "HLT-2025-0011",
+   "product": "health",
+   "loss_date": "2026-08-03",
+   "in_force": {
+    "policy_number": "HLT-2025-0011",
+    "loss_date": "2026-08-03",
+    "in_force": true,
+    "reason": "loss date 2026-08-03 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Member enquiring before a planned admission with no diagnosis given yet.",
+    "Pre-admission enquiry only."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::1",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 1. Hospitalisation benefit",
+     "resolved_against": "2026-08-03",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 1. Hospitalisation benefit [resolved against loss date 2026-08-03]",
+     "why": "Outlines the hospitalisation benefit indemnifying medical expenses reasonably and necessarily incurred for in-patient hospitalisation exceeding 24 consecutive hours up to the sum insured."
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-08-03",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": null,
+     "needs": "insured_age",
+     "percent": 10,
+     "applies_from_age": 66,
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "clause": "4. Amendment to Clause 9 \u2014 Co-payment",
+     "effective_date": "2026-05-01",
+     "resolved_against": "2026-08-03"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 2,
+      "document_id": "END-2026-02",
+      "version": "1.0",
+      "clause": "2. Amendment to Clause 1.1 \u2014 Room rent and proportionate deduction",
+      "effective_date": "2026-05-01",
+      "resolved_against": "2026-08-03",
+      "proportionate_deduction": false,
+      "amount_per_day": 10000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0011",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-0328D9A5",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00526",
+    "recorded": true,
+    "reason": "Pre-admission enquiry received for a planned admission. The adjuster should review the hospitalisation benefits, pre-authorisation requirements, and applicable limits."
+   },
+   "summary_for_adjuster": "The policy HLT-2025-0011 was in force on the date of loss (2026-08-03). Relevant wording covers hospitalisation benefits and 48-hour pre-authorisation rules for planned admissions. Limits and co-payment details have been retrieved from the system.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": [
+    {
+     "chunk_id": "PW-HEALTH-002::8",
+     "clause": "Group Health Indemnity Policy > 7. Claims \u2014 cashless",
+     "amended_by": "END-2026-02"
+    }
+   ]
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00533",
+  "group": "w6-placeholder-banner-cited",
+  "product": "health",
+  "loss_date": "2026-06-25",
+  "trace_id": "cap_caabea97709e",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-6EF078B5"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-02']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 6,
+  "tokens": 16089,
+  "cost_usd": 0.002808,
+  "wall_seconds": 52.006,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_caabea97709e",
+   "claim_number": "CLM-2026-00533",
+   "policy_number": "HLT-2025-0012",
+   "product": "health",
+   "loss_date": "2026-06-25",
+   "in_force": {
+    "policy_number": "HLT-2025-0012",
+    "loss_date": "2026-06-25",
+    "in_force": true,
+    "reason": "loss date 2026-06-25 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Member disputes the co-payment applied to an admission in June 2026.",
+    "Date of loss is 2026-06-25.",
+    "Policy HLT-2025-0012 was in force from 2025-10-01 to 2026-09-30."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-02::3",
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "effective_date": "2026-05-01",
+     "clause": "Endorsement 2 to the Group Health Indemnity Policy > 4. Amendment to Clause 9 \u2014 Co-payment",
+     "resolved_against": "2026-06-25",
+     "citation": "END-2026-02 v1.0 (effective 2026-05-01) \u2014 Endorsement 2 to the Group Health Indemnity Policy > 4. Amendment to Clause 9 \u2014 Co-payment [resolved against loss date 2026-06-25]",
+     "why": "Endorsement END-2026-02 amends clause 9 regarding the co-payment percentage and age threshold, superseding the base wording."
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-06-25",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": null,
+     "needs": "insured_age",
+     "percent": 10,
+     "applies_from_age": 66,
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "clause": "4. Amendment to Clause 9 \u2014 Co-payment",
+     "effective_date": "2026-05-01",
+     "resolved_against": "2026-06-25"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 2,
+      "document_id": "END-2026-02",
+      "version": "1.0",
+      "clause": "2. Amendment to Clause 1.1 \u2014 Room rent and proportionate deduction",
+      "effective_date": "2026-05-01",
+      "resolved_against": "2026-06-25",
+      "proportionate_deduction": false,
+      "amount_per_day": 10000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0012",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-6EF078B5",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00533",
+    "recorded": true,
+    "reason": "The member disputes the applied co-payment for a June 2026 admission. Endorsement END-2026-02 (effective 2026-05-01) supersedes the base health policy wording PW-HEALTH-002 regarding Clause 9 (Co-payment)."
+   },
+   "summary_for_adjuster": "The policy was in force on the date of loss. Endorsement END-2026-02 governs and supersedes the base health policy wording (PW-HEALTH-002) concerning the co-payment and room rent limits. The adjuster should review these clauses in relation to the member's dispute.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": [
+    {
+     "chunk_id": "PW-HEALTH-002::11",
+     "clause": "Group Health Indemnity Policy > 9. Co-payment",
+     "amended_by": "END-2026-02"
+    }
+   ]
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00541",
+  "group": "w6-pdf-table-mangled",
+  "product": "health",
+  "loss_date": "2026-03-08",
+  "trace_id": "cap_d666d6e5726c",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-1454D480"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-HEALTH-002']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 9,
+  "tokens": 24086,
+  "cost_usd": 0.00401,
+  "wall_seconds": 46.686,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [
+   {
+    "field": "relevant_why[1]",
+    "matched": [
+     "covered"
+    ]
+   }
+  ],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_d666d6e5726c",
+   "claim_number": "CLM-2026-00541",
+   "policy_number": "HLT-2025-0013",
+   "product": "health",
+   "loss_date": "2026-03-08",
+   "in_force": {
+    "policy_number": "HLT-2025-0013",
+    "loss_date": "2026-03-08",
+    "in_force": true,
+    "reason": "loss date 2026-03-08 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Itemised bill charges cradle charges, baby charges, comb, and room fresheners separately from room rent."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::2",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 1. Hospitalisation benefit > 1.1 Room rent limits",
+     "resolved_against": "2026-03-08",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 1. Hospitalisation benefit > 1.1 Room rent limits [resolved against loss date 2026-03-08]",
+     "why": "This clause covers room rent limits and proportionate deductions but does not explicitly detail which specific miscellaneous items are subsumed into room charges."
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::1",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 1. Hospitalisation benefit",
+     "resolved_against": "2026-03-08",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 1. Hospitalisation benefit [resolved against loss date 2026-03-08]",
+     "why": "[withheld: this line stated an outcome \u2014 for the adjuster to decide]"
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-03-08",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": null,
+     "needs": "insured_age",
+     "percent": 20,
+     "applies_from_age": 61,
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "clause": "9. Co-payment",
+     "effective_date": "2025-04-01",
+     "resolved_against": "2026-03-08"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 1,
+      "document_id": "PW-HEALTH-002",
+      "version": "3.4",
+      "clause": "1.1 Room rent limits",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-03-08",
+      "proportionate_deduction": true,
+      "amount_per_day": 5000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0013",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-1454D480",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00541",
+    "recorded": true,
+    "reason": "The policy wording does not explicitly mention whether cradle charges, baby charges, combs, or room fresheners are subsumed into room charges, requiring the adjuster to evaluate the itemised bill."
+   },
+   "summary_for_adjuster": "The policy was in force on the date of loss, and the limits have been resolved. The adjuster should review the itemised hospital charges to determine how miscellaneous items like cradle charges, baby charges, combs, and room fresheners are treated under standard billing or policy guidelines.",
+   "decision": null,
+   "guard_violations": [
+    {
+     "field": "relevant_why[1]",
+     "matched": [
+      "covered"
+     ]
+    }
+   ],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00548",
+  "group": "w6-pdf-table-mangled",
+  "product": "health",
+  "loss_date": "2026-05-30",
+  "trace_id": "cap_c38987bf6042",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-FD6B3BF5"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-02']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 9,
+  "tokens": 26918,
+  "cost_usd": 0.004665,
+  "wall_seconds": 20.122,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [
+   {
+    "field": "relevant_why[0]",
+    "matched": [
+     "covered",
+     "is included"
+    ]
+   }
+  ],
+  "overrides": [],
+  "blocked": [
+   {
+    "tool": "refer_to_adjuster",
+    "reason": "BLOCKED: before referring, you still need to call: get_limits."
+   }
+  ],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_c38987bf6042",
+   "claim_number": "CLM-2026-00548",
+   "policy_number": "HLT-2025-0014",
+   "product": "health",
+   "loss_date": "2026-05-30",
+   "in_force": {
+    "policy_number": "HLT-2025-0014",
+    "loss_date": "2026-05-30",
+    "in_force": true,
+    "reason": "loss date 2026-05-30 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "The member underwent a balloon sinuplasty as a day care procedure.",
+    "The claimed amount is INR 88,000.",
+    "The date of loss is 2026-05-30."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-02::5",
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "effective_date": "2026-05-01",
+     "clause": "Endorsement 2 to the Group Health Indemnity Policy > 7. New Clause 3A \u2014 Modern treatments",
+     "resolved_against": "2026-05-30",
+     "citation": "END-2026-02 v1.0 (effective 2026-05-01) \u2014 Endorsement 2 to the Group Health Indemnity Policy > 7. New Clause 3A \u2014 Modern treatments [resolved against loss date 2026-05-30]",
+     "why": "[withheld: this line stated an outcome \u2014 for the adjuster to decide]"
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-05-30",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": null,
+     "needs": "insured_age",
+     "percent": 10,
+     "applies_from_age": 66,
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "clause": "4. Amendment to Clause 9 \u2014 Co-payment",
+     "effective_date": "2026-05-01",
+     "resolved_against": "2026-05-30"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 2,
+      "document_id": "END-2026-02",
+      "version": "1.0",
+      "clause": "2. Amendment to Clause 1.1 \u2014 Room rent and proportionate deduction",
+      "effective_date": "2026-05-01",
+      "resolved_against": "2026-05-30",
+      "proportionate_deduction": false,
+      "amount_per_day": 10000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0014",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-FD6B3BF5",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00548",
+    "recorded": true,
+    "reason": "The adjuster should review the modern treatment list in Endorsement 2 Clause 3A to determine if balloon sinuplasty is an eligible modern treatment and evaluate the policy limits."
+   },
+   "summary_for_adjuster": "The policy was in force on the date of loss. Endorsement 2 Clause 3A governs modern treatments with a cap of 50% of the sum insured, but the adjuster needs to verify if balloon sinuplasty is among the listed procedures.",
+   "decision": null,
+   "guard_violations": [
+    {
+     "field": "relevant_why[0]",
+     "matched": [
+      "covered",
+      "is included"
+     ]
+    }
+   ],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00553",
+  "group": "w6-pdf-table-mangled",
+  "product": "health",
+  "loss_date": "2026-07-11",
+  "trace_id": "cap_c110bc4ea621",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-E1562786"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-HEALTH-002']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 7,
+  "tokens": 20048,
+  "cost_usd": 0.003408,
+  "wall_seconds": 38.64,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_c110bc4ea621",
+   "claim_number": "CLM-2026-00553",
+   "policy_number": "HLT-2025-0015",
+   "product": "health",
+   "loss_date": "2026-07-11",
+   "in_force": {
+    "policy_number": "HLT-2025-0015",
+    "loss_date": "2026-07-11",
+    "in_force": true,
+    "reason": "loss date 2026-07-11 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "An arthrotomy of the hip joint was performed with under 24 hours of hospitalisation.",
+    "The hospital billed the procedure as day care."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::3",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 3. Day care procedures",
+     "resolved_against": "2026-07-11",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 3. Day care procedures [resolved against loss date 2026-07-11]",
+     "why": "Defines day care procedures as those listed in Annexure A requiring less than 24 hours of hospitalisation because of technological advancement, excluding out-patient treatment."
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-07-11",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": null,
+     "needs": "insured_age",
+     "percent": 10,
+     "applies_from_age": 66,
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "clause": "4. Amendment to Clause 9 \u2014 Co-payment",
+     "effective_date": "2026-05-01",
+     "resolved_against": "2026-07-11"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 2,
+      "document_id": "END-2026-02",
+      "version": "1.0",
+      "clause": "2. Amendment to Clause 1.1 \u2014 Room rent and proportionate deduction",
+      "effective_date": "2026-05-01",
+      "resolved_against": "2026-07-11",
+      "proportionate_deduction": false,
+      "amount_per_day": 10000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0015",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-E1562786",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00553",
+    "recorded": true,
+    "reason": "The adjuster should confirm whether arthrotomy of the hip joint is listed in Annexure A as a qualifying day care procedure requiring under 24 hours of hospitalisation."
+   },
+   "summary_for_adjuster": "The policy was in force on the loss date. The claim involves an arthrotomy of the hip joint performed with under 24 hours of stay, billed as day care. The relevant wording under '3. Day care procedures' requires checking against Annexure A for qualifying procedures due to technological advancement.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00561",
+  "group": "w6-clean-baseline",
+  "product": "motor",
+  "loss_date": "2026-06-02",
+  "trace_id": "cap_de961a822f0e",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-5FA36A54"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-01', 'PW-MOTOR-001']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 9,
+  "tokens": 25075,
+  "cost_usd": 0.004259,
+  "wall_seconds": 23.79,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [
+   {
+    "field": "exclusion_why[0]",
+    "matched": [
+     "covered"
+    ]
+   }
+  ],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_de961a822f0e",
+   "claim_number": "CLM-2026-00561",
+   "policy_number": "MOT-2025-0019",
+   "product": "motor",
+   "loss_date": "2026-06-02",
+   "in_force": {
+    "policy_number": "MOT-2025-0019",
+    "loss_date": "2026-06-02",
+    "in_force": true,
+    "reason": "loss date 2026-06-02 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Two tyres burst after striking a pothole.",
+    "No other part of the vehicle was damaged.",
+    "Replacement cost is INR 18,400 for the pair."
+   ],
+   "wording": [
+    {
+     "role": "exclusion_candidate",
+     "chunk_id": "PW-MOTOR-001::4",
+     "document_id": "PW-MOTOR-001",
+     "version": "5.1",
+     "effective_date": "2025-04-01",
+     "clause": "Private Car Package Policy \u2014 Section I: Own Damage > 3. What is not covered",
+     "resolved_against": "2026-06-02",
+     "citation": "PW-MOTOR-001 v5.1 (effective 2025-04-01) \u2014 Private Car Package Policy \u2014 Section I: Own Damage > 3. What is not covered [resolved against loss date 2026-06-02]",
+     "why": "[withheld: this line stated an outcome \u2014 for the adjuster to decide]"
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "PW-MOTOR-001::4",
+     "document_id": "PW-MOTOR-001",
+     "version": "5.1",
+     "effective_date": "2025-04-01",
+     "clause": "Private Car Package Policy \u2014 Section I: Own Damage > 3. What is not covered",
+     "resolved_against": "2026-06-02",
+     "citation": "PW-MOTOR-001 v5.1 (effective 2025-04-01) \u2014 Private Car Package Policy \u2014 Section I: Own Damage > 3. What is not covered [resolved against loss date 2026-06-02]",
+     "why": "The clause \"3. What is not covered\" sets out the condition regarding damage to tyres and tubes requiring simultaneous vehicle damage."
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-01::5",
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "effective_date": "2026-04-01",
+     "clause": "Endorsement 1 to the Private Car Package Policy > 7. New Clause 6A \u2014 No Claim Bonus protection",
+     "resolved_against": "2026-06-02",
+     "citation": "END-2026-01 v1.0 (effective 2026-04-01) \u2014 Endorsement 1 to the Private Car Package Policy > 7. New Clause 6A \u2014 No Claim Bonus protection [resolved against loss date 2026-06-02]",
+     "why": "Mentions that the exclusion of consequential loss and the 50% limit on tyre replacement where the vehicle is damaged at the same time remain in force."
+    }
+   ],
+   "numbers": {
+    "product": "motor",
+    "loss_date": "2026-06-02",
+    "deductible": {
+     "applies": true,
+     "amount": 3000,
+     "currency": "INR",
+     "vehicle_cc": 1600,
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "clause": "2. Amendment to Clause 2.2 \u2014 Compulsory deductible",
+     "effective_date": "2026-04-01",
+     "resolved_against": "2026-06-02"
+    },
+    "sub_limits": [
+     {
+      "name": "tyre_replacement_when_vehicle_also_damaged",
+      "kind": "percent_of_cost",
+      "value": 50,
+      "document_id": "PW-MOTOR-001",
+      "version": "5.1",
+      "clause": "3. What is not covered",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-06-02"
+     }
+    ],
+    "policy_limit": {
+     "type": "IDV",
+     "amount": 900000,
+     "currency": "INR",
+     "policy_number": "MOT-2025-0019",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-5FA36A54",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00561",
+    "recorded": true,
+    "reason": "The claim involves damage to tyres alone after striking a pothole, making the exclusion under \"What is not covered\" regarding tyre damage without simultaneous vehicle damage arguable."
+   },
+   "summary_for_adjuster": "The insured vehicle sustained damage exclusively to two tyres after hitting a pothole with no other parts damaged. The adjuster should examine the exclusion under \"What is not covered\" regarding tyre damage alone versus simultaneous vehicle damage, noting a compulsory deductible of INR 3,000 applies.",
+   "decision": null,
+   "guard_violations": [
+    {
+     "field": "exclusion_why[0]",
+     "matched": [
+      "covered"
+     ]
+    }
+   ],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00567",
+  "group": "w6-clean-baseline",
+  "product": "health",
+  "loss_date": "2026-04-25",
+  "trace_id": "cap_a96fb2efed08",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-0628C3FF"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-HEALTH-002']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 10,
+  "tokens": 25680,
+  "cost_usd": 0.004407,
+  "wall_seconds": 51.182,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [
+   {
+    "field": "relevant_why[0]",
+    "matched": [
+     "covered"
+    ]
+   }
+  ],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_a96fb2efed08",
+   "claim_number": "CLM-2026-00567",
+   "policy_number": "HLT-2025-0016",
+   "product": "health",
+   "loss_date": "2026-04-25",
+   "in_force": {
+    "policy_number": "HLT-2025-0016",
+    "loss_date": "2026-04-25",
+    "in_force": true,
+    "reason": "loss date 2026-04-25 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Member fell ill while travelling and was admitted to a hospital in Singapore.",
+    "The claimed medical bill is equivalent to INR 6,10,000.",
+    "The policy schedule shows no worldwide cover extension.",
+    "The date of loss is 2026-04-25, and the policy was in force."
+   ],
+   "wording": [
+    {
+     "role": "exclusion_candidate",
+     "chunk_id": "PW-HEALTH-002::6",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 6. What is not covered",
+     "resolved_against": "2026-04-25",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 6. What is not covered [resolved against loss date 2026-04-25]",
+     "why": "The policy wording excludes treatment taken outside India unless the schedule provides worldwide cover, and the schedule lacks this extension."
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::6",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 6. What is not covered",
+     "resolved_against": "2026-04-25",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 6. What is not covered [resolved against loss date 2026-04-25]",
+     "why": "[withheld: this line stated an outcome \u2014 for the adjuster to decide]"
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-04-25",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": null,
+     "needs": "insured_age",
+     "percent": 20,
+     "applies_from_age": 61,
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "clause": "9. Co-payment",
+     "effective_date": "2025-04-01",
+     "resolved_against": "2026-04-25"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 1,
+      "document_id": "PW-HEALTH-002",
+      "version": "3.4",
+      "clause": "1.1 Room rent limits",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-04-25",
+      "proportionate_deduction": true,
+      "amount_per_day": 5000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0016",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-0628C3FF",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00567",
+    "recorded": true,
+    "reason": "The treatment was received outside India in Singapore, and the policy schedule shows no worldwide cover extension, making the geographical exclusion arguable."
+   },
+   "summary_for_adjuster": "The member incurred hospitalisation expenses of INR 6,10,000 in Singapore. The policy was in force on the loss date. The exclusion regarding treatment taken outside India without worldwide cover in document PW-HEALTH-002 applies to these facts for the adjuster to weigh.",
+   "decision": null,
+   "guard_violations": [
+    {
+     "field": "relevant_why[0]",
+     "matched": [
+      "covered"
+     ]
+    }
+   ],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00572",
+  "group": "w6-clean-baseline",
+  "product": "motor",
+  "loss_date": "2026-07-21",
+  "trace_id": "cap_c7f72ab8bbd5",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-DA57982F"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-01']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 9,
+  "tokens": 21817,
+  "cost_usd": 0.003805,
+  "wall_seconds": 53.481,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [
+   {
+    "tool": "refer_to_adjuster",
+    "reason": "BLOCKED: before referring, you still need to call: search_wording."
+   }
+  ],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_c7f72ab8bbd5",
+   "claim_number": "CLM-2026-00572",
+   "policy_number": "MOT-2025-0020",
+   "product": "motor",
+   "loss_date": "2026-07-21",
+   "in_force": {
+    "policy_number": "MOT-2025-0020",
+    "loss_date": "2026-07-21",
+    "in_force": true,
+    "reason": "loss date 2026-07-21 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Front bumper and bonnet damaged in a low speed collision.",
+    "Assessed loss INR 58,000.",
+    "No voluntary deductible on the schedule.",
+    "Insured vehicle is a private car with 1800cc engine capacity."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-01::2",
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "effective_date": "2026-04-01",
+     "clause": "Endorsement 1 to the Private Car Package Policy > 2. Amendment to Clause 2.2 \u2014 Compulsory deductible",
+     "resolved_against": "2026-07-21",
+     "citation": "END-2026-01 v1.0 (effective 2026-04-01) \u2014 Endorsement 1 to the Private Car Package Policy > 2. Amendment to Clause 2.2 \u2014 Compulsory deductible [resolved against loss date 2026-07-21]",
+     "why": "Applies to establish the compulsory deductible of INR 3,000 for vehicles above 1500cc."
+    }
+   ],
+   "numbers": {
+    "product": "motor",
+    "loss_date": "2026-07-21",
+    "deductible": {
+     "applies": true,
+     "amount": 3000,
+     "currency": "INR",
+     "vehicle_cc": 1800,
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "clause": "2. Amendment to Clause 2.2 \u2014 Compulsory deductible",
+     "effective_date": "2026-04-01",
+     "resolved_against": "2026-07-21"
+    },
+    "sub_limits": [
+     {
+      "name": "tyre_replacement_when_vehicle_also_damaged",
+      "kind": "percent_of_cost",
+      "value": 50,
+      "document_id": "PW-MOTOR-001",
+      "version": "5.1",
+      "clause": "3. What is not covered",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-07-21"
+     }
+    ],
+    "policy_limit": {
+     "type": "IDV",
+     "amount": 900000,
+     "currency": "INR",
+     "policy_number": "MOT-2025-0020",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-DA57982F",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00572",
+    "recorded": true,
+    "reason": "The policy was in force at the time of loss, and the compulsory deductible has been resolved to INR 3,000 for a vehicle exceeding 1500cc in accordance with clause \"2. Amendment to Clause 2.2 \u2014 Compulsory deductible\" (END-2026-01::2)."
+   },
+   "summary_for_adjuster": "The claim involves front bumper and bonnet damage assessed at INR 58,000 for an 1800cc vehicle. The policy was in-force on the date of loss (2026-07-21), and a compulsory deductible of INR 3,000 applies based on endorsement END-2026-01.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00578",
+  "group": "w6-clean-baseline",
+  "product": "health",
+  "loss_date": "2026-07-09",
+  "trace_id": "cap_d6befc4977ac",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-DC3F7DDD"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-02']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 9,
+  "tokens": 23609,
+  "cost_usd": 0.004129,
+  "wall_seconds": 25.375,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [
+   {
+    "field": "facts[2]",
+    "matched": [
+     "Admissible"
+    ]
+   },
+   {
+    "field": "summary_for_adjuster",
+    "matched": [
+     "admissible"
+    ]
+   },
+   {
+    "field": "relevant_why[0]",
+    "matched": [
+     "admissible"
+    ]
+   }
+  ],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_d6befc4977ac",
+   "claim_number": "CLM-2026-00578",
+   "policy_number": "HLT-2025-0017",
+   "product": "health",
+   "loss_date": "2026-07-09",
+   "in_force": {
+    "policy_number": "HLT-2025-0017",
+    "loss_date": "2026-07-09",
+    "in_force": true,
+    "reason": "loss date 2026-07-09 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Insured person age 67",
+    "Admitted 4 nights for pneumonia",
+    "[withheld: this line stated an outcome \u2014 for the adjuster to decide]"
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-02::3",
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "effective_date": "2026-05-01",
+     "clause": "Endorsement 2 to the Group Health Indemnity Policy > 4. Amendment to Clause 9 \u2014 Co-payment",
+     "resolved_against": "2026-07-09",
+     "citation": "END-2026-02 v1.0 (effective 2026-05-01) \u2014 Endorsement 2 to the Group Health Indemnity Policy > 4. Amendment to Clause 9 \u2014 Co-payment [resolved against loss date 2026-07-09]",
+     "why": "[withheld: this line stated an outcome \u2014 for the adjuster to decide]"
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-07-09",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": true,
+     "percent": 10,
+     "applies_from_age": 66,
+     "insured_age": 67,
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "clause": "4. Amendment to Clause 9 \u2014 Co-payment",
+     "effective_date": "2026-05-01",
+     "resolved_against": "2026-07-09"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 2,
+      "document_id": "END-2026-02",
+      "version": "1.0",
+      "clause": "2. Amendment to Clause 1.1 \u2014 Room rent and proportionate deduction",
+      "effective_date": "2026-05-01",
+      "resolved_against": "2026-07-09",
+      "proportionate_deduction": false,
+      "amount_per_day": 10000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0017",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-DC3F7DDD",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00578",
+    "recorded": true,
+    "reason": "The policy was in force on the loss date. The adjuster should review the co-payment percentage of 10% applicable for insured persons aged 66 years and above pursuant to Endorsement END-2026-02."
+   },
+   "summary_for_adjuster": "[withheld: this text stated an outcome \u2014 for the adjuster to decide]",
+   "decision": null,
+   "guard_violations": [
+    {
+     "field": "facts[2]",
+     "matched": [
+      "Admissible"
+     ]
+    },
+    {
+     "field": "summary_for_adjuster",
+     "matched": [
+      "admissible"
+     ]
+    },
+    {
+     "field": "relevant_why[0]",
+     "matched": [
+      "admissible"
+     ]
+    }
+   ],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00584",
+  "group": "w6-clean-baseline",
+  "product": "health",
+  "loss_date": "2026-06-14",
+  "trace_id": "cap_06e1e9611841",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-99B91C31"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-02']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 7,
+  "tokens": 20633,
+  "cost_usd": 0.003596,
+  "wall_seconds": 12.136,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_06e1e9611841",
+   "claim_number": "CLM-2026-00584",
+   "policy_number": "HLT-2025-0018",
+   "product": "health",
+   "loss_date": "2026-06-14",
+   "in_force": {
+    "policy_number": "HLT-2025-0018",
+    "loss_date": "2026-06-14",
+    "in_force": true,
+    "reason": "loss date 2026-06-14 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Member received treatment at a non-network hospital and paid INR 74,000 directly.",
+    "Discharge occurred on 2026-06-18.",
+    "Reimbursement papers reached the insurer on 2026-07-15, which is 27 days after discharge."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-02::3",
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "effective_date": "2026-05-01",
+     "clause": "Endorsement 2 to the Group Health Indemnity Policy > 4. Amendment to Clause 9 \u2014 Co-payment",
+     "resolved_against": "2026-06-14",
+     "citation": "END-2026-02 v1.0 (effective 2026-05-01) \u2014 Endorsement 2 to the Group Health Indemnity Policy > 4. Amendment to Clause 9 \u2014 Co-payment [resolved against loss date 2026-06-14]",
+     "why": "Extends the window for submitting reimbursement documents from 15 days to 30 days from discharge, and the outer limit for admissibility to 120 days from discharge, which bears directly on whether the documents submitted 27 days after discharge were within time."
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-06-14",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": null,
+     "needs": "insured_age",
+     "percent": 10,
+     "applies_from_age": 66,
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "clause": "4. Amendment to Clause 9 \u2014 Co-payment",
+     "effective_date": "2026-05-01",
+     "resolved_against": "2026-06-14"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 2,
+      "document_id": "END-2026-02",
+      "version": "1.0",
+      "clause": "2. Amendment to Clause 1.1 \u2014 Room rent and proportionate deduction",
+      "effective_date": "2026-05-01",
+      "resolved_against": "2026-06-14",
+      "proportionate_deduction": false,
+      "amount_per_day": 10000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0018",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-99B91C31",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00584",
+    "recorded": true,
+    "reason": "Referred to the adjuster to evaluate whether the reimbursement documents submitted 27 days after discharge comply with the 30-day submission window set out in Endorsement 2."
+   },
+   "summary_for_adjuster": "The policy was in force on the date of loss. Endorsement 2 amends the reimbursement submission window to 30 days from discharge. The claim documents were submitted 27 days post-discharge.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00601",
+  "group": "w12-boundary",
+  "product": "motor",
+  "loss_date": "2026-03-31",
+  "trace_id": "cap_fde18a29a98e",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-9D376FCC"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-MOTOR-001']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 10,
+  "tokens": 24707,
+  "cost_usd": 0.004221,
+  "wall_seconds": 101.428,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [
+   {
+    "tool": "refer_to_adjuster",
+    "reason": "BLOCKED: before referring, you still need to call: search_wording."
+   }
+  ],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_fde18a29a98e",
+   "claim_number": "CLM-2026-00601",
+   "policy_number": "MOT-2025-0021",
+   "product": "motor",
+   "loss_date": "2026-03-31",
+   "in_force": {
+    "policy_number": "MOT-2025-0021",
+    "loss_date": "2026-03-31",
+    "in_force": true,
+    "reason": "loss date 2026-03-31 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "The insured's car was rear-ended at a traffic signal.",
+    "Rear bumper, boot lid and tail lamp assembly damaged; no injuries.",
+    "Surveyor's estimate INR 41,000."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "PW-MOTOR-001::3",
+     "document_id": "PW-MOTOR-001",
+     "version": "5.1",
+     "effective_date": "2025-04-01",
+     "clause": "Private Car Package Policy \u2014 Section I: Own Damage > 2. Basis of settlement > 2.2 Compulsory deductible",
+     "resolved_against": "2026-03-31",
+     "citation": "PW-MOTOR-001 v5.1 (effective 2025-04-01) \u2014 Private Car Package Policy \u2014 Section I: Own Damage > 2. Basis of settlement > 2.2 Compulsory deductible [resolved against loss date 2026-03-31]",
+     "why": "Details the compulsory deductible of INR 1,000 for vehicles with a cubic capacity up to 1500cc under clause '2.2 Compulsory deductible'."
+    }
+   ],
+   "numbers": {
+    "product": "motor",
+    "loss_date": "2026-03-31",
+    "deductible": {
+     "applies": true,
+     "amount": 1000,
+     "currency": "INR",
+     "vehicle_cc": 1400,
+     "document_id": "PW-MOTOR-001",
+     "version": "5.1",
+     "clause": "2.2 Compulsory deductible",
+     "effective_date": "2025-04-01",
+     "resolved_against": "2026-03-31"
+    },
+    "sub_limits": [
+     {
+      "name": "tyre_replacement_when_vehicle_also_damaged",
+      "kind": "percent_of_cost",
+      "value": 50,
+      "document_id": "PW-MOTOR-001",
+      "version": "5.1",
+      "clause": "3. What is not covered",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-03-31"
+     }
+    ],
+    "policy_limit": {
+     "type": "IDV",
+     "amount": 600000,
+     "currency": "INR",
+     "policy_number": "MOT-2025-0021",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-9D376FCC",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00601",
+    "recorded": true,
+    "reason": "The policy was in force at the time of the loss, and the compulsory deductible has been resolved to INR 1,000 under clause 2.2 for the adjuster's review."
+   },
+   "summary_for_adjuster": "The motor claim involves rear-end damage with a surveyor's estimate of INR 41,000. The policy was in force, and the compulsory deductible is resolved as INR 1,000 under clause 2.2 of document PW-MOTOR-001 (version 5.1, effective 2025-04-01).",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00602",
+  "group": "w12-boundary",
+  "product": "motor",
+  "loss_date": "2026-04-01",
+  "trace_id": "cap_3ecd0e89505f",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-311C2CE1"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-01']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 7,
+  "tokens": 18139,
+  "cost_usd": 0.003096,
+  "wall_seconds": 11.045,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [
+   {
+    "tool": "refer_to_adjuster",
+    "reason": "BLOCKED: before referring, you still need to call: search_wording."
+   }
+  ],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_3ecd0e89505f",
+   "claim_number": "CLM-2026-00602",
+   "policy_number": "MOT-2025-0022",
+   "product": "motor",
+   "loss_date": "2026-04-01",
+   "in_force": {
+    "policy_number": "MOT-2025-0022",
+    "loss_date": "2026-04-01",
+    "in_force": true,
+    "reason": "loss date 2026-04-01 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "The insured's car was side-swiped while parked outside a shop.",
+    "The left rear door and quarter panel were damaged with no injuries.",
+    "The surveyor's estimate is INR 38,500."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-01::2",
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "effective_date": "2026-04-01",
+     "clause": "Endorsement 1 to the Private Car Package Policy > 2. Amendment to Clause 2.2 \u2014 Compulsory deductible",
+     "resolved_against": "2026-04-01",
+     "citation": "END-2026-01 v1.0 (effective 2026-04-01) \u2014 Endorsement 1 to the Private Car Package Policy > 2. Amendment to Clause 2.2 \u2014 Compulsory deductible [resolved against loss date 2026-04-01]",
+     "why": "Specifies the applicable compulsory deductible of INR 1,500 for vehicles with a cubic capacity up to 1500cc under Endorsement 1 to the Private Car Package Policy."
+    }
+   ],
+   "numbers": {
+    "product": "motor",
+    "loss_date": "2026-04-01",
+    "deductible": {
+     "applies": true,
+     "amount": 1500,
+     "currency": "INR",
+     "vehicle_cc": 1400,
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "clause": "2. Amendment to Clause 2.2 \u2014 Compulsory deductible",
+     "effective_date": "2026-04-01",
+     "resolved_against": "2026-04-01"
+    },
+    "sub_limits": [
+     {
+      "name": "tyre_replacement_when_vehicle_also_damaged",
+      "kind": "percent_of_cost",
+      "value": 50,
+      "document_id": "PW-MOTOR-001",
+      "version": "5.1",
+      "clause": "3. What is not covered",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-04-01"
+     }
+    ],
+    "policy_limit": {
+     "type": "IDV",
+     "amount": 600000,
+     "currency": "INR",
+     "policy_number": "MOT-2025-0022",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-311C2CE1",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00602",
+    "recorded": true,
+    "reason": "The policy was in force at the time of the loss and the compulsory deductible has been resolved against the applicable wording."
+   },
+   "summary_for_adjuster": "The insured vehicle sustained own damage while parked, with an estimated repair cost of INR 38,500. The policy was in force on the loss date, and a compulsory deductible of INR 1,500 applies based on the vehicle's cubic capacity of 1400cc.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": [
+    {
+     "chunk_id": "PW-MOTOR-001::3",
+     "clause": "Private Car Package Policy \u2014 Section I: Own Damage > 2. Basis of settlement > 2.2 Compulsory deductible",
+     "amended_by": "END-2026-01"
+    }
+   ]
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00603",
+  "group": "w12-in-force-failure",
+  "product": "motor",
+  "loss_date": "2026-05-20",
+  "trace_id": "cap_072f4dca3312",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-B3DC69FE"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited []"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": "not in force: no numbers expected"
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 4,
+  "tokens": 8324,
+  "cost_usd": 0.001467,
+  "wall_seconds": 5.557,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_072f4dca3312",
+   "claim_number": "CLM-2026-00603",
+   "policy_number": "MOT-2025-0023",
+   "product": "motor",
+   "loss_date": "2026-05-20",
+   "in_force": {
+    "policy_number": "MOT-2025-0023",
+    "loss_date": "2026-05-20",
+    "in_force": false,
+    "reason": "loss date 2026-05-20 is after the policy's in-force window ended (2026-04-30)",
+    "in_force_from": "2025-05-01",
+    "in_force_to": "2026-04-30"
+   },
+   "facts": [
+    "The insured reversed into a parked vehicle in a car park resulting in left rear damage.",
+    "The estimated damage is INR 22,500.",
+    "The policy expired on 30 April 2026 and the renewal premium was not received."
+   ],
+   "wording": [],
+   "numbers": null,
+   "referral": {
+    "referral_id": "REF-B3DC69FE",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00603",
+    "recorded": true,
+    "reason": "loss date 2026-05-20 is after the policy's in-force window ended (2026-04-30)"
+   },
+   "summary_for_adjuster": "The policy was not in force at the time of the loss, as the date of loss falls after the policy's expiration date.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00604",
+  "group": "w12-in-force-failure",
+  "product": "motor",
+  "loss_date": "2026-02-10",
+  "trace_id": "cap_b8d9340480d1",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-3387AB60"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited []"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": "not in force: no numbers expected"
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 4,
+  "tokens": 8266,
+  "cost_usd": 0.00146,
+  "wall_seconds": 88.204,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_b8d9340480d1",
+   "claim_number": "CLM-2026-00604",
+   "policy_number": "MOT-2025-0024",
+   "product": "motor",
+   "loss_date": "2026-02-10",
+   "in_force": {
+    "policy_number": "MOT-2025-0024",
+    "loss_date": "2026-02-10",
+    "in_force": false,
+    "reason": "loss date 2026-02-10 is before the policy's in-force window began (2026-03-01)",
+    "in_force_from": "2026-03-01",
+    "in_force_to": "2027-02-28"
+   },
+   "facts": [
+    "A stone cracked the windscreen on the highway.",
+    "The loss date is 2026-02-10, which is before the policy's in-force window began on 2026-03-01."
+   ],
+   "wording": [],
+   "numbers": null,
+   "referral": {
+    "referral_id": "REF-3387AB60",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00604",
+    "recorded": true,
+    "reason": "The loss date 2026-02-10 is before the policy's in-force window began (2026-03-01)."
+   },
+   "summary_for_adjuster": "The policy was not in force at the time of the incident, as the loss occurred prior to the policy's effective start date. The adjuster should review the policy in-force status.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00605",
+  "group": "w12-pii",
+  "product": "motor",
+  "loss_date": "2026-05-12",
+  "trace_id": "cap_3eb2219c7d3c",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-FE89C97D"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-MOTOR-001']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "10 strings absent from 4 places"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 7,
+  "tokens": 21429,
+  "cost_usd": 0.00375,
+  "wall_seconds": 12.894,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_3eb2219c7d3c",
+   "claim_number": "CLM-2026-00605",
+   "policy_number": "MOT-2025-0025",
+   "product": "motor",
+   "loss_date": "2026-05-12",
+   "in_force": {
+    "policy_number": "MOT-2025-0025",
+    "loss_date": "2026-05-12",
+    "in_force": true,
+    "reason": "loss date 2026-05-12 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "The insured vehicle was hit on the driver's side after another driver ran a red light.",
+    "Repair estimate is INR 64,000."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "PW-MOTOR-001::1",
+     "document_id": "PW-MOTOR-001",
+     "version": "5.1",
+     "effective_date": "2025-04-01",
+     "clause": "Private Car Package Policy \u2014 Section I: Own Damage > 1. What is covered",
+     "resolved_against": "2026-05-12",
+     "citation": "PW-MOTOR-001 v5.1 (effective 2025-04-01) \u2014 Private Car Package Policy \u2014 Section I: Own Damage > 1. What is covered [resolved against loss date 2026-05-12]",
+     "why": "Covers loss or damage caused by accidental external means including collision under \"Private Car Package Policy \u2014 Section I: Own Damage > 1. What is covered\"."
+    },
+    {
+     "role": "relevant",
+     "chunk_id": "PW-MOTOR-001::4",
+     "document_id": "PW-MOTOR-001",
+     "version": "5.1",
+     "effective_date": "2025-04-01",
+     "clause": "Private Car Package Policy \u2014 Section I: Own Damage > 3. What is not covered",
+     "resolved_against": "2026-05-12",
+     "citation": "PW-MOTOR-001 v5.1 (effective 2025-04-01) \u2014 Private Car Package Policy \u2014 Section I: Own Damage > 3. What is not covered [resolved against loss date 2026-05-12]",
+     "why": "Details exclusions under \"Private Car Package Policy \u2014 Section I: Own Damage > 3. What is not covered\"."
+    }
+   ],
+   "numbers": {
+    "product": "motor",
+    "loss_date": "2026-05-12",
+    "deductible": {
+     "applies": true,
+     "amount": 1500,
+     "currency": "INR",
+     "vehicle_cc": 1500,
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "clause": "2. Amendment to Clause 2.2 \u2014 Compulsory deductible",
+     "effective_date": "2026-04-01",
+     "resolved_against": "2026-05-12"
+    },
+    "sub_limits": [
+     {
+      "name": "tyre_replacement_when_vehicle_also_damaged",
+      "kind": "percent_of_cost",
+      "value": 50,
+      "document_id": "PW-MOTOR-001",
+      "version": "5.1",
+      "clause": "3. What is not covered",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-05-12"
+     }
+    ],
+    "policy_limit": {
+     "type": "IDV",
+     "amount": 600000,
+     "currency": "INR",
+     "policy_number": "MOT-2025-0025",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-FE89C97D",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00605",
+    "recorded": true,
+    "reason": "Policy MOT-2025-0025 was in force on the loss date. The adjuster should review the collision damage against Section I coverage and apply the resolved deductible of INR 1,500."
+   },
+   "summary_for_adjuster": "The insured vehicle sustained driver's side damage in a collision when another vehicle ran a red light, with a repair estimate of INR 64,000. The policy was active on the date of loss, the deductible is INR 1,500, and the IDV policy limit is INR 600,000.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00606",
+  "group": "w12-three-numbers",
+  "product": "motor",
+  "loss_date": "2026-06-15",
+  "trace_id": "cap_3899a978f776",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-60380D33"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": false,
+    "detail": "did not cite PW-MOTOR-001; cited ['END-2026-01']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": false,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 7,
+  "tokens": 20411,
+  "cost_usd": 0.003512,
+  "wall_seconds": 11.815,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_3899a978f776",
+   "claim_number": "CLM-2026-00606",
+   "policy_number": "MOT-2025-0026",
+   "product": "motor",
+   "loss_date": "2026-06-15",
+   "in_force": {
+    "policy_number": "MOT-2025-0026",
+    "loss_date": "2026-06-15",
+    "in_force": true,
+    "reason": "loss date 2026-06-15 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "The insured's car hit a deep pothole.",
+    "Both front tyres burst, and the front left wheel arch and bumper were damaged at the same time.",
+    "The estimated cost is INR 9,000 for tyres and INR 26,000 for body work."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-01::5",
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "effective_date": "2026-04-01",
+     "clause": "Endorsement 1 to the Private Car Package Policy > 7. New Clause 6A \u2014 No Claim Bonus protection",
+     "resolved_against": "2026-06-15",
+     "citation": "END-2026-01 v1.0 (effective 2026-04-01) \u2014 Endorsement 1 to the Private Car Package Policy > 7. New Clause 6A \u2014 No Claim Bonus protection [resolved against loss date 2026-06-15]",
+     "why": "Mentions that a 50% limit on tyre replacement where the vehicle is damaged at the same time remains in force."
+    }
+   ],
+   "numbers": {
+    "product": "motor",
+    "loss_date": "2026-06-15",
+    "deductible": {
+     "applies": true,
+     "amount": 1500,
+     "currency": "INR",
+     "vehicle_cc": 1400,
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "clause": "2. Amendment to Clause 2.2 \u2014 Compulsory deductible",
+     "effective_date": "2026-04-01",
+     "resolved_against": "2026-06-15"
+    },
+    "sub_limits": [
+     {
+      "name": "tyre_replacement_when_vehicle_also_damaged",
+      "kind": "percent_of_cost",
+      "value": 50,
+      "document_id": "PW-MOTOR-001",
+      "version": "5.1",
+      "clause": "3. What is not covered",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-06-15"
+     }
+    ],
+    "policy_limit": {
+     "type": "IDV",
+     "amount": 600000,
+     "currency": "INR",
+     "policy_number": "MOT-2025-0026",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-60380D33",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00606",
+    "recorded": true,
+    "reason": "The adjuster should review the tyre damage limits and the 50% sub-limit applicable when tyres and the vehicle are damaged simultaneously."
+   },
+   "summary_for_adjuster": "The policy was in force on the date of loss. The claim involves front tyre and body damage from hitting a pothole, with estimated costs of INR 9,000 for tyres and INR 26,000 for body work. A 50% sub-limit applies to tyre replacement when the vehicle is damaged at the same time, along with a compulsory deductible of INR 1,500.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00607",
+  "group": "w12-boundary",
+  "product": "health",
+  "loss_date": "2026-04-30",
+  "trace_id": "cap_dae84f057bdc",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-D020EAF9"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-HEALTH-002']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 7,
+  "tokens": 19783,
+  "cost_usd": 0.00345,
+  "wall_seconds": 91.919,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_dae84f057bdc",
+   "claim_number": "CLM-2026-00607",
+   "policy_number": "HLT-2025-0019",
+   "product": "health",
+   "loss_date": "2026-04-30",
+   "in_force": {
+    "policy_number": "HLT-2025-0019",
+    "loss_date": "2026-04-30",
+    "in_force": true,
+    "reason": "loss date 2026-04-30 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Planned knee arthroscopy at a network hospital",
+    "Insured person aged 63",
+    "Hospital bill INR 1,40,000"
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::11",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 9. Co-payment",
+     "resolved_against": "2026-04-30",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 9. Co-payment [resolved against loss date 2026-04-30]",
+     "why": "It outlines that a 20% co-payment applies to all insured persons aged 61 years and above at the commencement of the policy year, bearing directly on the insured's age of 63."
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-04-30",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": true,
+     "percent": 20,
+     "applies_from_age": 61,
+     "insured_age": 63,
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "clause": "9. Co-payment",
+     "effective_date": "2025-04-01",
+     "resolved_against": "2026-04-30"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 1,
+      "document_id": "PW-HEALTH-002",
+      "version": "3.4",
+      "clause": "1.1 Room rent limits",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-04-30",
+      "proportionate_deduction": true,
+      "amount_per_day": 5000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0019",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-D020EAF9",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00607",
+    "recorded": true,
+    "reason": "Referred to the adjuster to determine how the 20% co-payment applies to the hospital bill for an insured aged 63 under the policy wording."
+   },
+   "summary_for_adjuster": "The claim involves a planned knee arthroscopy at a network hospital for a 63-year-old insured with a hospital bill of INR 1,40,000 under an in-force health policy. The policy wording under '9. Co-payment' specifies a 20% co-payment for insured persons aged 61 and above.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00608",
+  "group": "w12-boundary",
+  "product": "health",
+  "loss_date": "2026-05-01",
+  "trace_id": "cap_c9d6e02bc855",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-72812CDD"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-02']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 8,
+  "tokens": 22356,
+  "cost_usd": 0.003823,
+  "wall_seconds": 23.2,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_c9d6e02bc855",
+   "claim_number": "CLM-2026-00608",
+   "policy_number": "HLT-2025-0020",
+   "product": "health",
+   "loss_date": "2026-05-01",
+   "in_force": {
+    "policy_number": "HLT-2025-0020",
+    "loss_date": "2026-05-01",
+    "in_force": true,
+    "reason": "loss date 2026-05-01 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "Planned knee arthroscopy at a network hospital",
+    "Insured person aged 63",
+    "Hospital bill INR 1,40,000"
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-02::3",
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "effective_date": "2026-05-01",
+     "clause": "Endorsement 2 to the Group Health Indemnity Policy > 4. Amendment to Clause 9 \u2014 Co-payment",
+     "resolved_against": "2026-05-01",
+     "citation": "END-2026-02 v1.0 (effective 2026-05-01) \u2014 Endorsement 2 to the Group Health Indemnity Policy > 4. Amendment to Clause 9 \u2014 Co-payment [resolved against loss date 2026-05-01]",
+     "why": "Endorsement 2 raises the mandatory co-payment age threshold from 61 to 66 years, meaning no co-payment applies for an insured aged 63 on the loss date."
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-05-01",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": false,
+     "percent": null,
+     "applies_from_age": 66,
+     "insured_age": 63,
+     "document_id": "END-2026-02",
+     "version": "1.0",
+     "clause": "4. Amendment to Clause 9 \u2014 Co-payment",
+     "effective_date": "2026-05-01",
+     "resolved_against": "2026-05-01"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 2,
+      "document_id": "END-2026-02",
+      "version": "1.0",
+      "clause": "2. Amendment to Clause 1.1 \u2014 Room rent and proportionate deduction",
+      "effective_date": "2026-05-01",
+      "resolved_against": "2026-05-01",
+      "proportionate_deduction": false,
+      "amount_per_day": 10000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0020",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-72812CDD",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00608",
+    "recorded": true,
+    "reason": "Referred to the adjuster to determine applicability of co-payment given the insured's age and Endorsement 2 wording."
+   },
+   "summary_for_adjuster": "The claim involves a planned knee arthroscopy for an insured aged 63. Under Endorsement 2 (effective 2026-05-01), the mandatory co-payment age threshold is raised to 66 years, which is relevant to the adjuster's question on whether a co-payment applies.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ },
+ {
+  "claim_number": "CLM-2026-00609",
+  "group": "w12-boundary",
+  "product": "health",
+  "loss_date": "2026-04-30",
+  "trace_id": "cap_206e20a66937",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-B4712546"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['PW-HEALTH-002']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 7,
+  "tokens": 19998,
+  "cost_usd": 0.003469,
+  "wall_seconds": 34.345,
+  "model": "gemini-3.5-flash-lite",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v2",
+  "prompt_sha": "8343a85b02d6",
+  "packet": {
+   "trace_id": "cap_206e20a66937",
+   "claim_number": "CLM-2026-00609",
+   "policy_number": "HLT-2025-0021",
+   "product": "health",
+   "loss_date": "2026-04-30",
+   "in_force": {
+    "policy_number": "HLT-2025-0021",
+    "loss_date": "2026-04-30",
+    "in_force": true,
+    "reason": "loss date 2026-04-30 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "The member occupied a private room at INR 9,000 per day for three nights during a routine surgical admission.",
+    "The sum insured is INR 5,00,000."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "PW-HEALTH-002::2",
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "effective_date": "2025-04-01",
+     "clause": "Group Health Indemnity Policy > 1. Hospitalisation benefit > 1.1 Room rent limits",
+     "resolved_against": "2026-04-30",
+     "citation": "PW-HEALTH-002 v3.4 (effective 2025-04-01) \u2014 Group Health Indemnity Policy > 1. Hospitalisation benefit > 1.1 Room rent limits [resolved against loss date 2026-04-30]",
+     "why": "Sets out the room rent limit of 1% of the sum insured per day for a normal ward (INR 5,000 per day based on a sum insured of INR 5,000,000) and describes the proportionate deduction rule where room rent exceeds the eligible limit."
+    }
+   ],
+   "numbers": {
+    "product": "health",
+    "loss_date": "2026-04-30",
+    "deductible": {
+     "applies": false,
+     "reason": "health policies in this corpus use a co-payment, not a deductible"
+    },
+    "co_payment": {
+     "applies": false,
+     "percent": null,
+     "applies_from_age": 61,
+     "insured_age": 40,
+     "document_id": "PW-HEALTH-002",
+     "version": "3.4",
+     "clause": "9. Co-payment",
+     "effective_date": "2025-04-01",
+     "resolved_against": "2026-04-30"
+    },
+    "sub_limits": [
+     {
+      "name": "room_rent_normal_ward_per_day",
+      "kind": "percent_of_sum_insured_per_day",
+      "value": 1,
+      "document_id": "PW-HEALTH-002",
+      "version": "3.4",
+      "clause": "1.1 Room rent limits",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-04-30",
+      "proportionate_deduction": true,
+      "amount_per_day": 5000,
+      "of_sum_insured": 500000
+     }
+    ],
+    "policy_limit": {
+     "type": "sum_insured",
+     "amount": 500000,
+     "currency": "INR",
+     "policy_number": "HLT-2025-0021",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-B4712546",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00609",
+    "recorded": true,
+    "reason": "The adjuster should review the room rent limits and proportionate deduction clause in relation to the private room rate of INR 9,000 per day against the eligible limit of INR 5,000 per day."
+   },
+   "summary_for_adjuster": "The claim involves a private room stay at INR 9,000 per day for three nights under a health policy with a sum insured of INR 5,00,000. The normal ward room rent limit is 1% of the sum insured per day (INR 5,000), and clause 1.1 governs proportionate deductions when the actual room rent exceeds this limit.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ }
+]
