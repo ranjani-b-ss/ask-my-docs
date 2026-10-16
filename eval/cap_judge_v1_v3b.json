@@ -1,0 +1,908 @@
+{
+ "natural:v3b:CLM-2026-00418": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00418",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that permanently excluded expenses are detailed in clause 6 is supported by passage [1].",
+    "error": "",
+    "seconds": 3.7
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that permanently excluded expenses are detailed in clause 6 is supported by passage [1].",
+    "error": "",
+    "seconds": 5.6
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that permanently excluded expenses are detailed in clause 6 of the policy wording is supported by passage [1].",
+    "error": "",
+    "seconds": 4.7
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00423": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00423",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement pointing the adjuster to Clause 4 'Cancellation' is supported by passage [1].",
+    "error": "",
+    "seconds": 3.9
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement pointing the adjuster to Clause 4 'Cancellation' is supported by passage [1].",
+    "error": "",
+    "seconds": 6.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement pointing the adjuster to Clause 4 'Cancellation' is supported by passage [1].",
+    "error": "",
+    "seconds": 4.4
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00431": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00431",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement defining a network provider is supported by passage [3].",
+    "error": "",
+    "seconds": 6.0
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement defining a network provider is supported by passage [3].",
+    "error": "",
+    "seconds": 12.0
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement defining a network provider is supported by passage [3].",
+    "error": "",
+    "seconds": 3.3
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00437": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00437",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The room rent limits and proportionate deduction rule are fully supported by passage [1] and the tool results.",
+    "error": "",
+    "seconds": 3.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The room rent limit of 1% of the sum insured per day and the proportionate deduction rule are supported by passage [1] and the tool results.",
+    "error": "",
+    "seconds": 13.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The room rent limits, percentages, and proportionate deduction rules stated in the text are supported by passage [1] and the tool results.",
+    "error": "",
+    "seconds": 5.7
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00442": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00442",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that non-medical items such as gloves and attendant comfort items are not covered is supported by passage [1].",
+    "error": "",
+    "seconds": 6.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that non-medical items such as attendant charges and gloves are not covered is supported by passage [1].",
+    "error": "",
+    "seconds": 5.6
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that non-medical items including attendant charges and gloves are not covered is supported by passage [1].",
+    "error": "",
+    "seconds": 5.9
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00455": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00455",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The referral correctly points the adjuster to the Nil Depreciation cover under Endorsement 1, which exists in passage [1].",
+    "error": "",
+    "seconds": 10.5
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The referral points to Endorsement 1 and Nil Depreciation cover, which are supported by passage [1].",
+    "error": "",
+    "seconds": 4.7
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording, figures, or limits, only a deferral pointing the adjuster to Endorsement 1, which exists in passage [1].",
+    "error": "",
+    "seconds": 10.2
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00461": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00461",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Nil Depreciation is limited to a maximum of two claims per policy year with the standard table applying thereafter is supported by passage [1].",
+    "error": "",
+    "seconds": 10.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Nil Depreciation is limited to a maximum of two claims per policy year with the standard table applying from the third onward is supported by passage [1].",
+    "error": "",
+    "seconds": 4.9
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a maximum of two Nil Depreciation claims are permitted per policy year is supported by passage [1].",
+    "error": "",
+    "seconds": 10.8
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00468": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00468",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording to audit.",
+    "error": "",
+    "seconds": 6.5
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text makes no claims about policy wording, relying entirely on a deferral and administrative triage status.",
+    "error": "",
+    "seconds": 5.4
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text makes no claims about policy wording, limits, or conditions, merely reporting that triage did not complete.",
+    "error": "",
+    "seconds": 3.8
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00472": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00472",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that Endorsement 3 provides a 15-day decision timeframe after the receipt of the last document conflicts with passage [2], which sets that timeline at 15 days from receipt of the last document but is overridden by the investigation timeline of 30 days, yet the text misapplies the 15-day timeline when an investigation is warranted.",
+    "error": "",
+    "seconds": 16.0
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that Endorsement 3 provides a 30-day decision timeframe where an investigation is warranted, but passage [2] specifies 30 days for this stage while passage [1] specifies 45 days, and passage [2] is the in-force endorsement on the date of loss 2026-06-30.",
+    "error": "",
+    "seconds": 5.7
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement that Endorsement 3 provides a 15-day decision timeframe after receipt of the last document is contradicted by [2], which provides a 30-day decision timeframe where an investigation is warranted.",
+    "error": "",
+    "seconds": 3.8
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00479": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00479",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording or tool results, only a triage failure notice and a referral reason.",
+    "error": "",
+    "seconds": 5.5
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text makes no claims about policy wording, figures, or conditions, merely reporting that triage did not complete.",
+    "error": "",
+    "seconds": 16.0
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording or tool results, only a triage failure notice and a deferral to the adjuster.",
+    "error": "",
+    "seconds": 19.3
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00483": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00483",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording, only a triage failure notice and a deferral to the adjuster.",
+    "error": "",
+    "seconds": 5.8
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording, relying entirely on a deferral.",
+    "error": "",
+    "seconds": 5.7
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording, only a triage failure notice and a deferral to the adjuster.",
+    "error": "",
+    "seconds": 4.4
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00491": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00491",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy requires written notice within 48 hours of occurrence is supported by passage [1].",
+    "error": "",
+    "seconds": 15.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy requires written notice within 48 hours of occurrence is supported by passage [1].",
+    "error": "",
+    "seconds": 6.0
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy requires written notice within 48 hours of occurrence is supported by passage [1].",
+    "error": "",
+    "seconds": 15.2
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00496": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00496",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement 2 reduces the specified illnesses waiting period to 12 months is supported by passage [1], and the base wording of a 24-month waiting period for hernia is supported by passages [2] and [3].",
+    "error": "",
+    "seconds": 4.5
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement 2 reduces the specified illnesses waiting period to 12 months is supported by passage [1], and the base policy 24-month waiting period for hernia is supported by passages [2] and [3].",
+    "error": "",
+    "seconds": 6.0
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement 2 reduces the specified illnesses waiting period to 12 months is supported by passage [1], and the statement about the base wording specifying a 24-month waiting period is supported by passage [3].",
+    "error": "",
+    "seconds": 16.1
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00502": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00502",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording to evaluate.",
+    "error": "",
+    "seconds": 5.6
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording or tool results, making all statements fully grounded.",
+    "error": "",
+    "seconds": 13.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording to evaluate.",
+    "error": "",
+    "seconds": 6.2
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00509": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00509",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy excludes treatment for alcoholism, drug or substance abuse is supported by passage [1].",
+    "error": "",
+    "seconds": 5.6
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy excludes treatment for alcoholism, drug or substance abuse is supported by passage [1].",
+    "error": "",
+    "seconds": 46.5
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that alcoholism, drug or substance abuse is excluded is supported by passage [1].",
+    "error": "",
+    "seconds": 3.5
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00514": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00514",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that loss or damage caused while the driver is under the influence of intoxicating liquor or drugs is excluded is supported by passage [1].",
+    "error": "",
+    "seconds": 19.6
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that loss or damage caused while the driver is under the influence of intoxicating liquor or drugs is excluded is supported by passage [1].",
+    "error": "",
+    "seconds": 5.7
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy excludes loss or damage caused while the driver is under the influence of intoxicating liquor or drugs is supported by passage [1].",
+    "error": "",
+    "seconds": 5.4
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00521": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00521",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement about No Claim Bonus protection is supported by passage [2].",
+    "error": "",
+    "seconds": 6.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that No Claim Bonus protection is detailed and unchanged provisions confirmed is supported by passage [2].",
+    "error": "",
+    "seconds": 5.3
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy covers own damage scope and exclusions is supported by passages [1] and [3].",
+    "error": "",
+    "seconds": 5.6
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00526": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00526",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that in-patient hospitalisation requires a period exceeding 24 consecutive hours is supported by passage [4].",
+    "error": "",
+    "seconds": 5.9
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that in-patient hospitalisation requires a period exceeding 24 consecutive hours is supported by passage [4].",
+    "error": "",
+    "seconds": 11.7
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that in-patient hospitalisation requires a period exceeding 24 consecutive hours is supported by passage [4].",
+    "error": "",
+    "seconds": 6.0
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00533": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00533",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording, figures, or provisions.",
+    "error": "",
+    "seconds": 4.3
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wording to evaluate, as it is an incomplete triage notice.",
+    "error": "",
+    "seconds": 6.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text contains no claims about policy wordings or passages, only a status note on triage completion.",
+    "error": "",
+    "seconds": 5.4
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00541": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00541",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy excludes non-medical items listed in Annexure C is supported by passage [3].",
+    "error": "",
+    "seconds": 15.7
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that non-medical items are excluded under Annexure C is supported by passage [3].",
+    "error": "",
+    "seconds": 5.8
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy excludes non-medical items listed in Annexure C is supported by passage [3].",
+    "error": "",
+    "seconds": 5.3
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00548": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00548",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The text makes no policy claims, only reporting that triage did not complete.",
+    "error": "",
+    "seconds": 12.9
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text makes no claims about policy wording or passages, only reporting that triage did not complete.",
+    "error": "",
+    "seconds": 5.9
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The text makes no policy statements or claims about the wording, meaning the grounding criterion is trivially satisfied.",
+    "error": "",
+    "seconds": 11.5
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00553": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00553",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that day care procedures are those requiring less than 24 hours of hospitalisation due to technological advancement that are listed in Annexure A is supported by passage [1].",
+    "error": "",
+    "seconds": 5.8
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that day care procedures are those requiring less than 24 hours of hospitalisation due to technological advancement that are listed in Annexure A is supported by passage [1].",
+    "error": "",
+    "seconds": 18.8
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that day care procedures are those requiring less than 24 hours of hospitalisation due to technological advancement and listed in Annexure A is supported by [1].",
+    "error": "",
+    "seconds": 5.7
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00561": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00561",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The statement in Why line 3 that an endorsement confirms the tyre replacement restriction comes from passage [2], but passage [2] does not contain a tyre replacement restriction or mention tyres.",
+    "error": "",
+    "seconds": 5.6
+   },
+   {
+    "verdict": "UNGROUNDED",
+    "why": "The text states that the endorsement confirms the tyre replacement restriction remains unchanged, but passage [2] actually attributes this confirmation to \"Endorsement 1\" and mentions Section I generally rather than that specific restriction being solely an endorsement feature in that context.",
+    "error": "",
+    "seconds": 5.6
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that tyre damage is excluded unless simultaneous vehicle damage occurs is supported by passage [1].",
+    "error": "",
+    "seconds": 5.7
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00567": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00567",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that treatment taken outside India is excluded unless the schedule provides worldwide cover is supported by passage [1].",
+    "error": "",
+    "seconds": 6.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that treatment taken outside India is excluded is supported by passage [1].",
+    "error": "",
+    "seconds": 6.3
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that treatment outside India is excluded unless the schedule provides worldwide cover is supported by passage [1].",
+    "error": "",
+    "seconds": 5.8
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00572": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00572",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a compulsory deductible of INR 3,000 applies for vehicles above 1500cc is supported by passage [1].",
+    "error": "",
+    "seconds": 13.8
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a compulsory deductible of INR 3,000 applies for vehicles above 1500cc is supported by passage [1] and the tool results.",
+    "error": "",
+    "seconds": 5.8
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a compulsory deductible of INR 3,000 applies for vehicles above 1500cc is supported by passage [1].",
+    "error": "",
+    "seconds": 5.5
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00578": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00578",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement 2 raises the age threshold to 66 years and reduces the percentage to 10% is supported by passage [2].",
+    "error": "",
+    "seconds": 9.0
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement 2 raises the age threshold to 66 years and reduces the percentage to 10% is supported by passage [2].",
+    "error": "",
+    "seconds": 2.5
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that Endorsement 2 raises the age threshold to 66 years and reduces the percentage to 10% is supported by passage [2].",
+    "error": "",
+    "seconds": 8.7
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00584": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00584",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the submission window was extended to 30 days is supported by passage [1].",
+    "error": "",
+    "seconds": 12.7
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the reimbursement submission window was extended to 30 days is supported by passage [1].",
+    "error": "",
+    "seconds": 6.0
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the reimbursement submission window was extended to 30 days is supported by passage [1].",
+    "error": "",
+    "seconds": 5.7
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00601": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00601",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a compulsory deductible of INR 1,000 applies for vehicles up to 1500cc is supported by passage [1].",
+    "error": "",
+    "seconds": 15.8
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a compulsory deductible of INR 1,000 applies to vehicles with a cubic capacity up to 1500cc is supported by passage [1].",
+    "error": "",
+    "seconds": 14.6
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that a compulsory deductible of INR 1,000 applies to vehicles up to 1500cc is supported by passage [1].",
+    "error": "",
+    "seconds": 6.5
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00602": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00602",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the compulsory deductible is INR 1,500 for vehicles up to 1500cc is supported by passage [2].",
+    "error": "",
+    "seconds": 23.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the compulsory deductible is INR 1,500 for vehicles up to 1500cc is supported by passage [2].",
+    "error": "",
+    "seconds": 6.4
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the compulsory deductible is INR 1,500 for vehicles up to 1500cc is supported by passage [2].",
+    "error": "",
+    "seconds": 18.9
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00603": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00603",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement regarding the in-force window ending on 30 April 2026 is fully supported by the TOOL RESULTS.",
+    "error": "",
+    "seconds": 5.9
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement regarding the policy in-force window ending on 30 April 2026 is supported by the tool result for check_in_force.",
+    "error": "",
+    "seconds": 6.6
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement regarding the in-force window ending on 30 April 2026 is supported by the tool result check_in_force.",
+    "error": "",
+    "seconds": 17.7
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00604": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00604",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement concerning the policy not being in force on the date of loss is supported by the tool result check_in_force.",
+    "error": "",
+    "seconds": 10.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement regarding the policy not being in force on the date of loss is supported by the TOOL RESULTS confirming the loss date falls before the in-force window.",
+    "error": "",
+    "seconds": 9.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the policy was not in force on the date of loss is supported by the tool result check_in_force.",
+    "error": "",
+    "seconds": 6.8
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00605": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00605",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that collision is covered comes from passage [3].",
+    "error": "",
+    "seconds": 6.5
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that collision is covered under Section I: Own Damage is supported by passage [3].",
+    "error": "",
+    "seconds": 9.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that collision is covered under Section I comes from passage [3].",
+    "error": "",
+    "seconds": 24.0
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00606": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00606",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The 50% tyre replacement limit is supported by passages [1] and [2].",
+    "error": "",
+    "seconds": 6.2
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that liability is limited to 50% of the cost of replacement for tyres when the vehicle is damaged at the same time is supported by passages [1] and [2].",
+    "error": "",
+    "seconds": 3.8
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that liability for tyre replacement when the vehicle is damaged at the same time is limited to 50% is supported by passage [2] and passage [1].",
+    "error": "",
+    "seconds": 2.9
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00607": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00607",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that clause '9. Co-payment' mandates a 20% co-payment for insured persons aged 61 and above is supported by passage [1].",
+    "error": "",
+    "seconds": 6.6
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The 20% co-payment requirement for insured persons aged 61 and above is supported by passage [1].",
+    "error": "",
+    "seconds": 19.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that clause 9 mandates a 20% co-payment for insured persons aged 61 and above is supported by passage [1].",
+    "error": "",
+    "seconds": 6.3
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00608": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00608",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the endorsement raises the co-payment age threshold to 66 years, making it inapplicable to an insured aged 63, is supported by passage [2] and the tool result for co_payment.",
+    "error": "",
+    "seconds": 4.8
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the endorsement raises the co-payment age threshold to 66 years, making it inapplicable to an insured aged 63, is supported by passage [2] and the tool result for co_payment.",
+    "error": "",
+    "seconds": 8.0
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the co-payment age threshold is raised to 66 and therefore does not apply to an insured aged 63 is supported by passage [2].",
+    "error": "",
+    "seconds": 6.4
+   }
+  ]
+ },
+ "natural:v3b:CLM-2026-00609": {
+  "kind": "natural",
+  "key": "v3b:CLM-2026-00609",
+  "split": "test",
+  "runs": [
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the room rent limit is 1% of the sum insured per day is supported by passage [1].",
+    "error": "",
+    "seconds": 6.0
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the room rent limit is 1% of the sum insured per day is supported by passage [1].",
+    "error": "",
+    "seconds": 6.1
+   },
+   {
+    "verdict": "GROUNDED",
+    "why": "The statement that the room rent limit is 1% of the sum insured per day for a normal ward is supported by passage [1].",
+    "error": "",
+    "seconds": 6.1
+   }
+  ]
+ },
+ "_meta": {
+  "judge_prompt": "v1",
+  "prompt_sha": "e075e1818e0e",
+  "model": "gemini-3.5-flash-lite",
+  "written_at": "2026-10-16T16:52:53+0530"
+ }
+}

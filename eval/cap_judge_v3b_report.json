@@ -1,0 +1,26 @@
+{
+ "n_labelled": 36,
+ "n_scored": 36,
+ "agreement": 34,
+ "agreement_pct": 94.4,
+ "wilson_95": [
+  81.9,
+  98.5
+ ],
+ "always_grounded_baseline_pct": 100.0,
+ "false_alarms_by_majority": [
+  "v3b:CLM-2026-00472",
+  "v3b:CLM-2026-00561"
+ ],
+ "cases_with_any_ungrounded_run": [
+  "v3b:CLM-2026-00472",
+  "v3b:CLM-2026-00561"
+ ],
+ "run_flips": [
+  "v3b:CLM-2026-00561"
+ ],
+ "judge_runs_per_case": {
+  "3": 36
+ },
+ "provider_errors": 0
+}

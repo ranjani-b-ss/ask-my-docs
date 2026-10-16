@@ -1,0 +1,185 @@
+{
+ "protocol": "36 hand labels on the criterion in eval/judge_cap_v1.txt, one per v3b run (final system), written 2026-10-16 from the rebuilt context BEFORE any judge call on these outputs. Same labeler as labels_cap_70.json: the assistant that built the system, the judge and the assertions; NOT independent. Result of labelling: I found NO ungrounded output, so the always-GROUNDED baseline is 100% and raw agreement can only measure false alarms. Prompt judge_cap_v1 is the one frozen by eval/judge_cap_protocol.md; it is not edited for this run.",
+ "labels": {
+  "v3b:CLM-2026-00418": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00423": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00431": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00437": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00442": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00455": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00461": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00468": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "no statement about the wording at all ('Triage did not complete'); trivially grounded"
+  },
+  "v3b:CLM-2026-00472": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "END-2026-03 (eff 2026-06-01) gives 15/30 days; loss 2026-06-30; the 2026-08-06 flag is in the claim file."
+  },
+  "v3b:CLM-2026-00479": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "no statement about the wording at all ('Triage did not complete'); trivially grounded"
+  },
+  "v3b:CLM-2026-00483": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "no statement about the wording at all ('Triage did not complete'); trivially grounded"
+  },
+  "v3b:CLM-2026-00491": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "GROUNDED against what the model was shown: the 48-hour figure is in the PW-MOTOR-001 v5.1 passage and no amending passage was retrieved. NOTE: the 48 hours is the base figure and an endorsement amends the intimation window (S17); that is a retrieval failure the judge cannot see from this context."
+  },
+  "v3b:CLM-2026-00496": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "24-month base and 12-month endorsement figures are both in the passages; END-2026-02 effective 2026-05-01, loss 2026-08-01."
+  },
+  "v3b:CLM-2026-00502": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "no statement about the wording at all ('Triage did not complete'); trivially grounded"
+  },
+  "v3b:CLM-2026-00509": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00514": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "the exclusion for a driver under the influence is in the motor not-covered passage; 'matches' applies it to the police-report fact, which is the reading the clause supports."
+  },
+  "v3b:CLM-2026-00521": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00526": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00533": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "no statement about the wording at all ('Triage did not complete'); trivially grounded"
+  },
+  "v3b:CLM-2026-00541": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "Annexure C non-medical items are in the not-covered passage."
+  },
+  "v3b:CLM-2026-00548": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "no statement about the wording at all ('Triage did not complete'); trivially grounded"
+  },
+  "v3b:CLM-2026-00553": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00561": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00567": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00572": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "3,000 above 1500cc is in END-2026-01 (eff 2026-04-01); 'no arguable exclusions' is the model's reading of the facts and states no provision."
+  },
+  "v3b:CLM-2026-00578": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00584": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "END-2026-02 (eff 2026-05-01) extends 15 to 30 days; 90-day limit is in the base passage and described as the original; loss 2026-06-14."
+  },
+  "v3b:CLM-2026-00601": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00602": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00603": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00604": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00605": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00606": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  },
+  "v3b:CLM-2026-00607": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "base 20% at 61+ is in force: END-2026-02 is effective 2026-05-01, loss 2026-04-30."
+  },
+  "v3b:CLM-2026-00608": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "END-2026-02 effective 2026-05-01 = loss date: threshold 66, so no co-payment at 63; both in passages."
+  },
+  "v3b:CLM-2026-00609": {
+   "label": "GROUNDED",
+   "split": "test",
+   "reason": "every figure, period and clause named in the prose is in a retrieved passage or the limits result; checked line by line against the rebuilt context"
+  }
+ }
+}

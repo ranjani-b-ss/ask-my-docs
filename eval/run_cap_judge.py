@@ -64,12 +64,15 @@ def main() -> int:
     ap.add_argument("--runs", type=int, default=1)
     ap.add_argument("--model", default="gemini-3.5-flash-lite")
     ap.add_argument("--out", required=True)
+    ap.add_argument("--set", choices=["v1v2", "v3b"], default="v1v2",
+                    help="v3b: the 36 final-system outputs (labels_cap_v3b.json), no planted cases")
     a = ap.parse_args()
 
     template, psha = cj.load_prompt(a.version)
-    labels = json.loads((ROOT / "eval" / "labels_cap_70.json").read_text())["labels"]
-    planted = json.loads((ROOT / "eval" / "planted_cap.json").read_text())
-    runs, chunks = cj.load_runs(), cj._chunk_store()
+    final = a.set == "v3b"
+    labels = json.loads((ROOT / "eval" / ("labels_cap_v3b.json" if final else "labels_cap_70.json")).read_text())["labels"]
+    planted = [] if final else json.loads((ROOT / "eval" / "planted_cap.json").read_text())
+    runs, chunks = cj.load_runs(("v3b",) if final else ("v1", "v2")), cj._chunk_store()
 
     todo = [("natural", k, v["split"], None) for k, v in labels.items()]
     todo += [("planted", p["id"], p["split"], p) for p in planted]

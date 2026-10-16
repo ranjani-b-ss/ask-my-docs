@@ -19,7 +19,7 @@ repeatedly run out, so the final-code 36-case run was only completed late: **33/
 | Seam list (unedited, dated) | Done, append-only | `SEAMS.md` S1–S23 |
 | One-page architecture sketch | Done (a little over a page) | `ARCHITECTURE.md` |
 | Eval suite, 25–40 cases, assertions before judge | Done: 36 cases, 9 deterministic assertions | `src/cap_assertions.py`, `eval/run_capstone_eval.py` |
-| Judge, validated ≥85% vs hand labels | Done **on v1/v2 outputs**; not on the final system | `EVAL_REPORT.md` §8 |
+| Judge, validated ≥85% vs hand labels | Done on v1/v2 (recall + agreement); on v3b **false alarms only** — 36 labels, all GROUNDED, 34/36 (2026-10-16) | `EVAL_REPORT.md` §8 |
 | Error taxonomy re-scored, 4–7 modes, ≥1 new | Done on v1, v2 **and the final system v3b** (2026-10-16; R8 added) | `taxonomy_w12.md` (+ `_notes.md`) |
 | Trajectory eval, 10+ cases | Done; scored for v1, v2, v3 | `eval/cap_trajectory_eval.py` |
 | One trace id across agent + MCP hops, PII out | Done | `cli.py trace <id>`; `src/span_log.py`, `src/redact.py` |
@@ -42,9 +42,7 @@ If you want a variance estimate, run it again with a new `--label`/`--out`; the 
 ### P2 — Re-score the final system  *(offline once P1 is done, except the labels)*
 - **Trajectory:** done for v3b (`eval/cap_trajectory_v3b.json`).
 - **Taxonomy:** done for v3b (`taxonomy_w12.md`, `eval/taxonomy_w12.py` now covers v1/v2/v3b; 36 observation sentences in the notes). Open from it: R8 (unresolved co-payment unflagged, 13 of 36) needs `unresolved_flags` extended beyond the deductible; R5 is half guard-matches-a-clause-title; R4 is driven by the gate's extra search (S23).
-- **Judge:** the 70 frozen labels cover v1/v2 only. Either hand-label the ~36 new outputs (protocol: `eval/judge_cap_protocol.md`; the `ChunkStores` class
-  already rebuilds context from whichever index a trace used) and re-run `eval/run_cap_judge.py`, or leave §8 labelled "v1/v2 outputs". Do not edit
-  `eval/labels_cap_70.json` — a test checks its hash; record revisions in `labels_cap_70_revisions.json`.
+- **Judge:** done for false alarms on v3b (`eval/labels_cap_v3b.json`, `eval/cap_judge_v1_v3b.json`, `eval/cap_judge_v3b_report.py`; EVAL_REPORT §8b). Open: recall on planted errors was not re-run, and an independent labeller would replace mine. Do not edit `eval/labels_cap_70.json` or `labels_cap_v3b.json` — hashes are recorded; revisions go in a revisions file.
 
 ### P3 — ~~Write the non-coverage list~~  **DONE 2026-10-18** (`EVAL_REPORT.md` §7: 13 unmeasured items, 7 weakly measured, 5 measured only on the older system)
 Re-read it after P1/P2 if the taxonomy or judge are repeated: tier C shrinks as they are.
@@ -63,11 +61,11 @@ fallbacks from v3b, and **rehearse against a clock** — it has never been timed
 |---|---|
 | S23 | the 30,000-token budget now binds at the median (28.3k) — raise it, or stop resending every chunk each lap (95% of tokens are prompt) |
 | S22 | the missing-marker error message is still empty, so other format slips get no hint; `Final Answer:` must still be spelled exactly |
-| S17 | the amendment map misses 5 of 16 amended clauses (e.g. motor intimation, health reimbursement) — fix is "parse every `Amendment to Clause X` heading in the chunk text, not just the section label" |
+| S17 | the amendment map misses 5 of 16 amended clauses (e.g. motor intimation, health reimbursement) — fix is "parse every `Amendment to Clause X` heading in the chunk text, not just the section label" — **endorsement side fixed 2026-10-16** (map 11 → 16; 00491 now passes, n = 1); base side and a full re-run still open |
 | S18 | the guard blanks adjuster-facing text (`[withheld …]`) in ~1 run in 5 — try rewriting instead of replacing |
-| S19 | nothing stops a second `refer_to_adjuster` (one duplicate seen) |
+| S19 | nothing stops a second `refer_to_adjuster` (one duplicate seen)  **Fixed in code 2026-10-16** (SEAMS 'Updates'); full re-run pending |
 | S20 | the registry and a claim narrative can disagree on sum insured (CLM-2026-00479) |
-| S16 | `prompt_sha` does not cover the tool description |
+| S16 | `prompt_sha` does not cover the tool description  **Fixed in code 2026-10-16** (SEAMS 'Updates'); full re-run pending |
 
 ### P7 — Nice to have
 - **Week 12 tab in `trace_viewer.py`** (tabs stop at Week 11; it would read `traces/capstone_traces.jsonl` and show packet + stitched trace + eval results).

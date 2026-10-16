@@ -3,7 +3,7 @@
 > **Read first (updated 2026-10-18).** Sections 1–8 below were produced under the capstone prompt `triage-v2` on the legacy `recursive` index with no
 > exclusions gate. The current system is `triage-v3` + `structured` chunking + the exclusions gate + the `ActionInput` parser fix (SEAMS.md S21, S22).
 > **§10 reports its complete 36-case run: 33/36 = 92%** (v3 before the parser fix: 32/36; v2: 35/36). One run per case, so those differences are within noise.
-> The trajectory eval and the hand-read taxonomy (§6b, `taxonomy_w12.md`) were repeated on the final system; the judge validation (§8) was **not** and still describes v1/v2 outputs.
+> The trajectory eval and the hand-read taxonomy (§6b, `taxonomy_w12.md`) were repeated on the final system; the judge validation was repeated for false alarms only (§8b; recall is still the v1/v2 measurement).
 
 36 claim files · model `gemini-3.5-flash-lite` · one run per case · all data synthetic.
 Produced by `eval/run_capstone_eval.py` (deterministic assertions only — no model grades anything
@@ -150,7 +150,7 @@ Three tiers, so a reader can tell "unmeasured" from "measured badly" from "measu
 | # | What | Measured on | Current state |
 |---|---|---|---|
 | C1 | Hand-read taxonomy (8 modes, frequencies) | v1, v2 and v3b runs | repeated on v3b 2026-10-16 (§6b); one reader; R8 added on the way |
-| C2 | Judge agreement with hand labels | v1 and v2 outputs | not repeated; new outputs unlabelled |
+| C2 | Judge agreement with hand labels | v1 and v2 outputs | repeated on v3b (§8b): 36 labels all GROUNDED, 34/36 agreement; recall not re-measured |
 | C3 | End-to-end straddle ablation (filter on/off) | legacy index, `triage-v2` | not repeated (quota; one run per cell) |
 | C4 | MCP load probe, log size per claim | earlier system | not repeated |
 | C5 | Whether `structured` chunking changes judged groundedness | — | no before/after on judged outputs |
@@ -206,6 +206,27 @@ states a policy limit that contradicts its own limits result. The last is partly
 **What the judge does not see:** wording that was never retrieved (an absence claim is judged against the shown passages only —
 the annexure case, R7, is invisible to it), which heading a citation shows (R2), and anything in the claim file it is told
 not to judge.
+
+## 8b. Judge on the final system (v3b) — 2026-10-16
+
+**Labels:** 36, one per final-system run (`eval/labels_cap_v3b.json`, sha256 in `labels_cap_v3b.sha256`), written by me from the rebuilt context **before** the judge ran; same labeler as §8, so not independent.
+**Every one of the 36 is GROUNDED** — I found no ungrounded output (6 are the budget-stop packets, which say nothing about the wording, so they are grounded trivially). One of the 36 (00491) carries a note: its 48-hour figure is the base figure
+and an endorsement amends it, but the endorsement was never retrieved, so against what the model was shown it is grounded. The judge cannot see that failure; the S17 assertion can.
+**Judge:** the frozen `judge_cap_v1` prompt (sha `e075e1818e0e`), unedited, `gemini-3.5-flash-lite`, 3 runs per case, no provider errors. Script: `eval/cap_judge_v3b_report.py`.
+
+| | result |
+|---|---|
+| Agreement with my labels (majority of 3) | **34 of 36 = 94.4%** (Wilson 95%: 82–98%) |
+| Always-GROUNDED baseline | **100%** — so the 85% bar is uninformative here and the judge scores *below* the baseline |
+| False alarms | 2: **00472** (3 of 3 runs) and **00561** (2 of 3 runs) |
+| Run-to-run flips | 1 case (00561) |
+| Recall | **not measurable** — there is no ungrounded natural output to catch; planted-error recall is the §8 measurement and was not repeated |
+
+**Both alarms are the judge's mistakes, by my reading — checked against the passages, labels not changed.** 00472: the judge says the 15-day figure conflicts with the 30-day investigation figure; passage [2] (END-2026-03, effective 2026-06-01, loss 2026-06-30) states both
+(15 days after the last document, 30 where an investigation is warranted), exactly as the text does. 00561: the judge says passage [2] never mentions tyres; its "8. Unchanged provisions" section states that the 50% limit on tyre replacement is unchanged.
+The same pattern as §8's v1/v2 errors: it misreads a long chunk. That is my reading against the judge's, so treat it as a disagreement I resolved myself, not as ground truth.
+
+**What this adds to §8:** on outputs I find fully grounded the judge raises a false alarm on 2 of 36 (6%, 2–18%), and one of the two is unstable between runs. It says nothing new about recall, and it cannot catch a retrieval failure such as 00491.
 
 ## 9. Bonus — loss-date-aware retrieval
 
@@ -269,4 +290,4 @@ did not finish their own reasoning. The model also attempted an outcome statemen
 **How to read it.** v3b sits between v3 (89%) and v2 (97%) with no difference larger than run-to-run variance, and v2 was measured with the prompt that quoted exclusion
 wording, so it is not a like-for-like target. The solid findings are: the parser loop is gone, and what is left is the token budget (S23) and the S17 amendment map.
 
-**Still not repeated on v3/v3b:** the judge validation. The taxonomy was (§6b). The numbers in §§1–5 and §8 are v1/v2 results and stay valid as that.
+**Still not repeated on v3/v3b:** judge recall on planted errors. The taxonomy was (§6b) and judge false alarms were (§8b). The numbers in §§1–5 and §8 are v1/v2 results and stay valid as that.

@@ -6,7 +6,7 @@ how I know they stay fixed.
 
 > **What the numbers are (2026-10-18).** The live run uses the final system — `triage-v3` + structured chunking + exclusions gate + parser fix — whose complete 36-case result is
 > **33/36 = 92%** (EVAL_REPORT.md §10b; the earlier 97% was `triage-v2`, whose prompt quoted exclusion wording, so say 92%, not 97%). One run per case, so 32 → 33 → 35 is within noise.
-> The judge numbers below are from the **v1/v2 outputs** — say so; the taxonomy was re-scored on the final system. Three claims still fail: 00468 (token budget), 00491 and 00584 (S17 amendment map); never present them as clean.
+> The judge numbers below are from the **v1/v2 outputs** — say so; on the final system I re-checked false alarms only (34 of 36 agree, both disagreements the judge's mistakes by my reading; EVAL_REPORT §8b). The taxonomy was re-scored on the final system. Three claims still fail: 00468 (token budget), 00491 and 00584 (S17 amendment map); never present them as clean.
 
 ## Before you start (5 minutes, not on the clock)
 
@@ -108,7 +108,7 @@ assertions. At volume, the model provider's quota breaks first, at about claim 6
 requests and 159k tokens a minute if half arrive in the first day. Then claims silently lost in an outage — that bug is fixed. Then the runner is serial: 46 claims an hour at today's
 latency, so 8 workers for a front-loaded week."** (`10X_PLAN.md`) **"What does *not* break: tools are 1–3% of the time, the MCP hop is at about 6% of its ceiling, and cost is $79 for the week."**
 
-**9:50 "What I haven't re-measured on the final system: the judge validation, and anything with more than one run per case. Questions."**
+**9:50 "What I haven't re-measured on the final system: the judge's recall on planted errors, and anything with more than one run per case. Questions."**
 
 ## If it goes wrong live
 

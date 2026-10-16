@@ -44,15 +44,15 @@ def _chunk_store() -> ChunkStores:
     return ChunkStores()
 
 
-def load_runs() -> dict:
-    """{(version, claim): trace row} for the 72 eval runs that completed (same filter as the taxonomy)."""
+def load_runs(versions=("v1", "v2")) -> dict:
+    """{(version, claim): trace row} for the eval runs that completed (same filter as the taxonomy). Default: the 72 v1/v2 runs."""
     runs = {}
     for line in (ROOT / "traces" / "capstone_traces.jsonl").read_text(encoding="utf-8").splitlines():
         r = json.loads(line)
         lab = str(r.get("submitted_by", ""))
-        if lab in ("capstone-eval-v1", "capstone-eval-v2") and r["usage"]["total_tokens"] > 0 \
+        if lab in tuple(f"capstone-eval-{v}" for v in versions) and r["usage"]["total_tokens"] > 0 \
                 and "max_wall" not in str(r["stop_reason"]):
-            runs[(lab[-2:], r["claim_number"])] = r
+            runs[(lab.removeprefix("capstone-eval-"), r["claim_number"])] = r
     return runs
 
 
