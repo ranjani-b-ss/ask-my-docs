@@ -13,6 +13,7 @@ import re
 from functools import lru_cache
 
 _AMENDS = re.compile(r"(?i)\bamendment to clause\s+(\d+(?:\.\d+)?[A-Z]?)")
+_HEADING = re.compile(r"(?m)^#{1,6}[ \t]+(.*)$")
 _CLAUSE = re.compile(r"(\d+(?:\.\d+)?[A-Z]?)\b")
 
 
@@ -23,18 +24,27 @@ def clause_number(clause_path: str) -> str | None:
     return m.group(1) if m else None
 
 
-def amendment_map(metadatas: list[dict]) -> dict[tuple[str, str], list[tuple[str, str]]]:
-    """(base document_id, clause number) -> [(endorsement id, its effective_date)]."""
+def amendment_map(metadatas: list[dict], documents: list[str] | None = None) -> dict[tuple[str, str], list[tuple[str, str]]]:
+    """(base document_id, clause number) -> [(endorsement id, its effective_date)].
+
+    Reads every heading in the chunk text, not only the chunk's first (the section label): a chunk that opens with one
+    amendment can hold the next under a later heading (SEAMS.md S17). Without ``documents`` only the label is read."""
     out: dict[tuple[str, str], list[tuple[str, str]]] = {}
-    for meta in metadatas:
+    for i, meta in enumerate(metadatas):
         base, doc = meta.get("supersedes"), meta.get("document_id")
-        found = _AMENDS.search(str(meta.get("section") or ""))
-        if not (base and doc and found):
+        headings = [str(meta.get("section") or "")]
+        if documents is not None:
+            headings += _HEADING.findall(documents[i] or "")
+        if not (base and doc):
             continue
         entry = (str(doc), str(meta.get("effective_date") or ""))
-        bucket = out.setdefault((str(base), found.group(1)), [])
-        if entry not in bucket:
-            bucket.append(entry)
+        for h in headings:
+            found = _AMENDS.search(h)
+            if not found:
+                continue
+            bucket = out.setdefault((str(base), found.group(1)), [])
+            if entry not in bucket:
+                bucket.append(entry)
     return out
 
 
@@ -56,4 +66,5 @@ def load_amendments(corpus_id: str, slug: str | None = None) -> dict:
     from . import store
     from .config import capstone_chunking, chunking_from_slug
     collection = store.get_collection(chunking_from_slug(slug) if slug else capstone_chunking(), corpus_id)
-    return amendment_map(collection.get(include=["metadatas"])["metadatas"] or [])
+    got = collection.get(include=["metadatas", "documents"])
+    return amendment_map(got["metadatas"] or [], got["documents"] or [])

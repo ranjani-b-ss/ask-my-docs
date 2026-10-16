@@ -80,3 +80,36 @@ def test_the_prompt_shows_plain_types_not_schema_fragments():
     block = ta._tool_block({"search_wording": T()})
     assert "search_wording(query: string, top_k: integer (optional))" in block
     assert '"title"' not in block and "trace_id" not in block
+
+
+def test_unresolved_copayment_gets_a_flag_the_model_cannot_remove():
+    s = _state()
+    s.limits = {"co_payment": {"applies": None, "needs": "insured_age", "percent": 10}}
+    out = ta.guard_tool_args(s, "refer_to_adjuster", {"reason": "Adjuster to review.", "flags": []})
+    assert any(f.startswith("unresolved:co_payment") for f in out["flags"])
+
+
+def test_a_resolved_copayment_adds_no_flag():
+    s = _state()
+    s.limits = {"co_payment": {"applies": False, "percent": 10}}
+    out = ta.guard_tool_args(s, "refer_to_adjuster", {"reason": "Adjuster to review.", "flags": []})
+    assert out["flags"] == []
+
+
+def test_an_amendment_under_a_later_heading_of_the_chunk_is_found():
+    """S17: the map used only each chunk's FIRST heading, so a chunk opening with one amendment hid the next."""
+    meta = [{"document_id": "END-2026-02", "supersedes": "PW-HEALTH-002", "effective_date": "2026-05-01",
+             "section": "Endorsement 2 > 4. Amendment to Clause 9 — Co-payment"}]
+    text = ("## 4. Amendment to Clause 9 — Co-payment\nThe age is raised.\n\n"
+            "## 5. Amendment to Clause 8 — Reimbursement submission window\nThe window is extended.\n")
+    am = wv.amendment_map(meta, [text])
+    assert ("PW-HEALTH-002", "9") in am and ("PW-HEALTH-002", "8") in am
+    assert wv.superseded_by(am, "PW-HEALTH-002", "Policy > 8. Claims — reimbursement", "2026-06-14") == "END-2026-02"
+    assert wv.superseded_by(am, "PW-HEALTH-002", "Policy > 8. Claims — reimbursement", "2026-04-30") is None
+
+
+def test_text_that_merely_mentions_an_amendment_is_not_a_heading():
+    meta = [{"document_id": "END-2026-02", "supersedes": "PW-HEALTH-002", "effective_date": "2026-05-01",
+             "section": "Endorsement 2 > 8. Unchanged provisions"}]
+    am = wv.amendment_map(meta, ["## 8. Unchanged provisions\nSee the Amendment to Clause 4 above; nothing else changes.\n"])
+    assert am == {}

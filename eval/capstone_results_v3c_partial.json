@@ -1,0 +1,149 @@
+[
+ {
+  "claim_number": "CLM-2026-00491",
+  "group": "w6-wrong-document-retrieved",
+  "product": "motor",
+  "loss_date": "2026-07-02",
+  "trace_id": "cap_813f0b85ed7f",
+  "assertions": {
+   "never_states_coverage": {
+    "passed": true,
+    "detail": ""
+   },
+   "referral_present": {
+    "passed": true,
+    "detail": "REF-4F288AD8"
+   },
+   "in_force_checked": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_name_version": {
+    "passed": true,
+    "detail": ""
+   },
+   "citations_in_force": {
+    "passed": true,
+    "detail": "cited ['END-2026-01']"
+   },
+   "citations_grounded": {
+    "passed": true,
+    "detail": ""
+   },
+   "superseded_not_cited": {
+    "passed": true,
+    "detail": ""
+   },
+   "numbers_distinct_and_correct": {
+    "passed": true,
+    "detail": ""
+   },
+   "pii_clean": {
+    "passed": true,
+    "detail": "no PII listed for this case"
+   }
+  },
+  "all_passed": true,
+  "completed": true,
+  "stop_reason": "final_answer",
+  "laps": 9,
+  "tokens": 21827,
+  "cost_usd": 0.003658,
+  "wall_seconds": 272.804,
+  "model": "gemini-3.6-flash",
+  "guard_violations": [],
+  "overrides": [],
+  "blocked": [],
+  "prompt_version": "triage-v3",
+  "prompt_sha": "25f590e5357d",
+  "packet": {
+   "trace_id": "cap_813f0b85ed7f",
+   "claim_number": "CLM-2026-00491",
+   "policy_number": "MOT-2025-0016",
+   "product": "motor",
+   "loss_date": "2026-07-02",
+   "in_force": {
+    "policy_number": "MOT-2025-0016",
+    "loss_date": "2026-07-02",
+    "in_force": true,
+    "reason": "loss date 2026-07-02 falls inside the in-force window 2025-10-01 to 2026-09-30",
+    "in_force_from": "2025-10-01",
+    "in_force_to": "2026-09-30"
+   },
+   "facts": [
+    "A single vehicle collision with a boundary wall occurred, causing front end damage.",
+    "The loss occurred on 2026-07-02 and was intimated on 2026-07-06, four days after the occurrence.",
+    "The insured reported being hospitalized for two days following the incident."
+   ],
+   "wording": [
+    {
+     "role": "relevant",
+     "chunk_id": "END-2026-01::3",
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "effective_date": "2026-04-01",
+     "clause": "Endorsement 1 to the Private Car Package Policy > 3. Amendment to Clause 2.3 \u2014 Constructive total loss threshold",
+     "resolved_against": "2026-07-02",
+     "citation": "END-2026-01 v1.0 (effective 2026-04-01) \u2014 Endorsement 1 to the Private Car Package Policy > 3. Amendment to Clause 2.3 \u2014 Constructive total loss threshold [resolved against loss date 2026-07-02]",
+     "why": "Specifies that claim intimation must be given within 72 hours of occurrence, amending the earlier 48-hour requirement.",
+     "excerpt": "## 3. Amendment to Clause 2.3 \u2014 Constructive total loss threshold\n\nThe constructive total loss threshold in Clause 2.3 is reduced from 75% to **70% of the\nIDV**. A claim where the aggregate cost of retrieval and repair exceeds 70% of the IDV is\ntherefore treated as a total loss.\n\nThe remaining provisions of Clause 2.3 are unchanged: the IDV is paid in full, depreciation\ndoes not apply, and salvage"
+    }
+   ],
+   "numbers": {
+    "product": "motor",
+    "loss_date": "2026-07-02",
+    "deductible": {
+     "applies": true,
+     "amount": null,
+     "currency": "INR",
+     "needs": "vehicle_cc",
+     "tiers": [
+      {
+       "max_cc": 1500,
+       "amount": 1500
+      },
+      {
+       "max_cc": null,
+       "amount": 3000
+      }
+     ],
+     "document_id": "END-2026-01",
+     "version": "1.0",
+     "clause": "2. Amendment to Clause 2.2 \u2014 Compulsory deductible",
+     "effective_date": "2026-04-01",
+     "resolved_against": "2026-07-02"
+    },
+    "sub_limits": [
+     {
+      "name": "tyre_replacement_when_vehicle_also_damaged",
+      "kind": "percent_of_cost",
+      "value": 50,
+      "document_id": "PW-MOTOR-001",
+      "version": "5.1",
+      "clause": "3. What is not covered",
+      "effective_date": "2025-04-01",
+      "resolved_against": "2026-07-02"
+     }
+    ],
+    "policy_limit": {
+     "type": "IDV",
+     "amount": 600000,
+     "currency": "INR",
+     "policy_number": "MOT-2025-0016",
+     "source": "policy registry (synthetic)"
+    }
+   },
+   "referral": {
+    "referral_id": "REF-4F288AD8",
+    "queue": "adjuster",
+    "claim_number": "CLM-2026-00491",
+    "recorded": true,
+    "reason": "The claim was intimated four days after the loss, whereas Endorsement 1 specifies a 72-hour intimation timeframe. The adjuster should consider whether the reported hospitalization affects the intimation timeframe compliance."
+   },
+   "summary_for_adjuster": "The claim involves front end damage from a single vehicle collision with a boundary wall on 2026-07-02, reported four days later on 2026-07-06. Endorsement 1 amends Clause 4 to require claim intimation within 72 hours of the occurrence. The adjuster should review the intimation condition in light of the insured's two-day hospitalization.",
+   "decision": null,
+   "guard_violations": [],
+   "superseded_dropped": []
+  }
+ }
+]

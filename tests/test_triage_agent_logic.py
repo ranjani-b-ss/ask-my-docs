@@ -184,3 +184,18 @@ def test_neutral_referral_reason_is_untouched_and_other_tools_are_ignored():
     assert ta.guard_tool_args(s, "refer_to_adjuster", args) == args
     assert ta.guard_tool_args(s, "search_wording", {"query": "is covered"}) == {"query": "is covered"}
     assert s.arg_violations == []
+
+
+def test_a_second_referral_is_blocked():
+    """S19: the gate checked order only, so a model could refer twice and leave two records for one claim."""
+    s = _looked_up(_state(), in_force=False)
+    assert ta.gate(s, "refer_to_adjuster") is None
+    s.referral = {"referral_id": "REF-1", "recorded": True}
+    msg = ta.gate(s, "refer_to_adjuster")
+    assert msg and msg.startswith("BLOCKED") and "already" in msg
+
+
+def test_prompt_sha_covers_the_tool_block():
+    """S16: v1 and v2 reported one hash for different prompts because the tool block was left out."""
+    assert ta.prompt_sha("tool A") != ta.prompt_sha("tool B")
+    assert ta.prompt_sha("tool A") == ta.prompt_sha("tool A")

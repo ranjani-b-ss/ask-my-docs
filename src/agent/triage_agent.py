@@ -111,7 +111,8 @@ PROMPT_VERSION = "triage-v3"
 
 
 def prompt_sha(tool_block: str = "") -> str:
-    return hashlib.sha256(SYSTEM_PROMPT_TEMPLATE.encode("utf-8")).hexdigest()[:12]
+    """Hash of the prompt template AND the tool block the model is shown (SEAMS.md S16). Traces written before 2026-10-16 hashed the template only."""
+    return hashlib.sha256((SYSTEM_PROMPT_TEMPLATE + tool_block).encode("utf-8")).hexdigest()[:12]
 
 
 @dataclass
@@ -207,10 +208,15 @@ def guard_tool_args(state: RunState, tool: str, args: dict) -> dict:
 def unresolved_flags(state: RunState) -> list[str]:
     """A number the tools could not resolve is surfaced by code, not left to the model's prose
     (SEAMS.md S11): refusing to guess the deductible tier is right, silence about it is not."""
-    ded = (state.limits or {}).get("deductible") or {}
+    limits = state.limits or {}
+    ded = limits.get("deductible") or {}
+    cop = limits.get("co_payment") or {}
+    flags = []
     if ded.get("applies") and ded.get("amount") is None and ded.get("needs"):
-        return [f"unresolved:deductible (needs {ded['needs']})"]
-    return []
+        flags.append(f"unresolved:deductible (needs {ded['needs']})")
+    if cop.get("applies") is None and cop.get("needs"):
+        flags.append(f"unresolved:co_payment (needs {cop['needs']})")
+    return flags
 
 
 def gate(state: RunState, tool: str) -> str | None:
@@ -224,6 +230,8 @@ def gate(state: RunState, tool: str) -> str | None:
     if state.in_force is False and tool in SEARCH_TOOLS:
         return ("BLOCKED: the policy was not in force on the loss date, so no wording may be "
                 "applied to this loss. Go to refer_to_adjuster and quote the check_in_force reason.")
+    if tool == "refer_to_adjuster" and state.referral is not None:
+        return "BLOCKED: a referral has already been recorded for this claim; do not refer again — give your Final Answer."
     if tool == "refer_to_adjuster":
         need = missing_steps(state)
         if need:
@@ -532,7 +540,7 @@ async def run_with_registry(registry: MCPToolRegistry, claim_number: str,
     wall = round(time.perf_counter() - started_all, 3)
     result = {
         "trace_id": state.trace_id, "system": "triage", "claim_number": claim.claim_number,
-        "submitted_by": submitted_by, "prompt_version": PROMPT_VERSION, "prompt_sha": prompt_sha(),
+        "submitted_by": submitted_by, "prompt_version": PROMPT_VERSION, "prompt_sha": prompt_sha(_tool_block(registry.tools)),
         "tools_discovered": sorted(registry.tools), "index": state.index,
         "packet": packet, "stop_reason": stop_reason, "iterations": iteration,
         "guard_violations": violations + state.arg_violations,
