@@ -3,7 +3,7 @@
 > **Read first (updated 2026-10-18).** Sections 1–8 below were produced under the capstone prompt `triage-v2` on the legacy `recursive` index with no
 > exclusions gate. The current system is `triage-v3` + `structured` chunking + the exclusions gate + the `ActionInput` parser fix (SEAMS.md S21, S22).
 > **§10 reports its complete 36-case run: 33/36 = 92%** (v3 before the parser fix: 32/36; v2: 35/36). One run per case, so those differences are within noise.
-> The trajectory eval was repeated; the taxonomy (hand-read) and the judge validation were **not** and still describe v1/v2 outputs.
+> The trajectory eval and the hand-read taxonomy (§6b, `taxonomy_w12.md`) were repeated on the final system; the judge validation (§8) was **not** and still describes v1/v2 outputs.
 
 36 claim files · model `gemini-3.5-flash-lite` · one run per case · all data synthetic.
 Produced by `eval/run_capstone_eval.py` (deterministic assertions only — no model grades anything
@@ -101,10 +101,11 @@ fetching limits; the gate blocked it and the model recovered. 2 of 36 cases have
 
 ## 6b. What the 36 passing runs still hide
 
-`taxonomy_w12.md` (all 72 runs read by hand): the final run shows a failure mode in **13 of 36** runs, and **12 of those
-13 passed every assertion** here. R1 and R6 (the modes this suite measures) went to 0; R2 (citation label shows the chunk's
-first heading, 4 runs), R4 (empty packet, 2), R5 (guard blanks the adjuster's summary, 6) and R7 (1) are not measured by
-any assertion. One reader, not independent.
+`taxonomy_w12.md` (all 108 runs — v1, v2 and the final system v3b — read by hand): on the **final system 23 of 36 runs show a mode and 20 of those 23 passed every
+assertion** (excluding the new mode R8: 19 and 16; on v2 it was 13 and 12). Against v2: R4 (empty packet) **2 → 6**, R5 (guard blanks the adjuster's text) **6 → 10**,
+R1 0 → 2 (S17), R2 4 → 3, R3 and R7 stay 0. The gate drove R4 (all 6 budget stops ran its extra search) and R5 (5 of the 10 are the guard matching the clause title
+"What is not covered", not an outcome). The re-score also found **R8**, present since v1: a health claim with no age on file carries an unresolved co-payment with no flag (13 of 36 final
+runs), because the flag code only knows the deductible. One reader, not independent; the same 36 claims scored three times.
 
 ## 7. What this suite does not measure
 
@@ -148,7 +149,7 @@ Three tiers, so a reader can tell "unmeasured" from "measured badly" from "measu
 
 | # | What | Measured on | Current state |
 |---|---|---|---|
-| C1 | Hand-read taxonomy (7 modes, frequencies) | v1 and v2 runs | not repeated on `triage-v3` / v3b |
+| C1 | Hand-read taxonomy (8 modes, frequencies) | v1, v2 and v3b runs | repeated on v3b 2026-10-16 (§6b); one reader; R8 added on the way |
 | C2 | Judge agreement with hand labels | v1 and v2 outputs | not repeated; new outputs unlabelled |
 | C3 | End-to-end straddle ablation (filter on/off) | legacy index, `triage-v2` | not repeated (quota; one run per cell) |
 | C4 | MCP load probe, log size per claim | earlier system | not repeated |
@@ -268,4 +269,4 @@ did not finish their own reasoning. The model also attempted an outcome statemen
 **How to read it.** v3b sits between v3 (89%) and v2 (97%) with no difference larger than run-to-run variance, and v2 was measured with the prompt that quoted exclusion
 wording, so it is not a like-for-like target. The solid findings are: the parser loop is gone, and what is left is the token budget (S23) and the S17 amendment map.
 
-**Still not repeated on v3/v3b:** the hand-read taxonomy and the judge validation. The numbers in §§1–8 are v1/v2 results and stay valid as that.
+**Still not repeated on v3/v3b:** the judge validation. The taxonomy was (§6b). The numbers in §§1–5 and §8 are v1/v2 results and stay valid as that.

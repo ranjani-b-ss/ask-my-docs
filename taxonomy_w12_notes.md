@@ -79,3 +79,44 @@
 - **CLM-2026-00607** `cap_dae84f057bdc` — Cites the base co-payment clause; summary says 20% applies at age 63.
 - **CLM-2026-00608** `cap_c9d6e02bc855` — Cites the endorsement's co-payment clause; summary says the age threshold is raised to 66; co-payment null.
 - **CLM-2026-00609** `cap_206e20a66937` — Cites 1.1 Room rent limits; summary gives 5,000 a day against a 9,000 room.
+
+## Final system (v3b: `triage-v3`, structured chunking, exclusions gate, parser fix) — added 2026-10-16
+
+Same method: all 36 runs rendered without assertion verdicts and read; one sentence each. Honest caveat: these sentences were written *after* I had already read the v1/v2 modes, and I looked up the referral flags and chunk text for four runs (00423, 00496, 00584, 00606) before writing, so this section is not as blind as the first one. Trace ids are in `traces/capstone_traces.jsonl` (`submitted_by` = `capstone-eval-v3b`).
+
+- **CLM-2026-00418** `cap_4e1ff38fb344` — One search ("What is not covered permanent exclusions"), one clause cited; summary, one fact and one "why" all replaced by the withheld marker after containing "covered" ("covered for 3 years" in a fact).
+- **CLM-2026-00423** `cap_739ba18da889` — Cites "3. Free look period" and the exclusions section; the referral sends the adjuster to "Clause 4 Cancellation", which sits in the same chunk under a later heading; summary withheld after "covered"; a referral attempt was blocked first.
+- **CLM-2026-00431** `cap_01533fa123ee` — Cites the exclusions section and a definitions clause, no cashless endorsement clause; the endorsement's cashless clause was dropped as superseded; co-payment shown as needing an age, nothing in the referral says so.
+- **CLM-2026-00437** `cap_42b4e91752a0` — Cites 1.1 Room rent limits and states 1% of sum insured, INR 5,000 a day; one blocked referral then a second search; co-payment needs an age, unflagged.
+- **CLM-2026-00442** `cap_662208401989` — Cites the exclusions section twice; referral reason replaced by the withheld marker, a "why" too; summary intact.
+- **CLM-2026-00455** `cap_152087888998` — Cites the Nil Depreciation endorsement clause; summary withheld after "payable"; one superseded base clause dropped.
+- **CLM-2026-00461** `cap_e9c5e33c4b85` — Cites the Nil Depreciation endorsement clause only; summary says third claim of the year exceeds the limit; clean.
+- **CLM-2026-00468** `cap_045513f9f157` — Four searches ("road ambulance", "ambulance", "What is not covered", "transport"); budget stop at lap 9; empty packet with forced referral after one blocked referral.
+- **CLM-2026-00472** `cap_6caec616781a` — Cites the settlement-timeline endorsement clause and the exclusions section; base clause dropped as superseded; deductible shown as needing engine size, and the referral record carries an `unresolved:deductible` flag.
+- **CLM-2026-00479** `cap_320964f797f0` — Three searches including two with "What is not covered"; budget stop at 36,580 tokens; empty packet with forced referral.
+- **CLM-2026-00483** `cap_8531a73dae63` — Two searches, one blocked referral; budget stop at 32,136 tokens; empty packet; deductible needs engine size and the referral carries the unresolved flag.
+- **CLM-2026-00491** `cap_b4050c3f8dcd` — Cites base clause 4 and the exclusions section; the referral and summary say 48 hours — the base figure — though the question is about the amended intimation period; deductible unresolved and flagged.
+- **CLM-2026-00496** `cap_2f07087bd0c7` — Cites the waiting-period endorsement and "4.1 Accident exception"; the summary's 24-month figure sits under heading 4.2 in the same chunk; co-payment not unresolved here (age on file).
+- **CLM-2026-00502** `cap_39f232bb6d8d` — Three searches; budget stop at 32,395 tokens; empty packet with forced referral after a blocked referral.
+- **CLM-2026-00509** `cap_b0d808970cec` — One search naming alcohol and "What is not covered"; cites the exclusions section twice; summary withheld after "covered"; a "why" too.
+- **CLM-2026-00514** `cap_34c6f3f1ee66` — One search; cites the motor exclusions section twice; summary and referral reason both withheld after "covered".
+- **CLM-2026-00521** `cap_8af9af985a4c` — Generic question; one search "What is not covered"; cites "1. What is covered", the exclusions section and the NCB clause; deductible needs engine size, flagged.
+- **CLM-2026-00526** `cap_5ecda49e12c2` — Generic question; cites the hospitalisation benefit and the exclusions section; clean apart from an unflagged co-payment.
+- **CLM-2026-00533** `cap_dedb8b5dd8ae` — Three searches; budget stop at 36,131 tokens; empty packet with forced referral after a blocked referral.
+- **CLM-2026-00541** `cap_0d45c7a3cab6` — Cites the exclusions section twice and the hospitalisation benefit; summary withheld; the referral does not claim the wording is silent.
+- **CLM-2026-00548** `cap_6734ac872211` — Two searches; budget stop at 32,680 tokens; empty packet after a blocked referral.
+- **CLM-2026-00553** `cap_d4b21308cba3` — Cites the day-care clause; summary withheld after "payable".
+- **CLM-2026-00561** `cap_4a7487eb3a07` — Cites the exclusions section twice and the NCB clause; summary states tyre damage alone is excluded unless the vehicle is damaged too; the guard hit only the "why" fields; summary intact.
+- **CLM-2026-00567** `cap_16f81e9e28df` — Cites the exclusions section twice; summary intact; two "why" fields flagged.
+- **CLM-2026-00572** `cap_8a8f3db72af9` — Cites the compulsory-deductible endorsement clause; deductible 3,000 for an 1800 cc car; clean.
+- **CLM-2026-00578** `cap_d4c196813418` — Cites the co-payment endorsement clause and the exclusions section; summary, a fact and a "why" withheld ("covered", "admissible").
+- **CLM-2026-00584** `cap_fb53ff4f85f2` — Cites the co-payment endorsement clause (the 30-day window is under clause 5 of the same chunk) and base clause 8 that the endorsement amends; summary gives the 30-day figure correctly.
+- **CLM-2026-00601** `cap_cbdacc3cbf93` — Cites base clause 2.2 and the exclusions section; deductible 1,000; clean.
+- **CLM-2026-00602** `cap_43b78a20d603` — Cites the endorsement's deductible clause only; deductible 1,500; one blocked referral first; clean.
+- **CLM-2026-00603** `cap_355b17da5fd5` — Not in force; four laps, no search; referral states the in-force window ended; clean.
+- **CLM-2026-00604** `cap_44217d20e131` — Not in force; four laps; clean.
+- **CLM-2026-00605** `cap_a52d612313bd` — The PII claim; one search; cites "1. What is covered"; deductible 1,500; clean.
+- **CLM-2026-00606** `cap_32a5bf64256b` — Cites the motor exclusions section (which holds the 50% tyre limit) and the NCB endorsement clause; referral reason withheld after "covered"; the 50% fact has a correctly labelled citation here.
+- **CLM-2026-00607** `cap_a0c6cc129bc7` — Cites the base co-payment clause 9 with age 63; clean.
+- **CLM-2026-00608** `cap_b52b621d6f83` — Cites the co-payment endorsement clause; base clause dropped as superseded; clean.
+- **CLM-2026-00609** `cap_b9690661c316` — Cites the exclusions section and 1.1 Room rent limits; 35,134 tokens, just over budget but a Final Answer arrived; clean.

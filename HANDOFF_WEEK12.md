@@ -20,7 +20,7 @@ repeatedly run out, so the final-code 36-case run was only completed late: **33/
 | One-page architecture sketch | Done (a little over a page) | `ARCHITECTURE.md` |
 | Eval suite, 25–40 cases, assertions before judge | Done: 36 cases, 9 deterministic assertions | `src/cap_assertions.py`, `eval/run_capstone_eval.py` |
 | Judge, validated ≥85% vs hand labels | Done **on v1/v2 outputs**; not on the final system | `EVAL_REPORT.md` §8 |
-| Error taxonomy re-scored, 4–7 modes, ≥1 new | Done **on v1/v2**; not on the final system | `taxonomy_w12.md` (+ `_notes.md`) |
+| Error taxonomy re-scored, 4–7 modes, ≥1 new | Done on v1, v2 **and the final system v3b** (2026-10-16; R8 added) | `taxonomy_w12.md` (+ `_notes.md`) |
 | Trajectory eval, 10+ cases | Done; scored for v1, v2, v3 | `eval/cap_trajectory_eval.py` |
 | One trace id across agent + MCP hops, PII out | Done | `cli.py trace <id>`; `src/span_log.py`, `src/redact.py` |
 | Closed failure→test loop | Done (S15 outage → test; S12/S14 etc.) | `tests/test_triage_provider_outage.py` |
@@ -41,8 +41,7 @@ If you want a variance estimate, run it again with a new `--label`/`--out`; the 
 
 ### P2 — Re-score the final system  *(offline once P1 is done, except the labels)*
 - **Trajectory:** done for v3b (`eval/cap_trajectory_v3b.json`).
-- **Taxonomy:** `eval/taxonomy_w12.py` hard-codes v1/v2. Extend it to v3b: the mechanical modes (R1, R3–R6) are automatic; R2 and R7 are hand-coded lists
-  (read the chunk against the prose) — read the v3b runs, do not just copy the old lists. Watch R4 (budget stops: 5 in v3) and R5 (`[withheld]`: 9 in v3).
+- **Taxonomy:** done for v3b (`taxonomy_w12.md`, `eval/taxonomy_w12.py` now covers v1/v2/v3b; 36 observation sentences in the notes). Open from it: R8 (unresolved co-payment unflagged, 13 of 36) needs `unresolved_flags` extended beyond the deductible; R5 is half guard-matches-a-clause-title; R4 is driven by the gate's extra search (S23).
 - **Judge:** the 70 frozen labels cover v1/v2 only. Either hand-label the ~36 new outputs (protocol: `eval/judge_cap_protocol.md`; the `ChunkStores` class
   already rebuilds context from whichever index a trace used) and re-run `eval/run_cap_judge.py`, or leave §8 labelled "v1/v2 outputs". Do not edit
   `eval/labels_cap_70.json` — a test checks its hash; record revisions in `labels_cap_70_revisions.json`.

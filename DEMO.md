@@ -6,7 +6,7 @@ how I know they stay fixed.
 
 > **What the numbers are (2026-10-18).** The live run uses the final system — `triage-v3` + structured chunking + exclusions gate + parser fix — whose complete 36-case result is
 > **33/36 = 92%** (EVAL_REPORT.md §10b; the earlier 97% was `triage-v2`, whose prompt quoted exclusion wording, so say 92%, not 97%). One run per case, so 32 → 33 → 35 is within noise.
-> The taxonomy and judge numbers below are from the **v1/v2 outputs** — say so. Three claims still fail: 00468 (token budget), 00491 and 00584 (S17 amendment map); never present them as clean.
+> The judge numbers below are from the **v1/v2 outputs** — say so; the taxonomy was re-scored on the final system. Three claims still fail: 00468 (token budget), 00491 and 00584 (S17 amendment map); never present them as clean.
 
 ## Before you start (5 minutes, not on the clock)
 
@@ -74,10 +74,7 @@ guard stopped every one, but that zero is true by construction, so I cannot tell
 phrasing would do. Three, from the brief's regulator question: I can't yet replay an agent answer
 byte for byte."**
 
-**Taxonomy** (`taxonomy_w12.md`, the v1 and v2 runs — 72 — read by hand; **not repeated on the final system**): **"I read 72 runs. Seven modes. Four are new from joining the pieces —
-the schema-echo tool error (17 → 0), the unflagged missing number (4 → 0), the guard blanking the summary (6 → 6), and the
-citation label that shows a chunk's first heading (5 → 4). The punchline: that second run passed 35 of 36 assertions, but 13 of 36
-runs still showed a mode — and 12 of those 13 passed every assertion. It repeats on the final system: 6 runs stopped on the token budget and 5 of them still passed every assertion. The suite only sees what I wrote it to see."**
+**Taxonomy** (`taxonomy_w12.md`, 108 runs — v1, v2 and the final system — read by hand, one reader): **"I read 108 runs and named eight modes. Four came from joining the pieces: the schema-echo tool error (17 → 0 → 0), the guard blanking the adjuster's text (6 → 6 → 10), the citation label that shows a chunk's first heading (5 → 4 → 3), and the unflagged missing number. The punchline: on the final system 23 of 36 runs show a mode and 20 of those 23 passed every assertion. And the gate I added to fix exclusions cost me twice: empty packets went 2 → 6 — all six ran the gate's extra search — and half of the ten blanked summaries are the guard matching the section title 'What is not covered', not an outcome. The re-score also found a mode I had missed since the first run: a health claim with no age on file carries an unresolved co-payment with no flag, in 13 of 36 — my flag code only knew the deductible. The suite only sees what I wrote it to see."**
 
 ## Part 3 — a number that moved (6:30–8:30)
 
@@ -111,7 +108,7 @@ assertions. At volume, the model provider's quota breaks first, at about claim 6
 requests and 159k tokens a minute if half arrive in the first day. Then claims silently lost in an outage — that bug is fixed. Then the runner is serial: 46 claims an hour at today's
 latency, so 8 workers for a front-loaded week."** (`10X_PLAN.md`) **"What does *not* break: tools are 1–3% of the time, the MCP hop is at about 6% of its ceiling, and cost is $79 for the week."**
 
-**9:50 "What I haven't re-measured on the final system: the taxonomy and the judge validation, and anything with more than one run per case. Questions."**
+**9:50 "What I haven't re-measured on the final system: the judge validation, and anything with more than one run per case. Questions."**
 
 ## If it goes wrong live
 
