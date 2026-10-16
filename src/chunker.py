@@ -10,6 +10,13 @@ Three strategies, deliberately different in kind rather than only in size:
 ``heading``    One chunk per Markdown/HTML heading section, so a clause stays whole.
                Structure-aware and great for policy documents, but chunk sizes become
                uneven, and one long section can still overflow.
+``structured`` ``recursive`` with two repairs to how an OVERSIZE section is split, both found
+               by a real failure (the motor exclusion list, WEEK11.md): a bullet and its
+               wrapped continuation lines are one atom, never cut between lines; and a clause
+               up to twice the target size stays whole instead of being cut in the middle.
+               Everything else — packing small sections together, heading boundaries — is
+               unchanged, so the two strategies differ only where ``recursive`` was cutting
+               a clause.
 
 Two details that matter more than chunk size, and which the README expands on:
 
@@ -132,7 +139,102 @@ def _pack_within_section(
     return [(o, s, t) for o, s, t in out if t.strip()]
 
 
-def _split_recursive(text: str, size: int, overlap: int) -> list[tuple[int, str, str]]:
+_ITEM_START = re.compile(r"^\s*(?:[-*\u2022]|\d+[.)])\s+|^#{1,6}\s")
+KEEP_WHOLE_FACTOR = 2   # a section up to this many times the target size is kept as one chunk
+
+
+def _logical_atoms(text: str) -> list[str]:
+    """Atoms that are whole IDEAS, not physical lines.
+
+    ``_atoms`` splits on every newline, but the corpus hard-wraps its lines, so a single bullet
+    ("- consequential loss, including ... hire charges for a" / "  replacement vehicle;") is two
+    atoms and the packer can end a chunk between them. Here a bullet plus its continuation lines
+    is one atom, and an unwrapped paragraph is one atom. Tables stay whole, as before.
+    """
+    atoms: list[str] = []
+    for block in re.split(r"\n\s*\n", text):
+        block = block.strip("\n")
+        if not block.strip():
+            continue
+        if block.count("|") >= 2 and block.count("\n") >= 1:
+            atoms.append(block)
+            atoms.append("")
+            continue
+        current: list[str] = []
+        items: list[str] = []
+        for line in block.split("\n"):
+            if current and _ITEM_START.match(line):
+                items.append("\n".join(current))
+                current = []
+            current.append(line)
+        if current:
+            items.append("\n".join(current))
+        for item in items:
+            # A very long unwrapped paragraph (extracted PDF text) still splits on sentence ends, as
+            # ``_atoms`` always did; only items that are genuinely short are kept whole.
+            if len(item) <= 400:
+                atoms.append(item)
+            else:
+                atoms.extend(x for x in _SENTENCE_END.split(item) if x.strip())
+        atoms.append("")
+    return atoms
+
+
+def _pack_within_section_structured(
+    body: str, offset: int, section: str, size: int, overlap: int
+) -> list[tuple[int, str, str]]:
+    """``_pack_within_section`` without its two clause-cutting habits.
+
+    1. A section up to ``KEEP_WHOLE_FACTOR`` x ``size`` is returned whole. The motor exclusion
+       list is ~1,050 characters against an 800 target: cutting it left the last two bullets in
+       a 253-character stub that no natural query reached.
+    2. Longer sections are packed from whole atoms (``_logical_atoms``), and the overlap carried
+       into the next chunk is whole trailing atoms, never a character slice that starts mid-line.
+    """
+    if len(body) <= size * KEEP_WHOLE_FACTOR:
+        return [(offset, section, body)]
+
+    out: list[tuple[int, str, str]] = []
+    buf: list[str] = []
+    buf_len = 0
+    cursor = offset
+
+    def flush() -> None:
+        nonlocal buf, buf_len, cursor
+        text = "\n".join(buf).strip()
+        if not text:
+            buf, buf_len = [], 0
+            return
+        out.append((cursor, section, text))
+        carry: list[str] = []
+        carried = 0
+        for atom in reversed([a for a in buf if a.strip()]):
+            if carried + len(atom) + 1 > overlap:
+                break
+            carry.insert(0, atom)
+            carried += len(atom) + 1
+        cursor += max(0, len(text) - carried)
+        buf, buf_len = carry, carried
+
+    for atom in _logical_atoms(body):
+        if len(atom) > size:
+            flush()
+            for _, piece in _split_fixed(atom, size, overlap):
+                out.append((cursor, section, piece))
+            cursor += len(atom)
+            buf, buf_len = [], 0
+            continue
+        if buf_len + len(atom) + 1 > size and any(a.strip() for a in buf):
+            flush()
+        buf.append(atom)
+        buf_len += len(atom) + 1
+
+    flush()
+    return [(o, s, t) for o, s, t in out if t.strip()]
+
+
+def _split_recursive(text: str, size: int, overlap: int,
+                     structured: bool = False) -> list[tuple[int, str, str]]:
     """Section-aware packing.
 
     Headings are treated as hard boundaries, because a heading stranded at the tail of one
@@ -146,6 +248,7 @@ def _split_recursive(text: str, size: int, overlap: int) -> list[tuple[int, str,
     """
     sections = _sections(text)
     out: list[tuple[int, str, str]] = []
+    pack = _pack_within_section_structured if structured else _pack_within_section
 
     buf: list[str] = []
     buf_len = 0
@@ -164,7 +267,7 @@ def _split_recursive(text: str, size: int, overlap: int) -> list[tuple[int, str,
     for offset, section, body in sections:
         if len(body) > size:
             flush()
-            out.extend(_pack_within_section(body, offset, section, size, overlap))
+            out.extend(pack(body, offset, section, size, overlap))
             continue
         if buf_len + len(body) + 2 > size and buf_len > 0:
             flush()
@@ -218,8 +321,9 @@ def chunk_document(doc: LoadedDoc, cfg: ChunkConfig, start_index: int = 0) -> li
             pieces.extend(
                 _pack_within_section(body, offset, section, cfg.chunk_size, cfg.overlap)
             )
-    elif cfg.strategy == "recursive":
-        pieces.extend(_split_recursive(doc.text, cfg.chunk_size, cfg.overlap))
+    elif cfg.strategy in ("recursive", "structured"):
+        pieces.extend(_split_recursive(doc.text, cfg.chunk_size, cfg.overlap,
+                                       structured=cfg.strategy == "structured"))
     else:
         # "fixed" deliberately ignores document structure — it is the naive baseline the
         # eval compares against. Section is recovered by offset lookup so citations still

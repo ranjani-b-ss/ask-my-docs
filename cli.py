@@ -113,7 +113,7 @@ def cmd_status(args) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Ask-my-documents (local RAG)")
     parser.add_argument("--strategy", default=DEFAULT_CHUNKING.strategy,
-                        choices=["fixed", "recursive", "heading"])
+                        choices=["fixed", "recursive", "heading", "structured"])
     parser.add_argument("--chunk-size", type=int, default=DEFAULT_CHUNKING.chunk_size)
     parser.add_argument("--overlap", type=int, default=DEFAULT_CHUNKING.overlap)
     parser.add_argument("--corpus", default=DEFAULT_CORPUS,

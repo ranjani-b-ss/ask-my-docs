@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 import time
 from dataclasses import asdict
@@ -55,13 +56,9 @@ know nothing excludes a claim is to check, not to notice that nothing obviously 
 was mentioned — and REFERRED without ever checking is a guess wearing a caution label, not \
 an honest one. If something in the notes suggests a specific exclusion — no valid licence, \
 alcohol or drugs, unlicensed or unauthorised use such as hire or reward, mechanical or \
-electrical breakdown with no external cause, damage limited to tyres alone, the vehicle \
-taken, driven, or repaired outside India or across a national border, or a genuinely \
+electrical breakdown with no external cause, damage limited to tyres alone, or a genuinely \
 ambiguous cause — name that fact directly in your search query; otherwise search generally \
-for what is not covered. For the geographical case specifically, search using the policy's \
-own wording — "outside the geographical area stated in the schedule" — not a paraphrase \
-like "abroad" or "cross-border": a paraphrase can fail to retrieve the clause even when it \
-exists and says exactly that.
+for what is not covered.
 3. A clause of the form "X is excluded UNLESS Y" only avoids the exclusion when Y is true \
 of THESE facts. Check Y against the claim before applying any exception inside an \
 exclusion — never grant a partial or reduced payout under an exception whose own condition \
@@ -121,8 +118,35 @@ SYSTEM_PROMPT = SYSTEM_PROMPT_TEMPLATE.format(tool_block=_tool_block())
 # live failure, not asserted). Rule 10 is new: a hard stop on inventing clause text after
 # repeated failed searches — the SAME live trace shows the v1 agent fabricating a fictional
 # policy clause under exactly this pressure.
-PROMPT_VERSION = "v2"
+#
+# v2 -> v3 (Week 11 follow-up, after review): v2's rule-2 additions are REMOVED — both the category hint for the geographical
+# exclusion and, above all, the verbatim clause wording ("outside the geographical area stated in the schedule") to search
+# with. Putting a clause's own words in the prompt hands the model the answer to the very case that exposed the failure; it
+# would have "fixed" C-011 without fixing anything, and does nothing for the next clause nobody thought to quote. The real
+# cause was the chunker, not the prompt: the exclusion list was cut mid-bullet and its last two bullets sat in a stub chunk
+# no natural query reached. That is repaired in src/chunker.py ("structured") and src/agent/tools.py, and verified with the
+# prompt carrying NO such wording. Rule 10 (no invented clauses) stays: it names no policy text. v1's rule 2 still lists five
+# exclusion CATEGORIES in plain words; that is the same practice in a milder form and is left as it was.
+PROMPT_VERSION = "v3"
 PROMPT_SHA = hashlib.sha256(SYSTEM_PROMPT.encode("utf-8")).hexdigest()[:12]
+
+
+# Week 11 follow-up — the exclusion clause must actually have been READ. The agent builds its own search queries from the
+# claim's vocabulary, and an exclusion rarely uses it ("a trip to Nepal" does not look like "outside the geographical area
+# stated in the schedule"): on C-011 six real queries never retrieved the clause, and the agent answered "covered" without
+# ever having seen the exclusion list. Nothing in the code required that it had. This does, in the same style as the other
+# gates below, and names no policy wording: it checks only that a retrieved chunk's section heading is the policy's
+# "what is not covered" clause. AGENT_EXCLUSIONS_GATE=off disables it for the before/after measurement and nothing else.
+EXCLUSION_CLAUSE = re.compile(r"not covered", re.IGNORECASE)
+
+
+def hits_exclusion_clause(observation) -> bool:
+    return any(EXCLUSION_CLAUSE.search(str(hit.get("section") or "")) for hit in observation or []
+               if isinstance(hit, dict))
+
+
+def exclusions_gate_enabled() -> bool:
+    return os.environ.get("AGENT_EXCLUSIONS_GATE", "on").lower() != "off"
 
 
 def _find_json_object(text: str, after: str) -> tuple[dict | None, str]:
@@ -132,9 +156,15 @@ def _find_json_object(text: str, after: str) -> tuple[dict | None, str]:
     or a colon; matching brackets by hand is a dozen lines and never misparses on structure
     it hasn't seen before.
     """
-    idx = text.find(after)
-    if idx == -1:
+    # The marker is matched with spaces optional ("Action Input" also matches "ActionInput"). A model that writes
+    # `ActionInput: {...}` meant the tool call, but an exact text.find() did not see it, returned an empty error, and the
+    # loop retried the same spelling: 68 of the 72 malformed laps in every logged trace were this one variant, and one claim
+    # lost 8 of its 12 laps to it. Only spaces and tabs are tolerated — never a newline — so a marker cannot be assembled
+    # from text on different lines.
+    found = re.search(re.escape(after).replace(r"\ ", "[ \t]*"), text)
+    if not found:
         return None, ""
+    idx = found.start()
     start = text.find("{", idx)
     if start == -1:
         return None, ""
@@ -241,6 +271,7 @@ def run(
     retrieved_chunk_ids: list[str] = []
     numbers_seen: set[float] = set()
     search_called = False
+    exclusions_read = False
     payout_called = False
     last_rejected_answer: dict | None = None
     repeat_count = 0
@@ -336,8 +367,11 @@ def run(
                 or answer.get("status") != "PAYABLE"
                 or last_deductible_used in numbers_seen
             )
-            verified = amount_matches and search_called and payout_called and deductible_grounded
+            exclusions_ok = exclusions_read or not exclusions_gate_enabled()
+            verified = (amount_matches and search_called and payout_called and deductible_grounded
+                        and exclusions_ok)
             step["payout_verified"] = verified
+            step["exclusions_read"] = exclusions_read
             steps.append(step)
 
             if verified:
@@ -369,6 +403,12 @@ def run(
                 reason = ("REJECTED — you have not called search_policy yet. You must check "
                           "the policy wording (deductible and exclusions) before any final "
                           "decision, even one that feels obvious from the notes alone.")
+            elif not exclusions_ok:
+                reason = ("REJECTED — no search_policy result this run has returned the policy's exclusion "
+                          "clause (the section titled 'What is not covered'). Exclusions rarely use the "
+                          "claim's own words, so a search built from the claim's facts can miss them. Search "
+                          "for that clause itself and read its whole list before any decision, including "
+                          "REFERRED.")
             elif not payout_called:
                 reason = ("REJECTED — you have not called compute_payout yet. Call it and "
                           "copy its exact returned number into payable_amount before "
@@ -403,6 +443,7 @@ def run(
                         last_deductible_used = None
                 elif tool_name == "search_policy":
                     search_called = True
+                    exclusions_read = exclusions_read or hits_exclusion_clause(observation)
                     for hit in observation:
                         numbers_seen.update(_numbers_in(hit.get("text", "")))
                         if hit.get("chunk_id"):

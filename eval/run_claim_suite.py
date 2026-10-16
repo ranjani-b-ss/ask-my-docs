@@ -72,6 +72,7 @@ def main() -> int:
     ap.add_argument("--label", default="", help="tag appended to submitted_by for this pass")
     ap.add_argument("--passes", type=int, default=1)
     ap.add_argument("--sleep", type=float, default=2.0)
+    ap.add_argument("--claims", default="", help="comma-separated claim ids to run instead of all of them")
     ap.add_argument("--model", default=None,
                     help="override GEMINI_MODEL — gemini-3.6-flash's free tier is a "
                          "20-requests-PER-DAY cap (see WEEK11.md's tenx.md), easily "
@@ -81,6 +82,8 @@ def main() -> int:
 
     gold = load_gold()
     claim_ids = claims_store.all_claim_ids()
+    if args.claims:
+        claim_ids = [c.strip() for c in args.claims.split(",") if c.strip()]
     missing = [c for c in claim_ids if c not in gold]
     if missing:
         raise SystemExit(f"race_cases.yaml has no gold answer for: {missing}")

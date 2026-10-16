@@ -174,7 +174,7 @@ RECENCY_TIE_BAND = 0.05
 class ChunkConfig:
     """One chunking strategy. The eval harness sweeps several of these."""
 
-    strategy: str = "recursive"   # "fixed" | "recursive" | "heading"
+    strategy: str = "recursive"   # "fixed" | "recursive" | "heading" | "structured"
     chunk_size: int = 800         # target characters per chunk
     overlap: int = 150            # characters repeated between neighbours
 

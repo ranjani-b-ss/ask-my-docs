@@ -102,3 +102,44 @@ def test_parse_lap_action_with_unparseable_input_is_malformed():
     raw = "Thought: ok\nAction: get_claim\nAction Input: not json at all"
     parsed = _parse_lap(raw)
     assert parsed["kind"] == "malformed"
+
+
+# --------------------------------------------------------------------- the `ActionInput` marker (SEAMS.md S22)
+# 68 of the 72 malformed laps in every logged trace were a model writing `ActionInput:` for `Action Input:`. The marker used to be
+# found with an exact text.find(), which returned an EMPTY error, so the loop never told the model what was wrong and it retried the
+# same spelling (CLM-2026-00567 lost 8 of its 12 laps).
+
+
+LOGGED_567_LAP_4 = ('Thought: Now that I have the policy number and loss date, I must check if the policy was in force on the '
+                    'date of loss.\nAction: check_in_force\nActionInput: {"policy_number": "HLT-2025-0016", "loss_date": "2026-04-25"}')
+
+
+def test_the_logged_actioninput_lap_now_parses():
+    parsed = _parse_lap(LOGGED_567_LAP_4)
+    assert parsed["kind"] == "action" and parsed["tool"] == "check_in_force"
+    assert parsed["args"] == {"policy_number": "HLT-2025-0016", "loss_date": "2026-04-25"}
+
+
+def test_spacing_variants_of_the_marker_all_parse():
+    for marker in ("Action Input", "ActionInput", "Action  Input", "Action\tInput"):
+        parsed = _parse_lap(f'Thought: x\nAction: get_claim\n{marker}: {{"claim_id": "C-001"}}')
+        assert parsed["kind"] == "action" and parsed["args"] == {"claim_id": "C-001"}, marker
+
+
+def test_a_marker_split_across_lines_is_still_not_a_marker():
+    parsed = _parse_lap('Thought: x\nAction: get_claim\nAction\nInput: {"claim_id": "C-001"}')
+    assert parsed["kind"] == "malformed"
+
+
+def test_the_standard_spelling_is_unchanged():
+    assert _parse_lap('Thought: x\nAction: get_claim\nAction Input: {"claim_id": "C-001"}')["args"] == {"claim_id": "C-001"}
+
+
+def test_an_action_with_no_input_marker_at_all_is_still_malformed():
+    assert _parse_lap("Thought: x\nAction: get_claim")["kind"] == "malformed"
+
+
+def test_the_final_answer_path_is_unaffected():
+    raw = ('Thought: done.\nFinal Answer: {"status": "NOT_PAYABLE", "payable_amount": 0.0, '
+           '"exclusion_clause": "c", "rationale": "r"}')
+    assert _parse_lap(raw)["kind"] == "final"

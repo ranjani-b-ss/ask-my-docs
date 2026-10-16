@@ -129,6 +129,8 @@ this requirement.
 
 ## 6. Requirement 4 — the fix, the version bump, canary and rollback
 
+> **Superseded — see §9.** Review feedback correctly pointed out that this "fix" copied the policy wording into the prompt, which hands the model the answer. The cause below was wrong, and the fix has been replaced.
+
 **Root cause, in one line**: rule 2 of `SYSTEM_PROMPT` enumerated specific trigger phrases
 for five known exclusion types and never mentioned the geographical one, so the agent built
 its search query from the claim notes' own vocabulary ("Nepal", "cross-border") — which
@@ -193,3 +195,61 @@ single working session (see §7). The one field named honestly as still missing:
 was nothing to index yet; the moment a second request shape exists (health claims, a
 different line of business), this is the field that will need adding before it becomes the
 next drill's bottleneck.
+
+---
+
+## 9. Follow-up after review — the real cause, and what is and is not verified
+
+**The feedback:** *"copying the policy wording into the prompt gives the model the answer, so fix the real cause and re-run the two
+cases that broke."* It was right. v2's rule 2 quoted "outside the geographical area stated in the schedule" as the phrase to search
+with — the clause's own words, for the exact case that exposed the failure. That would have turned C-011 green without fixing
+anything, and does nothing for the next clause nobody quoted. It is **removed** (prompt v3 carries no such wording; a test pins it).
+
+**Two real causes, found by measuring rather than assuming.**
+
+1. **A chunking defect** — `drill.md` named it and I did not fix it. The corpus hard-wraps its lines and `recursive` packs *physical
+   lines*, so the 8-bullet motor exclusion list (~1,050 chars vs an 800 target) was cut mid-bullet. Its tail — `…hire charges for a /
+   replacement vehicle` and the geographical-area bullet — sat in a 253-character stub (`PW-MOTOR-001::5`) that starts mid-line. Those are
+   the two cases that broke: **C-011** (geographical bullet) and **C-007** (the hire-car bill). Repair: a new `structured` strategy
+   (`src/chunker.py`) — a bullet with its continuation lines is one atom; a clause up to 2× the target stays whole — built as a *separate*
+   collection so Week 12's index, chunk ids and stored hashes are untouched. Exactly four sections change (motor exclusions, **health
+   exclusions — the same defect, in a policy no test claim touches**, health reimbursement, definitions); a test pins that set.
+   My first draft of this repair left an 18-character stub and hard-cut the definitions section; found by diffing the chunks, fixed.
+2. **Nothing in the code required the exclusion list to be read.** Replaying the model's own logged queries (zero-LLM,
+   `eval/chunk_fix_replay.json`): the chunk repair alone moves C-011 from **1/11 to 2/11** queries that put the governing bullet in the top 3,
+   and C-007 from 1/6 to 1/6 — **not enough.** The Nepal/geographic phrasings still retrieve endorsement and definitions chunks, because the
+   claim's vocabulary is not the clause's. What does reach it, on the new index and not the old, is the generic "what is not covered" query
+   (both bullets exposed vs neither). So the agent now has a code gate, in the style of its existing ones: a decision is rejected until a
+   retrieved chunk is the policy's "What is not covered" section (`AGENT_EXCLUSIONS_GATE`, default on). It names no wording.
+
+**Verified now (no model):** 8 chunker tests (invariants + the exact blast radius) and 4 gate tests that drive the real `react_agent.run`
+loop with a scripted model; the replay above; and that the prompt contains no geographical wording.
+
+**The live re-run (2026-10-14; the first attempt on 2026-10-13 hit the Gemini quota and is set aside in `eval/chunk_fix_rerun_outage_NOT_RESULTS.json`).**
+C-011 and C-007 × three arms × two runs, prompt v3 (no clause wording in it), `gemini-3.5-flash-lite`, graded by the suite's own grader.
+**n = 4 per arm — a direction, not a proof.**
+
+| arm | what is repaired | passes | governing bullet shown to the model |
+|---|---|---|---|
+| A | nothing (leak removed, old chunks, no gate) | **0 / 4** | 1 / 4 |
+| B | chunk repair only | **2 / 4** | 1 / 4 |
+| C | chunk repair + exclusions gate (shipped) | **3 / 4** | 3 / 4 |
+
+Taking the wording out of the prompt and fixing nothing else fails all four, which is what you would expect if the wording had been doing the work.
+Each repair moves the result the right way. With 4 runs per arm, 0/4 vs 3/4 is **not** statistically distinguishable (Fisher exact, one-sided
+p ≈ 0.07), and single runs of a stochastic system vary: C-011 arm C run 2 failed.
+
+Two things the runs showed that I did not expect:
+- **The gate on the OLD index is satisfied by an incomplete list.** In arm A the model did retrieve the "What is not covered" section (`exclusions_read`
+  true) in 3 of 4 runs, yet the governing bullet was shown in only 1 — the section's label was there, its tail sat in the stub. That is why the chunk
+  repair and the gate belong together: the gate checks the section label, only the repaired chunk makes the label mean "the whole list".
+- **The gate can stall.** C-011 arm C run 2 ended on `repeated_rejection`: the model resubmitted the same rejected Final Answer three times without
+  searching for the exclusion clause (Week 8's known pattern), so the gate cost that run instead of fixing it. Arm B also had one such stall (C-007, run 2),
+  from the existing payout checks. B run 1 of C-007 passed *without* reading the exclusions at all (the arithmetic from the notes was enough) — a pass the
+  gate would have required it to earn.
+
+**Same flaw elsewhere:** the v1 prompt's rule 2 still names five exclusion *categories* in plain words (left as it was). The Week 12 capstone's
+triage prompt and `search_wording` tool description quoted exclusion wording verbatim; **that has since been removed** (`triage-v3`, SEAMS.md S21), and
+the capstone now also reads the repaired `structured` chunking and has the same exclusions gate (S21). Neither capstone change has been re-evaluated
+end to end — the quota is exhausted.
+

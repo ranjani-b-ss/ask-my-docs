@@ -1,0 +1,271 @@
+{
+ "C-011": {
+  "n_queries": 11,
+  "old_hit": 1,
+  "new_hit": 2,
+  "rows": [
+   [
+    "Endorsement motor policy compulsory deductible geographical area 2026",
+    false,
+    false,
+    [
+     "END-2026-01::0",
+     "END-2026-03::0",
+     "END-2026-02::0"
+    ],
+    [
+     "END-2026-01::0",
+     "END-2026-03::0",
+     "END-2026-02::0"
+    ]
+   ],
+   [
+    "Nepal geographical extension endorsement territory",
+    false,
+    false,
+    [
+     "END-2026-03::0",
+     "END-2026-03::4",
+     "END-2026-03::5"
+    ],
+    [
+     "END-2026-03::0",
+     "END-2026-03::4",
+     "END-2026-03::5"
+    ]
+   ],
+   [
+    "geographic area India geographical limits motor policy",
+    false,
+    false,
+    [
+     "END-2026-02::7",
+     "END-2026-02::2",
+     "END-2026-02::0"
+    ],
+    [
+     "END-2026-02::7",
+     "END-2026-02::2",
+     "END-2026-02::0"
+    ]
+   ],
+   [
+    "geographic limits India foreign country Nepal exclusion",
+    false,
+    false,
+    [
+     "END-2026-02::7",
+     "END-2026-02::2",
+     "END-2026-02::4"
+    ],
+    [
+     "END-2026-02::7",
+     "END-2026-02::2",
+     "END-2026-02::4"
+    ]
+   ],
+   [
+    "geographic limits Nepal foreign country exclusion",
+    false,
+    false,
+    [
+     "END-2026-02::2",
+     "END-2026-02::7",
+     "END-2026-02::1"
+    ],
+    [
+     "END-2026-02::2",
+     "END-2026-02::7",
+     "END-2026-02::1"
+    ]
+   ],
+   [
+    "geographical area India territorial limits Nepal motor policy",
+    false,
+    false,
+    [
+     "END-2026-02::7",
+     "END-2026-02::2",
+     "END-2026-02::0"
+    ],
+    [
+     "END-2026-02::7",
+     "END-2026-02::2",
+     "END-2026-02::0"
+    ]
+   ],
+   [
+    "geographical limits territory Nepal outside India exclusions compulsory deductible",
+    false,
+    false,
+    [
+     "END-2026-02::7",
+     "END-2026-02::2",
+     "END-2026-02::3"
+    ],
+    [
+     "END-2026-03::4",
+     "END-2026-02::7",
+     "END-2026-02::2"
+    ]
+   ],
+   [
+    "geographical limits territory country foreign Nepal excluded",
+    false,
+    false,
+    [
+     "END-2026-02::7",
+     "END-2026-02::2",
+     "END-2026-02::1"
+    ],
+    [
+     "END-2026-02::7",
+     "END-2026-02::2",
+     "END-2026-02::1"
+    ]
+   ],
+   [
+    "motor geographical limits territorial scope outside India Nepal policy",
+    false,
+    false,
+    [
+     "END-2026-02::7",
+     "END-2026-02::2",
+     "END-2026-01::0"
+    ],
+    [
+     "END-2026-02::7",
+     "END-2026-02::2",
+     "END-2026-02::0"
+    ]
+   ],
+   [
+    "motor policy what is not covered exclusion",
+    false,
+    true,
+    [
+     "PW-MOTOR-001::4",
+     "END-2026-01::5",
+     "END-2026-02::7"
+    ],
+    [
+     "PW-MOTOR-001::4",
+     "END-2026-01::5",
+     "END-2026-02::7"
+    ]
+   ],
+   [
+    "outside the geographical area stated in the schedule",
+    true,
+    true,
+    [
+     "PW-MOTOR-001::5",
+     "PW-DEFS-004::4",
+     "END-2026-02::7"
+    ],
+    [
+     "PW-MOTOR-001::4",
+     "END-2026-02::7",
+     "END-2026-02::6"
+    ]
+   ]
+  ]
+ },
+ "C-007": {
+  "n_queries": 6,
+  "old_hit": 1,
+  "new_hit": 1,
+  "rows": [
+   [
+    "Compulsory Deductible For vehicles exceeding 1500cc",
+    false,
+    false,
+    [
+     "END-2026-01::2",
+     "PW-MOTOR-001::3",
+     "END-2026-02::2"
+    ],
+    [
+     "END-2026-01::2",
+     "PW-MOTOR-001::3",
+     "END-2026-02::2"
+    ]
+   ],
+   [
+    "compulsory deductible excess",
+    false,
+    false,
+    [
+     "PW-MOTOR-001::3",
+     "END-2026-01::2",
+     "END-2026-02::2"
+    ],
+    [
+     "PW-MOTOR-001::3",
+     "END-2026-01::2",
+     "END-2026-02::2"
+    ]
+   ],
+   [
+    "compulsory deductible hire car exclusions base policy",
+    false,
+    false,
+    [
+     "PW-MOTOR-001::3",
+     "END-2026-01::2",
+     "END-2026-02::0"
+    ],
+    [
+     "PW-MOTOR-001::3",
+     "END-2026-01::2",
+     "END-2026-02::0"
+    ]
+   ],
+   [
+    "exclusions hire car deductible",
+    false,
+    false,
+    [
+     "END-2026-01::2",
+     "END-2026-01::0",
+     "END-2026-01::3"
+    ],
+    [
+     "END-2026-01::2",
+     "END-2026-01::0",
+     "END-2026-01::3"
+    ]
+   ],
+   [
+    "exclusions hire car vehicle rental",
+    true,
+    false,
+    [
+     "PW-MOTOR-001::5",
+     "END-2026-01::0",
+     "END-2026-01::5"
+    ],
+    [
+     "END-2026-01::0",
+     "END-2026-01::5",
+     "END-2026-01::3"
+    ]
+   ],
+   [
+    "what is not covered exclusions",
+    false,
+    true,
+    [
+     "END-2026-02::7",
+     "PW-HEALTH-002::6",
+     "PW-MOTOR-001::4"
+    ],
+    [
+     "END-2026-02::7",
+     "PW-HEALTH-002::6",
+     "PW-MOTOR-001::4"
+    ]
+   ]
+  ]
+ }
+}

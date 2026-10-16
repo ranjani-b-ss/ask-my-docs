@@ -15,10 +15,21 @@ from dataclasses import dataclass, field
 from enum import Enum
 
 from . import claims_store
-from ..config import CANDIDATE_K, DEFAULT_CHUNKING, TOP_K
+import os
+
+from ..config import CANDIDATE_K, TOP_K, ChunkConfig
 from ..retriever import retrieve
 
 CORPUS_ID = "insurance"
+
+
+def agent_chunking() -> ChunkConfig:
+    """The index this agent's ``search_policy`` reads. ``structured`` by default: ``recursive`` cut the motor exclusion list
+    mid-bullet and left its last two bullets in a stub no natural query reached (WEEK11.md, tests/test_chunker_structured.py).
+    ``AGENT_CHUNKING=recursive_800_150`` selects the old index; it exists only so the before/after of that repair can be
+    measured with everything else held fixed. Week 12's wording server is deliberately NOT changed by this."""
+    strategy, size, overlap = os.environ.get("AGENT_CHUNKING", "structured_800_150").split("_")
+    return ChunkConfig(strategy, int(size), int(overlap))
 
 
 class ClaimStatus(str, Enum):
@@ -99,7 +110,7 @@ TOOL_SEARCH_POLICY = {
 
 
 def search_policy(query: str, top_k: int = 3) -> list[dict]:
-    result = retrieve(query, cfg=DEFAULT_CHUNKING, corpus_id=CORPUS_ID, top_k=top_k,
+    result = retrieve(query, cfg=agent_chunking(), corpus_id=CORPUS_ID, top_k=top_k,
                       candidate_k=CANDIDATE_K, min_cosine=0.0, min_rerank_score=0.0)
     return [
         {
