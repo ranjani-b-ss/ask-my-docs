@@ -9,8 +9,7 @@ first; this file is only the *state* and the *to-do*.
 The system works end to end (`python cli.py triage CLM-2026-00601`), the offline test suite is green (**282 tests**; the capstone's own list in
 `CAPSTONE.md` is 163), and most deliverables exist as files. What is **not** done is mostly *re-measurement*: the system changed three times after
 the main evals were run (prompt wording removed, `structured` chunking, an exclusions gate, a parser fix), and the Gemini free-tier quota has
-repeatedly run out, so **no 36-case result exists for the final code**. The newest complete run is 32/36 (before the parser fix); a re-run with it
-stopped after 10 claims. Two deliverables need a human (fresh-eyes note, demo on a clock).
+repeatedly run out, so the final-code 36-case run was only completed late: **33/36 = 92%** with the parser fix (v3 before it: 32/36). Two deliverables need a human (fresh-eyes note, demo on a clock).
 
 ## 2. Status by deliverable
 
@@ -26,7 +25,7 @@ stopped after 10 claims. Two deliverables need a human (fresh-eyes note, demo on
 | One trace id across agent + MCP hops, PII out | Done | `cli.py trace <id>`; `src/span_log.py`, `src/redact.py` |
 | Closed failure→test loop | Done (S15 outage → test; S12/S14 etc.) | `tests/test_triage_provider_outage.py` |
 | Cost per claim + 10× plan | Done | `10X_PLAN.md` ($0.0044/claim now; quota breaks first) |
-| Eval report with stated non-coverage | **Draft; §7 non-coverage list still PENDING** | `EVAL_REPORT.md` |
+| Eval report with stated non-coverage | Done (draft status removed once P2 is re-run) — §7 written | `EVAL_REPORT.md` |
 | Top-3 weaknesses, dated honestly | Done (written after the eval, says so) | `WEAKNESSES.md` — needs a v3 refresh |
 | 10-minute demo script | Done, **never rehearsed**; numbers partly stale | `DEMO.md` |
 | Fresh-eyes note | **Not done — needs a person** | — |
@@ -34,29 +33,22 @@ stopped after 10 claims. Two deliverables need a human (fresh-eyes note, demo on
 
 ## 3. Pending tasks, in the order I would do them
 
-### P1 — Finish the 36-case run for the final code  *(needs quota; ~25 min once it holds)*
-`eval/capstone_results_v3b.json` holds 10 valid rows (9 pass; CLM-2026-00468 stopped on the token budget at 30,296). 26 remain.
-```bash
-./.venv/bin/python eval/run_capstone_eval.py --model gemini-3.5-flash-lite --label capstone-eval-v3b --out eval/capstone_results_v3b.json --resume
-```
-The runner now **stops itself after 2 consecutive no-reply claims** and records none of them, so a dead quota cannot fill the file with fake failures.
-Do not trust a passing probe: the quota drained mid-run three times. Run it once, right after a reset, and watch the first few rows.
-*Done when:* 36 valid rows. Then compare with v3 (32/36) and v2 (35/36), **say it is one run per case and the difference is within noise**, and fold the
-parser fix's effect into `EVAL_REPORT.md` §10 (it currently says there is no number for the fixed parser).
+### P1 — ~~Finish the 36-case run for the final code~~  **DONE 2026-10-18**
+`eval/capstone_results_v3b.json` now holds all 36 valid rows: **33/36 = 92%** (v3 before the parser fix 32/36; v2 35/36). Three fail: 00468 (token budget → no numbers),
+00491 and 00584 (S17 amendment map). One run per case, so v3 → v3b is within noise. 6 runs stopped on the token budget and 5 of them still passed every assertion — the suite
+does not see an unfinished packet. Written up in `EVAL_REPORT.md` §10b and `SEAMS.md` S21–S23. The trajectory eval was repeated (`eval/cap_trajectory_v3b.json`: 21/36 clean routes, 93.1% tool choice).
+If you want a variance estimate, run it again with a new `--label`/`--out`; the quota allowed one full pass per day.
 
 ### P2 — Re-score the final system  *(offline once P1 is done, except the labels)*
-- **Trajectory:** `python eval/cap_trajectory_eval.py --label capstone-eval-v3b --results eval/capstone_results_v3b.json --out eval/cap_trajectory_v3b.json`
+- **Trajectory:** done for v3b (`eval/cap_trajectory_v3b.json`).
 - **Taxonomy:** `eval/taxonomy_w12.py` hard-codes v1/v2. Extend it to v3b: the mechanical modes (R1, R3–R6) are automatic; R2 and R7 are hand-coded lists
   (read the chunk against the prose) — read the v3b runs, do not just copy the old lists. Watch R4 (budget stops: 5 in v3) and R5 (`[withheld]`: 9 in v3).
 - **Judge:** the 70 frozen labels cover v1/v2 only. Either hand-label the ~36 new outputs (protocol: `eval/judge_cap_protocol.md`; the `ChunkStores` class
   already rebuilds context from whichever index a trace used) and re-run `eval/run_cap_judge.py`, or leave §8 labelled "v1/v2 outputs". Do not edit
   `eval/labels_cap_70.json` — a test checks its hash; record revisions in `labels_cap_70_revisions.json`.
 
-### P3 — Write the non-coverage list (`EVAL_REPORT.md` §7)  *(1 hour, no quota)*
-A draft sits there. It must say plainly what the suite does **not** measure at all. Candidates already known: repeat-run variance (one run per case);
-whether the cited clause answers the question (only the version is checked); real claim text/policies/PII (all synthetic); any model but the lite one;
-concurrent load; paraphrased outcome statements the guard's patterns miss; amendments not worded "Amendment to Clause X"; wording never retrieved (an
-absence claim is judged against shown passages only).
+### P3 — ~~Write the non-coverage list~~  **DONE 2026-10-18** (`EVAL_REPORT.md` §7: 13 unmeasured items, 7 weakly measured, 5 measured only on the older system)
+Re-read it after P1/P2 if the taxonomy or judge are repeated: tier C shrinks as they are.
 
 ### P4 — Fresh-eyes note  *(needs a person; ~1 hour)*
 Someone who did not build it clones the repo, follows `CAPSTONE.md` cold, and writes down every place they got stuck. The brief also wants a foreign MCP

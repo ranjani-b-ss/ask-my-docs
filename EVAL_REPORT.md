@@ -1,9 +1,9 @@
 # Eval report — Claims Triage & Coverage Assistant (DRAFT)
 
-> **Read first (updated 2026-10-14).** Sections 1–8 below were produced under the capstone prompt `triage-v2` on the legacy `recursive` index with no
-> exclusions gate. The current system is `triage-v3` + `structured` chunking + the gate (SEAMS.md S21), and **§10 reports its 36-case run: 32/36 = 89%, down
-> from 35/36 = 97%.** The trajectory eval was repeated for v3; the taxonomy (hand-read) and the judge validation were **not** and still describe v1/v2
-> outputs. §10 says what caused each new failure.
+> **Read first (updated 2026-10-18).** Sections 1–8 below were produced under the capstone prompt `triage-v2` on the legacy `recursive` index with no
+> exclusions gate. The current system is `triage-v3` + `structured` chunking + the exclusions gate + the `ActionInput` parser fix (SEAMS.md S21, S22).
+> **§10 reports its complete 36-case run: 33/36 = 92%** (v3 before the parser fix: 32/36; v2: 35/36). One run per case, so those differences are within noise.
+> The trajectory eval was repeated; the taxonomy (hand-read) and the judge validation were **not** and still describe v1/v2 outputs.
 
 36 claim files · model `gemini-3.5-flash-lite` · one run per case · all data synthetic.
 Produced by `eval/run_capstone_eval.py` (deterministic assertions only — no model grades anything
@@ -106,12 +106,56 @@ fetching limits; the gate blocked it and the model recovered. 2 of 36 cases have
 first heading, 4 runs), R4 (empty packet, 2), R5 (guard blanks the adjuster's summary, 6) and R7 (1) are not measured by
 any assertion. One reader, not independent.
 
-## 7. What this suite does not measure — PENDING FINAL LIST
+## 7. What this suite does not measure
 
-Drafted so far: repeat-run variance (one run per case) · whether the cited wording actually answers
-the adjuster's question (only that it is the right *version*) · real claim text, real policies, real PII ·
-any model other than `gemini-3.5-flash-lite` · behaviour under concurrent load · paraphrased outcome
-statements the guard's patterns do not recognise · amendments not worded "Amendment to Clause X".
+**In one sentence:** the suite checks that a packet cites the *right version* of the wording, states three separate numbers, names no person, and never states a coverage decision — it does
+**not** check that the cited clause answers the adjuster's question, that the packet is useful to a human adjuster, or that any of it holds on real claims, real policies or real load.
+
+Three tiers, so a reader can tell "unmeasured" from "measured badly" from "measured on the old system". The suite is 36 synthetic claims (21 health, 15 motor), loss dates 2026-02-10 to
+2026-08-03, one run each, graded by 9 deterministic assertions I wrote; gold for numbers comes from a registry and limits table I generated from the corpus.
+
+### A. Not measured at all
+
+| # | What is not measured | Why it matters | What would measure it |
+|---|---|---|---|
+| A1 | **Whether the cited clause answers the question.** Only the *version* is checked; only 6 of 36 cases carry citation gold, so 30 cannot detect a wrong-clause citation. | A right-version, wrong-clause citation reads as authoritative (WEAKNESSES.md #1). | Gold *clauses* on every case; judge the cited text against the question. |
+| A2 | **Whether an adjuster finds the packet useful.** No human adjuster has read one. "Useful", "neutral", "enough to act on" are untested. | The product is a hand-off to a person. | 10–20 packets rated by a real adjuster against the raw claim file. |
+| A3 | **Real data.** Policies, claims, people, addresses and limits are all synthetic; the registry assigns a default sum insured per product. | Real narratives are messier; real registries disagree with narratives (S20). | A held-out sample of real, consented claim files. |
+| A4 | **Prompt injection through the claim narrative.** The narrative is untrusted text sent to the model; Week 8's injection test targeted the older agent and was not run on the capstone. | The brief's own security concern. | Reuse `eval/injection_test.py`-style cases against `cli.py triage`. |
+| A5 | **Misses of the compliance guard and the PII scrubber.** Both are pattern checks. The guard's pass rate is 100% *by construction*; a miss is invisible to the check that would count it. The scrubber was tested on 9 invented claims plus a few FNOLs. | This is the compliance line the whole brief is built on. | A paraphrase set for the guard; a held-out set of realistic FNOLs with a reported miss rate. |
+| A6 | **Replay / audit.** Whether a past packet can be reproduced byte for byte (WEAKNESSES.md #3): tool observations are not stored; `prompt_sha` does not cover the tool description (S16). | The regulator question, "eighteen months on". | Store a transcript hash per lap; replay a seeded sample. |
+| A7 | **Wrong or missing loss dates.** The system trusts the claims system's `loss_date`. Multi-day events, missing dates and corrected dates are not in the set. | Everything date-aware rests on that one field. | Cases with a wrong, missing and amended date. |
+| A8 | **Amendments that are not worded "Amendment to Clause X"**, overlapping endorsements, an endorsement that supersedes another endorsement. The corpus has three endorsements and the amendment map already misses 5 of 16 (S17). | The version logic is only proven on this corpus's conventions. | A second corpus with different drafting conventions. |
+| A9 | **Waiting periods and other date arithmetic.** The system surfaces the wording; it does not compute whether a waiting period has run. Whether the model applies it correctly is judged by no assertion. | Health decisions turn on it. | Gold for "has the waiting period run" on cases that depend on it. |
+| A10 | **Concurrent claims.** One shared MCP session was probed only with concurrent *searches*, never concurrent *claims*; there is no worker pool (10X_PLAN.md). | The hailstorm scenario. | A load test of N claims in flight. |
+| A11 | **MCP failure modes other than a dead model provider.** A server crashing mid-run, a tool timeout, malformed tool output, or a hostile tool description from another server are not tested. The foreign-client check (someone else's agent calling our server) has not been done. | Joining servers is the point of the capstone. | Fault injection on both servers; a foreign client run (fresh-eyes task). |
+| A12 | **Any model but `gemini-3.5-flash-lite`**, and a stronger or independent judge. The judge is the same model family as the system under test; other models returned 503 during the run. | Self-preference and model-specific quirks (the `ActionInput` spelling was one) are unmeasured. | The same suite on a second model. |
+| A13 | **Language and format.** English only; one corpus of 7 documents (markdown, HTML, PDF text); no scanned documents, no other languages. | | A corpus in another format/language. |
+
+### B. Measured, but too weakly to lean on
+
+| # | What | Weakness |
+|---|---|---|
+| B1 | **Run-to-run variance.** | One run per case. v2 → v3 → v3b (35 → 32 → 33 of 36) is within what one run each can produce; the judge's verdicts flipped in 5 of 100 repeated cells. |
+| B2 | **Incomplete packets.** Token-budget stops (taxonomy R4). | 6 of 36 final runs stopped on the budget and **5 of those 6 passed every assertion**; the suite cannot tell an unfinished packet from a finished one. |
+| B3 | **Straddle cases end to end.** | 5 claims, one run each; without the filter only 3 of 5 cited future wording, so "5 of 5 red before" is not literally true. The retrieval-level version (8 topics) is deterministic but is retrieval, not decisions. |
+| B4 | **Cost of the date filter.** | 22 control questions I wrote myself (15 before running any retrieval); 0 of ~29 hits lost gives an upper bound near 11%, not "no cost". |
+| B5 | **Judge validation.** | Only 3 of 70 outputs are wrong, so raw agreement ≈ the always-GROUNDED baseline (κ 0.4–0.6); labels are mine, not independent; planted errors are errors I thought of. |
+| B6 | **Lapsed or not-yet-started policies.** | 2 of 36 cases; one PII case; no case with several policies or renewals. |
+| B7 | **Severity.** | Failures are counted, not weighted by what a wrong answer would cost on a real claim. |
+
+### C. Measured only on an older version of the system
+
+| # | What | Measured on | Current state |
+|---|---|---|---|
+| C1 | Hand-read taxonomy (7 modes, frequencies) | v1 and v2 runs | not repeated on `triage-v3` / v3b |
+| C2 | Judge agreement with hand labels | v1 and v2 outputs | not repeated; new outputs unlabelled |
+| C3 | End-to-end straddle ablation (filter on/off) | legacy index, `triage-v2` | not repeated (quota; one run per cell) |
+| C4 | MCP load probe, log size per claim | earlier system | not repeated |
+| C5 | Whether `structured` chunking changes judged groundedness | — | no before/after on judged outputs |
+
+**What this means for the headline.** 33/36 is a statement about *this* 36-claim synthetic set under these 9 assertions. It says nothing about A1–A13, and B2 means it overstates how many
+packets finished.
 
 ## 8. Judge agreement
 
@@ -168,20 +212,20 @@ See [STRADDLE_BONUS.md](STRADDLE_BONUS.md). Retrieval level: 7 of 8 day-before s
 
 ## 10. The current system (`triage-v3` + `structured` chunking + exclusions gate) — run 2026-10-14
 
-Same 36 claims, same assertions, same model (`gemini-3.5-flash-lite`), one run per case. `eval/capstone_results_v3.json`.
+Same 36 claims, same assertions, same model (`gemini-3.5-flash-lite`), one run per case. `eval/capstone_results_v3.json` (v3) and `eval/capstone_results_v3b.json` (v3b). The v3b run was split across two sessions: 10 claims, an interruption by the model quota (whose no-reply rows were discarded), then the remaining 26.
 
-| | v1 (corrected) | v2 | **v3 (current)** |
-|---|---|---|---|
-| every assertion | 26/36 = 72% | 35/36 = 97% | **32/36 = 89%** |
-| `citations_in_force` | 36/36 | 35/36 | 34/36 |
-| `superseded_not_cited` | 28/36 | 36/36 | 35/36 |
-| `numbers_distinct_and_correct` | 32/36 | 36/36 | 35/36 |
-| completed with a Final Answer | 31/36 | 34/36 | 31/36 |
-| stopped on a budget | 5 | 2 | **5** |
-| tokens per claim, median / p90 | – | 20,962 / 27,367 | **28,284 / 32,758** |
-| cost per claim | $0.0038 | $0.0036 | $0.0044 |
-| model attempted an outcome statement | 28 (13 cases) | 22 (13 cases) | **44 (20 cases)** |
-| trajectory: clean route · tool-choice accuracy | 17/36 · 90.5% | 31/36 · 97.3% | 24/36 · 94.9% |
+| | v1 (corrected) | v2 | v3 (before parser fix) | **v3b (current, parser fix)** |
+|---|---|---|---|---|
+| every assertion | 26/36 = 72% | 35/36 = 97% | 32/36 = 89% | **33/36 = 92%** |
+| `citations_in_force` | 36/36 | 35/36 | 34/36 | 36/36 |
+| `superseded_not_cited` | 28/36 | 36/36 | 35/36 | 34/36 |
+| `numbers_distinct_and_correct` | 32/36 | 36/36 | 35/36 | 35/36 |
+| completed with a Final Answer | 31/36 | 34/36 | 31/36 | 30/36 |
+| stopped on a budget | 5 | 2 | 5 | **6** |
+| tokens per claim, median / p90 | – | 20,962 / 27,367 | 28,284 / 32,758 | **27,266 / 32,997** |
+| cost per claim | $0.0038 | $0.0036 | $0.0044 | $0.0044 |
+| model attempted an outcome statement | 28 (13 cases) | 22 (13 cases) | 44 (20 cases) | **39 (19 cases)** |
+| trajectory: clean route · tool-choice accuracy | 17/36 · 90.5% | 31/36 · 97.3% | 24/36 · 94.9% | 21/36 · 93.1% |
 
 **v2 → v3 is a drop of 3 cases on n = 36, one run each — not distinguishable from run-to-run variance.** It is reported as it is. The four failures:
 
@@ -189,7 +233,7 @@ Same 36 claims, same assertions, same model (`gemini-3.5-flash-lite`), one run p
 |---|---|---|
 | CLM-2026-00606 | token budget exceeded (31.6k > 30k) → empty packet | **the gate** (one blocked referral + an extra "What is not covered" search, whose chunks ride in every later lap) |
 | CLM-2026-00607 | token budget exceeded (36.4k) → empty packet | **the gate** (searched the section first, then the co-payment clause) |
-| CLM-2026-00567 | 12 laps, 8 of them `malformed`: the model wrote `ActionInput:` (no space) so the parser rejected it | **not this change** — a brittle parser (SEAMS S22), **since fixed**: re-run once, it passes in 6 laps / 16.5k tokens. The 32/36 above is the run before that fix. A full re-run with the fix was attempted and stopped by the model quota after 10 claims (`capstone_results_v3b.json`: 9 pass, 1 budget stop) — **there is no 36-case number for the fixed parser yet** |
+| CLM-2026-00567 | 12 laps, 8 of them `malformed`: the model wrote `ActionInput:` (no space) so the parser rejected it | **not this change** — a brittle parser (SEAMS S22), **since fixed**: re-run once, it passes in 6 laps / 16.5k tokens. In the full v3b re-run it passes (see below). | |
 | CLM-2026-00584 | cites `PW-HEALTH-002` clause 8 next to the endorsement that amends it | **not this change** — the S17 amendment-map gap (clause 8 is one of the 5 the map misses); v2 passed by variance |
 
 **What the change did on the exclusion claims** (00509, 00514, 00567, 00561, 00442): the old prompt's phrases are gone — **0 of 62** logged queries quote them (v2: 4 of 89) —
@@ -202,4 +246,26 @@ packets; either the budget, or the habit of resending every retrieved chunk on e
 (2) The model tried to state an outcome **twice as often** (44 vs 22) once it could see the full exclusion list; the guard replaced all of them, so none shipped, but
 "the guard's 0 is by construction" matters more now. (3) The gate can add a lap or a stall; it does not make the model's reasoning better, it makes the evidence reach it.
 
-**Still not repeated on v3:** the hand-read taxonomy and the judge validation. The numbers in §§1–8 are v1/v2 results and stay valid as that.
+### 10b. v3b — the full re-run with the parser fix (33/36 = 92%)
+
+`ActionInput:` now parses (SEAMS.md S22). **5 claims changed result against v3; net +1, which is within single-run noise:**
+
+| claim | v3 | v3b | what it is |
+|---|---|---|---|
+| 00567, 00606, 00607 | fail | **pass** | 00567 was the `ActionInput` loop; 00606 and 00607 were token-budget stops that did not repeat |
+| 00468 | pass | **fail** | token budget ran out before `get_limits` → no numbers (it was just over the limit in an earlier partial run too: 30,296) |
+| 00491 | pass | **fail** | cites `PW-MOTOR-001` clause 4 beside the endorsement that amends it — the S17 map gap (clause 4 is one of the 5 the map misses) |
+
+The three failing in v3b: **00468** (budget), **00491** and **00584** (both S17). So the remaining defects are the two known ones, not new ones.
+
+**What the 33/36 hides.** 6 claims stopped on the token budget (00468, 00479, 00483, 00502, 00533, 00548) — and **5 of those 6 still passed every assertion**, because a forced
+referral with some citations satisfies them. The assertions do not see an empty or partial packet (taxonomy mode R4). So "33/36" understates the budget problem: 6 of 36 runs
+did not finish their own reasoning. The model also attempted an outcome statement 39 times (19 cases), the guard replaced all of them, and 10 packets reach the adjuster with a
+`[withheld …]` hole. The exclusions gate blocked 15 premature referrals. Median tokens per claim are 27.3k against the 30k budget; the 90th percentile (33.0k) is over it.
+
+**The headline number, on the final system.** The wrong-version citation rate (§1: 8/36 → 0/36) is **2/36 = 6% in v3b** (95% interval ≈ 2–18%): 00491 and 00584, both the S17 amendment-map gap. It moved a long way and did not stay at zero.
+
+**How to read it.** v3b sits between v3 (89%) and v2 (97%) with no difference larger than run-to-run variance, and v2 was measured with the prompt that quoted exclusion
+wording, so it is not a like-for-like target. The solid findings are: the parser loop is gone, and what is left is the token budget (S23) and the S17 amendment map.
+
+**Still not repeated on v3/v3b:** the hand-read taxonomy and the judge validation. The numbers in §§1–8 are v1/v2 results and stay valid as that.
